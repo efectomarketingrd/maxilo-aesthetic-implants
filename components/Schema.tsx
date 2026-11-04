@@ -1,0 +1,77 @@
+import type { Dict } from "@/lib/content";
+import { site, type Locale } from "@/lib/site";
+
+// Datos estructurados (Schema.org) para que Google entienda el centro, la doctora, los servicios y las preguntas frecuentes.
+export default function Schema({ t, lang }: { t: Dict; lang: Locale }) {
+  const url = `${site.url}/${lang}`;
+  const clinicId = `${site.url}/#clinic`;
+  const doctorId = `${site.url}/#doctor`;
+
+  const graph = [
+    {
+      "@type": ["MedicalClinic", "Dentist"],
+      "@id": clinicId,
+      name: site.name,
+      url,
+      logo: `${site.url}/brand/logo-dark.png`,
+      image: `${site.url}/brand/og.png`,
+      description: t.meta.description,
+      email: site.email,
+      telephone: ["+1-829-657-2217", "+1-829-371-0276"],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: site.address.locality,
+        addressRegion: site.address.region,
+        postalCode: site.address.postalCode,
+        addressCountry: site.address.country,
+      },
+      areaServed: ["Las Terrenas", "Samaná", "República Dominicana"],
+      medicalSpecialty: ["Dentistry", "PlasticSurgery", "Dermatology"],
+      availableLanguage: ["es", "en"],
+      employee: { "@id": doctorId },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: t.services.title,
+        itemListElement: t.services.items.map((group) => ({
+          "@type": "OfferCatalog",
+          name: group.title,
+          itemListElement: group.list.map((name) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "MedicalProcedure", name },
+          })),
+        })),
+      },
+    },
+    {
+      "@type": "Physician",
+      "@id": doctorId,
+      name: site.doctor,
+      jobTitle: t.doctor.role,
+      worksFor: { "@id": clinicId },
+      address: { "@type": "PostalAddress", addressLocality: site.address.locality, addressCountry: site.address.country },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${url}#faq`,
+      mainEntity: t.faq.items.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      inLanguage: lang,
+    },
+  ];
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }}
+    />
+  );
+}
