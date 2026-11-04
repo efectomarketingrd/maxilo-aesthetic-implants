@@ -18,7 +18,7 @@ export default function ContactForm({ t }: { t: Dict }) {
       `${c.name}: ${f.get("name")}`,
       `${c.email}: ${f.get("email")}`,
       `${c.phone}: ${f.get("phone")}`,
-      `${c.interest} ${interest}`,
+      `${c.interest}: ${interest}`,
       f.get("message") ? `${c.message}: ${f.get("message")}` : "",
     ].filter(Boolean);
     window.open(waLink(lines.join("\n")), "_blank", "noopener");

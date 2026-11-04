@@ -1,20 +1,36 @@
 import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import Schema from "@/components/Schema";
+import { Arrow, Award, Building, Check, Star, WaIcon, serviceIcons } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { site, waLink, type Locale } from "@/lib/site";
+import { waLink, type Locale } from "@/lib/site";
 
-const WaIcon = () => (
-  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor">
-    <path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z" />
-  </svg>
-);
+function Divider() {
+  return (
+    <span className="divider" aria-hidden="true">
+      <i />
+    </span>
+  );
+}
+
+function Head({ eyebrow, title, center = true, light = false }: { eyebrow: string; title: string; center?: boolean; light?: boolean }) {
+  return (
+    <div className={`section__head ${center ? "section__head--center" : ""} ${light ? "section__head--light" : ""}`}>
+      <p className="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+      <Divider />
+    </div>
+  );
+}
 
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: l } = await params;
   const lang = l as Locale;
   const t = dictionaries[lang];
+  const a = t.about;
 
   return (
     <>
@@ -22,71 +38,231 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       <Header t={t} lang={lang} />
 
       <main>
-        {/* HERO */}
+        {/* ───────── PARTE SUPERIOR: PRESENTACIÓN ───────── */}
         <section className="hero">
-          <div className="hero__ornament" aria-hidden="true" />
           <div className="container hero__grid">
             <div className="hero__copy">
-              <p className="eyebrow eyebrow--gold">{t.hero.eyebrow}</p>
+              <p className="tag">{t.hero.eyebrow}</p>
               <h1>
                 {t.hero.title} <em>{t.hero.titleAccent}</em>
               </h1>
               <p className="hero__text">{t.hero.text}</p>
               <div className="hero__ctas">
-                <a className="btn btn--gold" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
-                  <WaIcon /> {t.hero.primary}
+                <a className="btn btn--dark" href="#agendar">
+                  {t.hero.cta} <Arrow />
                 </a>
-                <a className="btn btn--ghost" href="#servicios">
+                <a className="btn btn--line" href="#servicios">
                   {t.hero.secondary}
                 </a>
               </div>
+              <ul className="hero__badges">
+                {t.hero.badges.map((b) => (
+                  <li key={b}>
+                    <span className="hero__badge-ico"><Check /></span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="hero__mark" aria-hidden="true">
-              <div className="hero__ring" />
-              <Image src="/brand/mono-light.png" alt="" width={536} height={332} priority />
+            <div className="hero__visual">
+              <div className="hero__arch">
+                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 460px, 80vw" />
+              </div>
+              <div className="hero__card">
+                <Image src="/brand/mono-dark.png" alt="" width={44} height={30} />
+                <span>
+                  <strong>{t.hero.nameTag}</strong>
+                  {t.hero.roleTag}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="container">
-            <ul className="trust">
-              {t.trust.map((x) => (
-                <li key={x.k}>
-                  <span>{x.k}</span>
-                  {x.v}
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
-        {/* SERVICIOS */}
-        <section id="servicios" className="section section--cream">
+        {/* ───────── PARTE MEDIA ───────── */}
+        {/* Servicios */}
+        <section id="servicios" className="section section--white">
           <div className="container">
-            <div className="section__head">
-              <p className="eyebrow">{t.services.eyebrow}</p>
-              <h2>{t.services.title}</h2>
-              <p className="lead">{t.services.text}</p>
+            <Head eyebrow={t.services.eyebrow} title={t.services.title} />
+            <div className="svc-grid">
+              {t.services.items.map((s) => {
+                const Ico = serviceIcons[s.icon];
+                return (
+                  <Link key={s.slug} href={`/${lang}/servicios/${s.slug}`} className="svc-card">
+                    <span className="svc-card__ico"><Ico size={44} /></span>
+                    <h3>{s.title}</h3>
+                    <p>{s.short}</p>
+                    <span className="svc-card__more">
+                      {t.services.more} <Arrow size={14} />
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
-            <div className="services">
-              {t.services.items.map((s) => (
-                <article className="service" key={s.n}>
-                  <span className="service__n">{s.n}</span>
-                  <h3>{s.title}</h3>
-                  <ul>
-                    {s.list.map((i) => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                  <a className="service__link" href={waLink(`${t.hero.waMsg} (${s.title})`)} target="_blank" rel="noopener">
-                    {t.services.ask} →
-                  </a>
+          </div>
+        </section>
+
+        {/* Sobre nosotros: el centro */}
+        <section id="sobre-nosotros" className="section section--ivory">
+          <div className="container about">
+            <div className="about__media">
+              <Image src="/brand/logo-dark.png" alt="Maxilo Aesthetic Implants" width={905} height={551} />
+            </div>
+            <div className="about__copy">
+              <p className="eyebrow">{a.eyebrow}</p>
+              <h2>{a.title}</h2>
+              <Divider />
+              {a.text.map((p) => (
+                <p key={p.slice(0, 24)} className="lead">{p}</p>
+              ))}
+              <ul className="about__values">
+                {a.values.map((v) => (
+                  <li key={v}><Check /> {v}</li>
+                ))}
+              </ul>
+            </div>
+            <aside className="stats" aria-label={a.statsTitle}>
+              <p className="stats__title">{a.statsTitle}</p>
+              {a.stats.map((s) => (
+                <div key={s.label} className="stats__row">
+                  <strong className={s.value ? "" : "is-pending"}>{s.value ?? "—"}</strong>
+                  <span>{s.label}</span>
+                </div>
+              ))}
+              {a.stats.some((s) => !s.value) && <p className="stats__pending">{t.pending}</p>}
+            </aside>
+          </div>
+        </section>
+
+        {/* Sobre nosotros: la doctora, formación, diplomas y equipo */}
+        <section id="doctora" className="section section--white">
+          <div className="container doctor">
+            <div className="doctor__photo">
+              <Image src="/brand/doctora.jpg" alt={a.doctorName} width={1000} height={1473} sizes="(min-width: 1040px) 420px, 90vw" />
+            </div>
+            <div>
+              <p className="eyebrow">{a.doctorEyebrow}</p>
+              <h2>{a.doctorName}</h2>
+              <p className="doctor__role">{a.doctorRole}</p>
+              {a.doctorText.map((p) => (
+                <p key={p.slice(0, 24)} className="lead">{p}</p>
+              ))}
+
+              <div className="doctor__blocks">
+                <div className="info-block">
+                  <h3><Award size={26} /> {a.trainingTitle}</h3>
+                  {a.training.length ? (
+                    <ul>{a.training.map((x) => <li key={x}>{x}</li>)}</ul>
+                  ) : (
+                    <p className="pending">{t.pending}</p>
+                  )}
+                </div>
+                <div className="info-block">
+                  <h3><Award size={26} /> {a.diplomasTitle}</h3>
+                  {a.diplomas.length ? (
+                    <ul>{a.diplomas.map((x) => <li key={x}>{x}</li>)}</ul>
+                  ) : (
+                    <p className="pending">{t.pending}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="container team">
+            <h3 className="team__title">{a.teamTitle}</h3>
+            <div className="team__grid">
+              <article className="team-card">
+                <div className="team-card__img">
+                  <Image src="/brand/doctora.jpg" alt={a.doctorName} width={1000} height={1473} sizes="120px" />
+                </div>
+                <div>
+                  <strong>{a.doctorName}</strong>
+                  <span>{a.doctorRole}</span>
+                </div>
+              </article>
+              {a.team.map((m) => (
+                <article className="team-card" key={m.name}>
+                  <div className="team-card__img team-card__img--empty" />
+                  <div>
+                    <strong>{m.name}</strong>
+                    <span>{m.role}</span>
+                  </div>
                 </article>
               ))}
+              {!a.team.length && (
+                <article className="team-card team-card--pending">
+                  <div className="team-card__img team-card__img--empty" />
+                  <div>
+                    <strong>{t.pending}</strong>
+                    <span>{a.teamTitle}</span>
+                  </div>
+                </article>
+              )}
             </div>
           </div>
         </section>
 
-        {/* IMPLANTES + ESTADÍA */}
-        <section id="estadia" className="section section--dark tourism">
+        {/* Preguntas frecuentes */}
+        <section id="preguntas" className="section section--ivory">
+          <div className="container faq">
+            <Head eyebrow={t.faq.eyebrow} title={t.faq.title} />
+            <div className="faq__list">
+              {t.faq.items.map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────── PARTE INFERIOR ───────── */}
+        {/* Valoraciones */}
+        <section id="valoraciones" className="section section--slate reviews">
+          <div className="container">
+            <Head eyebrow={t.reviews.eyebrow} title={t.reviews.title} light />
+            <div className="reviews__grid">
+              {t.reviews.items.length
+                ? t.reviews.items.map((r) => (
+                    <figure className="review" key={r.name}>
+                      <div className="review__stars">{[1, 2, 3, 4, 5].map((i) => <Star key={i} />)}</div>
+                      <blockquote>{r.text}</blockquote>
+                      <figcaption>
+                        <strong>{r.name}</strong> · {r.service}
+                      </figcaption>
+                    </figure>
+                  ))
+                : [1, 2, 3].map((i) => (
+                    <figure className="review review--pending" key={i}>
+                      <div className="review__stars">{[1, 2, 3, 4, 5].map((s) => <Star key={s} />)}</div>
+                      <blockquote>{t.reviews.emptyText}</blockquote>
+                      <figcaption>{t.pending}</figcaption>
+                    </figure>
+                  ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Marcas */}
+        <section id="marcas" className="section section--white">
+          <div className="container">
+            <Head eyebrow={t.brands.eyebrow} title={t.brands.title} />
+            <p className="lead lead--center">{t.brands.text}</p>
+            <div className="brands">
+              {t.brands.items.map((b) => (
+                <div className={`brand ${b.name ? "" : "brand--pending"}`} key={b.category}>
+                  <strong>{b.name ?? t.pending}</strong>
+                  <span>{b.category}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Paquete de implantes + estadía (sin cambios) */}
+        <section id="estadia" className="section section--slate tourism">
           <div className="container tourism__grid">
             <div>
               <p className="eyebrow eyebrow--gold">{t.tourism.eyebrow}</p>
@@ -111,112 +287,44 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
 
-        {/* DOCTORA */}
-        <section id="doctora" className="section section--white">
-          <div className="container doctor">
-            <figure className="doctor__photo">
-              {/* Reemplazar por una foto profesional de la doctora: /public/brand/doctora.jpg */}
-              <Image src="/brand/mono-dark.png" alt="" width={548} height={370} />
-            </figure>
-            <div>
-              <p className="eyebrow">{t.doctor.eyebrow}</p>
-              <h2>{t.doctor.title}</h2>
-              <p className="doctor__role">{t.doctor.role}</p>
-              {t.doctor.text.map((p) => (
-                <p key={p.slice(0, 20)} className="lead">
-                  {p}
-                </p>
-              ))}
-              <a className="btn btn--dark" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
-                {t.doctor.cta}
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* PROCESO */}
-        <section className="section section--cream">
+        {/* Instituciones */}
+        <section id="instituciones" className="section section--ivory section--tight">
           <div className="container">
-            <div className="section__head section__head--center">
-              <p className="eyebrow">{t.process.eyebrow}</p>
-              <h2>{t.process.title}</h2>
-            </div>
-            <ol className="steps">
-              {t.process.steps.map((s, i) => (
-                <li key={s.t}>
-                  <span className="steps__n">{String(i + 1).padStart(2, "0")}</span>
-                  <h3>{s.t}</h3>
-                  <p>{s.d}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section id="preguntas" className="section section--white">
-          <div className="container faq">
-            <div className="section__head">
-              <p className="eyebrow">{t.faq.eyebrow}</p>
-              <h2>{t.faq.title}</h2>
-            </div>
-            <div className="faq__list">
-              {t.faq.items.map((f) => (
-                <details key={f.q}>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
+            <Head eyebrow={t.institutions.eyebrow} title={t.institutions.title} />
+            <div className="institutions">
+              {(t.institutions.items.length ? t.institutions.items : [null, null, null]).map((x, i) => (
+                <div className={`institution ${x ? "" : "institution--pending"}`} key={x ?? i}>
+                  <Building size={34} />
+                  <span>{x ?? t.pending}</span>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CONTACTO */}
-        <section id="contacto" className="section section--dark">
-          <div className="container contact">
-            <div>
-              <p className="eyebrow eyebrow--gold">{t.contact.eyebrow}</p>
+        {/* Agenda tu consulta */}
+        <section id="agendar" className="section section--white">
+          <div className="container book">
+            <div className="book__intro">
+              <p className="eyebrow">{t.contact.eyebrow}</p>
               <h2>{t.contact.title}</h2>
+              <Divider />
               <p className="lead">{t.contact.text}</p>
-              <dl className="contact__info">
-                <div>
-                  <dt>{t.contact.phonesLabel}</dt>
-                  {site.phones.map((p) => (
-                    <dd key={p}>
-                      <a href={`tel:+1${p.replace(/\D/g, "")}`}>{p}</a>
-                    </dd>
-                  ))}
-                </div>
-                <div>
-                  <dt>{t.contact.emailLabel}</dt>
-                  <dd>
-                    <a href={`mailto:${site.email}`}>{site.email}</a>
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t.contact.addressLabel}</dt>
-                  <dd>{t.contact.address}</dd>
-                </div>
-              </dl>
+              <ul className="book__perks">
+                {t.contact.perks.map((p) => (
+                  <li key={p}><span><Check /></span> {p}</li>
+                ))}
+              </ul>
             </div>
-            <ContactForm t={t} />
+            <div className="book__form">
+              <h3>{t.nav.cta}</h3>
+              <ContactForm t={t} />
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="container footer__inner">
-          <Image src="/brand/logo-light.png" alt="Maxilo Aesthetic Implants — Dra. Celia Hernández Mauricio" width={260} height={153} />
-          <p>
-            © {new Date().getFullYear()} {site.name}. {t.footer.rights}
-          </p>
-          <a href={`/${lang === "es" ? "en" : "es"}`}>{t.footer.lang}</a>
-        </div>
-      </footer>
-
-      <a className="wa-float" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener" aria-label="WhatsApp">
-        <WaIcon />
-      </a>
+      <Footer t={t} lang={lang} />
     </>
   );
 }
