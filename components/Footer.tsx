@@ -21,7 +21,7 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
               <li><a href={`${home}#sobre-nosotros`}>{t.nav.about}</a></li>
               <li><a href={`${home}#preguntas`}>{t.nav.faq}</a></li>
               <li><a href={`${home}#marcas`}>{t.nav.brands}</a></li>
-              <li><Link href={`${home}/noticias`}>{t.nav.news}</Link></li>
+              <li><Link href={`${home}/blog`}>{t.nav.news}</Link></li>
               <li><a href={`${home}#agendar`}>{t.nav.cta}</a></li>
             </ul>
           </div>
