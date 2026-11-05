@@ -189,34 +189,26 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
 
-        {/* ───────── PAQUETE IMPLANTES + ESTADÍA ───────── */}
-        <section id="estadia" className="section section--slate tourism">
-          <div className="container tourism__grid">
-            <div>
-              <p className="eyebrow eyebrow--gold">{t.tourism.eyebrow}</p>
-              <h2>{t.tourism.title}</h2>
-              <p className="lead">{t.tourism.text}</p>
-              <a className="btn btn--gold" href={waLink(t.tourism.waMsg)} target="_blank" rel="noopener">
-                <WaIcon /> {t.tourism.cta}
-              </a>
-              <p className="tourism__note">{t.tourism.note}</p>
-            </div>
-            <ol className="timeline">
-              {t.tourism.steps.map((s, i) => (
-                <li key={s.t}>
-                  <span className="timeline__dot">{i + 1}</span>
-                  <div>
-                    <h3>{s.t}</h3>
-                    <p>{s.d}</p>
-                  </div>
-                </li>
+        {/* ───────── PREGUNTAS FRECUENTES ───────── */}
+        <section id="preguntas" className="h5-sec h5-sec--white">
+          <div className="container h5-faq">
+            <Head eyebrow={t.faq.eyebrow} title={t.faq.title} />
+            <div className="h5-faq__list">
+              {t.faq.items.slice(0, 4).map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
               ))}
-            </ol>
+            </div>
+            <Link className="h5-link h5-faq__all" href={`/${lang}/preguntas`}>
+              {h.faqAll} <Arrow size={14} />
+            </Link>
           </div>
         </section>
 
         {/* ───────── VALORACIONES ───────── */}
-        <section id="valoraciones" className="h5-sec h5-sec--white">
+        <section id="valoraciones" className="h5-sec h5-sec--ivory">
           <div className="container">
             <Head eyebrow={t.reviews.eyebrow} title={t.reviews.title} />
           </div>
@@ -235,26 +227,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
         </section>
 
-        {/* ───────── PREGUNTAS FRECUENTES ───────── */}
-        <section id="preguntas" className="h5-sec h5-sec--ivory">
-          <div className="container h5-faq">
-            <Head eyebrow={t.faq.eyebrow} title={t.faq.title} />
-            <div className="h5-faq__list">
-              {t.faq.items.slice(0, 4).map((f) => (
-                <details key={f.q}>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
-              ))}
-            </div>
-            <Link className="h5-link h5-faq__all" href={`/${lang}/preguntas`}>
-              {h.faqAll} <Arrow size={14} />
-            </Link>
-          </div>
-        </section>
-
         {/* ───────── CIERRE ───────── */}
-        <section className="h5-cta">
+        <section className="h5-cta h5-cta--light">
           <div className="container">
             <div className="h5-cta__card">
               <h2>{h.ctaTitle}</h2>
@@ -272,7 +246,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </section>
       </main>
 
-      <Footer t={t} lang={lang} offer={false} />
+      <Footer t={t} lang={lang} />
     </>
   );
 }

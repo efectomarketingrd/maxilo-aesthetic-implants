@@ -5884,3 +5884,495 @@ p {
     stroke-dashoffset: 0 !important;
   }
 }
+
+/* ═════════ Tarjeta de oferta (antes del pie) ═════════ */
+.offer2-wrap {
+  background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory) 62%, var(--slate) 62%);
+  padding: 20px 0 0;
+}
+
+.offer2 {
+  position: relative;
+}
+
+.offer2__card {
+  position: relative;
+  display: grid;
+  border-radius: 26px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ivory);
+  background: var(--slate-3);
+  box-shadow: 0 30px 60px rgba(28, 37, 41, 0.28);
+  isolation: isolate;
+}
+
+.offer2__photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.offer2__photo img {
+  object-fit: cover;
+  animation: offer-zoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes offer-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1) translateX(-2%); }
+}
+
+.offer2__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 26px 24px 30px;
+  background:
+    radial-gradient(70% 80% at 100% 100%, rgba(190, 157, 97, 0.22), transparent 60%),
+    linear-gradient(160deg, var(--slate) 0%, var(--slate-3) 100%);
+  z-index: 1;
+}
+
+/* Curva entre la foto y el panel (móvil: arriba) */
+.offer2__panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -38px;
+  height: 40px;
+  background: var(--slate);
+  clip-path: ellipse(70% 100% at 50% 100%);
+}
+
+.offer2__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.offer2__spark {
+  display: inline-block;
+  color: var(--gold);
+  animation: spark-spin 4s ease-in-out infinite;
+}
+
+@keyframes spark-spin {
+  0%, 70%, 100% { transform: rotate(0) scale(1); opacity: 1; }
+  80% { transform: rotate(90deg) scale(1.4); opacity: 0.8; }
+}
+
+.offer2__title {
+  font-family: var(--f-title);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 6vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--white);
+}
+
+.offer2__title em {
+  display: block;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold-soft);
+  letter-spacing: 0;
+  font-size: 1.08em;
+}
+
+.offer2__text {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(248, 246, 242, 0.78);
+  max-width: 40ch;
+}
+
+.offer2__btn {
+  margin-top: 6px;
+}
+
+.offer2__btn svg {
+  transition: transform 0.25s;
+}
+
+.offer2__card:hover .offer2__btn svg {
+  transform: translateX(4px);
+}
+
+/* Palmera */
+.offer2__palm {
+  position: absolute;
+  z-index: 2;
+  right: -6px;
+  bottom: -10px;
+  width: 104px;
+  height: auto;
+  pointer-events: none;
+}
+
+.palm-trunk {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.palm-leaf {
+  fill: rgba(190, 157, 97, 0.85);
+}
+
+.palm-leaf--2,
+.palm-leaf--4 {
+  fill: rgba(216, 195, 155, 0.9);
+}
+
+.palm-leaves {
+  transform-origin: 98px 78px;
+  animation: palm-sway 5s ease-in-out infinite;
+}
+
+@keyframes palm-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-5deg); }
+}
+
+.palm-sun {
+  fill: rgba(216, 195, 155, 0.25);
+  animation: palm-sun 5s ease-in-out infinite;
+  transform-origin: 40px 150px;
+}
+
+@keyframes palm-sun {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Ventajas debajo */
+.offer2__perks {
+  list-style: none;
+  margin: 0;
+  padding: 26px 4px 30px;
+  display: grid;
+  gap: 16px;
+  color: var(--ivory);
+}
+
+.offer2__perks li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.78rem;
+  color: rgba(248, 246, 242, 0.65);
+  line-height: 1.35;
+}
+
+.offer2__perks strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ivory);
+}
+
+.offer2__perk-ico {
+  flex: 0 0 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(190, 157, 97, 0.45);
+  color: var(--gold);
+  display: grid;
+  place-items: center;
+}
+
+/* Entrada animada */
+.offer2.js-anim .offer2__card {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.offer2.is-in .offer2__card {
+  animation: h6-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+.offer2.js-anim .offer2__perks li {
+  opacity: 0;
+}
+
+.offer2.is-in .offer2__perks li {
+  animation: svc-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(0.6s + var(--d, 0) * 0.15s);
+}
+
+.offer2.js-anim .offer2__palm {
+  opacity: 0;
+}
+
+.offer2.is-in .offer2__palm {
+  animation: h6-rise 1s ease 0.7s forwards;
+}
+
+/* La página del paquete: sin espacio extra antes del pie */
+.footer {
+  padding-top: 40px;
+}
+
+/* Cierre en versión clara */
+.h5-cta--light .h5-cta__card {
+  background:
+    radial-gradient(60% 100% at 50% 0%, rgba(190, 157, 97, 0.18), transparent 70%),
+    var(--white);
+  color: var(--slate);
+  border: 1px solid rgba(190, 157, 97, 0.35);
+  box-shadow: 0 18px 40px rgba(37, 48, 53, 0.08);
+}
+
+.h5-cta--light .h5-cta__card p {
+  color: var(--muted);
+}
+
+.h5-cta--light .h5-cta__wa {
+  border-color: rgba(37, 48, 53, 0.25);
+  color: var(--slate);
+}
+
+.h5-sec--ivory .h5-review {
+  background: var(--white);
+}
+
+/* Página del paquete */
+.pk-hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--white);
+  padding: 40px 0 56px;
+  min-height: 78vh;
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+  background: var(--slate-3);
+}
+
+.pk-hero__bg {
+  object-fit: cover;
+  z-index: -2;
+  animation: offer-zoom 20s ease-in-out infinite alternate;
+}
+
+.pk-hero__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(28, 37, 41, 0.95) 0%, rgba(28, 37, 41, 0.6) 50%, rgba(28, 37, 41, 0.2) 100%);
+}
+
+.pk-hero h1 {
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  color: var(--white);
+  margin: 12px 0 16px;
+}
+
+.pk-hero h1 em {
+  display: block;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold-soft);
+  letter-spacing: 0;
+  font-size: 1.05em;
+}
+
+.pk-hero__text {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 56ch;
+  margin-bottom: 26px;
+}
+
+.pk-hero__ctas {
+  display: grid;
+  gap: 10px;
+  max-width: 380px;
+}
+
+.pk-btn-light {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--white);
+}
+
+.pk-btn-light:hover {
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+}
+
+.crumbs--light,
+.crumbs--light a,
+.crumbs--light span {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pk-includes {
+  display: grid;
+  gap: 14px;
+}
+
+.pk-include {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px 22px;
+  background: var(--ivory);
+}
+
+.pk-include__n {
+  display: block;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.pk-include p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.pk-includes.js-anim .pk-include {
+  opacity: 0;
+}
+
+.pk-includes.is-in .pk-include {
+  animation: svc-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--d, 0) * 0.12s);
+}
+
+@media (min-width: 720px) {
+  .offer2__card {
+    grid-template-columns: 1.1fr 1fr;
+    min-height: 300px;
+  }
+
+  .offer2__photo {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
+  .offer2__panel {
+    justify-content: center;
+    padding: 36px 40px 36px 20px;
+  }
+
+  /* Curva lateral, como en el ejemplo */
+  .offer2__panel::before {
+    left: -70px;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 72px;
+    height: auto;
+    clip-path: ellipse(100% 70% at 100% 50%);
+  }
+
+  .offer2__palm {
+    width: 140px;
+    right: -10px;
+    bottom: -14px;
+  }
+
+  .offer2__perks {
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 40px;
+    padding: 28px 8px 34px;
+  }
+
+  .pk-includes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pk-hero__ctas {
+    display: flex;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1040px) {
+  .offer2-wrap {
+    padding-top: 40px;
+  }
+
+  .offer2__card {
+    grid-template-columns: 1.25fr 1fr;
+    min-height: 320px;
+  }
+
+  .offer2__panel {
+    padding: 44px 140px 44px 24px;
+  }
+
+  .offer2__palm {
+    width: 170px;
+  }
+
+  .pk-includes {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pk-hero {
+    min-height: 72vh;
+    padding-bottom: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer2 *,
+  .pk-hero__bg,
+  .pk-includes * {
+    animation: none !important;
+  }
+
+  .offer2.js-anim .offer2__card,
+  .offer2.js-anim .offer2__perks li,
+  .offer2.js-anim .offer2__palm,
+  .pk-includes.js-anim .pk-include {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Ajustes tarjeta de oferta */
+.offer2__panel {
+  background:
+    radial-gradient(70% 80% at 100% 100%, rgba(190, 157, 97, 0.22), transparent 60%),
+    var(--slate-3);
+}
+
+.offer2__panel::before {
+  background: var(--slate-3);
+}
+
+.offer2__btn {
+  position: relative;
+  z-index: 3;
+}
+
+@media (max-width: 719px) {
+  .offer2__palm {
+    width: 74px;
+    z-index: 0;
+    opacity: 0.75;
+  }
+
+  .offer2__panel {
+    padding-bottom: 34px;
+  }
+}
