@@ -118,7 +118,7 @@ export default async function PostPage({ params }: { params: Params }) {
             <div className="post__cta">
               <h3>{t.news.ctaTitle}</h3>
               <div className="hero__ctas">
-                <a className="btn btn--dark" href={`/${lang}#agendar`}>
+                <a className="btn btn--dark" href={`/${lang}/agendar`}>
                   {t.nav.cta} <Arrow />
                 </a>
                 {service ? (

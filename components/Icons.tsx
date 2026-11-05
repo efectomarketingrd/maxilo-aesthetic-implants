@@ -107,4 +107,45 @@ export const WaIcon = ({ size = 20 }: P) => (
   </svg>
 );
 
+export const Sun = ({ size }: P) => (
+  <svg {...base(size)}>
+    <circle cx="24" cy="22" r="8" />
+    <path d="M24 6v4M24 34v4M8 22h4M36 22h4M12.7 10.7l2.8 2.8M32.5 30.5l2.8 2.8M12.7 33.3l2.8-2.8M32.5 13.5l2.8-2.8" />
+    <path d="M6 42c4-3 8-3 12 0s8 3 12 0 8-3 12 0" />
+  </svg>
+);
+
+export const Calendar = ({ size }: P) => (
+  <svg {...base(size)}>
+    <rect x="7" y="10" width="34" height="31" rx="3" />
+    <path d="M7 19h34M16 6v8M32 6v8M15 27h4M22 27h4M29 27h4M15 33h4M22 33h4" />
+  </svg>
+);
+
+export const Person = ({ size }: P) => (
+  <svg {...base(size)}>
+    <circle cx="24" cy="16" r="8" />
+    <path d="M9 42c1-9 7-14 15-14s14 5 15 14" />
+  </svg>
+);
+
+export const Heart = ({ size }: P) => (
+  <svg {...base(size)}>
+    <path d="M24 41S7 31 7 18a9 9 0 0 1 17-4 9 9 0 0 1 17 4c0 13-17 23-17 23z" />
+  </svg>
+);
+
+export const Lock = ({ size = 14 }: P) => (
+  <svg {...base(size)} strokeWidth={2.4}>
+    <rect x="10" y="21" width="28" height="20" rx="3" />
+    <path d="M16 21v-6a8 8 0 0 1 16 0v6" />
+  </svg>
+);
+
+export const Chevron = ({ size = 18, dir = "right" }: P & { dir?: "left" | "right" }) => (
+  <svg {...base(size)} strokeWidth={2.6}>
+    <path d={dir === "right" ? "M18 10l14 14-14 14" : "M30 10L16 24l14 14"} />
+  </svg>
+);
+
 export const serviceIcons = { tooth: Tooth, profile: Profile, syringe: Syringe, shield: Shield };

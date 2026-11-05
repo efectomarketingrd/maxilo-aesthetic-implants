@@ -89,7 +89,7 @@ export default async function Blog({ params }: { params: Promise<{ lang: string 
                 ))}
           </div>
           <div className="container" style={{ textAlign: "center", marginTop: 48 }}>
-            <a className="btn btn--dark" href={`/${lang}#agendar`}>
+            <a className="btn btn--dark" href={`/${lang}/agendar`}>
               {t.nav.cta} <Arrow />
             </a>
           </div>

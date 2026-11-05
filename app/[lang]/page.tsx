@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ContactForm from "@/components/ContactForm";
+import Schedule from "@/components/Schedule";
 import Schema from "@/components/Schema";
 import { Arrow, Award, Building, Check, Star, WaIcon, serviceIcons } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
@@ -48,7 +48,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </h1>
               <p className="hero__text">{t.hero.text}</p>
               <div className="hero__ctas">
-                <a className="btn btn--dark" href="#agendar">
+                <a className="btn btn--dark" href={`/${lang}/agendar`}>
                   {t.hero.cta} <Arrow />
                 </a>
                 <a className="btn btn--line" href="#servicios">
@@ -317,8 +317,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </ul>
             </div>
             <div className="book__form">
-              <h3>{t.nav.cta}</h3>
-              <ContactForm t={t} />
+              <h3>{t.booking.scheduleTitle}</h3>
+              <Schedule t={t} lang={lang} />
+              <a className="btn btn--dark btn--block" href={`/${lang}/agendar`}>
+                {t.booking.cta} <Arrow />
+              </a>
+              <a className="btn btn--line btn--block book__wa" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
+                <WaIcon /> WhatsApp
+              </a>
             </div>
           </div>
         </section>

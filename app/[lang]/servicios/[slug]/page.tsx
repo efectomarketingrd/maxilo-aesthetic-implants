@@ -82,7 +82,7 @@ export default async function ServicePage({ params }: { params: Params }) {
               <h1>{s.title}</h1>
               <p className="lead">{s.intro}</p>
               <div className="hero__ctas">
-                <a className="btn btn--dark" href={`/${lang}#agendar`}>
+                <a className="btn btn--dark" href={`/${lang}/agendar`}>
                   {t.nav.cta} <Arrow />
                 </a>
                 <a className="btn btn--line" href={waLink(`${t.hero.waMsg} (${s.title})`)} target="_blank" rel="noopener">

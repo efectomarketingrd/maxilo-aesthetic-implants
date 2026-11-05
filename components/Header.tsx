@@ -97,7 +97,7 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
           <Link href={otherPath} className="header__lang" hrefLang={other} lang={other}>
             {other.toUpperCase()}
           </Link>
-          <a className="btn btn--dark btn--sm header__cta" href={`${home}#agendar`}>
+          <a className="btn btn--dark btn--sm header__cta" href={`${home}/agendar`}>
             {t.nav.cta}
           </a>
           <button className="header__toggle" aria-label="Menú" aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -126,7 +126,7 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
               {l.label}
             </a>
           ))}
-          <a className="btn btn--dark" href={`${home}#agendar`} onClick={close}>
+          <a className="btn btn--dark" href={`${home}/agendar`} onClick={close}>
             {t.nav.cta}
           </a>
         </div>

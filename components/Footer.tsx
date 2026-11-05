@@ -2,12 +2,32 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dict } from "@/lib/content";
 import { site, waLink, type Locale } from "@/lib/site";
-import { Clock, Mail, Phone, Pin, WaIcon } from "./Icons";
+import { Arrow, Clock, Mail, Phone, Pin, WaIcon } from "./Icons";
+import CaribbeanArt from "./CaribbeanArt";
+import { agenda, formatTime } from "@/lib/agenda";
 
 export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
   const home = `/${lang}`;
   return (
     <>
+      <div className="offer-wrap">
+        <div className="container">
+          <a className="offer" href={`${home}#estadia`}>
+            <div className="offer__art">
+              <CaribbeanArt />
+            </div>
+            <div className="offer__copy">
+              <span className="offer__tag">{t.footer.offer} ✦</span>
+              <strong className="offer__title">{t.footer.offerTitle}</strong>
+              <p>{t.footer.offerText}</p>
+              <span className="btn btn--gold btn--sm offer__btn">
+                {t.footer.offerCta} <Arrow size={14} />
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+
       <footer className="footer">
         <div className="container footer__grid">
           <div className="footer__brand">
@@ -22,7 +42,7 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
               <li><a href={`${home}#preguntas`}>{t.nav.faq}</a></li>
               <li><a href={`${home}#marcas`}>{t.nav.brands}</a></li>
               <li><Link href={`${home}/blog`}>{t.nav.news}</Link></li>
-              <li><a href={`${home}#agendar`}>{t.nav.cta}</a></li>
+              <li><a href={`${home}/agendar`}>{t.nav.cta}</a></li>
             </ul>
           </div>
           <div>
@@ -38,8 +58,18 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
           <div>
             <h4>{t.footer.hours}</h4>
             <p className="footer__line">
-              <Clock /> {t.footer.hoursValue ?? <span className="pending-inline">{t.pending}</span>}
+              <Clock /> {t.booking.scheduleDays}
             </p>
+            <ul className="footer__hours">
+              {agenda.slots.map((s) => (
+                <li key={s.time + s.type}>
+                  <span>{formatTime(s.time, lang)}</span>
+                  {s.type === "consulta" ? t.booking.scheduleConsulta.replace(/s$/, "") : t.booking.scheduleProc}
+                  {s.alt ? "*" : ""}
+                </li>
+              ))}
+            </ul>
+            <p className="footer__small">* {t.booking.alt}. {lang === "es" ? "Fuera de horario" : "Outside hours"}: +{agenda.surcharge}</p>
           </div>
           <div id="contacto">
             <h4>{t.footer.contact}</h4>
