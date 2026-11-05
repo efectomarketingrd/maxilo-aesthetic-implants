@@ -43,9 +43,10 @@ export default function TreatmentFinder({ t, lang }: { t: Dict; lang: Locale }) 
           />
         </label>
         <Link className="finder__btn" href={`/${lang}/agendar`} aria-label={t.nav.cta}>
-          <svg width="20" height="20" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <rect x="7" y="10" width="34" height="31" rx="4" />
             <path d="M7 19h34M16 6v8M32 6v8" />
+            <path d="M16 27h4M22 27h4M28 27h4M16 33h4M22 33h4" />
           </svg>
         </Link>
       </div>

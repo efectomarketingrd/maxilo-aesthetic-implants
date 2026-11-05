@@ -5317,3 +5317,24 @@ p {
     stroke-dashoffset: 0;
   }
 }
+
+/* Botón de calendario junto al buscador */
+.finder__btn {
+  background: var(--gold-tint);
+  border-color: rgba(190, 157, 97, 0.4);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.finder__btn:hover,
+.finder__btn:active {
+  background: var(--gold);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 359px) {
+  .finder__btn svg {
+    width: 22px;
+    height: 22px;
+  }
+}
