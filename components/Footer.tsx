@@ -73,7 +73,7 @@ export default function Footer({ t, lang, offer = true }: { t: Dict; lang: Local
         </div>
         <div className="container footer__bottom">
           <span>© {new Date().getFullYear()} {site.name}. {t.footer.rights}</span>
-          <Link href={lang === "es" ? "/en" : "/es"}>{t.footer.lang}</Link>
+          <a href={lang === "es" ? "/en" : "/es"} hrefLang={lang === "es" ? "en" : "es"}>{t.footer.lang}</a>
         </div>
       </footer>
 

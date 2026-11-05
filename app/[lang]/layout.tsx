@@ -10,6 +10,7 @@ import "@fontsource/montserrat/500.css";
 import "../globals.css";
 import { dictionaries } from "@/lib/content";
 import { locales, site, type Locale } from "@/lib/site";
+import ScrollTop from "@/components/ScrollTop";
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -46,7 +47,10 @@ export default async function LangLayout({ children, params }: { children: React
   if (!locales.includes(lang as Locale)) notFound();
   return (
     <html lang={lang}>
-      <body>{children}</body>
+      <body>
+        <ScrollTop />
+        {children}
+      </body>
     </html>
   );
 }

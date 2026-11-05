@@ -94,9 +94,10 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
         </nav>
 
         <div className="header__actions">
-          <Link href={otherPath} className="header__lang" hrefLang={other} lang={other}>
+          {/* Enlace normal (no Link): el cambio de idioma recarga la página y empieza arriba */}
+          <a href={otherPath} className="header__lang" hrefLang={other} lang={other}>
             {other.toUpperCase()}
-          </Link>
+          </a>
           <a className="btn btn--dark btn--sm header__cta" href={`${home}/agendar`}>
             {t.nav.cta}
           </a>
