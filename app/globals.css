@@ -5608,3 +5608,16 @@ p {
     animation: none !important;
   }
 }
+
+.h5-head__hint {
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+@media (min-width: 1040px) {
+  .h5-head__hint {
+    font-size: 1.25rem;
+  }
+}
