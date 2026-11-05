@@ -3,10 +3,10 @@
 const CDN = "https://d8j0ntlcm91z4.cloudfront.net/user_3LZ8my4o5R9prXx0ZTCU28u6qVU";
 
 export const img = {
-  implantes: `${CDN}/hf_20261105_005554_e61f3608-f5f8-421c-b16a-3604b61fb3ca.png`,
-  cirugiaOral: `${CDN}/hf_20261105_005423_2e977576-9c4e-4960-8734-0d968cdafa74.png`,
-  estetica: `${CDN}/hf_20261105_005423_5aa04142-e6dd-4a71-95cd-e805069d450b.png`,
-  medicina: `${CDN}/hf_20261105_005612_93b83380-8ea5-44c8-b4b3-48e138eee936.png`,
+  implantes: `${CDN}/hf_20261105_011842_e234406d-19f3-4c20-a787-6dab8df597a3.png`,
+  cirugiaOral: `${CDN}/hf_20261105_011901_3200f1f9-6701-43b3-bc28-48a887945222.png`,
+  estetica: `${CDN}/hf_20261105_011842_fbb34633-e3bf-4ad6-8f72-d598243ecfa2.png`,
+  medicina: `${CDN}/hf_20261105_011931_d8262b2e-9f19-40ea-ab25-37aaa07333c7.png`,
   reconstructiva: `${CDN}/hf_20261105_005424_4220a9e3-2041-4e24-ab79-4281a11cc151.png`,
   playa: `${CDN}/hf_20261105_005423_72f2b32a-9023-4c96-aa30-0495fb6e9daa.png`,
 };
