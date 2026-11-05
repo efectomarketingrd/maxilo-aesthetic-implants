@@ -6,6 +6,7 @@ import Schema from "@/components/Schema";
 import TreatmentFinder from "@/components/TreatmentFinder";
 import Greeting from "@/components/Greeting";
 import InView from "@/components/InView";
+import CtaCard from "@/components/CtaCard";
 import ServiceIcon from "@/components/ServiceIcon";
 import { Arrow, Check, Star, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
@@ -228,22 +229,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </section>
 
         {/* ───────── CIERRE ───────── */}
-        <section className="h5-cta h5-cta--light">
-          <div className="container">
-            <div className="h5-cta__card">
-              <h2>{h.ctaTitle}</h2>
-              <p>{h.ctaText}</p>
-              <div className="h5-cta__btns">
-                <Link className="btn btn--gold" href={`/${lang}/agendar`}>
-                  {t.nav.cta} <Arrow />
-                </Link>
-                <a className="btn h5-cta__wa" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
-                  <WaIcon /> WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CtaCard t={t} lang={lang} />
       </main>
 
       <Footer t={t} lang={lang} />

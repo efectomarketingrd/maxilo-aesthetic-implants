@@ -95,7 +95,8 @@ const es = {
     docCta: "Agenda con la doctora",
     docMore: "Más sobre nosotros",
     faqAll: "Ver todas las preguntas",
-    ctaTitle: "Dé el primer paso hacia su nueva sonrisa",
+    ctaTitle: "Su nueva sonrisa empieza aquí",
+    ctaSteps: ["Elija el servicio", "Día y hora", "Le confirmamos"],
     ctaText: "Elija día y hora en línea o escríbanos por WhatsApp. Le respondemos lo antes posible.",
   },
   services: {
@@ -487,7 +488,8 @@ const en: Dict = {
     docCta: "Book with the doctor",
     docMore: "More about us",
     faqAll: "See all questions",
-    ctaTitle: "Take the first step toward your new smile",
+    ctaTitle: "Your new smile starts here",
+    ctaSteps: ["Choose a service", "Day & time", "We confirm"],
     ctaText: "Choose a day and time online or message us on WhatsApp. We'll reply as soon as possible.",
   },
   services: {
