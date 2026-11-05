@@ -15,7 +15,6 @@ export default function Footer({ t, lang, offer = true }: { t: Dict; lang: Local
         <div className="container footer__grid">
           <div className="footer__brand">
             <Image src="/brand/logo-light.png" alt="Maxilo Aesthetic Implants — Dra. Celia Hernández Mauricio" width={220} height={130} />
-            <p>{t.footer.tagline}</p>
           </div>
           <div>
             <h4>{t.footer.quick}</h4>
