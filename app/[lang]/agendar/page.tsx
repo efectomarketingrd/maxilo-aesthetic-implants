@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BookingWizard from "@/components/BookingWizard";
-import { Arrow, Award, Calendar, Check, Clock, Heart, Person, Shield, Video, WaIcon } from "@/components/Icons";
+import { Arrow, Clock, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { agenda, formatTime } from "@/lib/agenda";
 import { site, waLink, type Locale } from "@/lib/site";
@@ -25,7 +24,6 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
   const lang = l as Locale;
   const t = dictionaries[lang];
   const b = t.booking;
-  const featureIcons = [Calendar, Person, Shield, Heart];
 
   const times = agenda.slots.map((s) => s.time).sort();
   const schema = {
@@ -49,7 +47,7 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
       <Header t={t} lang={lang} />
       <main className="booking-page">
         <section className="bk-hero">
-          <div className="container bk-hero__grid">
+          <div className="container bk-hero__grid bk-hero__grid--single">
             <div className="bk-hero__copy">
               <p className="tag">{b.eyebrow}</p>
               <h1>
@@ -63,38 +61,6 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
                 <a className="btn btn--line" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
                   <WaIcon /> WhatsApp
                 </a>
-              </div>
-              <ul className="bk-hero__badges">
-                {b.badges.map((x, i) => {
-                  const I = [Shield, Award, Heart][i];
-                  return (
-                    <li key={x}>
-                      <span className="bk-hero__badge-ico"><I size={24} /></span>
-                      <span>{x}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            <div className="bk-hero__visual">
-              <div className="bk-hero__circle" aria-hidden="true" />
-              <div className="bk-hero__photo">
-                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 420px, 75vw" />
-              </div>
-              <div className="bk-chip bk-chip--top">
-                <Calendar size={22} />
-                <span>
-                  <strong>{b.scheduleDays}</strong>
-                  {b.chipHours}
-                </span>
-              </div>
-              <div className="bk-chip bk-chip--bottom">
-                <Video size={22} />
-                <span>
-                  <strong>{b.chipModesTitle}</strong>
-                  {b.chipModes}
-                </span>
               </div>
             </div>
           </div>
@@ -126,41 +92,6 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
           </div>
         </section>
 
-        <section className="bk-features">
-          <div className="container bk-features__grid">
-            {b.features.map((f, i) => {
-              const I = featureIcons[i];
-              return (
-                <div className="bk-feature" key={f.t}>
-                  <I size={36} />
-                  <h3>{f.t}</h3>
-                  <p>{f.d}</p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="bk-meet">
-          <div className="container">
-            <div className="bk-meet__card">
-              <div className="bk-meet__photo">
-                <Image src="/brand/doctora.jpg" alt="" width={1000} height={1473} sizes="140px" />
-              </div>
-              <div className="bk-meet__text">
-                <p className="bk-meet__eyebrow">{b.meet}</p>
-                <strong>{t.about.doctorName}</strong>
-                <span>{t.about.doctorRole}</span>
-                <p>{b.meetText}</p>
-              </div>
-              <ul className="bk-meet__list">
-                {t.about.values.slice(0, 3).map((v) => (
-                  <li key={v}><Check /> {v}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer t={t} lang={lang} />
     </>

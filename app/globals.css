@@ -3375,3 +3375,20 @@ p {
     right: -4%;
   }
 }
+
+/* Agenda simplificada y pie de página de 3 columnas */
+.bk-hero__grid--single {
+  grid-template-columns: 1fr !important;
+  max-width: 760px;
+}
+
+.bk-hero__grid--single .hero__text {
+  max-width: 56ch;
+}
+
+@media (min-width: 1040px) {
+  .footer__grid {
+    grid-template-columns: 1.3fr 1fr 1.3fr;
+    gap: 56px;
+  }
+}

@@ -2,9 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dict } from "@/lib/content";
 import { site, waLink, type Locale } from "@/lib/site";
-import { Arrow, Building, Clock, Heart, Mail, Phone, Pin, Video, WaIcon } from "./Icons";
+import { Arrow, Building, Heart, Mail, Phone, Pin, Video, WaIcon } from "./Icons";
 import { img } from "@/lib/images";
-import { agenda, formatTime } from "@/lib/agenda";
 
 export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
   const home = `/${lang}`;
@@ -57,32 +56,6 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
               <li><Link href={`${home}/blog`}>{t.nav.news}</Link></li>
               <li><a href={`${home}/agendar`}>{t.nav.cta}</a></li>
             </ul>
-          </div>
-          <div>
-            <h4>{t.footer.services}</h4>
-            <ul>
-              {t.services.items.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`${home}/servicios/${s.slug}`}>{s.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4>{t.footer.hours}</h4>
-            <p className="footer__line">
-              <Clock /> {t.booking.scheduleDays}
-            </p>
-            <ul className="footer__hours">
-              {agenda.slots.map((s) => (
-                <li key={s.time + s.type}>
-                  <span>{formatTime(s.time, lang)}</span>
-                  {s.type === "consulta" ? t.booking.scheduleConsulta.replace(/s$/, "") : t.booking.scheduleProc}
-                  {s.alt ? "*" : ""}
-                </li>
-              ))}
-            </ul>
-            <p className="footer__small">* {t.booking.alt}. {lang === "es" ? "Fuera de horario" : "Outside hours"}: +{agenda.surcharge}</p>
           </div>
           <div id="contacto">
             <h4>{t.footer.contact}</h4>
