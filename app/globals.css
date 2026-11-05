@@ -6376,3 +6376,245 @@ p {
     padding-bottom: 34px;
   }
 }
+
+/* ═════════ Tarjeta de oferta v2: foto completa, flor y más animación ═════════ */
+.offer2__palm {
+  display: none;
+}
+
+.offer2__photo {
+  aspect-ratio: 4 / 3;
+}
+
+.offer2__photo img {
+  object-position: center 55%;
+  animation: offer-zoom2 16s ease-in-out infinite alternate;
+}
+
+@keyframes offer-zoom2 {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+
+.offer2__panel::before {
+  top: -22px;
+  height: 24px;
+}
+
+/* Reflejo de luz que cruza la foto */
+.offer2__glint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 240, 210, 0.28) 48%, transparent 62%);
+  transform: translateX(-100%);
+  animation: glint 9s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes glint {
+  0% { transform: translateX(-100%); }
+  25%, 100% { transform: translateX(100%); }
+}
+
+/* Partículas doradas que suben en el panel */
+.offer2__dots {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.offer2__dots i {
+  position: absolute;
+  bottom: -10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(216, 195, 155, 0.55);
+  animation: dot-rise 7s linear infinite;
+}
+
+.offer2__dots i:nth-child(1) { left: 18%; animation-delay: 0s; }
+.offer2__dots i:nth-child(2) { left: 46%; animation-delay: 2.2s; width: 3px; height: 3px; }
+.offer2__dots i:nth-child(3) { left: 70%; animation-delay: 4.1s; }
+.offer2__dots i:nth-child(4) { left: 88%; animation-delay: 5.6s; width: 4px; height: 4px; }
+
+@keyframes dot-rise {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-340px) translateX(14px); opacity: 0; }
+}
+
+.offer2__panel {
+  isolation: isolate;
+}
+
+/* Título que aparece por líneas */
+.offer2.js-anim .offer2__line,
+.offer2.js-anim .offer2__tag,
+.offer2.js-anim .offer2__text,
+.offer2.js-anim .offer2__btn {
+  opacity: 0;
+}
+
+.offer2.is-in .offer2__tag { animation: svc-in 0.6s ease 0.45s forwards; }
+.offer2.is-in .offer2__line:first-child { animation: svc-in 0.7s ease 0.6s forwards; }
+.offer2.is-in em.offer2__line { animation: svc-in 0.7s ease 0.8s forwards; }
+.offer2.is-in .offer2__text { animation: svc-in 0.7s ease 1s forwards; }
+.offer2.is-in .offer2__btn { animation: svc-in 0.7s ease 1.15s forwards; }
+
+.offer2__line {
+  display: inline-block;
+}
+
+em.offer2__line {
+  display: block;
+}
+
+/* Flor que sobresale */
+.offer2__flower {
+  position: absolute;
+  z-index: 4;
+  width: 150px;
+  height: auto;
+  right: -26px;
+  top: calc((100vw - 40px) * 0.75 - 92px);
+  pointer-events: none;
+  overflow: visible;
+  filter: drop-shadow(0 12px 18px rgba(20, 14, 8, 0.35));
+}
+
+.fl-main,
+.fl-bud {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.fl-petals {
+  transform-origin: 0 0;
+  animation: fl-breathe 6s ease-in-out infinite;
+}
+
+@keyframes fl-breathe {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(6deg) scale(1.03); }
+}
+
+.fl-leaf {
+  transform-box: fill-box;
+}
+
+.fl-leaf--1 { transform-origin: 0% 80%; animation: fl-sway 5.5s ease-in-out infinite; }
+.fl-leaf--2 { transform-origin: 50% 0%; animation: fl-sway 6.5s ease-in-out 0.8s infinite; }
+.fl-leaf--3 { transform-origin: 100% 20%; animation: fl-sway 6s ease-in-out 0.4s infinite reverse; }
+
+@keyframes fl-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-4deg); }
+}
+
+.fl-stamen {
+  transform-origin: 0 0;
+  animation: fl-stamen 4s ease-in-out infinite;
+}
+
+@keyframes fl-stamen {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-8deg); }
+}
+
+.fl-pollen circle {
+  fill: #f3d9a4;
+  animation: fl-pollen 5s ease-out infinite;
+}
+
+.fl-pollen circle:nth-child(2) { animation-delay: 1.6s; }
+.fl-pollen circle:nth-child(3) { animation-delay: 3.1s; }
+
+@keyframes fl-pollen {
+  0% { transform: translate(0, 0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(18px, -30px); opacity: 0; }
+}
+
+/* La flor "florece" al aparecer */
+.offer2.js-anim .offer2__flower {
+  opacity: 0;
+}
+
+.offer2.is-in .offer2__flower {
+  animation: fl-in 1.1s cubic-bezier(0.34, 1.4, 0.64, 1) 0.9s forwards;
+}
+
+@keyframes fl-in {
+  from { opacity: 0; transform: scale(0.4) rotate(-25deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.offer2__flower {
+  transform-origin: 60% 50%;
+}
+
+@media (min-width: 720px) {
+  .offer2__photo {
+    aspect-ratio: auto;
+  }
+
+  .offer2__photo img {
+    object-position: 35% center;
+  }
+
+  .offer2__panel::before {
+    top: 0;
+    height: auto;
+  }
+
+  .offer2__flower {
+    top: auto;
+    bottom: 40px;
+    right: -46px;
+    width: 210px;
+  }
+
+  .offer2__panel {
+    padding-right: 150px;
+  }
+}
+
+@media (min-width: 1040px) {
+  .offer2__card {
+    min-height: 340px;
+  }
+
+  .offer2__flower {
+    width: 250px;
+    right: -70px;
+    bottom: 30px;
+  }
+
+  .offer2__panel {
+    padding-right: 170px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer2.js-anim .offer2__line,
+  .offer2.js-anim .offer2__tag,
+  .offer2.js-anim .offer2__text,
+  .offer2.js-anim .offer2__btn,
+  .offer2.js-anim .offer2__flower {
+    opacity: 1 !important;
+  }
+}
+
+.offer2-wrap {
+  overflow-x: clip;
+}
+
+@media (min-width: 1040px) {
+  .offer2__flower {
+    bottom: 96px;
+    right: -78px;
+  }
+}
