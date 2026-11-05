@@ -4,7 +4,7 @@ import type { Dict } from "@/lib/content";
 import type { Locale } from "@/lib/site";
 import { img } from "@/lib/images";
 import InView from "./InView";
-import { Arrow, Heart, Sun, Video } from "./Icons";
+import { Arrow } from "./Icons";
 
 const PETAL = "M0 0 C -24 -8, -34 -46, -12 -64 C -2 -72, 14 -70, 22 -60 C 38 -40, 22 -10, 0 0 Z";
 
@@ -84,7 +84,6 @@ function Flower() {
 export default function OfferCard({ t, lang }: { t: Dict; lang: Locale }) {
   const k = t.pkg;
   const href = `/${lang}/paquete-implantes`;
-  const icons = [Video, Sun, Heart];
   return (
     <section className="offer2-wrap">
       <div className="container">
@@ -114,22 +113,6 @@ export default function OfferCard({ t, lang }: { t: Dict; lang: Locale }) {
             </span>
           </Link>
           <Flower />
-          <ul className="offer2__perks">
-            {k.perks.map((p, i) => {
-              const I = icons[i];
-              return (
-                <li key={p.t} style={{ "--d": i } as React.CSSProperties}>
-                  <span className="offer2__perk-ico">
-                    <I size={22} />
-                  </span>
-                  <span>
-                    <strong>{p.t}</strong>
-                    {p.d}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
         </InView>
       </div>
     </section>
