@@ -155,4 +155,11 @@ export const Video = ({ size }: P) => (
   </svg>
 );
 
+export const Globe = ({ size }: P) => (
+  <svg {...base(size)}>
+    <circle cx="24" cy="24" r="18" />
+    <path d="M6 24h36M24 6c5 5 7.5 11 7.5 18S29 37 24 42c-5-5-7.5-11-7.5-18S19 11 24 6z" />
+  </svg>
+);
+
 export const serviceIcons = { tooth: Tooth, profile: Profile, syringe: Syringe, shield: Shield };

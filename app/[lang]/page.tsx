@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Schedule from "@/components/Schedule";
 import Schema from "@/components/Schema";
-import { Arrow, Award, Building, Check, Star, WaIcon, serviceIcons } from "@/components/Icons";
+import { Arrow, Award, Building, Check, Globe, Heart, Pin, Star, Sun, WaIcon, serviceIcons } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { waLink, type Locale } from "@/lib/site";
 import { serviceImg } from "@/lib/images";
@@ -40,42 +40,51 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <main>
         {/* ───────── PARTE SUPERIOR: PRESENTACIÓN ───────── */}
-        <section className="hero">
-          <div className="container hero__grid">
-            <div className="hero__copy">
-              <p className="tag">{t.hero.eyebrow}</p>
-              <h1>
-                {t.hero.title} <em>{t.hero.titleAccent}</em>
-              </h1>
-              <p className="hero__text">{t.hero.text}</p>
-              <div className="hero__ctas">
-                <a className="btn btn--dark" href={`/${lang}/agendar`}>
-                  {t.hero.cta} <Arrow />
-                </a>
-                <a className="btn btn--line" href="#servicios">
-                  {t.hero.secondary}
-                </a>
+        <section className="hero2">
+          <div className="container hero2__grid">
+            <div className="hero2__visual">
+              <span className="hero2__ring" aria-hidden="true" />
+              <div className="hero2__arch">
+                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 440px, 74vw" />
               </div>
-              <ul className="hero__badges">
-                {t.hero.badges.map((b) => (
-                  <li key={b}>
-                    <span className="hero__badge-ico"><Check /></span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="hero__visual">
-              <div className="hero__arch">
-                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 460px, 80vw" />
-              </div>
-              <div className="hero__card">
-                <Image src="/brand/mono-dark.png" alt="" width={44} height={30} />
+              <a className="hero2__chip" href="#estadia">
+                <Sun size={22} />
+                <span>{t.hero.chip}</span>
+              </a>
+              <div className="hero2__card">
+                <Image src="/brand/mono-dark.png" alt="" width={40} height={27} />
                 <span>
                   <strong>{t.hero.nameTag}</strong>
                   {t.hero.roleTag}
                 </span>
               </div>
+            </div>
+
+            <div className="hero2__copy">
+              <p className="hero2__eyebrow"><Pin size={14} /> {t.hero.eyebrow}</p>
+              <h1>
+                {t.hero.title} <em>{t.hero.titleAccent}</em>
+              </h1>
+              <p className="hero2__text">{t.hero.text}</p>
+              <div className="hero2__ctas">
+                <a className="btn btn--dark" href={`/${lang}/agendar`}>
+                  {t.hero.cta} <Arrow />
+                </a>
+                <a className="hero2__link" href="#servicios">
+                  {t.hero.secondary} <Arrow size={14} />
+                </a>
+              </div>
+              <ul className="hero2__trust">
+                {t.hero.badges.map((b, i) => {
+                  const I = [Award, Globe, Heart][i];
+                  return (
+                    <li key={b}>
+                      <span className="hero2__trust-ico"><I size={22} /></span>
+                      <span>{b}</span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </section>
