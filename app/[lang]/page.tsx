@@ -150,21 +150,34 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         {/* ───────── LA DOCTORA ───────── */}
         <section id="doctora" className="h5-sec h5-sec--ivory">
           <div className="container">
-            <div className="h5-doc">
-              <div className="h5-doc__photo">
-                <Image src="/brand/doctora-retrato.jpg" alt={t.about.doctorName} width={1000} height={1473} sizes="(min-width: 1040px) 380px, 40vw" />
+            <InView className="h6-doc">
+              <div className="h6-doc__photo">
+                <svg className="h6-doc__ring" viewBox="0 0 100 100" aria-hidden="true">
+                  <circle cx="50" cy="50" r="48.5" pathLength={1} />
+                </svg>
+                <span className="h6-doc__disc" aria-hidden="true" />
+                <span className="h6-doc__clip">
+                  <Image src="/brand/doctora-hd.png" alt={t.about.doctorName} width={640} height={1062} sizes="(min-width: 1040px) 320px, 62vw" />
+                </span>
               </div>
-              <div className="h5-doc__body">
-                <p className="eyebrow">{h.docEyebrow}</p>
-                <h2>{t.about.doctorName}</h2>
-                <p className="h5-doc__role">
-                  {t.about.doctorRole} <span className="h5-badge">{h.docBadge}</span>
-                </p>
-              </div>
-              <div className="h5-doc__more">
-                <p className="h5-doc__text">{h.docText}</p>
-                <div className="h5-doc__btns">
-                  <Link className="btn btn--dark" href={`/${lang}/agendar`}>
+              <div className="h6-doc__body">
+                <p className="eyebrow h6-up" style={{ "--d": 1 } as React.CSSProperties}>{h.docEyebrow}</p>
+                <h2 className="h6-doc__name h6-up" style={{ "--d": 2 } as React.CSSProperties}>
+                  {t.about.doctorName}
+                  <svg className="h6-doc__sign" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M2 8 C 40 2, 80 11, 120 6 S 180 3, 198 7" pathLength={1} />
+                  </svg>
+                </h2>
+                <p className="h6-doc__role h6-up" style={{ "--d": 3 } as React.CSSProperties}>{t.about.doctorRole}</p>
+                <ul className="h6-doc__tags">
+                  {h.docTags.map((tag, i) => (
+                    <li key={tag} className="h6-up" style={{ "--d": 4 + i * 0.5 } as React.CSSProperties}>{tag}</li>
+                  ))}
+                </ul>
+                <blockquote className="h6-doc__quote h6-up" style={{ "--d": 6 } as React.CSSProperties}>“{h.docQuote}”</blockquote>
+                <p className="h6-doc__text h6-up" style={{ "--d": 7 } as React.CSSProperties}>{h.docText}</p>
+                <div className="h6-doc__btns h6-up" style={{ "--d": 8 } as React.CSSProperties}>
+                  <Link className="btn btn--dark h5-btn-shine" href={`/${lang}/agendar`}>
                     {h.docCta} <Arrow />
                   </Link>
                   <Link className="h5-link" href={`/${lang}/sobre-nosotros`}>
@@ -172,7 +185,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                   </Link>
                 </div>
               </div>
-            </div>
+            </InView>
           </div>
         </section>
 
