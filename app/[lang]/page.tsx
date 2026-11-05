@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Schema from "@/components/Schema";
 import TreatmentFinder from "@/components/TreatmentFinder";
+import Greeting from "@/components/Greeting";
 import { Arrow, Check, Star, WaIcon, serviceIcons } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { waLink, type Locale } from "@/lib/site";
@@ -53,7 +54,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section className="h5-hero">
           <div className="container h5-hero__grid">
             <div className="h5-hero__intro">
-              <p className="h5-hero__greet">{h.greet}</p>
+              <p className="h5-hero__greet">
+                <Greeting fallback={h.greet} {...h.greetings} />
+              </p>
               <h1>
                 {h.h1a} <em>{h.h1b}</em>
               </h1>

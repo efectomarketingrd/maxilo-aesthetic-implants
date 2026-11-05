@@ -5185,3 +5185,16 @@ p {
 .h5-cta__btns .btn {
   white-space: nowrap;
 }
+
+.h5-hero__greet {
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+@media (min-width: 1040px) {
+  .h5-hero__greet {
+    font-size: 1.3rem;
+  }
+}
