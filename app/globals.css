@@ -4142,3 +4142,78 @@ p {
     letter-spacing: 0.1em;
   }
 }
+
+/* Portada v6: doctora sobre fondo de marca */
+.hero3__scene {
+  background:
+    radial-gradient(70% 60% at 62% 58%, #f3e8d4 0%, #efe3cc 35%, #e9dcc3 60%, #e3d4b8 100%);
+}
+
+.hero3__brandbg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero3__halo {
+  position: absolute;
+  width: 95%;
+  aspect-ratio: 1;
+  right: -14%;
+  bottom: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 252, 245, 0.95) 0%, rgba(255, 250, 240, 0.55) 40%, rgba(255, 250, 240, 0) 70%);
+}
+
+.hero3__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(190, 157, 97, 0.55);
+}
+
+.hero3__ring--1 {
+  width: 78%;
+  aspect-ratio: 1;
+  right: -4%;
+  top: 14%;
+}
+
+.hero3__ring--2 {
+  width: 58%;
+  aspect-ratio: 1;
+  right: 6%;
+  top: 25%;
+  border-color: rgba(190, 157, 97, 0.3);
+}
+
+.hero3__mark {
+  position: absolute;
+  left: 6%;
+  top: 8%;
+  width: 46%;
+  height: auto;
+  opacity: 0.07;
+}
+
+.hero3__veil {
+  background: linear-gradient(0deg, rgba(37, 48, 53, 0.12) 0%, rgba(37, 48, 53, 0) 30%);
+}
+
+.hero3__doctor {
+  filter: drop-shadow(0 22px 34px rgba(80, 60, 30, 0.22));
+}
+
+@media (min-width: 1040px) {
+  .hero3__scene {
+    box-shadow: 0 40px 80px rgba(120, 95, 50, 0.16);
+  }
+
+  .hero3__doctor {
+    right: 8%;
+  }
+
+  .hero3__chip {
+    background: rgba(37, 48, 53, 0.9);
+  }
+}

@@ -43,11 +43,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section className="hero3">
           <div className="container hero3__grid">
             <div className="hero3__scene">
-              <picture className="hero3__bg" aria-hidden="true">
-                <source media="(min-width: 1040px)" srcSet="/brand/recepcion-h.jpg" />
-                <img src="/brand/recepcion-v.jpg" alt="" />
-              </picture>
-              <span className="hero3__veil" aria-hidden="true" />
+              <span className="hero3__brandbg" aria-hidden="true">
+                <span className="hero3__halo" />
+                <span className="hero3__ring hero3__ring--1" />
+                <span className="hero3__ring hero3__ring--2" />
+                <Image className="hero3__mark" src="/brand/mono-dark.png" alt="" width={548} height={370} />
+              </span>
               <Image
                 className="hero3__doctor"
                 src="/brand/doctora-hd.png"
