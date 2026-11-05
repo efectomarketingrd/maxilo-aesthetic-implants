@@ -125,7 +125,7 @@ const es = {
         slug: "cirugia-estetica-facial",
         icon: "profile",
         title: "Cirugía estética facial",
-        short: "Lipopapada, perfilamiento mandibular, blefaroplastia, otoplastia y lifting.",
+        short: "Lipopapada, perfilamiento mandibular, blefaroplastia, otoplastia, lifting y platismoplastia.",
         intro:
           "Procedimientos quirúrgicos que realzan los rasgos del rostro buscando armonía y naturalidad, planificados según sus proporciones y lo que usted desea lograr.",
         procedures: [
@@ -134,6 +134,7 @@ const es = {
           { name: "Otoplastia", desc: "Remodela y acerca las orejas prominentes a una posición más armónica." },
           { name: "Bichectomía", desc: "Retiro de las bolsas de Bichat para afinar las mejillas y estilizar el rostro." },
           { name: "Lifting facial y de cuello", desc: "Reposiciona los tejidos del rostro y el cuello para tratar la flacidez." },
+          { name: "Platismoplastia", desc: "Tensa el músculo del cuello (platisma) para corregir las bandas verticales y la flacidez, y definir mejor el ángulo entre el cuello y la mandíbula." },
         ],
       },
       {
@@ -202,7 +203,7 @@ const es = {
       { q: "¿Dónde está ubicado el centro?", a: "Estamos en Las Terrenas, provincia Samaná, República Dominicana." },
       { q: "¿Atienden a pacientes que vienen del extranjero?", a: "Sí. Recibimos pacientes que viven en Las Terrenas y también a quienes viajan desde otros países para su tratamiento. Para implantes dentales ofrecemos la opción de coordinar la estadía en hotel." },
       { q: "¿Cómo agendo una consulta?", a: "Escríbanos por WhatsApp o llámenos al (829) 657-2217 o al (829) 371-0276. También puede dejar sus datos en el formulario de esta página." },
-      { q: "¿Qué tratamientos estéticos ofrecen?", a: "Ofrecemos cirugía estética facial (como blefaroplastia, otoplastia, bichectomía o lifting) y medicina estética (bótox, ácido hialurónico, armonización facial, rejuvenecimiento y PRP)." },
+      { q: "¿Qué tratamientos estéticos ofrecen?", a: "Ofrecemos cirugía estética facial (como blefaroplastia, otoplastia, bichectomía, lifting o platismoplastia) y medicina estética (bótox, ácido hialurónico, armonización facial, rejuvenecimiento y PRP)." },
       { q: "¿Venden productos para el cuidado de la piel?", a: "Sí, en el centro encontrará productos de la marca Germaine de Capuccini." },
     ],
   },
@@ -482,7 +483,7 @@ const en: Dict = {
         slug: "cirugia-estetica-facial",
         icon: "profile",
         title: "Facial aesthetic surgery",
-        short: "Double-chin liposuction, jawline contouring, blepharoplasty, otoplasty and face lifts.",
+        short: "Double-chin liposuction, jawline contouring, blepharoplasty, otoplasty, face lifts and platysmaplasty.",
         intro: "Surgical procedures that enhance your facial features with harmony and a natural look, planned around your proportions and your goals.",
         procedures: [
           { name: "Double-chin liposuction & jawline contouring", desc: "Reduces fat under the chin and defines the jawline." },
@@ -490,6 +491,7 @@ const en: Dict = {
           { name: "Otoplasty", desc: "Reshapes prominent ears into a more balanced position." },
           { name: "Buccal fat removal", desc: "Removes the buccal fat pads to slim the cheeks and refine the face." },
           { name: "Face & neck lift", desc: "Repositions facial and neck tissues to treat sagging." },
+          { name: "Platysmaplasty", desc: "Tightens the neck muscle (platysma) to correct vertical neck bands and sagging, and to better define the angle between the neck and the jaw." },
         ],
       },
       {
@@ -556,7 +558,7 @@ const en: Dict = {
       { q: "Where is the clinic located?", a: "We are in Las Terrenas, Samaná province, Dominican Republic." },
       { q: "Do you treat patients traveling from abroad?", a: "Yes. We see patients who live in Las Terrenas as well as those who travel from other countries for treatment. For dental implants we can coordinate your hotel stay." },
       { q: "How do I book an appointment?", a: "Message us on WhatsApp or call +1 (829) 657-2217 or +1 (829) 371-0276. You can also leave your details in the form on this page." },
-      { q: "Which aesthetic treatments do you offer?", a: "We offer facial aesthetic surgery (such as blepharoplasty, otoplasty, buccal fat removal or face lifts) and aesthetic medicine (Botox, hyaluronic acid, facial harmonization, rejuvenation and PRP)." },
+      { q: "Which aesthetic treatments do you offer?", a: "We offer facial aesthetic surgery (such as blepharoplasty, otoplasty, buccal fat removal, face lifts or platysmaplasty) and aesthetic medicine (Botox, hyaluronic acid, facial harmonization, rejuvenation and PRP)." },
       { q: "Do you sell skincare products?", a: "Yes, Germaine de Capuccini products are available at the clinic." },
     ],
   },
