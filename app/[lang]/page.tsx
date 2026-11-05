@@ -5,7 +5,9 @@ import Footer from "@/components/Footer";
 import Schema from "@/components/Schema";
 import TreatmentFinder from "@/components/TreatmentFinder";
 import Greeting from "@/components/Greeting";
-import { Arrow, Check, Star, WaIcon, serviceIcons } from "@/components/Icons";
+import InView from "@/components/InView";
+import ServiceIcon from "@/components/ServiceIcon";
+import { Arrow, Check, Star, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { waLink, type Locale } from "@/lib/site";
 
@@ -109,40 +111,39 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="h5-head__hint">{h.svcHint}</p>
             </div>
 
-            <div className="h5-svc">
-              {t.services.items.map((s) => {
-                const Ico = serviceIcons[s.icon];
-                return (
-                  <details className="h5-svc__item" key={s.slug}>
-                    <summary>
-                      <span className="h5-svc__ico"><Ico size={26} /></span>
-                      <span className="h5-svc__txt">
-                        <strong>{s.title}</strong>
-                        <span>{s.short}</span>
-                      </span>
-                      <span className="h5-svc__chev" aria-hidden="true" />
-                    </summary>
-                    <div className="h5-svc__body">
-                      <ul>
-                        {s.procedures.map((p) => (
-                          <li key={p.name}>
-                            <Check size={14} /> {p.name}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="h5-svc__btns">
-                        <Link className="btn btn--dark btn--sm" href={`/${lang}/servicios/${s.slug}`}>
-                          {h.svcMore} <Arrow size={14} />
-                        </Link>
-                        <Link className="btn btn--line btn--sm" href={`/${lang}/agendar`}>
-                          {h.svcBook}
-                        </Link>
-                      </div>
+            <InView className="h5-svc">
+              {t.services.items.map((s, si) => (
+                <details className="h5-svc__item" key={s.slug} style={{ "--si": si } as React.CSSProperties}>
+                  <summary>
+                    <span className="h5-svc__ico">
+                      <ServiceIcon kind={s.icon} />
+                    </span>
+                    <span className="h5-svc__txt">
+                      <strong>{s.title}</strong>
+                      <span>{s.short}</span>
+                    </span>
+                    <span className="h5-svc__chev" aria-hidden="true" />
+                  </summary>
+                  <div className="h5-svc__body">
+                    <ul>
+                      {s.procedures.map((p, pi) => (
+                        <li key={p.name} style={{ "--i": pi } as React.CSSProperties}>
+                          <Check size={14} /> {p.name}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="h5-svc__btns" style={{ "--i": s.procedures.length } as React.CSSProperties}>
+                      <Link className="btn btn--dark btn--sm h5-btn-shine" href={`/${lang}/servicios/${s.slug}`}>
+                        {h.svcMore} <Arrow size={14} />
+                      </Link>
+                      <Link className="btn btn--line btn--sm h5-btn-fill" href={`/${lang}/agendar`}>
+                        <span>{h.svcBook}</span>
+                      </Link>
                     </div>
-                  </details>
-                );
-              })}
-            </div>
+                  </div>
+                </details>
+              ))}
+            </InView>
           </div>
         </section>
 
