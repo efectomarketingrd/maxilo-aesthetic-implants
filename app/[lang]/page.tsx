@@ -7,6 +7,7 @@ import Schema from "@/components/Schema";
 import { Arrow, Award, Building, Check, Star, WaIcon, serviceIcons } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { waLink, type Locale } from "@/lib/site";
+import { serviceImg } from "@/lib/images";
 
 function Divider() {
   return (
@@ -88,8 +89,11 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               {t.services.items.map((s) => {
                 const Ico = serviceIcons[s.icon];
                 return (
-                  <Link key={s.slug} href={`/${lang}/servicios/${s.slug}`} className="svc-card">
-                    <span className="svc-card__ico"><Ico size={44} /></span>
+                  <Link key={s.slug} href={`/${lang}/servicios/${s.slug}`} className="svc-card svc-card--photo">
+                    <span className="svc-card__img">
+                      <Image src={serviceImg[s.slug]} alt="" fill sizes="(min-width: 1040px) 280px, (min-width: 720px) 45vw, 90vw" />
+                      <span className="svc-card__badge"><Ico size={26} /></span>
+                    </span>
                     <h3>{s.title}</h3>
                     <p>{s.short}</p>
                     <span className="svc-card__more">

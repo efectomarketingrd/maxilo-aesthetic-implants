@@ -1,19 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
+import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, slotsFor, toKey, type SlotType } from "@/lib/agenda";
 import { site, waLink, type Locale } from "@/lib/site";
-import { Chevron, Lock, Mail, Profile, Shield, Sun, Syringe, Tooth, WaIcon } from "./Icons";
-
-const icons: Record<string, typeof Tooth> = {
-  implantes: Tooth,
-  "cirugia-oral": Tooth,
-  "estetica-facial": Profile,
-  "medicina-estetica": Syringe,
-  reconstructiva: Shield,
-  paquete: Sun,
-};
+import { Chevron, Lock, Mail, Shield, WaIcon } from "./Icons";
 
 function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -27,6 +20,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const [service, setService] = useState<string | null>(null);
   const [type, setType] = useState<SlotType>("consulta");
+  const [mode, setMode] = useState<"presencial" | "online">("presencial");
+  const effMode = type === "procedimiento" ? "presencial" : mode;
   const [cursor, setCursor] = useState(() => new Date(minDate.getFullYear(), minDate.getMonth(), 1));
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
@@ -75,6 +70,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       "",
       `${b.service}: ${svcName}`,
       `${b.type}: ${b.types[type]}`,
+      `${b.mode}: ${b.modes[effMode]}`,
       `${b.date}: ${dateLabel}`,
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
       special ? `${b.msgSurcharge} ${agenda.surcharge})` : "",
@@ -107,13 +103,12 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   return (
     <div className="booker">
       {/* PASO 1 */}
-      <section className="booker__card">
+      <section className="booker__card" id="reservar">
         <h2 className="booker__step"><span>1.</span> {b.step1}</h2>
         <p className="booker__help">{b.step1Text}</p>
 
         <div className="svc-pick" role="radiogroup" aria-label={b.step1}>
           {b.services.map((s) => {
-            const Ico = icons[s.id] ?? Tooth;
             const on = service === s.id;
             return (
               <button
@@ -124,7 +119,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 className={`svc-pick__item ${on ? "is-on" : ""}`}
                 onClick={() => setService(s.id)}
               >
-                <span className="svc-pick__ico"><Ico size={30} /></span>
+                <span className="svc-pick__img">
+                  <Image src={bookingImg[s.id]} alt="" fill sizes="72px" />
+                </span>
                 <span className="svc-pick__name">{s.name}</span>
                 <span className="svc-pick__radio" aria-hidden="true" />
               </button>
@@ -151,6 +148,26 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
           ))}
         </div>
         <p className="booker__help booker__help--small">{b.typeHelp[type]}</p>
+
+        <p className="booker__label">{b.modeLabel}</p>
+        <div className={`seg ${type === "procedimiento" ? "is-locked" : ""}`} role="radiogroup" aria-label={b.modeLabel}>
+          {(["presencial", "online"] as const).map((m) => (
+            <button
+              type="button"
+              role="radio"
+              aria-checked={effMode === m}
+              key={m}
+              className={effMode === m ? "is-on" : ""}
+              disabled={type === "procedimiento" && m === "online"}
+              onClick={() => setMode(m)}
+            >
+              {b.modes[m]}
+            </button>
+          ))}
+        </div>
+        <p className="booker__help booker__help--small">
+          {type === "procedimiento" ? b.modeOnlyPresencial : b.modeHelp[effMode]}
+        </p>
 
         <div className="booker__note">
           <Shield size={26} />
@@ -290,6 +307,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
             <dl>
               <div><dt>{b.service}</dt><dd>{svcName || "—"}</dd></div>
               <div><dt>{b.type}</dt><dd>{b.types[type]}</dd></div>
+              <div><dt>{b.mode}</dt><dd>{b.modes[effMode]}</dd></div>
               <div><dt>{b.date}</dt><dd className="summary__date">{dateLabel || "—"}</dd></div>
               <div>
                 <dt>{b.time}</dt>

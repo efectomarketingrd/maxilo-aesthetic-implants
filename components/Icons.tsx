@@ -148,4 +148,11 @@ export const Chevron = ({ size = 18, dir = "right" }: P & { dir?: "left" | "righ
   </svg>
 );
 
+export const Video = ({ size }: P) => (
+  <svg {...base(size)}>
+    <rect x="5" y="13" width="28" height="22" rx="3" />
+    <path d="M33 21l10-6v18l-10-6" />
+  </svg>
+);
+
 export const serviceIcons = { tooth: Tooth, profile: Profile, syringe: Syringe, shield: Shield };

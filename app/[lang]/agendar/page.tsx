@@ -3,11 +3,10 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BookingWizard from "@/components/BookingWizard";
-import Schedule from "@/components/Schedule";
-import { Award, Calendar, Check, Heart, Person, Shield } from "@/components/Icons";
+import { Arrow, Award, Calendar, Check, Clock, Heart, Person, Shield, Video, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { agenda } from "@/lib/agenda";
-import { site, type Locale } from "@/lib/site";
+import { agenda, formatTime } from "@/lib/agenda";
+import { site, waLink, type Locale } from "@/lib/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -51,32 +50,72 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
       <main className="booking-page">
         <section className="bk-hero">
           <div className="container bk-hero__grid">
-            <div>
-              <p className="eyebrow">{b.eyebrow}</p>
+            <div className="bk-hero__copy">
+              <p className="tag">{b.eyebrow}</p>
               <h1>
                 {b.title} <em>{b.titleAccent}</em>
               </h1>
               <p className="hero__text">{b.text}</p>
+              <div className="hero__ctas">
+                <a className="btn btn--dark" href="#reservar">
+                  {b.start} <Arrow />
+                </a>
+                <a className="btn btn--line" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
+                  <WaIcon /> WhatsApp
+                </a>
+              </div>
               <ul className="bk-hero__badges">
                 {b.badges.map((x, i) => {
                   const I = [Shield, Award, Heart][i];
                   return (
                     <li key={x}>
-                      <I size={30} />
+                      <span className="bk-hero__badge-ico"><I size={24} /></span>
                       <span>{x}</span>
                     </li>
                   );
                 })}
               </ul>
             </div>
-            <div className="bk-hero__side">
+
+            <div className="bk-hero__visual">
+              <div className="bk-hero__circle" aria-hidden="true" />
               <div className="bk-hero__photo">
-                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 300px, 50vw" />
+                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 420px, 75vw" />
               </div>
-              <div className="bk-hero__schedule">
-                <p className="eyebrow">{b.scheduleTitle}</p>
-                <Schedule t={t} lang={lang} compact />
+              <div className="bk-chip bk-chip--top">
+                <Calendar size={22} />
+                <span>
+                  <strong>{b.scheduleDays}</strong>
+                  {b.chipHours}
+                </span>
               </div>
+              <div className="bk-chip bk-chip--bottom">
+                <Video size={22} />
+                <span>
+                  <strong>{b.chipModesTitle}</strong>
+                  {b.chipModes}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="container">
+            <div className="bk-strip">
+              <p className="bk-strip__title"><Clock /> {b.scheduleTitle} · <span>{b.scheduleDays}</span></p>
+              <ul>
+                {agenda.slots.map((sl) => (
+                  <li key={sl.time + sl.type} className={sl.alt ? "is-alt" : ""}>
+                    <strong>{formatTime(sl.time, lang)}</strong>
+                    <span>
+                      {sl.type === "consulta" ? (sl.alt ? b.scheduleAltC : b.scheduleConsulta.replace(/s$/, "")) : sl.alt ? b.scheduleAltP : b.scheduleProc}
+                      {sl.oneSpot ? ` · ${b.oneSpot}` : ""}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="bk-strip__note">
+                * {b.alt}. {b.specialHelp} <strong>{agenda.surcharge}</strong>.
+              </p>
             </div>
           </div>
         </section>

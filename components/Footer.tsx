@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dict } from "@/lib/content";
 import { site, waLink, type Locale } from "@/lib/site";
-import { Arrow, Clock, Mail, Phone, Pin, WaIcon } from "./Icons";
-import CaribbeanArt from "./CaribbeanArt";
+import { Arrow, Building, Clock, Heart, Mail, Phone, Pin, Video, WaIcon } from "./Icons";
+import { img } from "@/lib/images";
 import { agenda, formatTime } from "@/lib/agenda";
 
 export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
@@ -13,17 +13,30 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
       <div className="offer-wrap">
         <div className="container">
           <a className="offer" href={`${home}#estadia`}>
-            <div className="offer__art">
-              <CaribbeanArt />
-            </div>
+            <Image className="offer__bg" src={img.playa} alt="" fill sizes="(min-width: 1240px) 1140px, 100vw" />
+            <span className="offer__shade" aria-hidden="true" />
             <div className="offer__copy">
-              <span className="offer__tag">{t.footer.offer} ✦</span>
-              <strong className="offer__title">{t.footer.offerTitle}</strong>
+              <span className="offer__tag">✦ {t.footer.offer}</span>
+              <strong className="offer__title">
+                {t.footer.offerTitle.split("+")[0].trim()}
+                {t.footer.offerTitle.includes("+") && <em>+ {t.footer.offerTitle.split("+")[1].trim()}</em>}
+              </strong>
               <p>{t.footer.offerText}</p>
-              <span className="btn btn--gold btn--sm offer__btn">
+              <span className="btn btn--gold offer__btn">
                 {t.footer.offerCta} <Arrow size={14} />
               </span>
             </div>
+            <ul className="offer__perks">
+              {t.footer.offerPerks.map((x, i) => {
+                const I = [Video, Building, Heart][i];
+                return (
+                  <li key={x}>
+                    <span><I size={22} /></span>
+                    {x}
+                  </li>
+                );
+              })}
+            </ul>
           </a>
         </div>
       </div>

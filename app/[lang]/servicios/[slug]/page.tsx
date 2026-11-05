@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Arrow, WaIcon, serviceIcons } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { locales, site, waLink, type Locale } from "@/lib/site";
+import { serviceImg } from "@/lib/images";
 
 type Params = Promise<{ lang: string; slug: string }>;
 
@@ -91,7 +92,7 @@ export default async function ServicePage({ params }: { params: Params }) {
               </div>
             </div>
             <div className="page-hero__photo">
-              <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} sizes="(min-width: 1040px) 340px, 60vw" priority />
+              <Image src={serviceImg[s.slug]} alt={s.title} fill sizes="(min-width: 1040px) 460px, 90vw" priority />
             </div>
           </div>
         </section>
@@ -138,8 +139,11 @@ export default async function ServicePage({ params }: { params: Params }) {
               {others.map((o) => {
                 const OI = serviceIcons[o.icon];
                 return (
-                  <Link key={o.slug} href={`/${lang}/servicios/${o.slug}`} className="svc-card">
-                    <span className="svc-card__ico"><OI size={40} /></span>
+                  <Link key={o.slug} href={`/${lang}/servicios/${o.slug}`} className="svc-card svc-card--photo">
+                    <span className="svc-card__img">
+                      <Image src={serviceImg[o.slug]} alt="" fill sizes="(min-width: 1040px) 360px, 90vw" />
+                      <span className="svc-card__badge"><OI size={24} /></span>
+                    </span>
                     <h3>{o.title}</h3>
                     <p>{o.short}</p>
                     <span className="svc-card__more">{t.services.more} <Arrow size={14} /></span>
