@@ -125,16 +125,16 @@ const es = {
         slug: "cirugia-estetica-facial",
         icon: "profile",
         title: "Cirugía estética facial",
-        short: "Lipopapada, perfilamiento mandibular, blefaroplastia, otoplastia, lifting y platismoplastia.",
+        short: "Lipopapada, perfilamiento mandibular, platismoplastia, blefaroplastia, otoplastia y lifting.",
         intro:
           "Procedimientos quirúrgicos que realzan los rasgos del rostro buscando armonía y naturalidad, planificados según sus proporciones y lo que usted desea lograr.",
         procedures: [
           { name: "Lipopapada y perfilamiento mandibular", desc: "Reduce la grasa bajo el mentón y define el contorno de la mandíbula." },
+          { name: "Platismoplastia", desc: "Tensa el músculo del cuello (platisma) para corregir las bandas verticales y la flacidez, y definir mejor el ángulo entre el cuello y la mandíbula." },
           { name: "Blefaroplastia", desc: "Corrige el exceso de piel o bolsas en los párpados para una mirada más descansada." },
           { name: "Otoplastia", desc: "Remodela y acerca las orejas prominentes a una posición más armónica." },
           { name: "Bichectomía", desc: "Retiro de las bolsas de Bichat para afinar las mejillas y estilizar el rostro." },
           { name: "Lifting facial y de cuello", desc: "Reposiciona los tejidos del rostro y el cuello para tratar la flacidez." },
-          { name: "Platismoplastia", desc: "Tensa el músculo del cuello (platisma) para corregir las bandas verticales y la flacidez, y definir mejor el ángulo entre el cuello y la mandíbula." },
         ],
       },
       {
@@ -483,15 +483,15 @@ const en: Dict = {
         slug: "cirugia-estetica-facial",
         icon: "profile",
         title: "Facial aesthetic surgery",
-        short: "Double-chin liposuction, jawline contouring, blepharoplasty, otoplasty, face lifts and platysmaplasty.",
+        short: "Double-chin liposuction, jawline contouring, platysmaplasty, blepharoplasty, otoplasty and face lifts.",
         intro: "Surgical procedures that enhance your facial features with harmony and a natural look, planned around your proportions and your goals.",
         procedures: [
           { name: "Double-chin liposuction & jawline contouring", desc: "Reduces fat under the chin and defines the jawline." },
+          { name: "Platysmaplasty", desc: "Tightens the neck muscle (platysma) to correct vertical neck bands and sagging, and to better define the angle between the neck and the jaw." },
           { name: "Blepharoplasty", desc: "Corrects excess skin or bags on the eyelids for a more rested look." },
           { name: "Otoplasty", desc: "Reshapes prominent ears into a more balanced position." },
           { name: "Buccal fat removal", desc: "Removes the buccal fat pads to slim the cheeks and refine the face." },
           { name: "Face & neck lift", desc: "Repositions facial and neck tissues to treat sagging." },
-          { name: "Platysmaplasty", desc: "Tightens the neck muscle (platysma) to correct vertical neck bands and sagging, and to better define the angle between the neck and the jaw." },
         ],
       },
       {
