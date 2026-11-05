@@ -6630,3 +6630,56 @@ em.offer2__line {
     padding-bottom: 36px;
   }
 }
+
+/* Botón flotante de WhatsApp: ondas y pequeño saludo */
+.wa-float {
+  isolation: isolate;
+  animation: wa-nudge 6s ease-in-out 3s infinite;
+}
+
+.wa-float::before,
+.wa-float::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #25d366;
+  z-index: -1;
+  animation: wa-ring 3s ease-out infinite;
+}
+
+.wa-float::after {
+  animation-delay: 1.5s;
+}
+
+@keyframes wa-ring {
+  0% { transform: scale(1); opacity: 0.45; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+@keyframes wa-nudge {
+  0%, 84%, 100% { transform: rotate(0) scale(1); }
+  87% { transform: rotate(-12deg) scale(1.08); }
+  90% { transform: rotate(10deg) scale(1.08); }
+  93% { transform: rotate(-6deg) scale(1.04); }
+  96% { transform: rotate(0) scale(1); }
+}
+
+.wa-float:hover,
+.wa-float:active {
+  animation-play-state: paused;
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float,
+  .wa-float::before,
+  .wa-float::after {
+    animation: none !important;
+  }
+
+  .wa-float::before,
+  .wa-float::after {
+    display: none;
+  }
+}
