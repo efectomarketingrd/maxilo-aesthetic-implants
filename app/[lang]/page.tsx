@@ -21,19 +21,27 @@ function Head({ eyebrow, title, light = false }: { eyebrow: string; title: strin
 function CalendarArt() {
   return (
     <svg className="h5-book__art" viewBox="0 0 120 110" aria-hidden="true">
-      <circle cx="70" cy="60" r="48" fill="rgba(255,255,255,0.06)" />
-      <rect x="22" y="22" width="78" height="70" rx="12" fill="#f8f6f2" />
-      <rect x="22" y="22" width="78" height="20" rx="12" fill="#d8c39b" />
-      <rect x="22" y="34" width="78" height="8" fill="#d8c39b" />
-      <rect x="40" y="14" width="6" height="16" rx="3" fill="#be9d61" />
-      <rect x="76" y="14" width="6" height="16" rx="3" fill="#be9d61" />
-      {[0, 1, 2].map((r) =>
-        [0, 1, 2, 3].map((c) => (
-          <rect key={`${r}${c}`} x={32 + c * 16} y={50 + r * 13} width="10" height="8" rx="2" fill={r === 1 && c === 2 ? "#be9d61" : "#e3dccf"} />
-        )),
-      )}
-      <circle cx="96" cy="86" r="14" fill="#be9d61" />
-      <path d="M89 86l5 5 9-10" stroke="#fff" strokeWidth="3.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle className="cal-halo" cx="70" cy="60" r="48" fill="rgba(255,255,255,0.06)" />
+      <g className="cal-float">
+        <rect x="22" y="22" width="78" height="70" rx="12" fill="#f8f6f2" />
+        <rect x="22" y="22" width="78" height="20" rx="12" fill="#d8c39b" />
+        <rect x="22" y="34" width="78" height="8" fill="#d8c39b" />
+        <rect x="40" y="14" width="6" height="16" rx="3" fill="#be9d61" />
+        <rect x="76" y="14" width="6" height="16" rx="3" fill="#be9d61" />
+        {[0, 1, 2].map((r) =>
+          [0, 1, 2, 3].map((c) =>
+            r === 1 && c === 2 ? (
+              <rect key={`${r}${c}`} className="cal-day" x={32 + c * 16} y={50 + r * 13} width="10" height="8" rx="2" fill="#be9d61" />
+            ) : (
+              <rect key={`${r}${c}`} x={32 + c * 16} y={50 + r * 13} width="10" height="8" rx="2" fill="#e3dccf" />
+            ),
+          ),
+        )}
+        <g className="cal-check">
+          <circle cx="96" cy="86" r="14" fill="#be9d61" />
+          <path className="cal-check__path" d="M89 86l5 5 9-10" stroke="#fff" strokeWidth="3.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      </g>
     </svg>
   );
 }

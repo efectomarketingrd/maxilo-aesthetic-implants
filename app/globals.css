@@ -5198,3 +5198,122 @@ p {
     font-size: 1.3rem;
   }
 }
+
+/* ───── Animación de la tarjeta "Agenda tu cita" ───── */
+.h5-book {
+  isolation: isolate;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Brillo dorado que recorre la tarjeta */
+.h5-book::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 0%, rgba(216, 195, 155, 0.16) 45%, rgba(255, 244, 220, 0.22) 50%, rgba(216, 195, 155, 0.16) 55%, transparent 100%);
+  transform: skewX(-18deg);
+  animation: book-shine 7s ease-in-out 1.2s infinite;
+}
+
+@keyframes book-shine {
+  0% { left: -60%; }
+  22% { left: 120%; }
+  100% { left: 120%; }
+}
+
+.h5-book:hover,
+.h5-book:active {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 50px rgba(37, 48, 53, 0.32);
+}
+
+.h5-book__btn svg {
+  transition: transform 0.25s ease;
+}
+
+.h5-book:hover .h5-book__btn,
+.h5-book:active .h5-book__btn {
+  background: var(--gold-soft);
+}
+
+.h5-book:hover .h5-book__btn svg,
+.h5-book:active .h5-book__btn svg {
+  transform: translateX(4px);
+}
+
+/* Calendario que flota */
+.cal-float {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cal-float 4.5s ease-in-out infinite;
+}
+
+@keyframes cal-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(-1.5deg); }
+}
+
+.cal-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cal-halo 4.5s ease-in-out infinite;
+}
+
+@keyframes cal-halo {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.7; }
+}
+
+/* Día destacado que late suavemente */
+.cal-day {
+  animation: cal-day 2.4s ease-in-out infinite;
+}
+
+@keyframes cal-day {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+/* Palomita: el círculo rebota y el ✓ se dibuja; se repite cada 6 s */
+.cal-check {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cal-pop 6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s infinite both;
+}
+
+@keyframes cal-pop {
+  0% { transform: scale(0); }
+  8% { transform: scale(1.12); }
+  12%, 100% { transform: scale(1); }
+}
+
+.cal-check__path {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
+  animation: cal-draw 6s ease 0.4s infinite both;
+}
+
+@keyframes cal-draw {
+  0%, 8% { stroke-dashoffset: 22; }
+  18%, 100% { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h5-book::after,
+  .cal-float,
+  .cal-halo,
+  .cal-day,
+  .cal-check,
+  .cal-check__path {
+    animation: none !important;
+  }
+
+  .cal-check__path {
+    stroke-dashoffset: 0;
+  }
+}
