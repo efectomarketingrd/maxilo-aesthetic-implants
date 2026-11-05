@@ -5,10 +5,11 @@ import { site, waLink, type Locale } from "@/lib/site";
 import { Arrow, Building, Heart, Mail, Phone, Pin, Video, WaIcon } from "./Icons";
 import { img } from "@/lib/images";
 
-export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
+export default function Footer({ t, lang, offer = true }: { t: Dict; lang: Locale; offer?: boolean }) {
   const home = `/${lang}`;
   return (
     <>
+      {offer && (
       <div className="offer-wrap">
         <div className="container">
           <a className="offer" href={`${home}#estadia`}>
@@ -39,6 +40,7 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
           </a>
         </div>
       </div>
+      )}
 
       <footer className="footer">
         <div className="container footer__grid">
@@ -50,9 +52,10 @@ export default function Footer({ t, lang }: { t: Dict; lang: Locale }) {
             <h4>{t.footer.quick}</h4>
             <ul>
               <li><Link href={home}>{t.nav.home}</Link></li>
-              <li><a href={`${home}#sobre-nosotros`}>{t.nav.about}</a></li>
-              <li><a href={`${home}#preguntas`}>{t.nav.faq}</a></li>
-              <li><a href={`${home}#marcas`}>{t.nav.brands}</a></li>
+              <li><Link href={`${home}/sobre-nosotros`}>{t.nav.about}</Link></li>
+              <li><Link href={`${home}/preguntas`}>{t.nav.faq}</Link></li>
+              <li><Link href={`${home}/marcas`}>{t.nav.brands}</Link></li>
+              <li><Link href={`${home}/instituciones`}>{t.nav.institutions}</Link></li>
               <li><Link href={`${home}/blog`}>{t.nav.news}</Link></li>
               <li><a href={`${home}/agendar`}>{t.nav.cta}</a></li>
             </ul>

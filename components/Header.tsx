@@ -38,9 +38,9 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
   const otherPath = pathname ? pathname.replace(/^\/(es|en)/, `/${other}`) : `/${other}`;
   const svc = t.services.items.map((s) => ({ href: `${home}/servicios/${s.slug}`, label: s.title }));
   const links = [
-    { href: `${home}#sobre-nosotros`, label: t.nav.about },
-    { href: `${home}#preguntas`, label: t.nav.faq },
-    { href: `${home}#marcas`, label: t.nav.brands },
+    { href: `${home}/sobre-nosotros`, label: t.nav.about },
+    { href: `${home}/preguntas`, label: t.nav.faq },
+    { href: `${home}/marcas`, label: t.nav.brands },
     { href: `${home}/blog`, label: t.nav.news },
     { href: `${home}#contacto`, label: t.nav.contact },
   ];
