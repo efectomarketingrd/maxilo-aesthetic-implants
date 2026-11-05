@@ -40,18 +40,28 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       <main>
         {/* ───────── PARTE SUPERIOR: PRESENTACIÓN ───────── */}
-        <section className="hero2">
-          <div className="container hero2__grid">
-            <div className="hero2__visual">
-              <span className="hero2__ring" aria-hidden="true" />
-              <div className="hero2__arch">
-                <Image src="/brand/doctora.jpg" alt={t.about.doctorName} width={1000} height={1473} priority sizes="(min-width: 1040px) 440px, 74vw" />
-              </div>
-              <a className="hero2__chip" href="#estadia">
-                <Sun size={22} />
+        <section className="hero3">
+          <div className="container hero3__grid">
+            <div className="hero3__scene">
+              <picture className="hero3__bg" aria-hidden="true">
+                <source media="(min-width: 1040px)" srcSet="/brand/recepcion-h.jpg" />
+                <img src="/brand/recepcion-v.jpg" alt="" />
+              </picture>
+              <span className="hero3__veil" aria-hidden="true" />
+              <Image
+                className="hero3__doctor"
+                src="/brand/doctora-hd.png"
+                alt={t.about.doctorName}
+                width={640}
+                height={1062}
+                priority
+                sizes="(min-width: 1040px) 380px, 62vw"
+              />
+              <a className="hero3__chip" href="#estadia">
+                <Sun size={20} />
                 <span>{t.hero.chip}</span>
               </a>
-              <div className="hero2__card">
+              <div className="hero3__card">
                 <Image src="/brand/mono-dark.png" alt="" width={40} height={27} />
                 <span>
                   <strong>{t.hero.nameTag}</strong>
@@ -60,26 +70,26 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </div>
             </div>
 
-            <div className="hero2__copy">
-              <p className="hero2__eyebrow"><Pin size={14} /> {t.hero.eyebrow}</p>
+            <div className="hero3__copy">
+              <p className="hero3__eyebrow"><Pin size={14} /> {t.hero.eyebrow}</p>
               <h1>
                 {t.hero.title} <em>{t.hero.titleAccent}</em>
               </h1>
-              <p className="hero2__text">{t.hero.text}</p>
-              <div className="hero2__ctas">
+              <p className="hero3__text">{t.hero.text}</p>
+              <div className="hero3__ctas">
                 <a className="btn btn--dark" href={`/${lang}/agendar`}>
                   {t.hero.cta} <Arrow />
                 </a>
-                <a className="hero2__link" href="#servicios">
+                <a className="hero3__link" href="#servicios">
                   {t.hero.secondary} <Arrow size={14} />
                 </a>
               </div>
-              <ul className="hero2__trust">
+              <ul className="hero3__trust">
                 {t.hero.badges.map((b, i) => {
                   const I = [Award, Globe, Heart][i];
                   return (
                     <li key={b}>
-                      <span className="hero2__trust-ico"><I size={22} /></span>
+                      <span className="hero3__trust-ico"><I size={22} /></span>
                       <span>{b}</span>
                     </li>
                   );
@@ -151,7 +161,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section id="doctora" className="section section--white">
           <div className="container doctor">
             <div className="doctor__photo">
-              <Image src="/brand/doctora.jpg" alt={a.doctorName} width={1000} height={1473} sizes="(min-width: 1040px) 420px, 90vw" />
+              <Image src="/brand/doctora-retrato.jpg" alt={a.doctorName} width={1000} height={1473} sizes="(min-width: 1040px) 420px, 90vw" />
             </div>
             <div>
               <p className="eyebrow">{a.doctorEyebrow}</p>
@@ -187,7 +197,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <div className="team__grid">
               <article className="team-card">
                 <div className="team-card__img">
-                  <Image src="/brand/doctora.jpg" alt={a.doctorName} width={1000} height={1473} sizes="120px" />
+                  <Image src="/brand/doctora-retrato.jpg" alt={a.doctorName} width={1000} height={1473} sizes="120px" />
                 </div>
                 <div>
                   <strong>{a.doctorName}</strong>

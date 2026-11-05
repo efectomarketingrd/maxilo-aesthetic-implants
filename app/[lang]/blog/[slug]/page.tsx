@@ -95,7 +95,7 @@ export default async function PostPage({ params }: { params: Params }) {
               <h1>{p.v.title}</h1>
               <p className="lead">{p.v.excerpt}</p>
               <div className="post__author">
-                <Image src="/brand/doctora.jpg" alt="" width={56} height={56} />
+                <Image src="/brand/doctora-retrato.jpg" alt="" width={56} height={56} />
                 <span>
                   {t.news.by} <strong>{site.doctor}</strong>
                   <small>{formatDate(p.date, lang)} · {p.readMinutes} min</small>
