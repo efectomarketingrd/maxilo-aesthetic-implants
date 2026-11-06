@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
@@ -77,6 +77,17 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [nudge, setNudge] = useState(0);
 
   const [service, setService] = useState<string | null>(null);
+  const [subs, setSubs] = useState<string[]>([]);
+  const [cols, setCols] = useState(2);
+
+  // Columnas de la cuadrícula de servicios (para abrir el panel justo debajo de la fila elegida)
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 720px)");
+    const set = () => setCols(mq.matches ? 3 : 2);
+    set();
+    mq.addEventListener("change", set);
+    return () => mq.removeEventListener("change", set);
+  }, []);
   const [type, setType] = useState<SlotType>("consulta");
   const [mode, setMode] = useState<"presencial" | "online">("presencial");
   const effMode = type === "procedimiento" ? "presencial" : mode;
@@ -128,13 +139,40 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const weekHeads = [1, 2, 3, 4, 5, 6, 0].map((i) => b.days[i]);
 
   const svcName = b.services.find((s) => s.id === service)?.name ?? "";
+
+  // Opciones dentro de cada servicio (tomadas de las páginas de servicios)
+  const procs = (slug: string) => t.services.items.find((x) => x.slug === slug)?.procedures.map((p) => p.name) ?? [];
+  const subOptions: Record<string, string[]> = {
+    implantes: b.implantNeeds,
+    paquete: b.implantNeeds,
+    "cirugia-oral": procs("implantes-cirugia-oral").slice(1),
+    "estetica-facial": procs("cirugia-estetica-facial"),
+    "medicina-estetica": procs("medicina-estetica"),
+    reconstructiva: procs("cirugia-reconstructiva"),
+  };
+  const subList = service ? [...(subOptions[service] ?? []), b.unsure] : [];
+  const svcFull = subs.length ? `${svcName} — ${subs.join(", ")}` : svcName;
+
+  function toggleSub(o: string) {
+    setSubs((cur) => {
+      if (o === b.unsure) return cur.includes(o) ? [] : [o];
+      const rest = cur.filter((x) => x !== b.unsure);
+      return rest.includes(o) ? rest.filter((x) => x !== o) : [...rest, o];
+    });
+  }
+
+  function pickService(id: string) {
+    if (id === service) return;
+    setService(id);
+    setSubs([]);
+  }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
   const timeLabel = special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
   const slotInfo = !special && time ? agenda.slots.find((s) => s.time === time && s.type === type) : undefined;
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
   const filled = (Object.keys(form) as (keyof typeof form)[]).every((k) => form[k].trim());
-  const okStep = [Boolean(service), Boolean(date && timeLabel), filled && emailOk, true];
+  const okStep = [Boolean(service && subs.length), Boolean(date && timeLabel), filled && emailOk, true];
 
   // Costo estimado
   const isProc = type === "procedimiento";
@@ -167,7 +205,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     const lines = [
       b.msgTitle,
       "",
-      `${b.service}: ${svcName}`,
+      `${b.service}: ${svcFull}`,
       `${b.type}: ${b.types[type]}`,
       `${b.mode}: ${b.modes[effMode]}`,
       `${b.date}: ${dateLabel}`,
@@ -238,7 +276,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
               <div className="bk2-svc" role="radiogroup" aria-label={b.step1}>
                 {b.services.map((s, i) => {
                   const on = service === s.id;
-                  return (
+                  const tile = (
                     <button
                       type="button"
                       role="radio"
@@ -246,7 +284,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                       key={s.id}
                       className={`bk2-svc__item ${on ? "is-on" : ""}`}
                       style={{ "--i": i } as React.CSSProperties}
-                      onClick={() => setService(s.id)}
+                      onClick={() => pickService(s.id)}
                     >
                       <span className="bk2-svc__img">
                         <Image src={bookingImg[s.id]} alt="" fill sizes="(min-width: 900px) 260px, 45vw" />
@@ -258,6 +296,43 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                         </svg>
                       </span>
                     </button>
+                  );
+                  const sel = b.services.findIndex((x) => x.id === service);
+                  const after = sel < 0 ? -1 : Math.min(b.services.length - 1, Math.floor(sel / cols) * cols + cols - 1);
+                  return (
+                    <Fragment key={s.id}>
+                      {tile}
+                      {i === after && (
+                        <div className="bk2-sub" key={`sub-${service}`} style={{ "--col": sel % cols, "--cols": cols } as React.CSSProperties}>
+                          <span className="bk2-sub__caret" aria-hidden="true" />
+                          <p className="bk2-sub__title">
+                            {b.subTitle} <span>{b.subHint}</span>
+                          </p>
+                          <div className="bk2-sub__chips" role="group" aria-label={b.subTitle}>
+                            {subList.map((o, k) => {
+                              const on = subs.includes(o);
+                              return (
+                                <button
+                                  type="button"
+                                  key={o}
+                                  aria-pressed={on}
+                                  className={`bk2-chip ${on ? "is-on" : ""} ${o === b.unsure ? "bk2-chip--unsure" : ""}`}
+                                  style={{ "--k": k } as React.CSSProperties}
+                                  onClick={() => toggleSub(o)}
+                                >
+                                  <span className="bk2-chip__box" aria-hidden="true">
+                                    <svg viewBox="0 0 20 20">
+                                      <path d="M5 10.5l3.2 3.2L15 7" pathLength={1} />
+                                    </svg>
+                                  </span>
+                                  {o}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </Fragment>
                   );
                 })}
               </div>
@@ -462,7 +537,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 </span>
                 <dl>
                   {[
-                    { k: b.service, v: svcName, to: 0 as Step },
+                    { k: b.service, v: svcFull, to: 0 as Step },
                     { k: b.type, v: `${b.types[type]} · ${b.modes[effMode]}`, to: 0 as Step },
                     { k: b.date, v: dateLabel, to: 1 as Step, cls: "summary__date" },
                     {
