@@ -14,11 +14,16 @@ function startOfDay(d: Date) {
 
 type Step = 0 | 1 | 2 | 3;
 
-// Horas que se ofrecen cuando el paciente pide otro día u horario (fuera de 11:30 a. m. – 1:00 p. m.)
-const SPECIAL_HOURS = Array.from({ length: 21 }, (_, i) => {
-  const m = 8 * 60 + i * 30; // de 8:00 a. m. a 6:00 p. m., cada media hora
-  return `${String(Math.floor(m / 60)).padStart(2, "0")}:${m % 60 ? "30" : "00"}`;
-}).filter((h) => !agenda.slots.some((s) => !s.alt && s.time === h)); // sin el horario normal
+// Horas que se ofrecen cuando el paciente pide otro día u horario:
+// mañana de 8:00 a 11:00 a. m. y tarde de 3:00 a 5:00 p. m., cada media hora
+const halfHours = (from: number, to: number) =>
+  Array.from({ length: (to - from) * 2 + 1 }, (_, i) => {
+    const m = from * 60 + i * 30;
+    return `${String(Math.floor(m / 60)).padStart(2, "0")}:${m % 60 ? "30" : "00"}`;
+  });
+const SPECIAL_HOURS = [...halfHours(8, 11), ...halfHours(15, 17)].filter(
+  (h) => !agenda.slots.some((s) => !s.alt && s.time === h), // nunca dentro del horario normal
+);
 
 // Monto en pesos con su equivalente aproximado en dólares debajo
 function Amt({ n, plus }: { n: number; plus?: boolean }) {
@@ -489,7 +494,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   />
                   <span>
                     <strong>{b.special}</strong>
-                    {b.specialHelp} <b>{agenda.surcharge}</b>.
+                    {b.specialWhy.split("{fee}")[0]}
+                    <b>{agenda.surcharge}</b>
+                    {b.specialWhy.split("{fee}")[1]}
                   </span>
                 </label>
               </div>
