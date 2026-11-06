@@ -8317,3 +8317,27 @@ body:has(.bk2-page) .wa-float {
     aspect-ratio: 16 / 9;
   }
 }
+
+/* "Continuar" siempre en su color; el aviso indica lo que falta */
+.bk2-next {
+  opacity: 1;
+}
+
+.bk2-next:not(.is-ready) {
+  box-shadow: none;
+}
+
+.bk2-times .bk2-hours {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.bk2-hours .time {
+  min-height: 46px;
+  animation-delay: calc(var(--i, 0) * 0.035s + 0.05s);
+}
+
+@media (min-width: 720px) {
+  .bk2-times .bk2-hours {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

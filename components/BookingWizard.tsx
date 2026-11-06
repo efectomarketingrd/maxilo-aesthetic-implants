@@ -14,6 +14,9 @@ function startOfDay(d: Date) {
 
 type Step = 0 | 1 | 2 | 3;
 
+// Horas que se ofrecen cuando el paciente pide otro día u horario
+const SPECIAL_HOURS = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+
 // Interruptor de dos opciones con píldora que se desliza
 function Seg<T extends string>({
   label,
@@ -323,10 +326,24 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 {!date ? (
                   <p className="bk2-help bk2-times__empty">{b.pickDay}</p>
                 ) : special ? (
-                  <label className="field bk2-in" key="special">
-                    <span>{b.specialTime}</span>
-                    <input type="time" value={specialTime} onChange={(e) => setSpecialTime(e.target.value)} />
-                  </label>
+                  <div className="bk2-in" key="special">
+                    <p className="times__title">{b.specialTime}</p>
+                    <div className="times__grid bk2-hours">
+                      {SPECIAL_HOURS.map((h, i) => (
+                        <button
+                          type="button"
+                          key={h}
+                          style={{ "--i": i } as React.CSSProperties}
+                          className={`time ${specialTime === h ? "is-on" : ""}`}
+                          onClick={() => setSpecialTime(h)}
+                          aria-pressed={specialTime === h}
+                        >
+                          {formatTime(h, lang)}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="bk2-help bk2-help--sm">{b.specialNote}</p>
+                  </div>
                 ) : (
                   <div key={toKey(date)} className="bk2-in">
                     <p className="times__title">
