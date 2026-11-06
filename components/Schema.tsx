@@ -20,6 +20,7 @@ export default function Schema({ t, lang, faq = true }: { t: Dict; lang: Locale;
       telephone: ["+1-829-657-2217", "+1-829-371-0276"],
       address: {
         "@type": "PostalAddress",
+        streetAddress: site.address.street,
         addressLocality: site.address.locality,
         addressRegion: site.address.region,
         postalCode: site.address.postalCode,

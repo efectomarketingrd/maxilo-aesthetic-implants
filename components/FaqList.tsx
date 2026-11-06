@@ -18,7 +18,7 @@ function Extras({ f, t, lang }: { f: Item; t: Dict; lang: Locale }) {
             <i />
           </span>
           <span className="faq-map__txt">
-            <strong>{site.name}</strong>
+            <strong>{t.faq.where}</strong>
             <span>
               {site.address.locality}, {site.address.region} · {a.place}
             </span>
