@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BookingWizard from "@/components/BookingWizard";
-import { Arrow, Clock, WaIcon } from "@/components/Icons";
+import { Calendar, Video, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { agenda, formatTime } from "@/lib/agenda";
-import { site, waLink, type Locale } from "@/lib/site";
+import { agenda } from "@/lib/agenda";
+import { site, type Locale } from "@/lib/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
@@ -45,53 +45,32 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <Header t={t} lang={lang} />
-      <main className="booking-page">
-        <section className="bk-hero">
-          <div className="container bk-hero__grid bk-hero__grid--single">
-            <div className="bk-hero__copy">
-              <p className="tag">{b.eyebrow}</p>
-              <h1>
-                {b.title} <em>{b.titleAccent}</em>
-              </h1>
-              <p className="hero__text">{b.text}</p>
-              <div className="hero__ctas">
-                <a className="btn btn--dark" href="#reservar">
-                  {b.start} <Arrow />
-                </a>
-                <a className="btn btn--line" href={waLink(t.hero.waMsg)} target="_blank" rel="noopener">
-                  <WaIcon /> WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
-
+      <main className="bk2-page">
+        <section className="bk2-hero">
           <div className="container">
-            <div className="bk-strip">
-              <p className="bk-strip__title"><Clock /> {b.scheduleTitle} · <span>{b.scheduleDays}</span></p>
-              <ul>
-                {agenda.slots.map((sl) => (
-                  <li key={sl.time + sl.type} className={sl.alt ? "is-alt" : ""}>
-                    <strong>{formatTime(sl.time, lang)}</strong>
-                    <span>
-                      {sl.type === "consulta" ? (sl.alt ? b.scheduleAltC : b.scheduleConsulta.replace(/s$/, "")) : sl.alt ? b.scheduleAltP : b.scheduleProc}
-                      {sl.oneSpot ? ` · ${b.oneSpot}` : ""}
-                    </span>
+            <p className="eyebrow bk2-rise" style={{ "--d": 0 } as React.CSSProperties}>{b.eyebrow}</p>
+            <h1 className="bk2-rise" style={{ "--d": 1 } as React.CSSProperties}>
+              {b.title} <em>{b.titleAccent}</em>
+            </h1>
+            <p className="bk2-hero__text bk2-rise" style={{ "--d": 2 } as React.CSSProperties}>{b.heroText}</p>
+            <ul className="bk2-chips">
+              {b.heroChips.map((c, i) => {
+                const Ico = [Calendar, Video, WaIcon][i];
+                return (
+                  <li key={c} className="bk2-rise" style={{ "--d": 3 + i * 0.5 } as React.CSSProperties}>
+                    <Ico size={16} /> {c}
                   </li>
-                ))}
-              </ul>
-              <p className="bk-strip__note">
-                * {b.alt}. {b.specialHelp} <strong>{agenda.surcharge}</strong>.
-              </p>
-            </div>
+                );
+              })}
+            </ul>
           </div>
         </section>
 
-        <section className="bk-main">
+        <section className="bk2-main">
           <div className="container">
             <BookingWizard t={t} lang={lang} />
           </div>
         </section>
-
       </main>
       <Footer t={t} lang={lang} />
     </>
