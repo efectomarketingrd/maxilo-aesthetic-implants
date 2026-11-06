@@ -6,7 +6,7 @@ import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
 import { site, waLink, type Locale } from "@/lib/site";
-import { Arrow, Chevron, Lock, Mail, Shield, WaIcon } from "./Icons";
+import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
 
 function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -381,7 +381,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
               </div>
 
               <div className="bk2-note">
-                <Shield size={24} />
+                <svg className="bk2-note__ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 3h7l5 5v13H7z" />
+                  <path d="M14 3v5h5M10 13h6M10 17h4" />
+                </svg>
                 <span>{b.note}</span>
               </div>
             </>
@@ -593,6 +596,13 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   )}
                 </div>
                 <p className="bk2-cost__note">{isProc ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
+                <p className="bk2-cost__pay">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="6" width="18" height="13" rx="2.5" />
+                    <path d="M3 10h18M7 15h4" />
+                  </svg>
+                  {b.cost.payFirst}
+                </p>
               </div>
 
               <div className="bk2-send">

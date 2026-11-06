@@ -8641,3 +8641,41 @@ body:has(.bk2-page) .wa-float {
     stroke-dashoffset: 1;
   }
 }
+
+.bk2-note__ico {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Pago antes de iniciar */
+.bk2-cost__pay {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(190, 157, 97, 0.16);
+  border: 1px solid rgba(216, 195, 155, 0.35);
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--ivory);
+}
+
+.bk2-cost__pay svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--gold-soft);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
