@@ -36,7 +36,7 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
         "@type": "OpeningHoursSpecification",
         dayOfWeek: agenda.weekdays.map((d) => `https://schema.org/${dayNames[d]}`),
         opens: times[0],
-        closes: "18:30",
+        closes: "13:30",
       },
     ],
   };

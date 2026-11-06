@@ -18,24 +18,15 @@ export const agenda = {
 
   // Horarios establecidos
   slots: [
+    // Horario en que la doctora está en el centro (consultas y procedimientos)
     { time: "11:30", type: "consulta" },
     { time: "12:00", type: "consulta" },
-    { time: "12:30", type: "procedimiento", oneSpot: true },
-    // Tarde: sujetos a disponibilidad
-    { time: "15:00", type: "consulta", alt: true },
-    { time: "15:30", type: "consulta", alt: true },
-    { time: "16:00", type: "consulta", alt: true },
-    { time: "16:30", type: "consulta", alt: true },
-    { time: "17:00", type: "consulta", alt: true },
-    { time: "17:30", type: "consulta", alt: true },
-    { time: "18:00", type: "consulta", alt: true },
-    { time: "15:00", type: "procedimiento", alt: true },
-    { time: "15:30", type: "procedimiento", alt: true },
-    { time: "16:00", type: "procedimiento", alt: true },
-    { time: "16:30", type: "procedimiento", alt: true },
-    { time: "17:00", type: "procedimiento", alt: true },
-    { time: "17:30", type: "procedimiento", alt: true },
-    { time: "18:00", type: "procedimiento", alt: true },
+    { time: "12:30", type: "consulta" },
+    { time: "13:00", type: "consulta" },
+    { time: "11:30", type: "procedimiento" },
+    { time: "12:00", type: "procedimiento" },
+    { time: "12:30", type: "procedimiento" },
+    { time: "13:00", type: "procedimiento" },
   ] as Slot[],
 
   // Días CERRADOS (feriados, vacaciones, congresos…). Formato "AAAA-MM-DD".

@@ -304,7 +304,7 @@ const es = {
     text: "Atención personalizada, resultados naturales y un plan hecho a su medida. Elija el servicio, el día y la hora, y envíenos su solicitud.",
     badges: ["Cirujana especialista", "Atención personalizada", "Resultados naturales"],
     start: "Elegir servicio y horario",
-    chipHours: "11:30 a. m. – 6:00 p. m.",
+    chipHours: "11:30 a. m. – 1:00 p. m.",
     chipModesTitle: "Presencial u online",
     chipModes: "Consulta en el centro o por videollamada",
     step1: "Elija el servicio",
@@ -324,7 +324,7 @@ const es = {
     types: { consulta: "Consulta / valoración", procedimiento: "Procedimiento" },
     typeHelp: {
       consulta: "Primera visita o revisión: la doctora evalúa su caso y le explica las opciones.",
-      procedimiento: "Para tratamientos ya indicados por la doctora en una consulta previa.",
+      procedimiento: "Para tratamientos ya indicados por la doctora en una consulta o si desea agendar directamente su tratamiento.",
     },
     services: [
       { id: "implantes", name: "Implantes dentales" },
@@ -724,7 +724,7 @@ const en: Dict = {
     text: "Personalized care, natural results and a plan made for you. Choose your service, day and time, and send us your request.",
     badges: ["Specialist surgeon", "Personalized care", "Natural results"],
     start: "Choose service & time",
-    chipHours: "11:30 AM – 6:00 PM",
+    chipHours: "11:30 AM – 1:00 PM",
     chipModesTitle: "In person or online",
     chipModes: "At the clinic or by video call",
     step1: "Choose a service",
@@ -744,7 +744,7 @@ const en: Dict = {
     types: { consulta: "Consultation / assessment", procedimiento: "Procedure" },
     typeHelp: {
       consulta: "First visit or check-up: the doctor assesses your case and explains your options.",
-      procedimiento: "For treatments already indicated by the doctor in a previous consultation.",
+      procedimiento: "For treatments already indicated by the doctor in a consultation, or if you would like to book your treatment directly.",
     },
     services: [
       { id: "implantes", name: "Dental implants" },

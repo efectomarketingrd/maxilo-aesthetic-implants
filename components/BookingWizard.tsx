@@ -14,8 +14,8 @@ function startOfDay(d: Date) {
 
 type Step = 0 | 1 | 2 | 3;
 
-// Horas que se ofrecen cuando el paciente pide otro día u horario
-const SPECIAL_HOURS = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+// Horas que se ofrecen cuando el paciente pide otro día u horario (fuera de 11:30 a. m. – 1:00 p. m.)
+const SPECIAL_HOURS = ["08:00", "09:00", "10:00", "11:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
 
 // Monto en pesos con su equivalente aproximado en dólares debajo
 function Amt({ n, plus }: { n: number; plus?: boolean }) {
