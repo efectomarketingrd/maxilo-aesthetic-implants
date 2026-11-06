@@ -21,7 +21,14 @@ export const agenda = {
     { time: "11:30", type: "consulta" },
     { time: "12:00", type: "consulta" },
     { time: "12:30", type: "procedimiento", oneSpot: true },
+    // Tarde: sujetos a disponibilidad
+    { time: "15:00", type: "consulta", alt: true },
     { time: "15:30", type: "consulta", alt: true },
+    { time: "16:00", type: "consulta", alt: true },
+    { time: "16:30", type: "consulta", alt: true },
+    { time: "17:00", type: "consulta", alt: true },
+    { time: "17:30", type: "consulta", alt: true },
+    { time: "18:00", type: "consulta", alt: true },
     { time: "16:00", type: "procedimiento", alt: true },
   ] as Slot[],
 
