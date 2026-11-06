@@ -1,0 +1,63 @@
+# Maxilo Aesthetic Implants — sitio web
+
+Cliente: **Dra. Celia Hernández Mauricio** · Maxilo Aesthetic Implants · Las Terrenas, Samaná, R.D.
+Agencia: **Efecto Marketing** (Omar) · efectomarketingrd@gmail.com
+
+- Repositorio: https://github.com/efectomarketingrd/maxilo-aesthetic-implants (rama `main`)
+- Producción: https://maxilo-aesthetic-implants.vercel.app (Vercel despliega solo al hacer push a `main`)
+- Stack: Next.js 16 (App Router), TypeScript, CSS propio en `app/globals.css`, sin librerías de UI.
+
+## Cómo trabajar
+
+```bash
+npm install
+npm run dev            # desarrollo
+npm run build && npx next start -p 3100   # comprobar versión final
+```
+
+Commits con autor `Efecto Marketing <efectomarketingrd@gmail.com>` y `git push origin main`.
+Cada push publica la web en Vercel en ~1 minuto.
+
+## Identidad visual
+
+- Colores: pizarra `#253035` / `#2e3b41` / `#1c2529`, marfil `#f8f6f2`, oro `#be9d61`, oro suave `#d8c39b`.
+- Fuentes (self-hosted con @fontsource): **Cinzel** (títulos), **Cormorant Garamond** itálica (acentos), **Montserrat** (texto).
+- Logos y fotos en `public/brand/` (logo-dark/light, mono-dark/light, doctora-hd.png recortada, doctora-retrato.jpg, og.png).
+- Imágenes de servicios generadas con Higgsfield, URLs en `lib/images.ts`.
+
+## Decisiones de diseño (aprobadas por el cliente)
+
+- **Mobile first**: la mayoría de visitas son por móvil. Probar en iPhone 13, iPhone SE y Pixel 7, sin scroll horizontal.
+- Estilo de la home = diseño tipo app ("home5"). Rechazados: portada con foto de recepción, portada con fondo de marca.
+- Animaciones sutiles y elegantes (componente `InView` + clases `js-anim`/`is-in`), siempre con alternativa `prefers-reduced-motion`.
+- Al proponer cambios, ofrecer opciones con recomendación.
+- Orden de la home: Portada (saludo según hora, H1, doctora, buscador de tratamientos, tarjeta Agendar animada) → Servicios (acordeón con iconos) → La doctora → Preguntas frecuentes (4) → Valoraciones → Tarjeta "Su nueva sonrisa empieza aquí" → Tarjeta del paquete (con flor animada) → Footer oscuro.
+- "Sobre nosotros" no va en la home; Marcas e Instituciones tienen páginas propias.
+- El blog sustituye a "Noticias" (`/noticias` redirige a `/blog`).
+- Cambio de idioma con enlace `<a>` (recarga completa) para que abra arriba de la página.
+- Botón flotante de WhatsApp con animación de pulso.
+
+## Estructura
+
+- `lib/site.ts` — datos de contacto, teléfonos (829) 657-2217 y (829) 371-0276, WhatsApp 18296572217, `waLink()`.
+- `lib/content.ts` — **todos los textos ES/EN**. Para cambiar un texto, se cambia aquí.
+- `lib/agenda.ts` — días de consulta (mar–vie), horarios, fechas cerradas/bloqueadas/extra, recargo RD$1,000 por horario alterno.
+- `lib/blog.ts` — artículos del blog (vacío por ahora).
+- `app/[lang]/` — páginas: inicio, agendar, servicios/[slug], paquete-implantes, blog, sobre-nosotros, preguntas, marcas, instituciones.
+- `components/` — Header, Footer, OfferCard, CtaCard, BookingWizard, TreatmentFinder, Schema (JSON-LD), etc.
+- SEO: JSON-LD (MedicalClinic/Dentist, Physician, FAQPage, MedicalWebPage, Blog, Offer), `app/sitemap.ts`, `app/robots.ts`.
+
+## Agenda
+
+Citas Presencial / Online. Se envían por WhatsApp o por correo (dracelia.maxiloestetica@gmail.com).
+Horarios alternos sujetos a disponibilidad con recargo de RD$1,000.
+
+## Pendientes (los aporta la doctora / el cliente)
+
+- Formación y diplomas de la doctora, estadísticas de casos, equipo.
+- Reseñas reales de pacientes.
+- Marcas (solo está Germaine de Capuccini) e instituciones.
+- Precios, hoteles y duración del paquete de implantes + estadía.
+- Aprobar la frase "Cada rostro merece un plan pensado solo para él." y la descripción de Platismoplastia.
+- Dominio propio → configurar `NEXT_PUBLIC_SITE_URL` en Vercel. Pasar a Vercel Pro antes del lanzamiento comercial.
+- Posible siguiente trabajo: dar el estilo nuevo a la página de agendar y a las páginas de servicios.
