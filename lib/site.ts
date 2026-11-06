@@ -6,6 +6,7 @@ export const site = {
   email: "dracelia.maxiloestetica@gmail.com",
   phones: ["(829) 657-2217", "(829) 371-0276"],
   whatsapp: "18296572217",
+  maps: "https://share.google/jq0Id5rWFLBov2GvE",
   address: {
     locality: "Las Terrenas",
     region: "Samaná",

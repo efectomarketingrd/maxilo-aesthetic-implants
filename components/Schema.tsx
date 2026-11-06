@@ -25,6 +25,7 @@ export default function Schema({ t, lang, faq = true }: { t: Dict; lang: Locale;
         postalCode: site.address.postalCode,
         addressCountry: site.address.country,
       },
+      hasMap: site.maps,
       areaServed: ["Las Terrenas", "Samaná", "República Dominicana"],
       medicalSpecialty: ["Dentistry", "PlasticSurgery", "Dermatology"],
       employee: { "@id": doctorId },

@@ -7006,3 +7006,326 @@ em.offer2__line {
 .cta2__wa-ico::after {
   inset: 0;
 }
+
+/* ───────── Preguntas frecuentes: animación y botones ───────── */
+.faq-anim details {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+/* Línea dorada que se dibuja a la izquierda de la pregunta abierta */
+.faq-anim details::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(var(--gold-soft), var(--gold));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.faq-anim details[open] {
+  border-color: rgba(190, 157, 97, 0.45);
+  box-shadow: 0 14px 30px rgba(37, 48, 53, 0.08);
+}
+
+.faq-anim details[open]::before {
+  transform: scaleY(1);
+}
+
+.faq-anim summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 40px;
+}
+
+.faq-anim summary::after {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--gold-tint);
+  line-height: 1;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s, color 0.3s;
+}
+
+.faq-anim details[open] summary::after {
+  background: var(--gold);
+  color: var(--white);
+  transform: translateY(-50%) rotate(135deg);
+}
+
+.faq-num {
+  flex: none;
+  font-family: var(--f-title);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  transition: color 0.3s;
+}
+
+.faq-q {
+  transition: color 0.3s;
+}
+
+.faq-anim summary:hover .faq-q {
+  color: var(--gold);
+}
+
+.faq-a {
+  padding-bottom: 18px;
+}
+
+.faq-anim .faq-a p {
+  padding-bottom: 0;
+}
+
+/* Entrada: las preguntas aparecen una tras otra al bajar */
+.js-anim.faq-anim details {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js-anim.faq-anim.is-in details {
+  animation: faq-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--fi, 0) * 0.1s);
+}
+
+@keyframes faq-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Despliegue suave */
+@supports (interpolate-size: allow-keywords) {
+  .faq-anim {
+    interpolate-size: allow-keywords;
+  }
+
+  .faq-anim details::details-content {
+    height: 0;
+    overflow: clip;
+    transition: height 0.4s ease, content-visibility 0.4s allow-discrete;
+  }
+
+  .faq-anim details[open]::details-content {
+    height: auto;
+  }
+}
+
+.faq-anim details[open] .faq-a p,
+.faq-anim details[open] .faq-x {
+  animation: svc-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: 0.1s;
+}
+
+.faq-anim details[open] .faq-x {
+  animation-delay: 0.25s;
+}
+
+/* Botones dentro de las respuestas */
+.faq-x {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.faq-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(190, 157, 97, 0.5);
+  background: var(--white);
+  color: var(--slate);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
+}
+
+.faq-chip:hover {
+  background: var(--gold-tint);
+  transform: translateY(-1px);
+}
+
+.faq-chip svg {
+  color: var(--gold);
+}
+
+.faq-chip--wa {
+  background: #25d366;
+  border-color: #25d366;
+  color: var(--white);
+}
+
+.faq-chip--wa svg {
+  color: var(--white);
+}
+
+.faq-chip--wa:hover {
+  background: #1ebe5b;
+}
+
+.faq-chip--dark {
+  background: var(--slate);
+  border-color: var(--slate);
+  color: var(--ivory);
+}
+
+.faq-chip--dark svg {
+  color: var(--gold-soft);
+}
+
+.faq-chip--dark:hover {
+  background: var(--slate-2);
+}
+
+/* Tarjeta de ubicación */
+.faq-map {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--ivory);
+  background:
+    radial-gradient(80% 140% at 0% 0%, rgba(190, 157, 97, 0.3), transparent 60%),
+    linear-gradient(140deg, var(--slate-2), var(--slate-3));
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.faq-map:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(28, 37, 41, 0.25);
+}
+
+.faq-map__pin {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(248, 246, 242, 0.08);
+  color: var(--gold-soft);
+}
+
+.faq-map__pin svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* Onda que sale del pin */
+.faq-map__pin i {
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 18px;
+  height: 6px;
+  margin-left: -9px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  opacity: 0;
+}
+
+details[open] .faq-map__pin svg {
+  animation: faq-pin-drop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both, faq-pin-bob 2.4s ease-in-out 1.2s infinite;
+}
+
+details[open] .faq-map__pin i {
+  animation: faq-pin-wave 2.4s ease-out 1s infinite;
+}
+
+@keyframes faq-pin-drop {
+  from { transform: translateY(-14px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+@keyframes faq-pin-bob {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes faq-pin-wave {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.faq-map__txt {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.faq-map__txt strong {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.faq-map__txt span {
+  font-size: 0.74rem;
+  color: rgba(248, 246, 242, 0.7);
+}
+
+.faq-map__go {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--slate-3);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.faq-map:hover .faq-map__go svg {
+  transform: translateX(3px);
+}
+
+.faq-map__go svg {
+  transition: transform 0.25s;
+}
+
+@media (max-width: 420px) {
+  .faq-map {
+    flex-wrap: wrap;
+  }
+
+  .faq-map__go {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-anim.faq-anim details,
+  .js-anim.faq-anim.is-in details {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .faq-anim details[open] .faq-a p,
+  .faq-anim details[open] .faq-x,
+  details[open] .faq-map__pin svg,
+  details[open] .faq-map__pin i {
+    animation: none;
+  }
+}

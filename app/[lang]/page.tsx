@@ -7,6 +7,7 @@ import TreatmentFinder from "@/components/TreatmentFinder";
 import Greeting from "@/components/Greeting";
 import InView from "@/components/InView";
 import CtaCard from "@/components/CtaCard";
+import FaqList from "@/components/FaqList";
 import ServiceIcon from "@/components/ServiceIcon";
 import { Arrow, Check, Star, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
@@ -194,14 +195,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <section id="preguntas" className="h5-sec h5-sec--white">
           <div className="container h5-faq">
             <Head eyebrow={t.faq.eyebrow} title={t.faq.title} />
-            <div className="h5-faq__list">
-              {t.faq.items.slice(0, 4).map((f) => (
-                <details key={f.q}>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
-              ))}
-            </div>
+            <FaqList t={t} lang={lang} limit={4} />
             <Link className="h5-link h5-faq__all" href={`/${lang}/preguntas`}>
               {h.faqAll} <Arrow size={14} />
             </Link>

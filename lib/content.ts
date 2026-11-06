@@ -201,12 +201,13 @@ const es = {
   faq: {
     eyebrow: "Preguntas frecuentes",
     title: "Resolvemos sus dudas",
+    act: { map: "Cómo llegar", place: "Ver en Google Maps", wa: "WhatsApp", call: "Llamar", book: "Agendar cita", pkg: "Ver paquete con estadía" },
     items: [
-      { q: "¿Dónde está ubicado el centro?", a: "Estamos en Las Terrenas, provincia Samaná, República Dominicana." },
-      { q: "¿Atienden a pacientes que vienen del extranjero?", a: "Sí. Recibimos pacientes que viven en Las Terrenas y también a quienes viajan desde otros países para su tratamiento. Para implantes dentales ofrecemos la opción de coordinar la estadía en hotel." },
-      { q: "¿Cómo agendo una consulta?", a: "Escríbanos por WhatsApp o llámenos al (829) 657-2217 o al (829) 371-0276. También puede dejar sus datos en el formulario de esta página." },
-      { q: "¿Qué tratamientos estéticos ofrecen?", a: "Ofrecemos cirugía estética facial (como blefaroplastia, otoplastia, bichectomía, lifting o platismoplastia) y medicina estética (bótox, ácido hialurónico, armonización facial, rejuvenecimiento y PRP)." },
-      { q: "¿Venden productos para el cuidado de la piel?", a: "Sí, en el centro encontrará productos de la marca Germaine de Capuccini." },
+      { q: "¿Dónde está ubicado el centro?", a: "Estamos en Las Terrenas, provincia Samaná, República Dominicana. Toque el botón para ver la ubicación en Google Maps y llegar sin complicaciones.", kind: "location" },
+      { q: "¿Atienden a pacientes que vienen del extranjero?", a: "Sí. Recibimos pacientes que viven en Las Terrenas y también a quienes viajan desde otros países para su tratamiento. Para implantes dentales ofrecemos la opción de coordinar la estadía en hotel.", kind: "abroad" },
+      { q: "¿Cómo agendo una consulta?", a: "Escríbanos por WhatsApp, llámenos o elija día y hora directamente en nuestra agenda en línea.", kind: "book" },
+      { q: "¿Qué tratamientos estéticos ofrecen?", a: "Ofrecemos cirugía estética facial (como blefaroplastia, otoplastia, bichectomía, lifting o platismoplastia) y medicina estética (bótox, ácido hialurónico, armonización facial, rejuvenecimiento y PRP).", kind: "services" },
+      { q: "¿Venden productos para el cuidado de la piel?", a: "Sí, en el centro encontrará productos de la marca Germaine de Capuccini.", kind: "" },
     ],
   },
   reviews: {
@@ -590,12 +591,13 @@ const en: Dict = {
   faq: {
     eyebrow: "FAQ",
     title: "Your questions, answered",
+    act: { map: "Get directions", place: "View on Google Maps", wa: "WhatsApp", call: "Call", book: "Book online", pkg: "See the stay package" },
     items: [
-      { q: "Where is the clinic located?", a: "We are in Las Terrenas, Samaná province, Dominican Republic." },
-      { q: "Do you treat patients traveling from abroad?", a: "Yes. We see patients who live in Las Terrenas as well as those who travel from other countries for treatment. For dental implants we can coordinate your hotel stay." },
-      { q: "How do I book an appointment?", a: "Message us on WhatsApp or call +1 (829) 657-2217 or +1 (829) 371-0276. You can also leave your details in the form on this page." },
-      { q: "Which aesthetic treatments do you offer?", a: "We offer facial aesthetic surgery (such as blepharoplasty, otoplasty, buccal fat removal, face lifts or platysmaplasty) and aesthetic medicine (Botox, hyaluronic acid, facial harmonization, rejuvenation and PRP)." },
-      { q: "Do you sell skincare products?", a: "Yes, Germaine de Capuccini products are available at the clinic." },
+      { q: "Where is the clinic located?", a: "We are in Las Terrenas, Samaná province, Dominican Republic. Tap the button to open our location in Google Maps and get directions.", kind: "location" },
+      { q: "Do you treat patients traveling from abroad?", a: "Yes. We see patients who live in Las Terrenas as well as those who travel from other countries for treatment. For dental implants we can coordinate your hotel stay.", kind: "abroad" },
+      { q: "How do I book an appointment?", a: "Message us on WhatsApp, give us a call or pick a day and time directly in our online booking.", kind: "book" },
+      { q: "Which aesthetic treatments do you offer?", a: "We offer facial aesthetic surgery (such as blepharoplasty, otoplasty, buccal fat removal, face lifts or platysmaplasty) and aesthetic medicine (Botox, hyaluronic acid, facial harmonization, rejuvenation and PRP).", kind: "services" },
+      { q: "Do you sell skincare products?", a: "Yes, Germaine de Capuccini products are available at the clinic.", kind: "" },
     ],
   },
   reviews: {

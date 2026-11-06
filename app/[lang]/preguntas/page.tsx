@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import FaqList from "@/components/FaqList";
 import { dictionaries } from "@/lib/content";
 import { site, type Locale } from "@/lib/site";
 
@@ -32,14 +33,7 @@ export default async function Faq({ params }: { params: Promise<{ lang: string }
         <PageHero t={t} lang={lang} eyebrow={t.faq.eyebrow} title={t.faq.title} crumb={t.nav.faq} />
         <section className="h5-sec h5-sec--white">
           <div className="container h5-faq">
-            <div className="h5-faq__list">
-              {t.faq.items.map((f) => (
-                <details key={f.q}>
-                  <summary>{f.q}</summary>
-                  <p>{f.a}</p>
-                </details>
-              ))}
-            </div>
+            <FaqList t={t} lang={lang} />
           </div>
         </section>
       </main>
