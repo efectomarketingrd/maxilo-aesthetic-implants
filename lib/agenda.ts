@@ -29,7 +29,13 @@ export const agenda = {
     { time: "17:00", type: "consulta", alt: true },
     { time: "17:30", type: "consulta", alt: true },
     { time: "18:00", type: "consulta", alt: true },
+    { time: "15:00", type: "procedimiento", alt: true },
+    { time: "15:30", type: "procedimiento", alt: true },
     { time: "16:00", type: "procedimiento", alt: true },
+    { time: "16:30", type: "procedimiento", alt: true },
+    { time: "17:00", type: "procedimiento", alt: true },
+    { time: "17:30", type: "procedimiento", alt: true },
+    { time: "18:00", type: "procedimiento", alt: true },
   ] as Slot[],
 
   // Días CERRADOS (feriados, vacaciones, congresos…). Formato "AAAA-MM-DD".
