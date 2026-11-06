@@ -201,13 +201,14 @@ const es = {
   faq: {
     eyebrow: "Preguntas frecuentes",
     title: "Resolvemos sus dudas",
+    svcLead: "Trabajamos en cuatro áreas de especialidad. Toque una para ver todos sus tratamientos.",
     where: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",
     act: { map: "Cómo llegar", place: "Ver en Google Maps", wa: "WhatsApp", call: "Llamar", book: "Agendar cita", pkg: "Ver paquete con estadía" },
     items: [
       { q: "¿Dónde está ubicado el centro?", a: "Estamos en el sector La Ceiba de Las Terrenas, Samaná, justo frente al parque con el letrero de bienvenida y cerca de los supermercados Merca Jumbo y La Sirena. Toque el botón para abrir la ruta en Google Maps.", kind: "location" },
       { q: "¿Atienden a pacientes que vienen del extranjero?", a: "Sí. Recibimos pacientes que viven en Las Terrenas y también a quienes viajan desde otros países para su tratamiento. Para implantes dentales ofrecemos la opción de coordinar la estadía en hotel.", kind: "abroad" },
       { q: "¿Cómo agendo una consulta?", a: "Escríbanos por WhatsApp, llámenos o elija día y hora directamente en nuestra agenda en línea.", kind: "book" },
-      { q: "¿Qué tratamientos estéticos ofrecen?", a: "Ofrecemos cirugía estética facial (como blefaroplastia, otoplastia, bichectomía, lifting o platismoplastia) y medicina estética (bótox, ácido hialurónico, armonización facial, rejuvenecimiento y PRP).", kind: "services" },
+      { q: "¿Qué servicios ofrecen?", a: "Trabajamos en cuatro áreas: implantes dentales y cirugía oral (incluida la extracción de cordales); cirugía estética facial, como blefaroplastia, otoplastia, bichectomía, lipopapada o platismoplastia; medicina estética, con bótox, ácido hialurónico, armonización facial y PRP; y cirugía reconstructiva para fracturas, traumatismos y malformaciones faciales. Toque un área para ver todos sus tratamientos.", kind: "services" },
       { q: "¿Venden productos para el cuidado de la piel?", a: "Sí, en el centro encontrará productos de la marca Germaine de Capuccini.", kind: "" },
     ],
   },
@@ -592,13 +593,14 @@ const en: Dict = {
   faq: {
     eyebrow: "FAQ",
     title: "Your questions, answered",
+    svcLead: "We work in four specialty areas. Tap one to see all its treatments.",
     where: "La Ceiba area, near Merca Jumbo and La Sirena supermarkets",
     act: { map: "Get directions", place: "View on Google Maps", wa: "WhatsApp", call: "Call", book: "Book online", pkg: "See the stay package" },
     items: [
       { q: "Where is the clinic located?", a: "We are in the La Ceiba area of Las Terrenas, Samaná, right across from the park with the welcome sign and close to the Merca Jumbo and La Sirena supermarkets. Tap the button to get directions in Google Maps.", kind: "location" },
       { q: "Do you treat patients traveling from abroad?", a: "Yes. We see patients who live in Las Terrenas as well as those who travel from other countries for treatment. For dental implants we can coordinate your hotel stay.", kind: "abroad" },
       { q: "How do I book an appointment?", a: "Message us on WhatsApp, give us a call or pick a day and time directly in our online booking.", kind: "book" },
-      { q: "Which aesthetic treatments do you offer?", a: "We offer facial aesthetic surgery (such as blepharoplasty, otoplasty, buccal fat removal, face lifts or platysmaplasty) and aesthetic medicine (Botox, hyaluronic acid, facial harmonization, rejuvenation and PRP).", kind: "services" },
+      { q: "Which services do you offer?", a: "We work in four areas: dental implants and oral surgery (including wisdom tooth removal); facial aesthetic surgery, such as blepharoplasty, otoplasty, buccal fat removal, double-chin reduction or platysmaplasty; aesthetic medicine, with Botox, hyaluronic acid, facial harmonization and PRP; and reconstructive surgery for facial fractures, trauma and malformations. Tap an area to see all its treatments.", kind: "services" },
       { q: "Do you sell skincare products?", a: "Yes, Germaine de Capuccini products are available at the clinic.", kind: "" },
     ],
   },

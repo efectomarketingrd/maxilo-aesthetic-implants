@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Dict } from "@/lib/content";
 import { site, waLink, type Locale } from "@/lib/site";
 import InView from "./InView";
+import ServiceIcon from "./ServiceIcon";
 import { Arrow, Calendar, Phone, Pin, WaIcon } from "./Icons";
 
 type Item = Dict["faq"]["items"][number];
@@ -53,14 +54,19 @@ function Extras({ f, t, lang }: { f: Item; t: Dict; lang: Locale }) {
     );
   if (f.kind === "services")
     return (
-      <div className="faq-x">
-        {t.services.items
-          .filter((s) => s.slug === "cirugia-estetica-facial" || s.slug === "medicina-estetica")
-          .map((s) => (
-            <Link key={s.slug} className="faq-chip" href={`/${lang}/servicios/${s.slug}`}>
-              {s.title} <Arrow size={14} />
-            </Link>
-          ))}
+      <div className="faq-x faq-x--svc">
+        {t.services.items.map((s, i) => (
+          <Link key={s.slug} className="faq-svc" href={`/${lang}/servicios/${s.slug}`} style={{ "--k": i } as React.CSSProperties}>
+            <span className="faq-svc__ico">
+              <ServiceIcon kind={s.icon} />
+            </span>
+            <span className="faq-svc__name">
+              <strong>{s.title}</strong>
+              <span>{s.short}</span>
+            </span>
+            <Arrow size={13} />
+          </Link>
+        ))}
       </div>
     );
   return null;
@@ -77,7 +83,7 @@ export default function FaqList({ t, lang, limit }: { t: Dict; lang: Locale; lim
             <span className="faq-q">{f.q}</span>
           </summary>
           <div className="faq-a">
-            <p>{f.a}</p>
+            <p>{f.kind === "services" ? t.faq.svcLead : f.a}</p>
             <Extras f={f} t={t} lang={lang} />
           </div>
         </details>
