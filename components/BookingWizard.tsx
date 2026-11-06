@@ -15,13 +15,13 @@ function startOfDay(d: Date) {
 type Step = 0 | 1 | 2 | 3;
 
 // Horas que se ofrecen cuando el paciente pide otro día u horario:
-// mañana de 8:00 a 11:00 a. m. y tarde de 3:00 a 5:00 p. m., cada media hora
+// de 3:00 a 5:00 p. m., cada media hora
 const halfHours = (from: number, to: number) =>
   Array.from({ length: (to - from) * 2 + 1 }, (_, i) => {
     const m = from * 60 + i * 30;
     return `${String(Math.floor(m / 60)).padStart(2, "0")}:${m % 60 ? "30" : "00"}`;
   });
-const SPECIAL_HOURS = [...halfHours(8, 11), ...halfHours(15, 17)].filter(
+const SPECIAL_HOURS = halfHours(15, 17).filter(
   (h) => !agenda.slots.some((s) => !s.alt && s.time === h), // nunca dentro del horario normal
 );
 
