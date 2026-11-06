@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
-import { agenda, formatTime, isOpenDay, slotsFor, toKey, type SlotType } from "@/lib/agenda";
+import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
 import { site, waLink, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, Shield, WaIcon } from "./Icons";
 
@@ -16,6 +16,17 @@ type Step = 0 | 1 | 2 | 3;
 
 // Horas que se ofrecen cuando el paciente pide otro día u horario
 const SPECIAL_HOURS = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+
+// Monto en pesos con su equivalente aproximado en dólares debajo
+function Amt({ n, plus }: { n: number; plus?: boolean }) {
+  return (
+    <span className="amt">
+      {plus ? "+ " : ""}
+      {rd(n)}
+      <small>≈ {usd(n)}</small>
+    </span>
+  );
+}
 
 // Interruptor de dos opciones con píldora que se desliza
 function Seg<T extends string>({
@@ -121,7 +132,19 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const timeLabel = special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
   const slotInfo = !special && time ? agenda.slots.find((s) => s.time === time && s.type === type) : undefined;
 
-  const okStep = [Boolean(service), Boolean(date && timeLabel), Boolean(form.name.trim() && form.phone.trim()), true];
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
+  const filled = (Object.keys(form) as (keyof typeof form)[]).every((k) => form[k].trim());
+  const okStep = [Boolean(service), Boolean(date && timeLabel), filled && emailOk, true];
+
+  // Costo estimado
+  const isProc = type === "procedimiento";
+  const base = isProc ? 0 : agenda.prices[effMode];
+  const extra = special ? agenda.surchargeAmount : 0;
+  const total = base + extra;
+  const money = (n: number) => `${rd(n)} (≈ ${usd(n)})`;
+  const costLine = isProc
+    ? `${b.cost.toConfirm}${extra ? ` + ${b.cost.surcharge.toLowerCase()} ${money(extra)}` : ""}`
+    : money(total);
   const valid = okStep[0] && okStep[1] && okStep[2];
 
   function go(n: Step) {
@@ -150,6 +173,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       `${b.date}: ${dateLabel}`,
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
       special ? `${b.msgSurcharge} ${agenda.surcharge})` : "",
+      `${b.cost.msg}: ${costLine}`,
       "",
       `${b.name}: ${form.name.trim()}`,
       `${b.phone}: ${form.phone.trim()}`,
@@ -265,6 +289,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   />
                   <p className="bk2-help bk2-help--sm" key={effMode + type}>
                     {type === "procedimiento" ? b.modeOnlyPresencial : b.modeHelp[effMode]}
+                  </p>
+                  <p className="bk2-price" key={`p-${effMode}-${type}`}>
+                    <span>{isProc ? b.cost.proc : b.cost.consult[effMode]}</span>
+                    <strong>{isProc ? b.cost.toConfirm : money(base)}</strong>
                   </p>
                 </div>
               </div>
@@ -393,26 +421,28 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
           {/* PASO 3 · DATOS */}
           {step === 2 && (
             <div className="fields bk2-fields">
-              <label className="field" style={{ "--i": 0 } as React.CSSProperties}>
-                <span>{b.name} *</span>
-                <input value={form.name} onChange={upd("name")} autoComplete="name" required />
-              </label>
-              <label className="field" style={{ "--i": 1 } as React.CSSProperties}>
-                <span>{b.phone} *</span>
-                <input value={form.phone} onChange={upd("phone")} type="tel" inputMode="tel" autoComplete="tel" required />
-              </label>
-              <label className="field" style={{ "--i": 2 } as React.CSSProperties}>
-                <span>{b.email}</span>
-                <input value={form.email} onChange={upd("email")} type="email" autoComplete="email" />
-              </label>
-              <label className="field" style={{ "--i": 3 } as React.CSSProperties}>
-                <span>{b.country}</span>
-                <input value={form.country} onChange={upd("country")} autoComplete="country-name" />
-              </label>
-              <label className="field field--full" style={{ "--i": 4 } as React.CSSProperties}>
-                <span>{b.notes}</span>
-                <textarea value={form.notes} onChange={upd("notes")} rows={3} />
-              </label>
+              {(
+                [
+                  { k: "name", label: b.name, auto: "name" },
+                  { k: "phone", label: b.phone, auto: "tel", type: "tel" },
+                  { k: "email", label: b.email, auto: "email", type: "email" },
+                  { k: "country", label: b.country, auto: "country-name" },
+                  { k: "notes", label: b.notes, area: true },
+                ] as { k: keyof typeof form; label: string; auto?: string; type?: string; area?: boolean }[]
+              ).map((f, i) => {
+                const bad = nudge > 0 && (!form[f.k].trim() || (f.k === "email" && !emailOk));
+                return (
+                  <label key={f.k} className={`field ${f.area ? "field--full" : ""} ${bad ? "is-err" : ""}`} style={{ "--i": i } as React.CSSProperties}>
+                    <span>{f.label} *</span>
+                    {f.area ? (
+                      <textarea value={form[f.k]} onChange={upd(f.k)} rows={3} required />
+                    ) : (
+                      <input value={form[f.k]} onChange={upd(f.k)} type={f.type ?? "text"} inputMode={f.type === "tel" ? "tel" : undefined} autoComplete={f.auto} required />
+                    )}
+                    {bad && f.k === "email" && form.email.trim() && <small className="field__err">{b.badEmail}</small>}
+                  </label>
+                );
+              })}
               <p className="bk2-secure" style={{ "--i": 5 } as React.CSSProperties}>
                 <Lock /> {b.secure}
               </p>
@@ -451,6 +481,33 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     </div>
                   ))}
                 </dl>
+              </div>
+
+              <div className="bk2-cost">
+                <p className="bk2-cost__title">{b.cost.title}</p>
+                <ul>
+                  <li style={{ "--i": 0 } as React.CSSProperties}>
+                    <span>{isProc ? b.cost.proc : b.cost.consult[effMode]}</span>
+                    <strong>{isProc ? b.cost.toConfirm : <Amt n={base} />}</strong>
+                  </li>
+                  {extra > 0 && (
+                    <li style={{ "--i": 1 } as React.CSSProperties}>
+                      <span>{b.cost.surcharge}</span>
+                      <strong><Amt n={extra} plus /></strong>
+                    </li>
+                  )}
+                </ul>
+                <div className="bk2-cost__total">
+                  <span>{b.cost.total}</span>
+                  {isProc ? (
+                    <strong className="bk2-cost__tbd">{b.cost.toConfirm}</strong>
+                  ) : (
+                    <strong>
+                      {rd(total)} <small>≈ {usd(total)}</small>
+                    </strong>
+                  )}
+                </div>
+                <p className="bk2-cost__note">{isProc ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
               </div>
 
               <div className="bk2-send">

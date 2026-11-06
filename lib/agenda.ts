@@ -58,9 +58,25 @@ export const agenda = {
 
   // Recargo por atención fuera del horario establecido
   surcharge: "RD$1,000",
+  surchargeAmount: 1000,
+
+  // Costo de la consulta (en pesos). Los procedimientos se cotizan después de la valoración.
+  prices: { presencial: 3000, online: 1500 },
+
+  // Tasa aproximada para mostrar el equivalente en dólares (RD$ por US$1)
+  usdRate: 61.5,
 };
 
 // ───────── utilidades (no hace falta modificarlas) ─────────
+
+export function rd(n: number) {
+  return `RD$${n.toLocaleString("en-US")}`;
+}
+
+// Equivalente aproximado en dólares, redondeado a múltiplos de 5
+export function usd(n: number) {
+  return `US$${Math.max(5, Math.round(n / agenda.usdRate / 5) * 5)}`;
+}
 
 export function toKey(d: Date) {
   const m = String(d.getMonth() + 1).padStart(2, "0");
