@@ -8,7 +8,7 @@ export const site = {
   whatsapp: "18296572217",
   maps: "https://share.google/jq0Id5rWFLBov2GvE",
   address: {
-    street: "Sector La Ceiba, frente al parque del letrero de bienvenida",
+    street: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",
     locality: "Las Terrenas",
     region: "Samaná",
     postalCode: "32000",

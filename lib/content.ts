@@ -201,7 +201,7 @@ const es = {
   faq: {
     eyebrow: "Preguntas frecuentes",
     title: "Resolvemos sus dudas",
-    where: "Sector La Ceiba, frente al parque del letrero de bienvenida",
+    where: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",
     act: { map: "Cómo llegar", place: "Ver en Google Maps", wa: "WhatsApp", call: "Llamar", book: "Agendar cita", pkg: "Ver paquete con estadía" },
     items: [
       { q: "¿Dónde está ubicado el centro?", a: "Estamos en el sector La Ceiba de Las Terrenas, Samaná, justo frente al parque con el letrero de bienvenida y cerca de los supermercados Merca Jumbo y La Sirena. Toque el botón para abrir la ruta en Google Maps.", kind: "location" },
@@ -592,7 +592,7 @@ const en: Dict = {
   faq: {
     eyebrow: "FAQ",
     title: "Your questions, answered",
-    where: "La Ceiba area, across from the welcome-sign park",
+    where: "La Ceiba area, near Merca Jumbo and La Sirena supermarkets",
     act: { map: "Get directions", place: "View on Google Maps", wa: "WhatsApp", call: "Call", book: "Book online", pkg: "See the stay package" },
     items: [
       { q: "Where is the clinic located?", a: "We are in the La Ceiba area of Las Terrenas, Samaná, right across from the park with the welcome sign and close to the Merca Jumbo and La Sirena supermarkets. Tap the button to get directions in Google Maps.", kind: "location" },
