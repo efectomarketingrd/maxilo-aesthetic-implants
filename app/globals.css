@@ -9010,8 +9010,3 @@ body:has(.bk2-page) .wa-float {
   font-size: 0.74rem;
 }
 
-/* La tarjeta queda como última opción */
-.bk2-cost .bk2-pay li.is-minor {
-  opacity: 0.6;
-  background: transparent;
-}
