@@ -41,7 +41,7 @@ Cada push publica la web en Vercel en ~1 minuto.
 
 - `lib/site.ts` — datos de contacto, teléfonos (829) 657-2217 y (829) 371-0276, WhatsApp 18296572217, `waLink()`.
 - `lib/content.ts` — **todos los textos ES/EN**. Para cambiar un texto, se cambia aquí.
-- `lib/agenda.ts` — días de consulta (mar–vie), horario 11:30 a. m.–1:00 p. m., horario especial 3:00–5:00 p. m. (sujeto a disponibilidad, sin recargo), precios (consulta RD$3,000 presencial / RD$1,500 online; cordales RD$10,000 c/u, las 4 a RD$8,000 c/u; Bótox RD$30,000 con retoque; PRP capilar: sesión RD$10,000, plan 3 meses RD$25,000, programa 1 año RD$45,000, mantenimiento RD$8,000; planes pagados completos al inicio) y tasa US$. PRP facial: precio pendiente.
+- `lib/agenda.ts` — días de consulta (mar–vie), horario 11:30 a. m.–1:00 p. m., horario especial 3:00–5:00 p. m. (sujeto a disponibilidad, sin recargo), precios (consulta RD$3,000 presencial / RD$1,500 online; cordales RD$10,000 c/u, las 4 a RD$8,000 c/u; Bótox RD$30,000 con retoque; PRP capilar: sesión RD$10,000, plan 3 meses RD$25,000, programa 12 meses (6 sesiones) RD$45,000, mantenimiento RD$8,000; planes pagados completos al inicio) y tasa US$. PRP facial: precio pendiente.
 - `lib/blog.ts` — artículos del blog (vacío por ahora).
 - `app/[lang]/` — páginas: inicio, agendar, servicios/[slug], paquete-implantes, blog, sobre-nosotros, preguntas, marcas, instituciones.
 - `components/` — Header, Footer, OfferCard, CtaCard, BookingWizard, TreatmentFinder, Schema (JSON-LD), etc.
@@ -62,4 +62,5 @@ Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recar
 - Dominio propio → configurar `NEXT_PUBLIC_SITE_URL` en Vercel. Pasar a Vercel Pro antes del lanzamiento comercial.
 - Pedir permiso a Wise, Remitly y Western Union para usar sus logos (por ahora solo botones con nombre y enlace).
 - **Recordar a Omar:** sección "¿Cómo es el proceso?" en las páginas de servicios (Valoración → Plan personalizado → Tratamiento → Seguimiento). Aprobada como idea; se hará más adelante y el texto lo revisa la doctora.
+- **Para contenidos (blog y página de Medicina estética), aún no trabajar:** explicación del PRP capilar — fase inicial de 3–5 sesiones mensuales (usamos 4) + mantenimiento cada 4–6 meses (meses 8 y 12) = 6 sesiones en 12 meses; cambios desde el mes 2–3, más densidad a los 3–6 meses, resultado más lleno a los 6–12 meses; no hay evidencia de que 12 sesiones mensuales mejoren el resultado. Fuentes: J Cutan Med Surg 2023 (pubmed 37533146), revisión PMC8664169.
 - Posible siguiente trabajo: dar el estilo nuevo a la página de agendar y a las páginas de servicios.

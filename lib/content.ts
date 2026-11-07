@@ -323,7 +323,7 @@ const es = {
     prpPlans: {
       "1": { name: "Sesión individual", note: "1 sesión" },
       "3m": { name: "Plan inicial 3 meses", note: "3 sesiones, una al mes" },
-      "1y": { name: "Programa capilar 1 año", note: "4 sesiones mensuales + mantenimiento en los meses 8 y 12" },
+      "1y": { name: "Programa capilar 12 meses (6 sesiones)", note: "4 sesiones mensuales + mantenimiento en los meses 8 y 12" },
       mant: { name: "Mantenimiento", note: "Para pacientes que completaron un plan" },
     },
     prpBest: "Recomendado",
@@ -792,7 +792,7 @@ const en: Dict = {
     prpPlans: {
       "1": { name: "Single session", note: "1 session" },
       "3m": { name: "3-month starter plan", note: "3 sessions, one per month" },
-      "1y": { name: "1-year hair program", note: "4 monthly sessions + maintenance in months 8 and 12" },
+      "1y": { name: "12-month hair program (6 sessions)", note: "4 monthly sessions + maintenance in months 8 and 12" },
       mant: { name: "Maintenance", note: "For patients who completed a plan" },
     },
     prpBest: "Recommended",
