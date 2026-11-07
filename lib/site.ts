@@ -15,6 +15,12 @@ export const site = {
       { cur: "US$", number: "813932191" },
     ],
   },
+  // Apps para pagar desde el extranjero (depositan en la cuenta en pesos)
+  remit: [
+    { name: "Wise", url: "https://wise.com/" },
+    { name: "Remitly", url: "https://remit.ly/us/en/dominican-republic/pricing" },
+    { name: "Western Union", url: "https://www.westernunion.com/us/en/providers/banco-popular.html" },
+  ],
   maps: "https://share.google/jq0Id5rWFLBov2GvE",
   address: {
     street: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",

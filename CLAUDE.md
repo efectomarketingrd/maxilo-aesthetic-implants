@@ -41,7 +41,7 @@ Cada push publica la web en Vercel en ~1 minuto.
 
 - `lib/site.ts` — datos de contacto, teléfonos (829) 657-2217 y (829) 371-0276, WhatsApp 18296572217, `waLink()`.
 - `lib/content.ts` — **todos los textos ES/EN**. Para cambiar un texto, se cambia aquí.
-- `lib/agenda.ts` — días de consulta (mar–vie), horarios, fechas cerradas/bloqueadas/extra, recargo RD$1,000 por horario alterno.
+- `lib/agenda.ts` — días de consulta (mar–vie), horario 11:30 a. m.–1:00 p. m., horario especial 3:00–5:00 p. m. (sujeto a disponibilidad, sin recargo), precios de consulta (RD$3,000 presencial / RD$1,500 online) y tasa US$.
 - `lib/blog.ts` — artículos del blog (vacío por ahora).
 - `app/[lang]/` — páginas: inicio, agendar, servicios/[slug], paquete-implantes, blog, sobre-nosotros, preguntas, marcas, instituciones.
 - `components/` — Header, Footer, OfferCard, CtaCard, BookingWizard, TreatmentFinder, Schema (JSON-LD), etc.
@@ -50,7 +50,7 @@ Cada push publica la web en Vercel en ~1 minuto.
 ## Agenda
 
 Citas Presencial / Online. Se envían por WhatsApp o por correo (dracelia.maxiloestetica@gmail.com).
-Horarios alternos sujetos a disponibilidad con recargo de RD$1,000.
+Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recargo por pagar con tarjeta: Ley 358-05, art. 87). Datos de transferencia (Banco Popular) y apps para pagar desde el extranjero en `lib/site.ts`.
 
 ## Pendientes (los aporta la doctora / el cliente)
 

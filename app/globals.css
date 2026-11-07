@@ -8947,3 +8947,65 @@ body:has(.bk2-page) .wa-float {
   color: rgba(248, 246, 242, 0.6);
 }
 .bk2-bank__proof{padding:0 16px;text-align:center}
+
+/* Apps para pagar desde el extranjero */
+.bk2-remit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bk2-remit a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--slate);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s, background 0.25s;
+}
+
+.bk2-remit a:hover {
+  background: var(--white);
+  transform: translateY(-1px);
+}
+
+.bk2-remit svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bk2-remit {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.bk2-remit a {
+  justify-content: center;
+  gap: 4px;
+  padding: 7px 6px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.bk2-remit {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bk2-remit a {
+  padding: 7px 14px;
+  font-size: 0.74rem;
+}

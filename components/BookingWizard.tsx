@@ -212,11 +212,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   // Costo estimado
   const isProc = type === "procedimiento";
   const base = isProc ? 0 : agenda.prices[effMode];
-  const extra = special ? agenda.surchargeAmount : 0;
-  const total = base + extra;
+  const total = base;
   const money = (n: number) => `${rd(n)} (≈ ${usd(n)})`;
   const costLine = isProc
-    ? `${b.cost.toConfirm}${extra ? ` + ${b.cost.surcharge.toLowerCase()} ${money(extra)}` : ""}`
+    ? b.cost.toConfirm
     : money(total);
   const valid = okStep[0] && okStep[1] && okStep[2];
 
@@ -245,7 +244,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       `${b.mode}: ${b.modes[effMode]}`,
       `${b.date}: ${dateLabel}`,
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
-      special ? `${b.msgSurcharge} ${agenda.surcharge})` : "",
+      special ? b.msgSpecial : "",
       `${b.cost.msg}: ${costLine}`,
       "",
       `${b.name}: ${form.name.trim()}`,
@@ -524,9 +523,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   />
                   <span>
                     <strong>{b.special}</strong>
-                    {b.specialWhy.split("{fee}")[0]}
-                    <b>{agenda.surcharge}</b>
-                    {b.specialWhy.split("{fee}")[1]}
+                    {b.specialWhy}
                   </span>
                 </label>
               </div>
@@ -582,7 +579,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     { k: b.date, v: dateLabel, to: 1 as Step, cls: "summary__date" },
                     {
                       k: b.time,
-                      v: `${timeLabel}${slotInfo?.alt ? ` · ${b.alt}` : ""}${special && timeLabel ? ` · +${agenda.surcharge}` : ""}`,
+                      v: `${timeLabel}${slotInfo?.alt ? ` · ${b.alt}` : ""}${special && timeLabel ? ` · ${b.alt}` : ""}`,
                       to: 1 as Step,
                     },
                     { k: b.name, v: `${form.name.trim()} · ${form.phone.trim()}`, to: 2 as Step },
@@ -605,12 +602,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     <span>{isProc ? b.cost.proc : b.cost.consult[effMode]}</span>
                     <strong>{isProc ? b.cost.toConfirm : <Amt n={base} />}</strong>
                   </li>
-                  {extra > 0 && (
-                    <li style={{ "--i": 1 } as React.CSSProperties}>
-                      <span>{b.cost.surcharge}</span>
-                      <strong><Amt n={extra} plus /></strong>
-                    </li>
-                  )}
                 </ul>
                 <div className="bk2-cost__total">
                   <span>{b.cost.total}</span>
@@ -685,6 +676,17 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                       <WaIcon size={16} /> {b.cost.bank.proof}
                     </a>
                     <p className="bk2-bank__abroad">{b.cost.bank.abroad}</p>
+                    <div className="bk2-remit">
+                      {site.remit.map((r) => (
+                        <a key={r.name} href={r.url} target="_blank" rel="noopener noreferrer">
+                          {r.name}
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M8 16L16 8M9.5 8H16v6.5" />
+                          </svg>
+                        </a>
+                      ))}
+                    </div>
+                    <p className="bk2-bank__abroad">{b.cost.bank.abroadCard}</p>
                   </div>
                 </details>
                 <p className="bk2-cost__pay">

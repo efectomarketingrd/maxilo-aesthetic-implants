@@ -47,9 +47,6 @@ export const agenda = {
   // Días mínimos de anticipación (1 = desde mañana)
   minDaysAhead: 1,
 
-  // Recargo por atención fuera del horario establecido
-  surcharge: "RD$1,000",
-  surchargeAmount: 1000,
 
   // Costo de la consulta (en pesos). Los procedimientos se cotizan después de la valoración.
   prices: { presencial: 3000, online: 1500 },
