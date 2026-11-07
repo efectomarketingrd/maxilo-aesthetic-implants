@@ -9101,3 +9101,62 @@ body:has(.bk2-page) .wa-float {
 .bk2-cost__total strong {
   font-size: clamp(1.05rem, 5.4vw, 1.35rem);
 }
+
+/* Aviso: si ya le indicaron la extracción, elegir Procedimiento */
+.bk2-tip {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--white);
+  border: 1px solid rgba(190, 157, 97, 0.5);
+  border-left: 3px solid var(--gold);
+  animation: svc-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.bk2-tip p {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+.bk2-tip button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--slate);
+  color: var(--ivory);
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bk2-tip button svg {
+  color: var(--gold-soft);
+}
+
+.bk2-molars .bk2-tip p {
+  font-weight: 400;
+  font-size: 0.78rem;
+}
+
+.bk2-molars .bk2-tip button {
+  width: auto;
+  height: auto;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--slate);
+  color: var(--ivory);
+  font-family: var(--f-body);
+  font-size: 0.74rem;
+  font-weight: 600;
+  animation: none;
+  transform: none;
+}

@@ -400,6 +400,20 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               <p className="bk2-molars__price">
                                 {rd(agenda.molarPrice)} {b.molarsPer} · {b.molarsAll4} {rd(agenda.molarPriceAll4)} {b.molarsEach}
                               </p>
+                              {type === "consulta" && (
+                                <div className="bk2-tip" role="note">
+                                  <p>{b.procTip}</p>
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setType("procedimiento");
+                                      setTime(null);
+                                    }}
+                                  >
+                                    {b.procTipBtn} <Arrow size={13} />
+                                  </button>
+                                </div>
+                              )}
                             </div>
                           )}
                         </div>
