@@ -51,6 +51,10 @@ export const agenda = {
   // Costo de la consulta (en pesos). Los procedimientos se cotizan después de la valoración.
   prices: { presencial: 3000, online: 1500 },
 
+  // Extracción de cordales (terceros molares): precio por cordal; si son las 4, precio especial por cordal
+  molarPrice: 10000,
+  molarPriceAll4: 8000,
+
   // Tasa aproximada para mostrar el equivalente en dólares (RD$ por US$1)
   usdRate: 61.5,
 };

@@ -9064,3 +9064,40 @@ body:has(.bk2-page) .wa-float {
   color: var(--gold-soft);
   transform: scale(1.06);
 }
+
+.bk2-molars .bk2-molars__price {
+  margin: 12px 0 0;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.bk2-cost li span small {
+  display: block;
+  font-size: 0.7rem;
+  color: rgba(248, 246, 242, 0.55);
+}
+
+.bk2-cost li.is-ref {
+  opacity: 0.75;
+}
+
+.bk2-cost__total strong {
+  text-align: right;
+}
+
+.bk2-cost__plus {
+  display: block;
+  font-family: var(--f-body);
+  font-style: normal;
+  font-size: 0.7rem;
+  color: rgba(248, 246, 242, 0.7);
+}
+
+.bk2-cost__total > span {
+  white-space: nowrap;
+}
+
+.bk2-cost__total strong {
+  font-size: clamp(1.05rem, 5.4vw, 1.35rem);
+}

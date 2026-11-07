@@ -219,10 +219,18 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   // Costo estimado
   const isProc = type === "procedimiento";
   const base = isProc ? 0 : agenda.prices[effMode];
-  const total = base;
+  // Cordales: RD$10,000 c/u; las 4 a RD$8,000 c/u
+  const molarN = needMolars && molars && molars !== "?" ? Number(molars) : 0;
+  const molarUnit = molarN === 4 ? agenda.molarPriceAll4 : agenda.molarPrice;
+  const molarCost = molarN * molarUnit;
+  const otherProcs = subs.some((x) => x !== molarOpt && x !== b.unsure);
+  const procTbd = isProc && (!molarN || otherProcs || subs.includes(b.unsure));
+  const total = isProc ? molarCost : base;
   const money = (n: number) => `${rd(n)} (≈ ${usd(n)})`;
   const costLine = isProc
-    ? b.cost.toConfirm
+    ? molarN
+      ? `${money(total)}${procTbd ? ` ${b.cost.plusTbd}` : ""}`
+      : b.cost.toConfirm
     : money(total);
   const valid = okStep[0] && okStep[1] && okStep[2];
 
@@ -389,6 +397,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                                   </button>
                                 ))}
                               </div>
+                              <p className="bk2-molars__price">
+                                {rd(agenda.molarPrice)} {b.molarsPer} · {b.molarsAll4} {rd(agenda.molarPriceAll4)} {b.molarsEach}
+                              </p>
                             </div>
                           )}
                         </div>
@@ -625,22 +636,43 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
               <div className="bk2-cost">
                 <p className="bk2-cost__title">{b.cost.title}</p>
                 <ul>
-                  <li style={{ "--i": 0 } as React.CSSProperties}>
-                    <span>{isProc ? b.cost.proc : b.cost.consult[effMode]}</span>
-                    <strong>{isProc ? b.cost.toConfirm : <Amt n={base} />}</strong>
-                  </li>
+                  {!isProc && (
+                    <li style={{ "--i": 0 } as React.CSSProperties}>
+                      <span>{b.cost.consult[effMode]}</span>
+                      <strong><Amt n={base} /></strong>
+                    </li>
+                  )}
+                  {molarN > 0 && (
+                    <li className={isProc ? "" : "is-ref"} style={{ "--i": 1 } as React.CSSProperties}>
+                      <span>
+                        {b.cost.molars}
+                        <small>
+                          {molarN} × {rd(molarUnit)}
+                        </small>
+                      </span>
+                      <strong><Amt n={molarCost} /></strong>
+                    </li>
+                  )}
+                  {procTbd && (
+                    <li style={{ "--i": 2 } as React.CSSProperties}>
+                      <span>{molarN ? b.cost.others : b.cost.proc}</span>
+                      <strong>{b.cost.toConfirm}</strong>
+                    </li>
+                  )}
                 </ul>
                 <div className="bk2-cost__total">
                   <span>{b.cost.total}</span>
-                  {isProc ? (
+                  {isProc && !molarN ? (
                     <strong className="bk2-cost__tbd">{b.cost.toConfirm}</strong>
                   ) : (
                     <strong>
                       {rd(total)} <small>≈ {usd(total)}</small>
+                      {procTbd && <em className="bk2-cost__plus">{b.cost.plusTbd}</em>}
                     </strong>
                   )}
                 </div>
-                <p className="bk2-cost__note">{isProc ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
+                {!isProc && molarN > 0 && <p className="bk2-cost__note">{b.cost.molarsRef}</p>}
+                <p className="bk2-cost__note">{procTbd ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
                 <div className="bk2-pay">
                   <p className="bk2-cost__title">{b.cost.payTitle}</p>
                   <ul>
