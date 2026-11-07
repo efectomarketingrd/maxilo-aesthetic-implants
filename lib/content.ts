@@ -381,9 +381,9 @@ const es = {
       msg: "Costo estimado",
       payTitle: "Formas de pago",
       pay: [
-        { k: "card", name: "Tarjeta", detail: "Crédito o débito" },
         { k: "bank", name: "Transferencia", detail: "Pesos o dólares" },
         { k: "cash", name: "Efectivo", detail: "Pesos, dólares o euros" },
+        { k: "card", name: "Tarjeta", detail: "Solo en el centro" },
       ],
       bank: {
         open: "Ver datos para transferencia",
@@ -398,7 +398,7 @@ const es = {
         proof: "Enviar comprobante",
         proofMsg: "Hola, les envío el comprobante de transferencia de mi cita.",
         abroad: "¿Paga desde el extranjero? Envíe a la cuenta en pesos desde la app de su preferencia:",
-        abroadCard: "También puede pagar con tarjeta al llegar al centro.",
+        abroadCard: "Si no le es posible transferir, puede pagar en efectivo o, como última opción, con tarjeta en el centro.",
       },
       payFirst: "El pago de la consulta o del procedimiento se realiza siempre antes de iniciar la atención.",
     },
@@ -822,9 +822,9 @@ const en: Dict = {
       msg: "Estimated cost",
       payTitle: "Payment methods",
       pay: [
-        { k: "card", name: "Card", detail: "Credit or debit" },
         { k: "bank", name: "Bank transfer", detail: "Pesos or dollars" },
         { k: "cash", name: "Cash", detail: "Pesos, dollars or euros" },
+        { k: "card", name: "Card", detail: "At the clinic only" },
       ],
       bank: {
         open: "View bank transfer details",
@@ -839,7 +839,7 @@ const en: Dict = {
         proof: "Send receipt",
         proofMsg: "Hello, here is the transfer receipt for my appointment.",
         abroad: "Paying from abroad? Send to the peso account with the app you prefer:",
-        abroadCard: "You can also pay by card when you arrive at the clinic.",
+        abroadCard: "If you cannot transfer, you can pay in cash or, as a last option, by card at the clinic.",
       },
       payFirst: "Payment for the consultation or procedure is always made before your appointment begins.",
     },

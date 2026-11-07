@@ -618,7 +618,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <p className="bk2-cost__title">{b.cost.payTitle}</p>
                   <ul>
                     {b.cost.pay.map((m, i) => (
-                      <li key={m.k} style={{ "--i": i } as React.CSSProperties}>
+                      <li key={m.k} className={m.k === "card" ? "is-minor" : ""} style={{ "--i": i } as React.CSSProperties}>
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                           {m.k === "card" && (
                             <>

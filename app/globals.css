@@ -9009,3 +9009,14 @@ body:has(.bk2-page) .wa-float {
   padding: 7px 14px;
   font-size: 0.74rem;
 }
+
+/* La transferencia va primero y destacada; la tarjeta queda como última opción */
+.bk2-cost .bk2-pay li:first-child {
+  background: rgba(190, 157, 97, 0.18);
+  border-color: rgba(216, 195, 155, 0.45);
+}
+
+.bk2-cost .bk2-pay li.is-minor {
+  opacity: 0.6;
+  background: transparent;
+}
