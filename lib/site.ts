@@ -6,6 +6,15 @@ export const site = {
   email: "dracelia.maxiloestetica@gmail.com",
   phones: ["(829) 657-2217", "(829) 371-0276"],
   whatsapp: "18296572217",
+  // Datos para transferencia bancaria (se muestran en el paso 4 de la agenda)
+  bank: {
+    holder: "Edelmira Celia Hernández Mauricio",
+    name: "Banco Popular Dominicano",
+    accounts: [
+      { cur: "RD$", number: "807870399" },
+      { cur: "US$", number: "813932191" },
+    ],
+  },
   maps: "https://share.google/jq0Id5rWFLBov2GvE",
   address: {
     street: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",

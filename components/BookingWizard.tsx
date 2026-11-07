@@ -25,6 +25,33 @@ const SPECIAL_HOURS = halfHours(15, 17).filter(
   (h) => !agenda.slots.some((s) => !s.alt && s.time === h), // nunca dentro del horario normal
 );
 
+// Botón para copiar un dato al portapapeles
+function CopyBtn({ text, label, done }: { text: string; label: string; done: string }) {
+  const [ok, setOk] = useState(false);
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    setOk(true);
+    setTimeout(() => setOk(false), 1800);
+  }
+  return (
+    <button type="button" className={`bk2-copy ${ok ? "is-ok" : ""}`} onClick={copy} aria-live="polite">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        {ok ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8" /></>}
+      </svg>
+      {ok ? done : label}
+    </button>
+  );
+}
+
 // Monto en pesos con su equivalente aproximado en dólares debajo
 function Amt({ n, plus }: { n: number; plus?: boolean }) {
   return (
@@ -625,6 +652,41 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     ))}
                   </ul>
                 </div>
+                <details className="bk2-bank">
+                  <summary>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18" />
+                    </svg>
+                    {b.cost.bank.open}
+                  </summary>
+                  <div className="bk2-bank__body">
+                    <p className="bk2-bank__when">{b.cost.bank.when}</p>
+                    <dl>
+                      <div>
+                        <dt>{b.cost.bank.holder}</dt>
+                        <dd>{site.bank.holder}</dd>
+                        <CopyBtn text={site.bank.holder} label={b.cost.bank.copy} done={b.cost.bank.copied} />
+                      </div>
+                      <div>
+                        <dt>{b.cost.bank.bank}</dt>
+                        <dd>{site.bank.name}</dd>
+                      </div>
+                      {site.bank.accounts.map((a) => (
+                        <div key={a.number}>
+                          <dt>
+                            {b.cost.bank.account} {b.cost.bank.cur[a.cur as "RD$" | "US$"]}
+                          </dt>
+                          <dd className="bk2-bank__num">{a.number}</dd>
+                          <CopyBtn text={a.number} label={b.cost.bank.copy} done={b.cost.bank.copied} />
+                        </div>
+                      ))}
+                    </dl>
+                    <a className="bk2-bank__proof" href={waLink(b.cost.bank.proofMsg)} target="_blank" rel="noopener noreferrer">
+                      <WaIcon size={16} /> {b.cost.bank.proof}
+                    </a>
+                    <p className="bk2-bank__abroad">{b.cost.bank.abroad}</p>
+                  </div>
+                </details>
                 <p className="bk2-cost__pay">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="12" r="8.5" />
