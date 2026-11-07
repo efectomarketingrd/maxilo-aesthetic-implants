@@ -596,10 +596,39 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   )}
                 </div>
                 <p className="bk2-cost__note">{isProc ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
+                <div className="bk2-pay">
+                  <p className="bk2-cost__title">{b.cost.payTitle}</p>
+                  <ul>
+                    {b.cost.pay.map((m, i) => (
+                      <li key={m.k} style={{ "--i": i } as React.CSSProperties}>
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          {m.k === "card" && (
+                            <>
+                              <rect x="3" y="6" width="18" height="13" rx="2.5" />
+                              <path d="M3 10h18M7 15h4" />
+                            </>
+                          )}
+                          {m.k === "bank" && <path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18" />}
+                          {m.k === "cash" && (
+                            <>
+                              <rect x="2.5" y="6.5" width="19" height="11" rx="2" />
+                              <circle cx="12" cy="12" r="2.6" />
+                              <path d="M6 9.5v5M18 9.5v5" />
+                            </>
+                          )}
+                        </svg>
+                        <span>
+                          <strong>{m.name}</strong>
+                          <small>{m.detail}</small>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <p className="bk2-cost__pay">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="3" y="6" width="18" height="13" rx="2.5" />
-                    <path d="M3 10h18M7 15h4" />
+                    <circle cx="12" cy="12" r="8.5" />
+                    <path d="M12 7.5V12l3 2" />
                   </svg>
                   {b.cost.payFirst}
                 </p>
