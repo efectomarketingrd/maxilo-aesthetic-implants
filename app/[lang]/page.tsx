@@ -226,7 +226,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         <CtaCard t={t} lang={lang} />
       </main>
 
-      <Footer t={t} lang={lang} />
+      <Footer t={t} lang={lang} offer />
     </>
   );
 }

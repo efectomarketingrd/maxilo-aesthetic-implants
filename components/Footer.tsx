@@ -5,7 +5,7 @@ import { site, waLink, type Locale } from "@/lib/site";
 import { Mail, Phone, Pin, WaIcon } from "./Icons";
 import OfferCard from "./OfferCard";
 
-export default function Footer({ t, lang, offer = true }: { t: Dict; lang: Locale; offer?: boolean }) {
+export default function Footer({ t, lang, offer = false }: { t: Dict; lang: Locale; offer?: boolean }) {
   const home = `/${lang}`;
   return (
     <>

@@ -122,7 +122,7 @@ export default async function Package({ params }: { params: Promise<{ lang: stri
           </div>
         </section>
       </main>
-      <Footer t={t} lang={lang} offer={false} />
+      <Footer t={t} lang={lang} />
     </>
   );
 }
