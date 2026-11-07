@@ -55,6 +55,9 @@ export const agenda = {
   molarPrice: 10000,
   molarPriceAll4: 8000,
 
+  // Bótox: incluye la aplicación y un retoque a las 2 semanas
+  botoxPrice: 30000,
+
   // Tasa aproximada para mostrar el equivalente en dólares (RD$ por US$1)
   usdRate: 61.5,
 };

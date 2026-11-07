@@ -219,16 +219,24 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   // Costo estimado
   const isProc = type === "procedimiento";
   const base = isProc ? 0 : agenda.prices[effMode];
-  // Cordales: RD$10,000 c/u; las 4 a RD$8,000 c/u
+  // Tratamientos con precio conocido
   const molarN = needMolars && molars && molars !== "?" ? Number(molars) : 0;
   const molarUnit = molarN === 4 ? agenda.molarPriceAll4 : agenda.molarPrice;
-  const molarCost = molarN * molarUnit;
-  const otherProcs = subs.some((x) => x !== molarOpt && x !== b.unsure);
-  const procTbd = isProc && (!molarN || otherProcs || subs.includes(b.unsure));
-  const total = isProc ? molarCost : base;
+  const botoxOpt = procs("medicina-estetica")[0] ?? "";
+  const hasBotox = service === "medicina-estetica" && subs.includes(botoxOpt);
+  const priced: { label: string; detail: string; amount: number }[] = [
+    ...(molarN ? [{ label: b.cost.molars, detail: `${molarN} × ${rd(molarUnit)}`, amount: molarN * molarUnit }] : []),
+    ...(hasBotox ? [{ label: botoxOpt, detail: b.cost.botoxIncl, amount: agenda.botoxPrice }] : []),
+  ];
+  const pricedSum = priced.reduce((a, x) => a + x.amount, 0);
+  const pricedNames = [molarOpt, botoxOpt];
+  const unpriced =
+    subs.some((x) => x !== b.unsure && !(pricedNames.includes(x) && (x !== molarOpt || molarN))) || subs.includes(b.unsure);
+  const procTbd = isProc && (!priced.length || unpriced);
+  const total = isProc ? pricedSum : base;
   const money = (n: number) => `${rd(n)} (≈ ${usd(n)})`;
   const costLine = isProc
-    ? molarN
+    ? priced.length
       ? `${money(total)}${procTbd ? ` ${b.cost.plusTbd}` : ""}`
       : b.cost.toConfirm
     : money(total);
@@ -400,20 +408,29 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               <p className="bk2-molars__price">
                                 {rd(agenda.molarPrice)} {b.molarsPer} · {b.molarsAll4} {rd(agenda.molarPriceAll4)} {b.molarsEach}
                               </p>
-                              {type === "consulta" && (
-                                <div className="bk2-tip" role="note">
-                                  <p>{b.procTip}</p>
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setType("procedimiento");
-                                      setTime(null);
-                                    }}
-                                  >
-                                    {b.procTipBtn} <Arrow size={13} />
-                                  </button>
-                                </div>
-                              )}
+                            </div>
+                          )}
+                          {hasBotox && (
+                            <p className="bk2-pricenote">
+                              <strong>
+                                {botoxOpt}: {rd(agenda.botoxPrice)}
+                              </strong>
+                              {" · "}
+                              {b.botoxInfo}
+                            </p>
+                          )}
+                          {type === "consulta" && (molarN > 0 || hasBotox) && (
+                            <div className="bk2-tip" role="note">
+                              <p>{b.procTip}</p>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setType("procedimiento");
+                                  setTime(null);
+                                }}
+                              >
+                                {b.procTipBtn} <Arrow size={13} />
+                              </button>
                             </div>
                           )}
                         </div>
@@ -656,27 +673,25 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                       <strong><Amt n={base} /></strong>
                     </li>
                   )}
-                  {molarN > 0 && (
-                    <li className={isProc ? "" : "is-ref"} style={{ "--i": 1 } as React.CSSProperties}>
+                  {priced.map((x, k) => (
+                    <li key={x.label} className={isProc ? "" : "is-ref"} style={{ "--i": 1 + k } as React.CSSProperties}>
                       <span>
-                        {b.cost.molars}
-                        <small>
-                          {molarN} × {rd(molarUnit)}
-                        </small>
+                        {x.label}
+                        <small>{x.detail}</small>
                       </span>
-                      <strong><Amt n={molarCost} /></strong>
+                      <strong><Amt n={x.amount} /></strong>
                     </li>
-                  )}
+                  ))}
                   {procTbd && (
                     <li style={{ "--i": 2 } as React.CSSProperties}>
-                      <span>{molarN ? b.cost.others : b.cost.proc}</span>
+                      <span>{priced.length ? b.cost.others : b.cost.proc}</span>
                       <strong>{b.cost.toConfirm}</strong>
                     </li>
                   )}
                 </ul>
                 <div className="bk2-cost__total">
                   <span>{b.cost.total}</span>
-                  {isProc && !molarN ? (
+                  {isProc && !priced.length ? (
                     <strong className="bk2-cost__tbd">{b.cost.toConfirm}</strong>
                   ) : (
                     <strong>
@@ -685,7 +700,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     </strong>
                   )}
                 </div>
-                {!isProc && molarN > 0 && <p className="bk2-cost__note">{b.cost.molarsRef}</p>}
+                {!isProc && priced.length > 0 && <p className="bk2-cost__note">{b.cost.molarsRef}</p>}
                 <p className="bk2-cost__note">{procTbd ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
                 <div className="bk2-pay">
                   <p className="bk2-cost__title">{b.cost.payTitle}</p>

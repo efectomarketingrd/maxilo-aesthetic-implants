@@ -9160,3 +9160,21 @@ body:has(.bk2-page) .wa-float {
   animation: none;
   transform: none;
 }
+
+/* Precio de tratamientos con precio fijo (paso 1) */
+.bk2-pricenote {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(190, 157, 97, 0.6);
+  background: var(--white);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--muted);
+  animation: svc-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.bk2-pricenote strong {
+  color: var(--slate);
+  font-weight: 600;
+}
