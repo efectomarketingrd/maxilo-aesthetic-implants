@@ -114,6 +114,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [service, setService] = useState<string | null>(null);
   const [subs, setSubs] = useState<string[]>([]);
   const [molars, setMolars] = useState<string | null>(null);
+  const [prp, setPrp] = useState<"1" | "3" | null>(null);
   const [cols, setCols] = useState(2);
 
   // Columnas de la cuadrícula de servicios (para abrir el panel justo debajo de la fila elegida)
@@ -191,7 +192,13 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const molarOpt = procs("implantes-cirugia-oral")[1] ?? "";
   const needMolars = service === "cirugia-oral" && subs.includes(molarOpt);
   const molarText = molars ? (molars === "?" ? b.molarsTbd : `${molars} ${molars === "1" ? b.molarsOne : b.molarsMany}`) : "";
-  const subsText = subs.map((x) => (x === molarOpt && molars ? `${x} (${molarText})` : x)).join(", ");
+  // PRP: 1 sesión o paquete de 3
+  const prpOpt = procs("medicina-estetica").find((x) => x.includes("PRP")) ?? "";
+  const needPrp = service === "medicina-estetica" && subs.includes(prpOpt);
+  const prpText = prp === "3" ? b.cost.prpPackD : prp === "1" ? b.cost.prpOneD : "";
+  const subsText = subs
+    .map((x) => (x === molarOpt && molars ? `${x} (${molarText})` : x === prpOpt && prp ? `${x} (${prpText})` : x))
+    .join(", ");
   const svcFull = subs.length ? `${svcName} — ${subsText}` : svcName;
 
   function toggleSub(o: string) {
@@ -207,6 +214,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     setService(id);
     setSubs([]);
     setMolars(null);
+    setPrp(null);
   }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
   const timeLabel = special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
@@ -214,7 +222,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
   const filled = (Object.keys(form) as (keyof typeof form)[]).every((k) => form[k].trim());
-  const okStep = [Boolean(service && subs.length && (!needMolars || molars)), Boolean(date && timeLabel), filled && emailOk, true];
+  const okStep = [Boolean(service && subs.length && (!needMolars || molars) && (!needPrp || prp)), Boolean(date && timeLabel), filled && emailOk, true];
 
   // Costo estimado
   const isProc = type === "procedimiento";
@@ -227,11 +235,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const priced: { label: string; detail: string; amount: number }[] = [
     ...(molarN ? [{ label: b.cost.molars, detail: `${molarN} × ${rd(molarUnit)}`, amount: molarN * molarUnit }] : []),
     ...(hasBotox ? [{ label: botoxOpt, detail: b.cost.botoxIncl, amount: agenda.botoxPrice }] : []),
+    ...(needPrp && prp ? [{ label: "PRP", detail: prpText, amount: prp === "3" ? agenda.prpPack3 : agenda.prpPrice }] : []),
   ];
   const pricedSum = priced.reduce((a, x) => a + x.amount, 0);
-  const pricedNames = [molarOpt, botoxOpt];
-  const unpriced =
-    subs.some((x) => x !== b.unsure && !(pricedNames.includes(x) && (x !== molarOpt || molarN))) || subs.includes(b.unsure);
+  const isPriced = (x: string) => (x === molarOpt && molarN > 0) || (x === botoxOpt && hasBotox) || (x === prpOpt && needPrp && !!prp);
+  const unpriced = subs.some((x) => x !== b.unsure && !isPriced(x)) || subs.includes(b.unsure);
   const procTbd = isProc && (!priced.length || unpriced);
   const total = isProc ? pricedSum : base;
   const money = (n: number) => `${rd(n)} (≈ ${usd(n)})`;
@@ -410,6 +418,33 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               </p>
                             </div>
                           )}
+                          {needPrp && (
+                            <div className="bk2-plan">
+                              <p>{b.prpQ}</p>
+                              <div role="radiogroup" aria-label={b.prpQ}>
+                                {(["1", "3"] as const).map((n, k) => (
+                                  <button
+                                    type="button"
+                                    role="radio"
+                                    aria-checked={prp === n}
+                                    key={n}
+                                    className={prp === n ? "is-on" : ""}
+                                    style={{ "--k": k } as React.CSSProperties}
+                                    onClick={() => setPrp(n)}
+                                  >
+                                    {n === "3" && (
+                                      <span className="bk2-plan__save">
+                                        {b.prpSave} {rd(agenda.prpPrice * 3 - agenda.prpPack3)}
+                                      </span>
+                                    )}
+                                    <strong>{n === "3" ? b.prpPack : b.prpOne}</strong>
+                                    <span className="bk2-plan__price">{rd(n === "3" ? agenda.prpPack3 : agenda.prpPrice)}</span>
+                                    {n === "3" && <small>{b.prpPackNote}</small>}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                           {hasBotox && (
                             <p className="bk2-pricenote">
                               <strong>
@@ -419,7 +454,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               {b.botoxInfo}
                             </p>
                           )}
-                          {type === "consulta" && (molarN > 0 || hasBotox) && (
+                          {type === "consulta" && priced.length > 0 && (
                             <div className="bk2-tip" role="note">
                               <p>{b.procTip}</p>
                               <button
