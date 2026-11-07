@@ -114,7 +114,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [service, setService] = useState<string | null>(null);
   const [subs, setSubs] = useState<string[]>([]);
   const [molars, setMolars] = useState<string | null>(null);
-  const [prp, setPrp] = useState<"1" | "3" | null>(null);
+  const [prp, setPrp] = useState<string | null>(null);
   const [cols, setCols] = useState(2);
 
   // Columnas de la cuadrícula de servicios (para abrir el panel justo debajo de la fila elegida)
@@ -193,9 +193,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const needMolars = service === "cirugia-oral" && subs.includes(molarOpt);
   const molarText = molars ? (molars === "?" ? b.molarsTbd : `${molars} ${molars === "1" ? b.molarsOne : b.molarsMany}`) : "";
   // PRP: 1 sesión o paquete de 3
-  const prpOpt = procs("medicina-estetica").find((x) => x.includes("PRP")) ?? "";
+  const prpOpt = procs("medicina-estetica").find((x) => x.includes("PRP")) ?? ""; // PRP capilar (el primero)
   const needPrp = service === "medicina-estetica" && subs.includes(prpOpt);
-  const prpText = prp === "3" ? b.cost.prpPackD : prp === "1" ? b.cost.prpOneD : "";
+  const prpPlan = agenda.prpPlans.find((x) => x.id === prp);
+  const prpName = prpPlan ? b.prpPlans[prpPlan.id as keyof typeof b.prpPlans] : null;
+  const prpText = prpName ? `${prpName.name}: ${prpName.note}` : "";
   const subsText = subs
     .map((x) => (x === molarOpt && molars ? `${x} (${molarText})` : x === prpOpt && prp ? `${x} (${prpText})` : x))
     .join(", ");
@@ -235,7 +237,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const priced: { label: string; detail: string; amount: number }[] = [
     ...(molarN ? [{ label: b.cost.molars, detail: `${molarN} × ${rd(molarUnit)}`, amount: molarN * molarUnit }] : []),
     ...(hasBotox ? [{ label: botoxOpt, detail: b.cost.botoxIncl, amount: agenda.botoxPrice }] : []),
-    ...(needPrp && prp ? [{ label: "PRP", detail: prpText, amount: prp === "3" ? agenda.prpPack3 : agenda.prpPrice }] : []),
+    ...(needPrp && prpPlan ? [{ label: prpOpt, detail: prpPlan.sessions > 1 ? `${prpText} · ${b.cost.prpPaid}` : prpText, amount: prpPlan.price }] : []),
   ];
   const pricedSum = priced.reduce((a, x) => a + x.amount, 0);
   const isPriced = (x: string) => (x === molarOpt && molarN > 0) || (x === botoxOpt && hasBotox) || (x === prpOpt && needPrp && !!prp);
@@ -422,27 +424,41 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                             <div className="bk2-plan">
                               <p>{b.prpQ}</p>
                               <div role="radiogroup" aria-label={b.prpQ}>
-                                {(["1", "3"] as const).map((n, k) => (
-                                  <button
-                                    type="button"
-                                    role="radio"
-                                    aria-checked={prp === n}
-                                    key={n}
-                                    className={prp === n ? "is-on" : ""}
-                                    style={{ "--k": k } as React.CSSProperties}
-                                    onClick={() => setPrp(n)}
-                                  >
-                                    {n === "3" && (
-                                      <span className="bk2-plan__save">
-                                        {b.prpSave} {rd(agenda.prpPrice * 3 - agenda.prpPack3)}
-                                      </span>
-                                    )}
-                                    <strong>{n === "3" ? b.prpPack : b.prpOne}</strong>
-                                    <span className="bk2-plan__price">{rd(n === "3" ? agenda.prpPack3 : agenda.prpPrice)}</span>
-                                    {n === "3" && <small>{b.prpPackNote}</small>}
-                                  </button>
-                                ))}
+                                {agenda.prpPlans.map((pl, k) => {
+                                  const nm = b.prpPlans[pl.id as keyof typeof b.prpPlans];
+                                  const save = agenda.prpPrice * pl.sessions - pl.price;
+                                  return (
+                                    <button
+                                      type="button"
+                                      role="radio"
+                                      aria-checked={prp === pl.id}
+                                      key={pl.id}
+                                      className={`${prp === pl.id ? "is-on" : ""} ${pl.id === "1y" ? "is-best" : ""}`}
+                                      style={{ "--k": k } as React.CSSProperties}
+                                      onClick={() => setPrp(pl.id)}
+                                    >
+                                      {pl.id === "1y" ? (
+                                        <span className="bk2-plan__save">{b.prpBest}</span>
+                                      ) : (
+                                        save > 0 && (
+                                          <span className="bk2-plan__save bk2-plan__save--soft">
+                                            {b.prpSave} {rd(save)}
+                                          </span>
+                                        )
+                                      )}
+                                      <strong>{nm.name}</strong>
+                                      <span className="bk2-plan__price">{rd(pl.price)}</span>
+                                      <small>{nm.note}</small>
+                                      {pl.id === "1y" && save > 0 && (
+                                        <small className="bk2-plan__savetxt">
+                                          {b.prpSave} {rd(save)}
+                                        </small>
+                                      )}
+                                    </button>
+                                  );
+                                })}
                               </div>
+                              <p className="bk2-plan__note">{b.prpPayNote}</p>
                             </div>
                           )}
                           {hasBotox && (

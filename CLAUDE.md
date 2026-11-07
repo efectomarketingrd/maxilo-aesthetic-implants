@@ -41,7 +41,7 @@ Cada push publica la web en Vercel en ~1 minuto.
 
 - `lib/site.ts` — datos de contacto, teléfonos (829) 657-2217 y (829) 371-0276, WhatsApp 18296572217, `waLink()`.
 - `lib/content.ts` — **todos los textos ES/EN**. Para cambiar un texto, se cambia aquí.
-- `lib/agenda.ts` — días de consulta (mar–vie), horario 11:30 a. m.–1:00 p. m., horario especial 3:00–5:00 p. m. (sujeto a disponibilidad, sin recargo), precios de consulta (RD$3,000 presencial / RD$1,500 online) y tasa US$.
+- `lib/agenda.ts` — días de consulta (mar–vie), horario 11:30 a. m.–1:00 p. m., horario especial 3:00–5:00 p. m. (sujeto a disponibilidad, sin recargo), precios (consulta RD$3,000 presencial / RD$1,500 online; cordales RD$10,000 c/u, las 4 a RD$8,000 c/u; Bótox RD$30,000 con retoque; PRP capilar: sesión RD$10,000, plan 3 meses RD$25,000, programa 1 año RD$45,000, mantenimiento RD$8,000; planes pagados completos al inicio) y tasa US$. PRP facial: precio pendiente.
 - `lib/blog.ts` — artículos del blog (vacío por ahora).
 - `app/[lang]/` — páginas: inicio, agendar, servicios/[slug], paquete-implantes, blog, sobre-nosotros, preguntas, marcas, instituciones.
 - `components/` — Header, Footer, OfferCard, CtaCard, BookingWizard, TreatmentFinder, Schema (JSON-LD), etc.

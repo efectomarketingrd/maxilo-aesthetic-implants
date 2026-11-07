@@ -58,9 +58,14 @@ export const agenda = {
   // Bótox: incluye la aplicación y un retoque a las 2 semanas
   botoxPrice: 30000,
 
-  // PRP: precio por sesión y paquete de 3 sesiones (una al mes)
+  // PRP capilar: precio por sesión y planes (los planes se pagan completos al inicio)
   prpPrice: 10000,
-  prpPack3: 15000,
+  prpPlans: [
+    { id: "1", sessions: 1, price: 10000 },
+    { id: "3m", sessions: 3, price: 25000 },
+    { id: "1y", sessions: 6, price: 45000 },
+    { id: "mant", sessions: 1, price: 8000 },
+  ],
 
   // Tasa aproximada para mostrar el equivalente en dólares (RD$ por US$1)
   usdRate: 61.5,

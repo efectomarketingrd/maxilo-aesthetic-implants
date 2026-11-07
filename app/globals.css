@@ -9261,3 +9261,34 @@ body:has(.bk2-page) .wa-float {
 .bk2-plan button.is-on small {
   color: rgba(248, 246, 242, 0.7);
 }
+
+.bk2-plan > div {
+  row-gap: 16px;
+}
+
+.bk2-plan__save--soft {
+  background: var(--gold-tint);
+  color: var(--gold);
+  border: 1px solid rgba(190, 157, 97, 0.5);
+}
+
+.bk2-plan button.is-best {
+  border-color: var(--gold);
+}
+
+.bk2-plan .bk2-plan__savetxt {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.bk2-plan button.is-on .bk2-plan__savetxt {
+  color: var(--gold-soft);
+}
+
+.bk2-plan .bk2-plan__note {
+  margin: 12px 0 0;
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted);
+}
