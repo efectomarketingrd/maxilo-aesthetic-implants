@@ -61,4 +61,5 @@ Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recar
 - Aprobar la frase "Cada rostro merece un plan pensado solo para él." y la descripción de Platismoplastia.
 - Dominio propio → configurar `NEXT_PUBLIC_SITE_URL` en Vercel. Pasar a Vercel Pro antes del lanzamiento comercial.
 - Pedir permiso a Wise, Remitly y Western Union para usar sus logos (por ahora solo botones con nombre y enlace).
+- **Recordar a Omar:** sección "¿Cómo es el proceso?" en las páginas de servicios (Valoración → Plan personalizado → Tratamiento → Seguimiento). Aprobada como idea; se hará más adelante y el texto lo revisa la doctora.
 - Posible siguiente trabajo: dar el estilo nuevo a la página de agendar y a las páginas de servicios.
