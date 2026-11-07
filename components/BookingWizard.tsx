@@ -113,6 +113,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const [service, setService] = useState<string | null>(null);
   const [subs, setSubs] = useState<string[]>([]);
+  const [molars, setMolars] = useState<string | null>(null);
   const [cols, setCols] = useState(2);
 
   // Columnas de la cuadrícula de servicios (para abrir el panel justo debajo de la fila elegida)
@@ -186,7 +187,12 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     reconstructiva: procs("cirugia-reconstructiva"),
   };
   const subList = service ? [...(subOptions[service] ?? []), b.unsure] : [];
-  const svcFull = subs.length ? `${svcName} — ${subs.join(", ")}` : svcName;
+  // Extracción de cordales: el paciente indica cuántas
+  const molarOpt = procs("implantes-cirugia-oral")[1] ?? "";
+  const needMolars = service === "cirugia-oral" && subs.includes(molarOpt);
+  const molarText = molars ? (molars === "?" ? b.molarsTbd : `${molars} ${molars === "1" ? b.molarsOne : b.molarsMany}`) : "";
+  const subsText = subs.map((x) => (x === molarOpt && molars ? `${x} (${molarText})` : x)).join(", ");
+  const svcFull = subs.length ? `${svcName} — ${subsText}` : svcName;
 
   function toggleSub(o: string) {
     setSubs((cur) => {
@@ -200,6 +206,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     if (id === service) return;
     setService(id);
     setSubs([]);
+    setMolars(null);
   }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
   const timeLabel = special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
@@ -207,7 +214,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
   const filled = (Object.keys(form) as (keyof typeof form)[]).every((k) => form[k].trim());
-  const okStep = [Boolean(service && subs.length), Boolean(date && timeLabel), filled && emailOk, true];
+  const okStep = [Boolean(service && subs.length && (!needMolars || molars)), Boolean(date && timeLabel), filled && emailOk, true];
 
   // Costo estimado
   const isProc = type === "procedimiento";
@@ -364,6 +371,26 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               );
                             })}
                           </div>
+                          {needMolars && (
+                            <div className="bk2-molars">
+                              <p>{b.molarsQ}</p>
+                              <div role="radiogroup" aria-label={b.molarsQ}>
+                                {["1", "2", "3", "4", "?"].map((n, k) => (
+                                  <button
+                                    type="button"
+                                    role="radio"
+                                    aria-checked={molars === n}
+                                    key={n}
+                                    className={`${molars === n ? "is-on" : ""} ${n === "?" ? "is-wide" : ""}`}
+                                    style={{ "--k": k } as React.CSSProperties}
+                                    onClick={() => setMolars(n)}
+                                  >
+                                    {n === "?" ? b.molarsUnsure : n}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       )}
                     </Fragment>

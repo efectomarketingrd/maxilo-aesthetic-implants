@@ -9010,3 +9010,57 @@ body:has(.bk2-page) .wa-float {
   font-size: 0.74rem;
 }
 
+
+/* ¿Cuántas cordales? */
+.bk2-molars {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(190, 157, 97, 0.45);
+  animation: svc-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.bk2-molars p {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.bk2-molars div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bk2-molars button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(37, 48, 53, 0.14);
+  background: var(--white);
+  font: inherit;
+  font-family: var(--f-title);
+  font-size: 1rem;
+  color: var(--slate);
+  cursor: pointer;
+  animation: svc-in 0.35s ease both;
+  animation-delay: calc(var(--k, 0) * 0.05s + 0.1s);
+  transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s;
+}
+
+.bk2-molars button.is-wide {
+  width: auto;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-family: var(--f-body);
+  font-size: 0.8rem;
+  border-style: dashed;
+  border-color: rgba(190, 157, 97, 0.7);
+}
+
+.bk2-molars button.is-on {
+  background: var(--slate);
+  border-color: var(--slate);
+  color: var(--gold-soft);
+  transform: scale(1.06);
+}
