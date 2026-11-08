@@ -132,7 +132,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [special, setSpecial] = useState(false);
-  const [soon, setSoon] = useState(false);
   const [specialTime, setSpecialTime] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", email: "", country: "", notes: "" });
 
@@ -163,9 +162,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     return out;
   }, [cursor]);
 
-  // Procedimientos: una semana de anticipación, salvo que pida atenderse antes (sujeto a confirmación)
+  // Procedimientos: una semana de anticipación, salvo que marque "otro día u horario" (sujeto a confirmación)
   const procMin = new Date(today.getFullYear(), today.getMonth(), today.getDate() + agenda.procMinDaysAhead);
-  const firstDate = type === "procedimiento" && !soon ? procMin : minDate;
+  const firstDate = type === "procedimiento" && !special ? procMin : minDate;
   const inRange = (d: Date) => d >= firstDate && d <= maxDate;
   const selectable = (d: Date) => {
     if (!inRange(d)) return false;
@@ -306,7 +305,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       `${b.date}: ${dateLabel}`,
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
       special ? b.msgSpecial : "",
-      type === "procedimiento" && soon ? b.msgSoon : "",
       `${b.cost.msg}: ${costLine}`,
       isProc ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
       "",
@@ -661,28 +659,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   </div>
                 )}
 
-                {type === "procedimiento" && (
-                  <>
-                    <p className="bk2-procweek">{b.procWeek}</p>
-                    <label className={`special bk2-special ${soon ? "is-on" : ""}`}>
-                      <input
-                        type="checkbox"
-                        checked={soon}
-                        onChange={(e) => {
-                          setSoon(e.target.checked);
-                          if (!e.target.checked && date && date < procMin) {
-                            setDate(null);
-                            setTime(null);
-                          }
-                        }}
-                      />
-                      <span>
-                        <strong>{b.procSoon}</strong>
-                        {b.procSoonWhy}
-                      </span>
-                    </label>
-                  </>
-                )}
+                {type === "procedimiento" && <p className="bk2-procweek">{b.procWeek}</p>}
 
                 <label className={`special bk2-special ${special ? "is-on" : ""}`}>
                   <input
