@@ -227,6 +227,8 @@ const es = {
       members: [
         { n: "Colegio Dominicano de Odontólogos", s: "CDO" },
         { n: "Sociedad Dominicana de Implantología Oral", s: "SDIO" },
+        { n: "Sociedad Dominicana de Cirugía Bucal y Maxilofacial", s: "SODOCIBUMAX" },
+        { n: "Sociedad Española de Cirugía Oral y Maxilofacial y de Cabeza y Cuello", s: "SECOM CyC" },
       ],
       galleryTitle: "En el centro",
       gallery: ["Valoración de estudios", "Procedimiento en consulta", "Consultorio", "Recepción"],
@@ -811,6 +813,8 @@ const en: Dict = {
       members: [
         { n: "Dominican College of Dentists", s: "CDO" },
         { n: "Dominican Society of Oral Implantology", s: "SDIO" },
+        { n: "Dominican Society of Oral & Maxillofacial Surgery", s: "SODOCIBUMAX" },
+        { n: "Spanish Society of Oral & Maxillofacial and Head & Neck Surgery", s: "SECOM CyC" },
       ],
       galleryTitle: "At the clinic",
       gallery: ["Reviewing studies", "In-office procedure", "Treatment room", "Reception"],

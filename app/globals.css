@@ -10993,3 +10993,16 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+.ab-members__s {
+  min-width: 64px;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.ab-members__s {
+  width: 108px;
+  min-width: 108px;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
