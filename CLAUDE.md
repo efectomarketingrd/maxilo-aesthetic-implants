@@ -54,7 +54,7 @@ Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recar
 
 ## Pendientes (los aporta la doctora / el cliente)
 
-- Formación y diplomas de la doctora, estadísticas de casos, equipo.
+- Sobre nosotros ya tiene formación (UCE 2012 Cum Laude, exequátur 2013, especialidad UASD 2013–2017 con residencia en Hospital Dr. Darío Contreras, tesis PRF 2017, cursos en cadáver Faces Team y Maxilofacial Dexeus) y membresías CDO y SDIO. Pendiente confirmar: SODOCIBUMAX vigente, AO Foundation y SECOM CyC (miembro o curso, año).
 - Reseñas reales de pacientes.
 - Marcas (solo está Germaine de Capuccini) e instituciones.
 - Precios, hoteles y duración del paquete de implantes + estadía.
