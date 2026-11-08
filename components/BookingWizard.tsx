@@ -276,7 +276,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       ? `${money(total)}${procTbd ? ` ${b.cost.plusTbd}` : ""}`
       : b.cost.toConfirm
     : money(total);
-  const deposit = isProc && priced.length ? Math.ceil((pricedSum * agenda.procDeposit) / 100) : 0;
+  // Planes de PRP (más de 1 sesión): pago completo; lo demás: anticipo del 50%
+  const planFull = isProc && needPrp && prpPlan && prpPlan.sessions > 1 ? prpPlan.price : 0;
+  const depositBase = pricedSum - planFull;
+  const deposit = isProc && depositBase > 0 ? Math.ceil((depositBase * agenda.procDeposit) / 100) : 0;
+  const showDeposit = isProc && (deposit > 0 || procTbd);
   const valid = okStep[0] && okStep[1] && okStep[2];
 
   function go(n: Step) {
@@ -306,7 +310,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
       special ? b.msgSpecial : "",
       `${b.cost.msg}: ${costLine}`,
-      isProc ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
+      planFull ? `${b.cost.msgPlanFull} (${money(planFull)})` : "",
+      showDeposit ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
       "",
       `${b.name}: ${form.name.trim()}`,
       `${b.phone}: ${form.phone.trim()}`,
@@ -783,7 +788,16 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 </div>
                 {!isProc && priced.length > 0 && <p className="bk2-cost__note">{b.cost.molarsRef}</p>}
                 <p className="bk2-cost__note">{procTbd ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
-                {isProc && (
+                {planFull > 0 && (
+                  <div className="bk2-deposit">
+                    <div>
+                      <span>{b.cost.planFull}</span>
+                      <strong><Amt n={planFull} /></strong>
+                    </div>
+                    <p>{b.cost.planFullWhy}</p>
+                  </div>
+                )}
+                {showDeposit && (
                   <div className="bk2-deposit">
                     <div>
                       <span>
