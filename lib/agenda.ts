@@ -47,6 +47,10 @@ export const agenda = {
   // Días mínimos de anticipación (1 = desde mañana)
   minDaysAhead: 1,
 
+  // Procedimientos: días mínimos de anticipación y anticipo mínimo (%)
+  procMinDaysAhead: 7,
+  procDeposit: 50,
+
 
   // Costo de la consulta (en pesos). Los procedimientos se cotizan después de la valoración.
   prices: { presencial: 3000, online: 1500 },

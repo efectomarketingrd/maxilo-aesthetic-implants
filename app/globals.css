@@ -10415,3 +10415,57 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+/* Procedimientos: una semana de anticipación */
+.bk2-procweek {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border-left: 3px solid var(--gold);
+  background: var(--gold-tint);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--slate);
+}
+
+/* Anticipo del 50% */
+.bk2-deposit {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(190, 157, 97, 0.16);
+  border: 1px solid rgba(216, 195, 155, 0.4);
+}
+
+.bk2-deposit > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.bk2-deposit > div > span {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.bk2-deposit > div > span small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--gold-soft);
+}
+
+.bk2-deposit > div > strong {
+  font-size: 0.9rem;
+  color: var(--gold-soft);
+  text-align: right;
+}
+
+.bk2-deposit p {
+  margin: 10px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(248, 246, 242, 0.7);
+}
+.bk2-deposit{margin-bottom:4px}

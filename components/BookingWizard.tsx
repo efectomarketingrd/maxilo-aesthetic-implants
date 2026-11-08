@@ -132,6 +132,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [special, setSpecial] = useState(false);
+  const [soon, setSoon] = useState(false);
   const [specialTime, setSpecialTime] = useState("");
   const [form, setForm] = useState({ name: "", phone: "", email: "", country: "", notes: "" });
 
@@ -162,14 +163,29 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     return out;
   }, [cursor]);
 
-  const inRange = (d: Date) => d >= minDate && d <= maxDate;
+  // Procedimientos: una semana de anticipación, salvo que pida atenderse antes (sujeto a confirmación)
+  const procMin = new Date(today.getFullYear(), today.getMonth(), today.getDate() + agenda.procMinDaysAhead);
+  const firstDate = type === "procedimiento" && !soon ? procMin : minDate;
+  const inRange = (d: Date) => d >= firstDate && d <= maxDate;
   const selectable = (d: Date) => {
     if (!inRange(d)) return false;
     if (agenda.closedDates.includes(toKey(d))) return false;
     return special ? true : isOpenDay(d);
   };
 
-  const canPrev = new Date(cursor.getFullYear(), cursor.getMonth(), 0) >= minDate;
+  const canPrev = new Date(cursor.getFullYear(), cursor.getMonth(), 0) >= firstDate;
+
+  // Si cambia el tipo de cita y la fecha elegida queda fuera de rango, se borra y el calendario salta al primer mes válido
+  const firstKey = toKey(firstDate);
+  useEffect(() => {
+    if (date && date < firstDate) {
+      setDate(null);
+      setTime(null);
+    }
+    const lastOfCursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 0);
+    if (lastOfCursor < firstDate) setCursor(new Date(firstDate.getFullYear(), firstDate.getMonth(), 1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstKey]);
   const canNext = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1) <= maxDate;
 
   const daySlots = date && !special ? slotsFor(date).filter((s) => s.type === type) : [];
@@ -261,6 +277,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       ? `${money(total)}${procTbd ? ` ${b.cost.plusTbd}` : ""}`
       : b.cost.toConfirm
     : money(total);
+  const deposit = isProc && priced.length ? Math.ceil((pricedSum * agenda.procDeposit) / 100) : 0;
   const valid = okStep[0] && okStep[1] && okStep[2];
 
   function go(n: Step) {
@@ -289,7 +306,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       `${b.date}: ${dateLabel}`,
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
       special ? b.msgSpecial : "",
+      type === "procedimiento" && soon ? b.msgSoon : "",
       `${b.cost.msg}: ${costLine}`,
+      isProc ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
       "",
       `${b.name}: ${form.name.trim()}`,
       `${b.phone}: ${form.phone.trim()}`,
@@ -642,6 +661,29 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   </div>
                 )}
 
+                {type === "procedimiento" && (
+                  <>
+                    <p className="bk2-procweek">{b.procWeek}</p>
+                    <label className={`special bk2-special ${soon ? "is-on" : ""}`}>
+                      <input
+                        type="checkbox"
+                        checked={soon}
+                        onChange={(e) => {
+                          setSoon(e.target.checked);
+                          if (!e.target.checked && date && date < procMin) {
+                            setDate(null);
+                            setTime(null);
+                          }
+                        }}
+                      />
+                      <span>
+                        <strong>{b.procSoon}</strong>
+                        {b.procSoonWhy}
+                      </span>
+                    </label>
+                  </>
+                )}
+
                 <label className={`special bk2-special ${special ? "is-on" : ""}`}>
                   <input
                     type="checkbox"
@@ -764,6 +806,18 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 </div>
                 {!isProc && priced.length > 0 && <p className="bk2-cost__note">{b.cost.molarsRef}</p>}
                 <p className="bk2-cost__note">{procTbd ? `${b.cost.procNote} ${b.cost.note}` : b.cost.note}</p>
+                {isProc && (
+                  <div className="bk2-deposit">
+                    <div>
+                      <span>
+                        {b.cost.deposit}
+                        <small>{b.cost.depositPct}</small>
+                      </span>
+                      <strong>{deposit ? <Amt n={deposit} /> : b.cost.depositTbd}</strong>
+                    </div>
+                    <p>{b.cost.depositWhy}</p>
+                  </div>
+                )}
                 <div className="bk2-pay">
                   <p className="bk2-cost__title">{b.cost.payTitle}</p>
                   <ul>
