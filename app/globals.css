@@ -9399,3 +9399,481 @@ body:has(.bk2-page) .wa-float {
     transition: none;
   }
 }
+
+/* ═════════ UBICACIÓN ═════════ */
+.loc {
+  background: var(--ivory);
+}
+
+.loc-sec {
+  padding: 8px 0 36px;
+}
+
+.loc-sec--white {
+  background: var(--white);
+  padding: 36px 0;
+}
+
+.loc-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.loc-h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.25rem, 5.4vw, 1.8rem);
+}
+
+.loc-hero .bk2-chips svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Mapa ilustrado */
+.loc-map {
+  display: block;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(37, 48, 53, 0.08);
+  text-decoration: none;
+  color: inherit;
+  background: var(--white);
+}
+
+.loc-map__art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.loc-roads path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ic-draw 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.4s forwards;
+}
+
+.loc-roads path:nth-child(2) { animation-delay: 0.7s; }
+.loc-roads path:nth-child(3) { animation-delay: 0.9s; }
+
+.loc-poi {
+  opacity: 0;
+  animation: bk2-rise 0.6s ease forwards;
+  animation-delay: calc(var(--p, 0) * 0.15s + 1.2s);
+}
+
+.loc-wave {
+  animation: loc-wave 4s ease-in-out infinite;
+}
+
+.loc-wave--2 {
+  animation-delay: -2s;
+}
+
+@keyframes loc-wave {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(10px); }
+}
+
+.loc-pin__drop {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: loc-drop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1.5s both, loc-bob 2.6s ease-in-out 2.4s infinite;
+}
+
+.loc-pin__ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: loc-ring 2.4s ease-out 2.2s infinite;
+}
+
+.loc-pin__ring--2 {
+  animation-delay: 3.4s;
+}
+
+@keyframes loc-drop {
+  from { transform: translateY(-60px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+@keyframes loc-bob {
+  0%, 100% { transform: none; }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes loc-ring {
+  0% { transform: scale(0.5); opacity: 0.9; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+.loc-map__card {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.loc-map__card strong {
+  font-family: var(--f-title);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.loc-map__card > span:not(.btn) {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.loc-map__btn {
+  justify-self: start;
+  margin-top: 6px;
+}
+
+/* Referencias */
+.loc-refs {
+  margin-top: 28px;
+}
+
+.loc-refs ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.loc-refs li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.js-anim.loc-refs li,
+.js-anim.loc-arrive figure,
+.js-anim.loc-routes li {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.js-anim.loc-refs.is-in li,
+.js-anim.loc-arrive.is-in figure,
+.js-anim.loc-routes.is-in li {
+  animation: faq-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.loc-refs__ico {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--gold-tint);
+}
+
+.loc-refs__ico svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loc-refs li > span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.loc-refs strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.loc-refs li > span:last-child > span {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* Al llegar: fotos */
+.loc-arrive {
+  display: grid;
+  gap: 22px;
+}
+
+.loc-arrive figure {
+  margin: 0;
+}
+
+.loc-arrive__img {
+  position: relative;
+  display: block;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ivory-2);
+}
+
+.loc-arrive__img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.loc-arrive__img--tall img {
+  aspect-ratio: 4 / 5;
+  object-position: center 40%;
+}
+
+.loc-arrive figure:hover img {
+  transform: scale(1.03);
+}
+
+.loc-arrive__n {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--slate);
+  color: var(--gold-soft);
+  font-family: var(--f-title);
+  font-size: 1rem;
+  box-shadow: 0 6px 14px rgba(28, 37, 41, 0.3);
+}
+
+.loc-arrive figcaption {
+  display: grid;
+  gap: 4px;
+  padding: 12px 4px 0;
+}
+
+.loc-arrive figcaption strong {
+  font-family: var(--f-title);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.loc-arrive figcaption span {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Rutas en forma de línea de tiempo */
+.loc-routes ol {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.loc-routes ol::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 14px;
+  bottom: 22px;
+  border-left: 2px dashed rgba(190, 157, 97, 0.55);
+}
+
+.loc-routes li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.loc-routes__dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gold);
+  z-index: 1;
+}
+
+.loc-routes__dot--end {
+  background: var(--slate);
+  border-color: var(--slate);
+  box-shadow: 0 0 0 5px rgba(190, 157, 97, 0.25);
+}
+
+.loc-routes__from {
+  display: grid;
+  gap: 2px;
+}
+
+.loc-routes__from strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.loc-routes__from small {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.loc-routes__time {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid rgba(190, 157, 97, 0.45);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+.loc-note {
+  margin: 8px 0 0;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+/* Horario y ayuda */
+.loc-info {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.loc-hours {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 18px;
+  color: var(--ivory);
+  background:
+    radial-gradient(80% 120% at 100% 0%, rgba(190, 157, 97, 0.28), transparent 60%),
+    linear-gradient(150deg, var(--slate-2), var(--slate-3));
+}
+
+.loc-hours__ico {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(248, 246, 242, 0.08);
+  color: var(--gold-soft);
+}
+
+.loc-hours p {
+  margin: 0;
+}
+
+.loc-hours__t {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.loc-hours__h {
+  margin-top: 4px !important;
+  font-family: var(--f-title);
+  font-size: 1.05rem;
+}
+
+.loc-hours__s {
+  margin-top: 4px !important;
+  font-size: 0.76rem;
+  color: rgba(248, 246, 242, 0.7);
+}
+
+.loc-help {
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.loc-help__t {
+  margin: 0;
+  font-weight: 600;
+}
+
+.loc-help__d {
+  margin: 4px 0 12px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.loc-help__btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (min-width: 760px) {
+  .loc-arrive {
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+  }
+
+  .loc-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .loc-refs ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .loc-refs li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loc-roads path,
+  .loc-poi,
+  .loc-wave,
+  .loc-pin__drop,
+  .loc-pin__ring {
+    animation: none;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+
+  .loc-pin__ring {
+    opacity: 0;
+  }
+
+  .js-anim.loc-refs li,
+  .js-anim.loc-arrive figure,
+  .js-anim.loc-routes li {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+.loc-hours__h {
+  font-family: var(--f-body);
+  font-size: 0.98rem;
+  font-weight: 600;
+}

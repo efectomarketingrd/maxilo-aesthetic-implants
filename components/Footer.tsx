@@ -26,12 +26,13 @@ export default function Footer({ t, lang, offer = false }: { t: Dict; lang: Loca
               <li><Link href={`${home}/instituciones`}>{t.nav.institutions}</Link></li>
               <li><Link href={`${home}/paquete-implantes`}>{t.pkg.nav}</Link></li>
               <li><Link href={`${home}/blog`}>{t.nav.news}</Link></li>
+              <li><Link href={`${home}/ubicacion`}>{t.location.nav}</Link></li>
               <li><a href={`${home}/agendar`}>{t.nav.cta}</a></li>
             </ul>
           </div>
           <div id="contacto">
             <h4>{t.footer.contact}</h4>
-            <p className="footer__line"><Pin /> {t.footer.address}</p>
+            <p className="footer__line"><Pin /> <Link href={`${home}/ubicacion`}>{t.footer.address}</Link></p>
             {site.phones.map((p) => (
               <p className="footer__line" key={p}>
                 <Phone /> <a href={`tel:+1${p.replace(/\D/g, "")}`}>{p}</a>

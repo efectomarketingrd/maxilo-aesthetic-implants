@@ -44,6 +44,7 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
     { href: `${home}/preguntas`, label: t.nav.faq },
     { href: `${home}/marcas`, label: t.nav.brands },
     { href: `${home}/blog`, label: t.nav.news },
+    { href: `${home}/ubicacion`, label: t.location.nav },
   ];
   const isHome = pathname === home;
   const close = () => {
