@@ -10469,3 +10469,20 @@ body:has(.bk2-page) .wa-float {
   color: rgba(248, 246, 242, 0.7);
 }
 .bk2-deposit{margin-bottom:4px}
+
+/* Áreas de rellenos: chips normales (no tarjetas de plan) */
+.bk2-plan.bk2-areas > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bk2-plan.bk2-areas .bk2-chip {
+  display: inline-flex;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  gap: 8px;
+  align-content: center;
+  font-size: 0.8rem;
+  transform: none;
+}

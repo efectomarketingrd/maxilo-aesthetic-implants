@@ -56,11 +56,24 @@ export const agenda = {
   prices: { presencial: 3000, online: 1500 },
 
   // Extracción de cordales (terceros molares): precio por cordal; si son las 4, precio especial por cordal
-  molarPrice: 10000,
-  molarPriceAll4: 8000,
+  // precio por cordal según cuántas se extraen
+  molarPrice: 10000, // 1 cordal
+  molarPrice23: 8500, // 2 o 3 cordales, c/u
+  molarPriceAll4: 7000, // las 4, c/u
 
   // Bótox: incluye la aplicación y un retoque a las 2 semanas
-  botoxPrice: 30000,
+  botoxPrice: 28000,
+
+  // Rellenos de ácido hialurónico: precio por área
+  fillerPrice: 30000,
+  // PRP facial: por sesión
+  prpFacialPrice: 10000,
+  // Hilos (fijados en pesos; equivalen a US$500 y US$400)
+  threadLiftPrice: 31000,
+  threadBioPrice: 24500,
+  // Lobuloplastia: por oreja · Eliminación de verrugas: por área
+  lobulePrice: 10000,
+  wartPrice: 8000,
 
   // PRP capilar: precio por sesión y planes (los planes se pagan completos al inicio)
   prpPrice: 10000,

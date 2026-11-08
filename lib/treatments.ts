@@ -103,8 +103,9 @@ export const treatments: Treatment[] = [
       recovery: "Es normal tener inflamación y molestias durante 2 o 3 días. Ayudan el frío local las primeras horas, la dieta blanda, el reposo relativo y seguir las indicaciones de la doctora. La mayoría de las personas retoma sus actividades en pocos días.",
       price: {
         lines: [
-          { label: "Por cordal", value: "RD$10,000" },
-          { label: "Las 4 cordales", value: "RD$8,000 c/u (RD$32,000)" },
+          { label: "1 cordal", value: "RD$10,000" },
+          { label: "2 o 3 cordales", value: "RD$8,500 c/u" },
+          { label: "Las 4 cordales", value: "RD$7,000 c/u (RD$28,000)" },
         ],
         note: "Si ya le indicaron la extracción, puede agendar directamente como procedimiento: no paga consulta.",
       },
@@ -132,8 +133,9 @@ export const treatments: Treatment[] = [
       recovery: "Swelling and discomfort for 2 or 3 days are normal. Cold compresses in the first hours, a soft diet, relative rest and following the doctor's instructions help. Most people return to their activities within a few days.",
       price: {
         lines: [
-          { label: "Per wisdom tooth", value: "RD$10,000" },
-          { label: "All 4 wisdom teeth", value: "RD$8,000 each (RD$32,000)" },
+          { label: "1 wisdom tooth", value: "RD$10,000" },
+          { label: "2 or 3 wisdom teeth", value: "RD$8,500 each" },
+          { label: "All 4 wisdom teeth", value: "RD$7,000 each (RD$28,000)" },
         ],
         note: "If the extraction has already been recommended, you can book it directly as a procedure: no consultation fee.",
       },

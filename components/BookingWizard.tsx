@@ -115,6 +115,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [subs, setSubs] = useState<string[]>([]);
   const [molars, setMolars] = useState<string | null>(null);
   const [prp, setPrp] = useState<string | null>(null);
+  const [areas, setAreas] = useState<string[]>([]); // rellenos
+  const [ears, setEars] = useState<string | null>(null); // lobuloplastia
+  const [warts, setWarts] = useState<string | null>(null); // verrugas
   const [cols, setCols] = useState(2);
 
   // Columnas de la cuadrícula de servicios (para abrir el panel justo debajo de la fila elegida)
@@ -213,8 +216,30 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const prpPlan = agenda.prpPlans.find((x) => x.id === prp);
   const prpName = prpPlan ? b.prpPlans[prpPlan.id as keyof typeof b.prpPlans] : null;
   const prpText = prpName ? `${prpName.name}: ${prpName.note}` : "";
+  // Medicina estética y cirugía estética: tratamientos con precio (por posición en la lista)
+  const med = procs("medicina-estetica");
+  const est = procs("cirugia-estetica-facial");
+  const fillerOpt = med[2] ?? "";
+  const prpFacialOpt = med[5] ?? "";
+  const liftOpt = med[6] ?? "";
+  const bioOpt = med[7] ?? "";
+  const lobuleOpt = est[6] ?? "";
+  const wartOpt = est[7] ?? "";
+  const inMed = service === "medicina-estetica";
+  const inEst = service === "estetica-facial";
+  const needAreas = inMed && subs.includes(fillerOpt);
+  const needEars = inEst && subs.includes(lobuleOpt);
+  const needWarts = inEst && subs.includes(wartOpt);
+  const countText = (n: string, one: string, many: string) => (n === "?" ? b.molarsTbd : `${n} ${n === "1" ? one : many}`);
   const subsText = subs
-    .map((x) => (x === molarOpt && molars ? `${x} (${molarText})` : x === prpOpt && prp ? `${x} (${prpText})` : x))
+    .map((x) => {
+      if (x === molarOpt && molars) return `${x} (${molarText})`;
+      if (x === prpOpt && prp) return `${x} (${prpText})`;
+      if (x === fillerOpt && needAreas && areas.length) return `${x} (${areas.join(", ")})`;
+      if (x === lobuleOpt && ears) return `${x} (${countText(ears, b.earWord, b.earsWord)})`;
+      if (x === wartOpt && warts) return `${x} (${countText(warts, b.areaWord, b.areasWord)})`;
+      return x;
+    })
     .join(", ");
   const svcFull = subs.length ? `${svcName} — ${subsText}` : svcName;
 
@@ -243,6 +268,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     setSubs([]);
     setMolars(null);
     setPrp(null);
+    setAreas([]);
+    setEars(null);
+    setWarts(null);
   }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
   const timeLabel = special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
@@ -250,23 +278,38 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
   const filled = (Object.keys(form) as (keyof typeof form)[]).every((k) => form[k].trim());
-  const okStep = [Boolean(service && subs.length && (!needMolars || molars) && (!needPrp || prp)), Boolean(date && timeLabel), filled && emailOk, true];
+  const okStep = [Boolean(service && subs.length && (!needMolars || molars) && (!needPrp || prp) && (!needAreas || areas.length) && (!needEars || ears) && (!needWarts || warts)), Boolean(date && timeLabel), filled && emailOk, true];
 
   // Costo estimado
   const isProc = type === "procedimiento";
   const base = isProc ? 0 : agenda.prices[effMode];
   // Tratamientos con precio conocido
   const molarN = needMolars && molars && molars !== "?" ? Number(molars) : 0;
-  const molarUnit = molarN === 4 ? agenda.molarPriceAll4 : agenda.molarPrice;
+  const molarUnit = molarN === 4 ? agenda.molarPriceAll4 : molarN >= 2 ? agenda.molarPrice23 : agenda.molarPrice;
+  const earN = needEars && ears && ears !== "?" ? Number(ears) : 0;
+  const wartN = needWarts && warts && warts !== "?" ? Number(warts) : 0;
   const botoxOpt = procs("medicina-estetica")[0] ?? "";
   const hasBotox = service === "medicina-estetica" && subs.includes(botoxOpt);
   const priced: { label: string; detail: string; amount: number }[] = [
     ...(molarN ? [{ label: b.cost.molars, detail: `${molarN} × ${rd(molarUnit)}`, amount: molarN * molarUnit }] : []),
     ...(hasBotox ? [{ label: botoxOpt, detail: b.cost.botoxIncl, amount: agenda.botoxPrice }] : []),
+    ...(needAreas && areas.length ? [{ label: fillerOpt, detail: `${areas.length} × ${rd(agenda.fillerPrice)} · ${areas.join(", ")}`, amount: areas.length * agenda.fillerPrice }] : []),
+    ...(inMed && subs.includes(prpFacialOpt) ? [{ label: prpFacialOpt, detail: `1 × ${rd(agenda.prpFacialPrice)}`, amount: agenda.prpFacialPrice }] : []),
+    ...(inMed && subs.includes(liftOpt) ? [{ label: liftOpt, detail: "", amount: agenda.threadLiftPrice }] : []),
+    ...(inMed && subs.includes(bioOpt) ? [{ label: bioOpt, detail: "", amount: agenda.threadBioPrice }] : []),
+    ...(earN ? [{ label: lobuleOpt, detail: `${earN} × ${rd(agenda.lobulePrice)}`, amount: earN * agenda.lobulePrice }] : []),
+    ...(wartN ? [{ label: wartOpt, detail: `${wartN} × ${rd(agenda.wartPrice)}`, amount: wartN * agenda.wartPrice }] : []),
     ...(needPrp && prpPlan ? [{ label: prpOpt, detail: prpPlan.sessions > 1 ? `${prpText} · ${b.cost.prpPaid}` : prpText, amount: prpPlan.price }] : []),
   ];
   const pricedSum = priced.reduce((a, x) => a + x.amount, 0);
-  const isPriced = (x: string) => (x === molarOpt && molarN > 0) || (x === botoxOpt && hasBotox) || (x === prpOpt && needPrp && !!prp);
+  const isPriced = (x: string) =>
+    (x === molarOpt && molarN > 0) ||
+    (x === botoxOpt && hasBotox) ||
+    (x === prpOpt && needPrp && !!prp) ||
+    (inMed && x === fillerOpt && areas.length > 0) ||
+    (inMed && (x === prpFacialOpt || x === liftOpt || x === bioOpt)) ||
+    (x === lobuleOpt && earN > 0) ||
+    (x === wartOpt && wartN > 0);
   const unpriced = subs.some((x) => x !== b.unsure && !isPriced(x)) || subs.includes(b.unsure);
   const procTbd = isProc && (!priced.length || unpriced);
   const total = isProc ? pricedSum : base;
@@ -449,7 +492,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                                 ))}
                               </div>
                               <p className="bk2-molars__price">
-                                {rd(agenda.molarPrice)} {b.molarsPer} · {b.molarsAll4} {rd(agenda.molarPriceAll4)} {b.molarsEach}
+                                {b.molarsPrices}
                               </p>
                             </div>
                           )}
@@ -494,6 +537,60 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               <p className="bk2-plan__note">{b.prpPayNote}</p>
                             </div>
                           )}
+                          {needAreas && (
+                            <div className="bk2-plan bk2-areas">
+                              <p>{b.fillerQ}</p>
+                              <div className="bk2-sub__chips" role="group" aria-label={b.fillerQ}>
+                                {b.fillerAreas.map((a, k) => {
+                                  const on = areas.includes(a);
+                                  return (
+                                    <button
+                                      type="button"
+                                      key={a}
+                                      aria-pressed={on}
+                                      className={`bk2-chip ${on ? "is-on" : ""}`}
+                                      style={{ "--k": k } as React.CSSProperties}
+                                      onClick={() => setAreas((cur) => (cur.includes(a) ? cur.filter((x) => x !== a) : [...cur, a]))}
+                                    >
+                                      <span className="bk2-chip__box" aria-hidden="true">
+                                        <svg viewBox="0 0 20 20">
+                                          <path d="M5 10.5l3.2 3.2L15 7" pathLength={1} />
+                                        </svg>
+                                      </span>
+                                      {a}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                              <p className="bk2-plan__note">{b.fillerInfo}</p>
+                            </div>
+                          )}
+                          {[
+                            { on: needEars, q: b.lobuleQ, info: b.lobuleInfo, val: ears, set: setEars, opts: ["1", "2"] },
+                            { on: needWarts, q: b.wartQ, info: b.wartInfo, val: warts, set: setWarts, opts: ["1", "2", "3", "4", "?"] },
+                          ]
+                            .filter((x) => x.on)
+                            .map((x) => (
+                              <div className="bk2-molars" key={x.q}>
+                                <p>{x.q}</p>
+                                <div role="radiogroup" aria-label={x.q}>
+                                  {x.opts.map((n, k) => (
+                                    <button
+                                      type="button"
+                                      role="radio"
+                                      aria-checked={x.val === n}
+                                      key={n}
+                                      className={`${x.val === n ? "is-on" : ""} ${n === "?" ? "is-wide" : ""}`}
+                                      style={{ "--k": k } as React.CSSProperties}
+                                      onClick={() => x.set(n)}
+                                    >
+                                      {n === "?" ? b.countUnsure : n}
+                                    </button>
+                                  ))}
+                                </div>
+                                <p className="bk2-molars__price">{x.info}</p>
+                              </div>
+                            ))}
                           {hasBotox && (
                             <p className="bk2-pricenote">
                               <strong>
