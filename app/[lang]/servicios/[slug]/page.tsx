@@ -4,9 +4,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Arrow, WaIcon, serviceIcons } from "@/components/Icons";
+import { Arrow } from "@/components/Icons";
+import CtaCard from "@/components/CtaCard";
+import InView from "@/components/InView";
+import ServiceIcon from "@/components/ServiceIcon";
+import { bookingHref, treatmentAt } from "@/lib/treatments";
 import { dictionaries } from "@/lib/content";
-import { locales, site, waLink, type Locale } from "@/lib/site";
+import { locales, site, type Locale } from "@/lib/site";
 import { serviceImg } from "@/lib/images";
 
 type Params = Promise<{ lang: string; slug: string }>;
@@ -41,7 +45,6 @@ export default async function ServicePage({ params }: { params: Params }) {
   const lang = l as Locale;
   const { t, s } = find(lang, slug);
   if (!s) notFound();
-  const Ico = serviceIcons[s.icon];
   const others = t.services.items.filter((x) => x.slug !== slug);
   const url = `${site.url}/${lang}/servicios/${slug}`;
 
@@ -72,89 +75,83 @@ export default async function ServicePage({ params }: { params: Params }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <Header t={t} lang={lang} />
-      <main>
-        <section className="page-hero">
-          <div className="container page-hero__grid">
-            <div>
-              <nav className="crumbs" aria-label="breadcrumb">
-                <Link href={`/${lang}`}>{t.nav.home}</Link> / <a href={`/${lang}#servicios`}>{t.nav.services}</a> / <span>{s.title}</span>
-              </nav>
-              <span className="page-hero__ico"><Ico size={54} /></span>
-              <h1>{s.title}</h1>
-              <p className="lead">{s.intro}</p>
-              <div className="hero__ctas">
-                <a className="btn btn--dark" href={`/${lang}/agendar`}>
-                  {t.nav.cta} <Arrow />
-                </a>
-                <a className="btn btn--line" href={waLink(`${t.hero.waMsg} (${s.title})`)} target="_blank" rel="noopener">
-                  <WaIcon /> WhatsApp
-                </a>
-              </div>
+      <main className="sv">
+        {/* Portada */}
+        <section className="sv-hero">
+          <div className="container sv-wrap">
+            <nav className="sv-crumbs bk2-rise" aria-label="breadcrumb">
+              <Link href={`/${lang}`}>{t.nav.home}</Link> <span>/</span> {t.nav.services}
+            </nav>
+            <div className="sv-hero__img bk2-rise" style={{ "--d": 1 } as React.CSSProperties}>
+              <Image src={serviceImg[s.slug]} alt={s.title} fill sizes="(min-width: 900px) 820px, 92vw" priority />
+              <span className="sv-hero__badge">
+                <ServiceIcon kind={s.icon} size={34} />
+              </span>
             </div>
-            <div className="page-hero__photo">
-              <Image src={serviceImg[s.slug]} alt={s.title} fill sizes="(min-width: 1040px) 460px, 90vw" priority />
+            <h1 className="bk2-rise" style={{ "--d": 2 } as React.CSSProperties}>{s.title}</h1>
+            <p className="sv-hero__intro bk2-rise" style={{ "--d": 3 } as React.CSSProperties}>{s.intro}</p>
+            <div className="sv-hero__btns bk2-rise" style={{ "--d": 4 } as React.CSSProperties}>
+              <Link className="btn btn--dark h5-btn-shine" href={`/${lang}/agendar`}>
+                {t.nav.cta} <Arrow />
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="section section--white">
-          <div className="container">
-            <div className="section__head">
-              <p className="eyebrow">{t.services.procedures}</p>
-              <h2>{s.title}</h2>
-            </div>
-            <div className="proc-grid">
-              {s.procedures.map((p, i) => (
-                <article className="proc" key={p.name}>
-                  <span className="proc__n">{String(i + 1).padStart(2, "0")}</span>
-                  <h3>{p.name}</h3>
-                  <p>{p.desc}</p>
-                  <a href={waLink(`${t.hero.waMsg} (${p.name})`)} target="_blank" rel="noopener" className="svc-card__more">
-                    {t.services.ask} <Arrow size={14} />
-                  </a>
-                </article>
+        {/* Tratamientos */}
+        <section className="sv-sec">
+          <div className="container sv-wrap">
+            <h2 className="loc-h2">{t.treat.treatments}</h2>
+            <p className="sv-hint">{t.treat.treatmentsHint}</p>
+            <InView className="sv-list">
+              {s.procedures.map((p, i) => {
+                const tr = treatmentAt(s.slug, i);
+                const inner = (
+                  <>
+                    <span className="sv-item__n">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="sv-item__txt">
+                      <strong>{p.name}</strong>
+                      <span>{p.desc}</span>
+                    </span>
+                    <span className="sv-item__go" aria-hidden="true">
+                      <Arrow size={16} />
+                    </span>
+                  </>
+                );
+                return tr ? (
+                  <Link key={p.name} href={`/${lang}/servicios/${s.slug}/${tr.slug}`} className="sv-item" style={{ "--i": i } as React.CSSProperties}>
+                    {inner}
+                  </Link>
+                ) : (
+                  <Link key={p.name} href={bookingHref(lang, s.slug, i, p.name)} className="sv-item sv-item--book" style={{ "--i": i } as React.CSSProperties}>
+                    {inner}
+                  </Link>
+                );
+              })}
+            </InView>
+          </div>
+        </section>
+
+        <CtaCard t={t} lang={lang} />
+
+        {/* Otros servicios: compacto */}
+        <section className="sv-sec sv-sec--others">
+          <div className="container sv-wrap">
+            <p className="sv-others__t">{t.treat.otherServices}</p>
+            <div className="sv-others">
+              {others.map((o) => (
+                <Link key={o.slug} href={`/${lang}/servicios/${o.slug}`}>
+                  <span className="sv-others__ico">
+                    <ServiceIcon kind={o.icon} size={22} />
+                  </span>
+                  {o.title}
+                </Link>
               ))}
             </div>
           </div>
         </section>
-
-        <section className="section section--slate section--tight">
-          <div className="container cta-band">
-            <div>
-              <h2>{t.services.ctaTitle}</h2>
-              <p className="lead">{t.services.ctaText}</p>
-            </div>
-            <a className="btn btn--gold" href={waLink(`${t.hero.waMsg} (${s.title})`)} target="_blank" rel="noopener">
-              <WaIcon /> {t.services.ask}
-            </a>
-          </div>
-        </section>
-
-        <section className="section section--ivory">
-          <div className="container">
-            <div className="section__head section__head--center">
-              <p className="eyebrow">{t.services.otherServices}</p>
-            </div>
-            <div className="svc-grid svc-grid--3">
-              {others.map((o) => {
-                const OI = serviceIcons[o.icon];
-                return (
-                  <Link key={o.slug} href={`/${lang}/servicios/${o.slug}`} className="svc-card svc-card--photo">
-                    <span className="svc-card__img">
-                      <Image src={serviceImg[o.slug]} alt="" fill sizes="(min-width: 1040px) 360px, 90vw" />
-                      <span className="svc-card__badge"><OI size={24} /></span>
-                    </span>
-                    <h3>{o.title}</h3>
-                    <p>{o.short}</p>
-                    <span className="svc-card__more">{t.services.more} <Arrow size={14} /></span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
       </main>
-      <Footer t={t} lang={lang} offer={slug === "implantes-cirugia-oral"} />
+      <Footer t={t} lang={lang} />
     </>
   );
 }

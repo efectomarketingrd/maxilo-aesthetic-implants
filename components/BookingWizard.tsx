@@ -211,6 +211,17 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     });
   }
 
+  // Si se llega desde la página de un tratamiento (?s=servicio&o=opción), dejarlo ya marcado
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const sId = q.get("s");
+    if (!sId || !b.services.some((x) => x.id === sId)) return;
+    setService(sId);
+    const o = q.get("o");
+    if (o && (subOptions[sId] ?? []).includes(o)) setSubs([o]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function pickService(id: string) {
     if (id === service) return;
     setService(id);
