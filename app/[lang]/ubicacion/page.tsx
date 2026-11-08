@@ -252,6 +252,11 @@ export default async function LocationPage({ params }: { params: Params }) {
                   <Clock size={22} />
                 </span>
                 <div>
+                  <p className="loc-hours__t">{c.centerTitle}</p>
+                  {c.center.map((h) => (
+                    <p className="loc-hours__h" key={h}>{h}</p>
+                  ))}
+                  <span className="loc-hours__sep" aria-hidden="true" />
                   <p className="loc-hours__t">{c.hoursTitle}</p>
                   <p className="loc-hours__h">{c.hours}</p>
                   <p className="loc-hours__s">{c.hoursSpecial}</p>

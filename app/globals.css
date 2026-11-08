@@ -9877,3 +9877,10 @@ body:has(.bk2-page) .wa-float {
   font-size: 0.98rem;
   font-weight: 600;
 }
+
+.loc-hours__sep {
+  display: block;
+  height: 1px;
+  margin: 12px 0;
+  background: rgba(248, 246, 242, 0.14);
+}

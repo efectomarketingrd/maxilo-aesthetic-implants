@@ -27,6 +27,10 @@ export default function Schema({ t, lang, faq = true }: { t: Dict; lang: Locale;
         addressCountry: site.address.country,
       },
       hasMap: site.maps,
+      openingHoursSpecification: [
+        { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"].map((d) => `https://schema.org/${d}`), opens: "08:00", closes: "18:00" },
+        { "@type": "OpeningHoursSpecification", dayOfWeek: "https://schema.org/Saturday", opens: "09:00", closes: "15:00" },
+      ],
       areaServed: ["Las Terrenas", "Samaná", "República Dominicana"],
       medicalSpecialty: ["Dentistry", "PlasticSurgery", "Dermatology"],
       employee: { "@id": doctorId },
