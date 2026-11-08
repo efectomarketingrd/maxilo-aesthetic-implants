@@ -9292,3 +9292,110 @@ body:has(.bk2-page) .wa-float {
   line-height: 1.5;
   color: var(--muted);
 }
+
+/* ───────── Menú móvil: Servicios desplegable ───────── */
+.header__drawer > * {
+  animation: svc-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.header__drawer > *:nth-child(2) { animation-delay: 0.04s; }
+.header__drawer > *:nth-child(3) { animation-delay: 0.08s; }
+.header__drawer > *:nth-child(5) { animation-delay: 0.12s; }
+.header__drawer > *:nth-child(6) { animation-delay: 0.16s; }
+.header__drawer > *:nth-child(7) { animation-delay: 0.2s; }
+.header__drawer > *:nth-child(8) { animation-delay: 0.24s; }
+
+.header__drawer-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  font-family: var(--f-title);
+  font-size: 1.1rem;
+  color: var(--slate);
+  text-align: left;
+  cursor: pointer;
+}
+
+.header__drawer-toggle svg {
+  color: var(--gold);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.header__drawer-toggle.is-open {
+  color: var(--gold);
+  border-bottom-color: transparent;
+}
+
+.header__drawer-toggle.is-open svg {
+  transform: rotate(180deg);
+}
+
+.header__drawer-svc {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.header__drawer-svc.is-open {
+  grid-template-rows: 1fr;
+}
+
+.header__drawer-svc > div {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__drawer-svc.is-open > div {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+}
+
+.header__drawer .header__drawer-svc .header__drawer-sub {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0 10px 4px;
+  border-bottom: 0;
+  font-family: var(--f-body);
+  font-size: 0.92rem;
+  color: var(--slate);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.header__drawer-svc.is-open .header__drawer-sub {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 0.05s + 0.08s);
+}
+
+.header__drawer-ico {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--gold-tint);
+}
+
+.header__drawer-ico .sicon {
+  width: 22px;
+  height: 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__drawer > *,
+  .header__drawer-svc,
+  .header__drawer .header__drawer-svc .header__drawer-sub {
+    animation: none;
+    transition: none;
+  }
+}

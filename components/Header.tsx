@@ -6,10 +6,12 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Dict } from "@/lib/content";
 import type { Locale } from "@/lib/site";
+import ServiceIcon from "./ServiceIcon";
 
 export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
   const [open, setOpen] = useState(false);
   const [drop, setDrop] = useState(false);
+  const [svcOpen, setSvcOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const dropRef = useRef<HTMLDivElement>(null);
@@ -42,12 +44,12 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
     { href: `${home}/preguntas`, label: t.nav.faq },
     { href: `${home}/marcas`, label: t.nav.brands },
     { href: `${home}/blog`, label: t.nav.news },
-    { href: `${home}#contacto`, label: t.nav.contact },
   ];
   const isHome = pathname === home;
   const close = () => {
     setOpen(false);
     setDrop(false);
+    setSvcOpen(false);
   };
 
   return (
@@ -116,12 +118,38 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
           <a href={links[0].href} onClick={close}>
             {links[0].label}
           </a>
-          <p className="header__drawer-label">{t.nav.services}</p>
-          {svc.map((s) => (
-            <Link key={s.href} href={s.href} className="header__drawer-sub" onClick={close}>
-              {s.label}
-            </Link>
-          ))}
+          {/* Servicios: se despliega al tocar y se cierra al volver a tocar */}
+          <button
+            type="button"
+            className={`header__drawer-toggle ${svcOpen ? "is-open" : ""}`}
+            aria-expanded={svcOpen}
+            aria-controls="drawer-services"
+            onClick={() => setSvcOpen(!svcOpen)}
+          >
+            {t.nav.services}
+            <svg width="14" height="14" viewBox="0 0 10 10" aria-hidden="true">
+              <path d="M1 3l4 4 4-4" stroke="currentColor" fill="none" strokeWidth="1.3" />
+            </svg>
+          </button>
+          <div id="drawer-services" className={`header__drawer-svc ${svcOpen ? "is-open" : ""}`}>
+            <div>
+              {t.services.items.map((s, i) => (
+                <Link
+                  key={s.slug}
+                  href={`${home}/servicios/${s.slug}`}
+                  className="header__drawer-sub"
+                  style={{ "--i": i } as React.CSSProperties}
+                  tabIndex={svcOpen ? 0 : -1}
+                  onClick={close}
+                >
+                  <span className="header__drawer-ico">
+                    <ServiceIcon kind={s.icon} />
+                  </span>
+                  {s.title}
+                </Link>
+              ))}
+            </div>
+          </div>
           {links.slice(1).map((l) => (
             <a key={l.href} href={l.href} onClick={close}>
               {l.label}
