@@ -12403,3 +12403,29 @@ body:has(.bk2-page) .wa-float {
     opacity: 0 !important;
   }
 }
+
+/* PRP capilar: el cabello crece */
+.tx-hair {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.tx-art.js-anim .tx-hair {
+  transform: scaleY(0.32);
+}
+
+.tx-art.is-in .tx-hair {
+  animation: tx-hair 0.9s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d) * 1s);
+}
+
+@keyframes tx-hair {
+  from { transform: scaleY(0.32); }
+  to { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-art.js-anim .tx-hair {
+    transform: none !important;
+  }
+}

@@ -1282,6 +1282,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Frene la caída y estimule el crecimiento del cabello con plasma de su propia sangre, en un programa planificado.",
       what: "El PRP (plasma rico en plaquetas) se obtiene de una pequeña muestra de su propia sangre, que se procesa para concentrar las plaquetas y sus factores de crecimiento. Aplicado en el cuero cabelludo, ayuda a fortalecer el folículo, reducir la caída y mejorar la densidad del cabello. Como es de su propia sangre, es un tratamiento seguro y bien tolerado. El mejor resultado se logra con un programa: una fase inicial de sesiones mensuales y luego sesiones de mantenimiento.",
+      art: {
+        labels: [
+          { t: "Su plasma", s: "de su propia sangre" },
+          { t: "Folículo", s: "se fortalece" },
+          { t: "Cabello", s: "más denso" },
+        ],
+        caption: "El plasma de su propia sangre estimula los folículos para frenar la caída y ganar densidad.",
+      },
+      facts: [
+        { i: "drop", t: "Su propia sangre", s: "Seguro y bien tolerado" },
+        { i: "plan", t: "Programa 12 meses", s: "6 sesiones · RD$45,000" },
+        { i: "time", t: "Primeros cambios", s: "Desde el 2.º o 3.er mes" },
+        { i: "home", t: "Sin reposo", s: "Vuelve a sus actividades" },
+      ],
       forWho: [
         "Personas con caída del cabello o pérdida de densidad.",
         "Cabello que se ve más fino, sobre todo en la coronilla o las entradas.",
@@ -1314,6 +1328,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Reduce hair loss and stimulate growth with plasma from your own blood, in a planned program.",
       what: "PRP (platelet-rich plasma) is obtained from a small sample of your own blood, processed to concentrate the platelets and their growth factors. Applied to the scalp, it helps strengthen the follicles, reduce hair loss and improve hair density. Because it comes from your own blood, it is safe and well tolerated. The best result comes from a program: an initial phase of monthly sessions followed by maintenance sessions.",
+      art: {
+        labels: [
+          { t: "Your plasma", s: "from your own blood" },
+          { t: "Follicle", s: "strengthened" },
+          { t: "Hair", s: "denser" },
+        ],
+        caption: "Plasma from your own blood stimulates the follicles to reduce hair loss and gain density.",
+      },
+      facts: [
+        { i: "drop", t: "Your own blood", s: "Safe and well tolerated" },
+        { i: "plan", t: "12-month program", s: "6 sessions · RD$45,000" },
+        { i: "time", t: "First changes", s: "From month 2 or 3" },
+        { i: "home", t: "No downtime", s: "Back to your activities" },
+      ],
       forWho: [
         "People with hair loss or loss of density.",
         "Hair that looks thinner, especially at the crown or hairline.",
@@ -1352,6 +1380,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Estimule la regeneración de la piel del rostro con los componentes de su propia sangre.",
       what: "El PRP facial utiliza plasma rico en plaquetas obtenido de una pequeña muestra de su propia sangre. Aplicado en la piel del rostro, sus factores de crecimiento estimulan la producción de colágeno y la renovación de la piel. Ayuda a mejorar la textura, la luminosidad y la firmeza de forma progresiva y natural. La doctora tiene experiencia en el uso de derivados plaquetarios, tema de su tesis de especialidad.",
+      art: {
+        labels: [
+          { t: "Su plasma", s: "factores de crecimiento" },
+          { t: "Aplicación", s: "microinyecciones" },
+          { t: "Luminosidad", s: "piel renovada" },
+        ],
+        caption: "Los factores de crecimiento de su plasma estimulan el colágeno y renuevan la piel.",
+      },
+      facts: [
+        { i: "drop", t: "Su propia sangre", s: "Riesgo muy bajo de reacciones" },
+        { i: "tag", t: "RD$10,000", s: "Por sesión" },
+        { i: "time", t: "Por sesiones", s: "La doctora indica cuántas" },
+        { i: "sparkle", t: "Cambio progresivo", s: "En las semanas siguientes" },
+      ],
       forWho: [
         "Piel opaca, cansada o con textura irregular.",
         "Líneas finas y pérdida de firmeza.",
@@ -1378,6 +1420,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Stimulate skin regeneration on the face with components from your own blood.",
       what: "Facial PRP uses platelet-rich plasma obtained from a small sample of your own blood. Applied to the facial skin, its growth factors stimulate collagen production and skin renewal. It helps improve texture, radiance and firmness gradually and naturally. The doctor is experienced in the use of platelet concentrates, the subject of her specialty thesis.",
+      art: {
+        labels: [
+          { t: "Your plasma", s: "growth factors" },
+          { t: "Application", s: "micro-injections" },
+          { t: "Radiance", s: "renewed skin" },
+        ],
+        caption: "The growth factors in your plasma stimulate collagen and renew the skin.",
+      },
+      facts: [
+        { i: "drop", t: "Your own blood", s: "Very low risk of reactions" },
+        { i: "tag", t: "RD$10,000", s: "Per session" },
+        { i: "time", t: "In sessions", s: "The doctor says how many" },
+        { i: "sparkle", t: "Gradual change", s: "Over the following weeks" },
+      ],
       forWho: [
         "Dull, tired or uneven skin.",
         "Fine lines and loss of firmness.",
@@ -1410,6 +1466,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Reposicione y tense los tejidos del rostro con hilos reabsorbibles, para un efecto lifting sin cirugía.",
       what: "Los hilos tensores son hilos médicos reabsorbibles que se colocan bajo la piel con una aguja o cánula fina. Tienen pequeñas espículas que sujetan los tejidos y permiten reposicionarlos, por ejemplo para levantar el tercio medio del rostro o definir el óvalo facial. Con el tiempo el hilo se reabsorbe, y en el proceso estimula la formación de colágeno.",
+      art: {
+        labels: [
+          { t: "Hilos", s: "reabsorbibles" },
+          { t: "Sostén", s: "eleva los tejidos" },
+          { t: "Óvalo", s: "contorno definido" },
+        ],
+        caption: "Los hilos sostienen y elevan los tejidos; al reabsorberse, estimulan colágeno.",
+      },
+      facts: [
+        { i: "tag", t: "RD$31,000", s: "Precio del tratamiento" },
+        { i: "anest", t: "Anestesia local", s: "Sin cirugía" },
+        { i: "time", t: "Recuperación rápida", s: "Pocos días de inflamación" },
+        { i: "sparkle", t: "Colágeno", s: "El hilo lo estimula al reabsorberse" },
+      ],
       forWho: [
         "Personas con flacidez leve a moderada en el rostro.",
         "Quienes desean definir el óvalo facial o elevar las mejillas.",
@@ -1435,6 +1505,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Reposition and tighten facial tissues with absorbable threads for a lifting effect without surgery.",
       what: "Tensor threads are absorbable medical threads placed under the skin with a fine needle or cannula. They have small barbs that hold the tissues and allow them to be repositioned, for example to lift the midface or define the facial oval. Over time the thread is absorbed, stimulating collagen formation in the process.",
+      art: {
+        labels: [
+          { t: "Threads", s: "absorbable" },
+          { t: "Support", s: "lifts the tissues" },
+          { t: "Oval", s: "defined contour" },
+        ],
+        caption: "The threads support and lift the tissues; as they absorb, they stimulate collagen.",
+      },
+      facts: [
+        { i: "tag", t: "RD$31,000", s: "Treatment price" },
+        { i: "anest", t: "Local anesthesia", s: "No surgery" },
+        { i: "time", t: "Quick recovery", s: "A few days of swelling" },
+        { i: "sparkle", t: "Collagen", s: "Stimulated as the thread absorbs" },
+      ],
       forWho: [
         "People with mild to moderate facial sagging.",
         "Those who want to define the facial oval or lift the cheeks.",
@@ -1466,6 +1550,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Mejore la firmeza y la calidad de la piel estimulando su propio colágeno con hilos finos.",
       what: "La bioestimulación con hilos utiliza hilos muy finos y reabsorbibles, sin espículas, que se colocan bajo la piel formando una malla. A diferencia de los hilos tensores, su función no es levantar, sino estimular la producción de colágeno. El resultado es una piel más firme, más densa y de mejor calidad, que mejora de forma progresiva.",
+      art: {
+        labels: [
+          { t: "Hilos finos", s: "en forma de malla" },
+          { t: "Colágeno", s: "se forma de nuevo" },
+          { t: "Piel", s: "más firme y densa" },
+        ],
+        caption: "La malla de hilos estimula colágeno nuevo y la piel gana firmeza poco a poco.",
+      },
+      facts: [
+        { i: "tag", t: "RD$24,500", s: "Precio del tratamiento" },
+        { i: "plan", t: "Combinable", s: "Con hilos tensores" },
+        { i: "time", t: "Progresivo", s: "Mejora en semanas y meses" },
+        { i: "home", t: "Pocos días", s: "De inflamación leve" },
+      ],
       forWho: [
         "Piel con pérdida de firmeza o aspecto flácido leve.",
         "Zonas como las mejillas, el cuello o el contorno de la boca.",
@@ -1491,6 +1589,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Improve skin firmness and quality by stimulating your own collagen with fine threads.",
       what: "Thread biostimulation uses very fine, absorbable, smooth threads placed under the skin in a mesh pattern. Unlike tensor threads, their purpose is not to lift but to stimulate collagen production. The result is firmer, denser, better-quality skin that improves gradually.",
+      art: {
+        labels: [
+          { t: "Fine threads", s: "in a mesh" },
+          { t: "Collagen", s: "new collagen forms" },
+          { t: "Skin", s: "firmer and denser" },
+        ],
+        caption: "The thread mesh stimulates new collagen and the skin gradually gains firmness.",
+      },
+      facts: [
+        { i: "tag", t: "RD$24,500", s: "Treatment price" },
+        { i: "plan", t: "Can be combined", s: "With tensor threads" },
+        { i: "time", t: "Gradual", s: "Improves over weeks and months" },
+        { i: "home", t: "A few days", s: "Of mild swelling" },
+      ],
       forWho: [
         "Skin with loss of firmness or mild sagging.",
         "Areas such as the cheeks, neck or around the mouth.",

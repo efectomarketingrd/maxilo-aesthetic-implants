@@ -5,7 +5,7 @@ import ReplayInView from "@/components/ReplayInView";
 // Las ilustraciones se eligen por el slug del tratamiento; los textos vienen de lib/treatments.ts.
 
 export type ArtLabel = { t: string; s: string };
-export type FactIcon = "anest" | "titanium" | "fixed" | "crown" | "xray" | "home" | "tag" | "plan" | "follow" | "scar" | "time" | "band" | "people" | "sparkle" | "sun";
+export type FactIcon = "anest" | "titanium" | "fixed" | "crown" | "xray" | "home" | "tag" | "plan" | "follow" | "scar" | "time" | "band" | "people" | "sparkle" | "sun" | "drop";
 export type Fact = { i: FactIcon; t: string; s: string };
 
 const css = (v: Record<string, string | number>) => v as React.CSSProperties;
@@ -937,6 +937,215 @@ function GlowDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// Tubo de sangre que se separa: abajo glóbulos rojos, arriba el plasma dorado
+function Tube({ x, y, h }: { x: number; y: number; h: number }) {
+  return (
+    <g>
+      <rect x={x - 2} y={y - 8} width="28" height="11" rx="3" fill="#253035" />
+      <rect x={x} y={y} width="24" height={h} rx="11" fill="#fff" stroke="#9aa6ab" strokeWidth="2" />
+      <rect x={x + 3} y={y + h * 0.45} width="18" height={h * 0.55 - 4} rx="8" fill="#b5574e" />
+      <rect className="tx-show" style={css({ "--d": 1.0 })} x={x + 3} y={y + 10} width="18" height={h * 0.38} rx="4" fill="#e3c27a" />
+      <g className="tx-out" style={css({ "--d": 1.0 })}>
+        <rect x={x + 3} y={y + 10} width="18" height={h * 0.5} rx="4" fill="#b5574e" />
+      </g>
+    </g>
+  );
+}
+
+// PRP capilar: el plasma de su sangre llega a los folículos y el cabello crece más denso.
+function HairPrpDiagram({ labels }: { labels: ArtLabel[] }) {
+  const hairs = [96, 112, 128, 144, 160, 176, 192, 208];
+  return (
+    <svg className="tx-svg" viewBox="0 100 374 180" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txScalp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f1e2d0" />
+          <stop offset="1" stopColor="#e6cfb6" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <Tube x={30} y={124} h={110} />
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <path d="M80 202 C 120 196, 180 196, 224 202 L 224 262 C 180 268, 120 268, 80 262 Z" fill="url(#txScalp)" />
+        <path d="M80 202 C 120 196, 180 196, 224 202" fill="none" stroke="#c9a98d" strokeWidth="2" />
+      </g>
+      {hairs.map((x, k) => (
+        <g key={x}>
+          <ellipse className="tx-in" style={css({ "--d": 0.3 })} cx={x} cy="230" rx="4" ry="9" fill="#d4ab88" />
+          <g className="tx-hair" style={css({ "--d": 2.2 + k * 0.08 })}>
+            <path d={`M${x} 226 C ${x - 2} 196, ${x + 4} 172, ${x + 2} 148`} fill="none" stroke="#2e3b41" strokeWidth="2.6" strokeLinecap="round" />
+          </g>
+        </g>
+      ))}
+      {hairs.filter((_, k) => k % 2 === 0).map((x, k) => (
+        <g key={x} className="tx-zone" style={css({ "--d": 1.7 + k * 0.1 })}>
+          <circle cx={x + 8} cy="226" r="3.6" fill="#be9d61" />
+        </g>
+      ))}
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M54 146 L 206 128 H226", x: 54, y: 146, ly: 124, t: 1.1 },
+          { d: "M208 230 H226", x: 208, y: 230, ly: 232, t: 1.8 },
+          { d: "M210 160 H226", x: 210, y: 160, ly: 176, t: 2.8 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// PRP facial: plasma aplicado en microinyecciones; la piel se renueva y gana luminosidad.
+function FacePrpDiagram({ labels }: { labels: ArtLabel[] }) {
+  const FACE = "M120 96 C 162 96, 182 132, 178 172 C 174 206, 156 246, 120 252 C 84 246, 66 206, 62 172 C 58 132, 78 96, 120 96 Z";
+  const dots: number[][] = [];
+  for (const [cx, cy] of [[90, 192], [150, 192], [120, 138]])
+    for (let i = 0; i < 5; i++) dots.push([cx + ((i % 3) - 1) * 9, cy + (Math.floor(i / 3) - 0.5) * 9]);
+  return (
+    <svg className="tx-svg" viewBox="0 88 374 210" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txFaceP" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#efe3d2" />
+        </linearGradient>
+        <radialGradient id="txGlowF">
+          <stop offset="0" stopColor="#fffaf2" stopOpacity="0.9" />
+          <stop offset="1" stopColor="#fffaf2" stopOpacity="0" />
+        </radialGradient>
+        <clipPath id="txFaceClip">
+          <path d={FACE} />
+        </clipPath>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M100 246 L 98 296 M140 246 L 142 296" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+        <path d={FACE} fill="url(#txFaceP)" stroke="#253035" strokeWidth="2.2" />
+      </g>
+      <g clipPath="url(#txFaceClip)">
+        <g className="tx-show" style={css({ "--d": 2.8 })}>
+          <circle cx="120" cy="180" r="70" fill="url(#txGlowF)" />
+        </g>
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.1 })}>
+        <FrontFace />
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <Tube x={192} y={186} h={56} />
+      </g>
+      {dots.map(([x, y], k) => (
+        <g key={k} className="tx-zone" style={css({ "--d": 1.5 + k * 0.05 })}>
+          <g className="tx-out" style={css({ "--d": 2.9 })}>
+            <circle cx={x} cy={y} r="2.4" fill="#be9d61" />
+          </g>
+        </g>
+      ))}
+      <path className="tx-spark" d="M152 150 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3z" fill="#be9d61" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M214 204 H226", x: 214, y: 204, ly: 206, t: 1.1 },
+          { d: "M159 192 L 200 140 H226", x: 159, y: 192, ly: 140, t: 1.9 },
+          { d: "M136 234 L 186 258 H226", x: 136, y: 234, ly: 262, t: 3.1 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+const PROFILE_FULL =
+  "M128 58 C 104 64, 94 84, 96 104 C 96 112, 92 116, 90 122 C 84 134, 70 144, 64 152 C 62 156, 70 160, 78 160 C 76 166, 70 170, 72 176 C 74 180, 78 182, 76 186 C 72 190, 70 194, 74 198 C 80 202, 84 206, 80 214 C 78 222, 82 230, 96 236 C 112 242, 128 244, 136 252 L 140 300";
+
+// Hilos tensores: los hilos se colocan bajo la piel y sostienen los tejidos hacia arriba.
+function ThreadLiftDiagram({ labels }: { labels: ArtLabel[] }) {
+  const threads = [
+    { d: "M172 128 L 106 206", t: 1.0 },
+    { d: "M176 138 L 116 232", t: 1.2 },
+    { d: "M180 150 L 132 250", t: 1.4 },
+  ];
+  return (
+    <svg className="tx-svg" viewBox="0 50 374 250" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txSkin3" x1="0" x2="1">
+          <stop offset="0" stopColor="#f6eee3" />
+          <stop offset="1" stopColor="#efe4d4" />
+        </linearGradient>
+      </defs>
+      <path className="tx-in" style={css({ "--d": 0 })} d={PROFILE_FULL + " L 214 300 C 206 270, 204 246, 210 220 C 220 180, 216 120, 196 92 C 180 68, 154 54, 128 58 Z"} fill="url(#txSkin3)" />
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.1 })} d={PROFILE_FULL} fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.4 })} d="M168 146 C 178 136, 190 146, 186 162 C 184 172, 176 174, 174 182" fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round" />
+      <g className="tx-in" style={css({ "--d": 0.5 })}>
+        <g className="tx-out" style={css({ "--d": 2.4 })} fill="none" stroke="#c9a98d" strokeWidth="2" strokeLinecap="round">
+          <path d="M92 222 C 104 240, 124 244, 140 238" />
+          <path d="M100 196 C 108 206, 118 210, 128 210" />
+        </g>
+      </g>
+      {threads.map((th, i) => (
+        <g key={i}>
+          <path className="tx-draw" pathLength={1} style={css({ "--d": th.t })} d={th.d} fill="none" stroke="#be9d61" strokeWidth="1.8" strokeLinecap="round" />
+        </g>
+      ))}
+      <g className="tx-show" style={css({ "--d": 1.9 })} fill="none" stroke="#be9d61" strokeWidth="1.3" strokeLinecap="round">
+        <path d="M150 156 l -2 7 M138 170 l -2 7 M126 184 l -2 7 M154 168 l -1 7 M142 186 l -1 7 M130 206 l -1 7 M160 184 l 0 7 M150 204 l 0 7 M142 224 l 0 7" />
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 2.7 })} d="M84 214 C 110 230, 150 226, 176 196" fill="none" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M172 128 L 206 120 H226", x: 172, y: 128, ly: 120, t: 1.6 },
+          { d: "M142 196 L 206 182 H226", x: 142, y: 196, ly: 182, t: 2.2 },
+          { d: "M160 214 L 206 246 H226", x: 160, y: 214, ly: 246, t: 3.0 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Bioestimulación: malla de hilos finos en la piel → se forma colágeno nuevo → la superficie se alisa.
+function BiostimDiagram({ labels }: { labels: ArtLabel[] }) {
+  const mesh = ["M36 172 L 112 252", "M76 172 L 152 252", "M116 172 L 192 252", "M196 172 L 120 252", "M156 172 L 80 252", "M116 172 L 40 252"];
+  const fibers = [[54, 196], [92, 214], [132, 190], [170, 212], [74, 238], [150, 240], [112, 226], [186, 188], [46, 224], [124, 252], [190, 236]];
+  return (
+    <svg className="tx-svg" viewBox="0 112 374 168" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txDerm" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f3e3d1" />
+          <stop offset="1" stopColor="#e8d2ba" />
+        </linearGradient>
+        <clipPath id="txDermClip">
+          <rect x="20" y="138" width="196" height="132" rx="18" />
+        </clipPath>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <rect x="20" y="138" width="196" height="132" rx="18" fill="url(#txDerm)" />
+        <rect x="20" y="138" width="196" height="20" rx="10" fill="#efd6c8" />
+      </g>
+      <g clipPath="url(#txDermClip)">
+        <g className="tx-in" style={css({ "--d": 0.2 })}>
+          <g className="tx-out" style={css({ "--d": 2.9 })}>
+            <path d="M20 141 C 36 134, 46 148, 62 141 C 78 134, 88 148, 104 141 C 120 134, 130 148, 146 141 C 162 134, 172 148, 188 141 C 200 136, 208 142, 216 141" fill="none" stroke="#c49a80" strokeWidth="2.2" />
+          </g>
+        </g>
+        <path className="tx-show" style={css({ "--d": 2.9 })} d="M20 140 H216" stroke="#d8b59c" strokeWidth="2.2" />
+        {mesh.map((d, k) => (
+          <g key={k} className="tx-soft" style={css({ "--d": 3.2 })}>
+            <path className="tx-draw" pathLength={1} style={css({ "--d": 0.6 + k * 0.1 })} d={d} stroke="#7d8b90" strokeWidth="1.5" strokeLinecap="round" />
+          </g>
+        ))}
+        {fibers.map(([x, y], k) => (
+          <path key={k} className="tx-show" style={css({ "--d": 1.9 + k * 0.09 })} d={`M${x - 11} ${y} q 5.5 -6 11 0 t 11 0`} fill="none" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" />
+        ))}
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M176 192 H226", x: 176, y: 192, ly: 188, t: 1.3 },
+          { d: "M161 240 L 206 250 H226", x: 161, y: 240, ly: 250, t: 2.6 },
+          { d: "M200 141 L 206 128 H226", x: 200, y: 141, ly: 128, t: 3.1 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
@@ -953,6 +1162,10 @@ const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = 
   "armonizacion-facial": HarmonyDiagram,
   "acido-hialuronico-rellenos": FillerDiagram,
   "rejuvenecimiento-facial": GlowDiagram,
+  "prp-capilar": HairPrpDiagram,
+  "prp-facial": FacePrpDiagram,
+  "lifting-hilos-tensores": ThreadLiftDiagram,
+  "bioestimulacion-colageno-hilos": BiostimDiagram,
 };
 
 const factIcons: Record<FactIcon, React.ReactNode> = {
@@ -970,6 +1183,7 @@ const factIcons: Record<FactIcon, React.ReactNode> = {
   people: <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M16.5 11a2.5 2.5 0 1 0 0-5M16 14.2c2.6.4 4.5 2.6 4.5 5.3" />,
   sparkle: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" />,
   sun: <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" />,
+  drop: <path d="M12 3c3.5 4.2 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8.5 7.2 12 3zM9.5 14.5a2.5 2.5 0 0 0 2.5 2.5" />,
   crown: <path d="M7 3.5c2-.8 3.5-.2 5 .8 1.5-1 3-1.6 5-.8 2.3 1 2.7 4 1.8 7.3L17 19c-.4 1.6-2.4 1.6-2.7 0L13 13.5c-.3-1.2-1.7-1.2-2 0L9.7 19c-.3 1.6-2.3 1.6-2.7 0l-1.8-8.2C4.3 7.5 4.7 4.5 7 3.5z" />,
 };
 
