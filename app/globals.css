@@ -11912,3 +11912,227 @@ body:has(.bk2-page) .wa-float {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* ───────── Infografía animada del tratamiento + datos clave ───────── */
+.tx {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.tx-art {
+  padding: 18px 14px 14px;
+  border-radius: 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 28px rgba(37, 48, 53, 0.06);
+}
+
+.tx-svg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.tx-t {
+  font-family: var(--f-title);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--slate);
+}
+
+.tx-s {
+  font-family: var(--f-body);
+  font-size: 9.5px;
+  fill: #7a8589;
+}
+
+.tx-cap {
+  margin: 10px 4px 0;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--slate);
+}
+
+/* Estado inicial (solo con JS) y secuencia al entrar en pantalla */
+.tx-art.js-anim .tx-in,
+.tx-art.js-anim .tx-screw,
+.tx-art.js-anim .tx-pilar,
+.tx-art.js-anim .tx-crown,
+.tx-art.js-anim .tx-lab,
+.tx-art.js-anim .tx-osseo circle,
+.tx-art.js-anim .tx-cap {
+  opacity: 0;
+}
+
+.tx-art.js-anim .tx-lead {
+  stroke-dashoffset: 1;
+}
+
+.tx-spark {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.tx-art.is-in .tx-in {
+  animation: bk2-rise 0.6s ease both;
+  animation-delay: calc(var(--d, 0) * 1s);
+}
+
+.tx-art.is-in .tx-screw {
+  animation: tx-screw 1s cubic-bezier(0.3, 0.7, 0.2, 1) 0.6s both;
+}
+
+.tx-art.is-in .tx-osseo circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tx-pop 0.4s ease both, tx-glow 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--k) * 0.09s + 1.6s), calc(var(--k) * 0.2s + 3.6s);
+}
+
+.tx-art.is-in .tx-pilar {
+  animation: tx-drop 0.6s cubic-bezier(0.3, 0.7, 0.2, 1) 2.1s both;
+}
+
+.tx-art.is-in .tx-crown {
+  animation: tx-crown 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) 2.7s both, br-float 3.6s ease-in-out 3.8s infinite;
+}
+
+.tx-art.is-in .tx-spark {
+  animation: br-spark 2.4s ease-in-out 3.6s infinite;
+}
+
+.tx-art.is-in .tx-lead {
+  animation: ic-draw 0.5s ease both;
+  animation-delay: calc(var(--d) * 1s);
+}
+
+.tx-art.is-in .tx-lab {
+  animation: tx-fade 0.5s ease both;
+  animation-delay: calc(var(--d) * 1s + 0.35s);
+}
+
+.tx-art.is-in .tx-cap {
+  animation: bk2-rise 0.6s ease 3.6s both;
+}
+
+@keyframes tx-screw {
+  0% { opacity: 0; transform: translateY(-80px); }
+  30% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes tx-drop {
+  from { opacity: 0; transform: translateY(-36px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes tx-crown {
+  0% { opacity: 0; transform: translateY(-56px); }
+  70% { opacity: 1; transform: translateY(3px); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes tx-pop {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes tx-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes tx-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Datos clave */
+.tx-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tx-facts li {
+  display: grid;
+  gap: 3px;
+  align-content: start;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.tx-facts strong {
+  margin-top: 8px;
+  font-size: 0.86rem;
+  color: var(--slate);
+}
+
+.tx-facts span:last-child {
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.tx-facts__ico {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--slate);
+}
+
+.tx-facts__ico svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--gold-soft);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tx-facts.js-anim li {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.tx-facts.is-in li {
+  animation: bk2-rise 0.55s ease both;
+  animation-delay: calc(var(--i) * 0.12s);
+}
+
+@media (min-width: 900px) {
+  .tx {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-art.js-anim *,
+  .tx-facts.js-anim li {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .tx-art .tx-spark {
+    opacity: 0 !important;
+  }
+}

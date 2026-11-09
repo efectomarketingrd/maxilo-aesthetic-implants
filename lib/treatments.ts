@@ -4,12 +4,15 @@
 
 import type { ServiceSlug } from "./content";
 import type { Locale } from "./site";
+import type { ArtLabel, Fact } from "@/components/TreatmentVisual";
 
 export type TreatmentDetail = {
   summary: string;
   what: string;
   forWho: string[];
   alert?: string; // aviso destacado (por ejemplo, urgencias)
+  art?: { labels: ArtLabel[]; caption?: string }; // infografía animada (components/TreatmentVisual)
+  facts?: Fact[]; // datos clave bajo "¿Qué es?"
   steps: { t: string; d: string }[];
   recovery: string;
   price?: { lines: { label: string; value: string }[]; note?: string };
@@ -37,6 +40,21 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Reemplace uno o varios dientes con una solución fija que se ve, se siente y funciona como un diente natural.",
       what: "Un implante dental es una pequeña pieza de titanio, compatible con el cuerpo, que se coloca en el hueso del maxilar y cumple la función de la raíz del diente. Una vez integrado al hueso, sobre él se fija una corona o una prótesis. Es la opción más estable para reponer dientes perdidos, porque no depende de los dientes vecinos ni se mueve al comer o hablar.",
+      art: {
+        labels: [
+          { t: "Corona", s: "hecha a medida" },
+          { t: "Pilar", s: "une corona e implante" },
+          { t: "Implante", s: "de titanio" },
+          { t: "Hueso", s: "se une al implante" },
+        ],
+        caption: "El implante cumple la función de la raíz: el hueso lo abraza y sobre él se fija la corona.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Sin dolor durante el procedimiento" },
+        { i: "titanium", t: "Titanio", s: "Material compatible con el cuerpo" },
+        { i: "fixed", t: "Fijo", s: "No se mueve al comer ni al hablar" },
+        { i: "crown", t: "Corona a medida", s: "Del color de sus dientes" },
+      ],
       forWho: [
         "Personas a las que les falta uno o varios dientes.",
         "Quienes usan dentadura removible y desean algo fijo y cómodo.",
@@ -60,6 +78,21 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Replace one or more teeth with a fixed solution that looks, feels and works like a natural tooth.",
       what: "A dental implant is a small, biocompatible titanium post placed in the jawbone that works as the root of a tooth. Once it has bonded with the bone, a crown or prosthesis is fixed on top. It is the most stable way to replace missing teeth, because it does not rely on neighboring teeth and does not move when you eat or speak.",
+      art: {
+        labels: [
+          { t: "Crown", s: "custom-made" },
+          { t: "Abutment", s: "joins crown and implant" },
+          { t: "Implant", s: "titanium" },
+          { t: "Bone", s: "bonds to the implant" },
+        ],
+        caption: "The implant works as the root: the bone grows around it and the crown is fixed on top.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "No pain during the procedure" },
+        { i: "titanium", t: "Titanium", s: "A biocompatible material" },
+        { i: "fixed", t: "Fixed", s: "Does not move when eating or speaking" },
+        { i: "crown", t: "Custom crown", s: "Matched to your teeth" },
+      ],
       forWho: [
         "People missing one or more teeth.",
         "Those who wear removable dentures and want something fixed and comfortable.",

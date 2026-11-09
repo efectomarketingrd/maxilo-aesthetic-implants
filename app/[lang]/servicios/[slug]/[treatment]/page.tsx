@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import CtaCard from "@/components/CtaCard";
 import InView from "@/components/InView";
 import ServiceIcon from "@/components/ServiceIcon";
+import TreatmentVisual from "@/components/TreatmentVisual";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { locales, site, type Locale } from "@/lib/site";
@@ -122,6 +123,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                 <p className="tr-p">{d.what}</p>
               </div>
             </div>
+            <TreatmentVisual slug={treatment} labels={d.art?.labels} caption={d.art?.caption} facts={d.facts} />
           </div>
         </section>
 
