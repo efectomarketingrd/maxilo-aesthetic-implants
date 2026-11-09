@@ -232,6 +232,9 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
             <InView className="br-cards br-cards--med">
               {b.aesthetic.map((m, i) => (
                 <article key={m.name} className="br-card br-card--med" style={{ "--i": i } as React.CSSProperties}>
+                  <span className="br-card__logo br-card__logo--med">
+                    <Image src={m.logo} alt={m.name} width={640} height={m.k === "toxin" ? 512 : 258} sizes="220px" />
+                  </span>
                   <span className={`br-chip br-chip--${m.k}`}>
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       {m.k === "toxin" ? (

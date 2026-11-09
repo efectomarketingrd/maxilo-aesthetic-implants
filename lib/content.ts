@@ -298,8 +298,8 @@ const es = {
     aestheticText: "La toxina botulínica, los rellenos de ácido hialurónico y los hilos que utilizamos son de laboratorios reconocidos y cuentan con registro sanitario. En su valoración, la doctora le indica el producto adecuado para su caso.",
     aestheticLead: "Productos de un laboratorio con más de 20 años de trayectoria, aplicados por la doctora según cada caso.",
     aesthetic: [
-      { k: "toxin", cat: "Toxina botulínica tipo A", name: "Neuronox", maker: "Medytox · Corea del Sur", d: "Suaviza las líneas de expresión de la frente, el entrecejo y el contorno de los ojos.", link: "medicina-estetica" },
-      { k: "filler", cat: "Ácido hialurónico", name: "Neuramis Deep", maker: "Medytox · Corea del Sur", d: "Relleno con lidocaína para dar volumen y suavizar surcos, con mayor comodidad durante la aplicación.", link: "medicina-estetica" },
+      { k: "toxin", cat: "Toxina botulínica tipo A", name: "Neuronox", logo: "/brand/marcas/neuronox.png", maker: "Medytox · Corea del Sur", d: "Suaviza las líneas de expresión de la frente, el entrecejo y el contorno de los ojos.", link: "medicina-estetica" },
+      { k: "filler", cat: "Ácido hialurónico", name: "Neuramis Deep", logo: "/brand/marcas/neuramis.png", maker: "Medytox · Corea del Sur", d: "Relleno con lidocaína para dar volumen y suavizar surcos, con mayor comodidad durante la aplicación.", link: "medicina-estetica" },
     ],
     aestheticNote: "Productos de uso médico, aplicados exclusivamente por la doctora tras una valoración.",
     skinTitle: "Cuidado de la piel",
@@ -927,8 +927,8 @@ const en: Dict = {
     aestheticText: "The botulinum toxin, hyaluronic acid fillers and threads we use come from recognized laboratories and hold health registration. At your assessment, the doctor will recommend the right product for your case.",
     aestheticLead: "Products from a laboratory with over 20 years of experience, applied by the doctor according to each case.",
     aesthetic: [
-      { k: "toxin", cat: "Botulinum toxin type A", name: "Neuronox", maker: "Medytox · South Korea", d: "Softens expression lines on the forehead, between the brows and around the eyes.", link: "medicina-estetica" },
-      { k: "filler", cat: "Hyaluronic acid", name: "Neuramis Deep", maker: "Medytox · South Korea", d: "Filler with lidocaine to add volume and smooth folds, with greater comfort during application.", link: "medicina-estetica" },
+      { k: "toxin", cat: "Botulinum toxin type A", name: "Neuronox", logo: "/brand/marcas/neuronox.png", maker: "Medytox · South Korea", d: "Softens expression lines on the forehead, between the brows and around the eyes.", link: "medicina-estetica" },
+      { k: "filler", cat: "Hyaluronic acid", name: "Neuramis Deep", logo: "/brand/marcas/neuramis.png", maker: "Medytox · South Korea", d: "Filler with lidocaine to add volume and smooth folds, with greater comfort during application.", link: "medicina-estetica" },
     ],
     aestheticNote: "Medical-use products, applied exclusively by the doctor after an assessment.",
     skinTitle: "Skincare",

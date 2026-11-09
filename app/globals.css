@@ -11528,3 +11528,11 @@ body:has(.bk2-page) .wa-float {
 .js-anim.br-med__art.is-in * {
   animation-play-state: running !important;
 }
+
+.br-card--med .br-card__logo--med {
+  background: var(--white);
+}
+
+.br-card__logo--med img {
+  max-height: 78px;
+}
