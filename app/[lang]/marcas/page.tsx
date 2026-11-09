@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CtaCard from "@/components/CtaCard";
 import InView from "@/components/InView";
+import BrandTabs from "@/components/BrandTabs";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { site, type Locale } from "@/lib/site";
@@ -169,6 +170,15 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
           </div>
         </section>
 
+        <BrandTabs
+          label={b.eyebrow}
+          tabs={[
+            {
+              id: "implantes",
+              label: b.tabs[0],
+              icon: <svg className="br-tabs__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10c1.7 0 3 1.4 3 3.2 0 2-1.2 3.3-2 4.8H6c-.8-1.5-2-2.8-2-4.8C4 4.4 5.3 3 7 3zM9 11v2h6v-2M9.5 13l.5 8h4l.5-8M9.6 15.5h4.8M9.8 18h4.4" /></svg>,
+              panel: (
+                <>
         {/* Implantes */}
         <section className="ab-sec">
           <div className="container br-wrap">
@@ -217,8 +227,17 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
           </div>
         </section>
 
+                </>
+              ),
+            },
+            {
+              id: "estetica",
+              label: b.tabs[1],
+              icon: <svg className="br-tabs__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v3h4V3M8 6h8v13a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2zM8 11h8" /></svg>,
+              panel: (
+                <>
         {/* Medicina estética */}
-        <section className="ab-sec ab-sec--white">
+        <section className="ab-sec">
           <div className="container br-wrap">
             <div className="br-med">
               <InView className="br-med__art">
@@ -258,7 +277,15 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
           </div>
         </section>
 
-        {/* Cuidado de la piel */}
+                </>
+              ),
+            },
+            {
+              id: "piel",
+              label: b.tabs[2],
+              icon: <svg className="br-tabs__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 4.2 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8.5 7.2 12 3z" /></svg>,
+              panel: (
+                <>
         <section className="ab-sec">
           <div className="container br-wrap">
             <div className="tr-card tr-card--dark">
@@ -266,9 +293,17 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
               <p className="br-skin">{b.skin.name}</p>
               <p className="tr-price__note br-skin__t">{b.skin.text}</p>
             </div>
-            <p className="tr-review br-legal">{b.legal}</p>
           </div>
         </section>
+                </>
+              ),
+            },
+          ]}
+        />
+
+        <div className="container br-wrap">
+          <p className="tr-review br-legal">{b.legal}</p>
+        </div>
 
         <CtaCard t={t} lang={lang} />
       </main>

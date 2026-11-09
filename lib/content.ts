@@ -264,6 +264,7 @@ const es = {
     text: "Materiales de fabricantes reconocidos, con respaldo internacional.",
     seals: ["Autorización FDA 510(k)", "Corea del Sur · Israel", "Registro sanitario"],
     metaDesc: "Implantes Cowellmedi (Corea del Sur) y AB Dental (Israel), productos de medicina estética con registro sanitario y cosmética Germaine de Capuccini en Maxilo Aesthetic Implants, Las Terrenas.",
+    tabs: ["Implantes", "Estética", "Piel"],
     implantsTitle: "Implantes dentales",
     implantsText: "Utilizamos sistemas de implantes de titanio de fabricantes con trayectoria internacional, cuyos sistemas cuentan con autorización 510(k) de la FDA de Estados Unidos.",
     implants: [
@@ -893,6 +894,7 @@ const en: Dict = {
     text: "Materials from recognized manufacturers, with international backing.",
     seals: ["FDA 510(k) cleared", "South Korea · Israel", "Health registration"],
     metaDesc: "Cowellmedi (South Korea) and AB Dental (Israel) implants, registered aesthetic medicine products and Germaine de Capuccini skincare at Maxilo Aesthetic Implants, Las Terrenas.",
+    tabs: ["Implants", "Aesthetics", "Skincare"],
     implantsTitle: "Dental implants",
     implantsText: "We use titanium implant systems from manufacturers with international experience, whose systems hold US FDA 510(k) clearance.",
     implants: [
