@@ -12230,3 +12230,12 @@ body:has(.bk2-page) .wa-float {
     opacity: 0 !important;
   }
 }
+
+/* Repetición de la infografía: se desvanece antes de volver a empezar */
+.tx-round {
+  transition: opacity 0.45s ease;
+}
+
+.tx-art.is-fading .tx-round {
+  opacity: 0;
+}

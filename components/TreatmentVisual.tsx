@@ -1,4 +1,5 @@
 import InView from "@/components/InView";
+import ReplayInView from "@/components/ReplayInView";
 
 // Infografía animada de cada tratamiento (debajo de "¿Qué es?") + franja de datos clave.
 // Las ilustraciones se eligen por el slug del tratamiento; los textos vienen de lib/treatments.ts.
@@ -292,10 +293,10 @@ export default function TreatmentVisual({ slug, labels, facts, caption }: { slug
   return (
     <div className="tx">
       {Art && labels && (
-        <InView className="tx-art">
+        <ReplayInView className="tx-art">
           <Art labels={labels} />
           {caption && <p className="tx-cap">{caption}</p>}
-        </InView>
+        </ReplayInView>
       )}
       {facts && facts.length > 0 && (
         <InView className="tx-facts">
