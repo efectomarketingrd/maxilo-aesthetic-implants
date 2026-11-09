@@ -952,6 +952,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Suavice las líneas de expresión de la frente, el entrecejo y el contorno de los ojos con un resultado natural.",
       what: "La toxina botulínica, conocida como bótox, relaja de forma temporal los músculos que forman las arrugas de expresión al gesticular. Así la piel se ve más lisa y el rostro más descansado, sin perder la expresión. Se aplica con microinyecciones en puntos precisos, en una sesión corta y sin cirugía.",
+      art: {
+        labels: [
+          { t: "Frente", s: "líneas horizontales" },
+          { t: "Entrecejo", s: "líneas verticales" },
+          { t: "Patas de gallo", s: "contorno de los ojos" },
+        ],
+        caption: "Microinyecciones en puntos precisos relajan el músculo y suavizan las líneas.",
+      },
+      facts: [
+        { i: "tag", t: "RD$28,000", s: "Incluye el retoque" },
+        { i: "time", t: "Efecto en días", s: "Completo a las 2 semanas" },
+        { i: "home", t: "Sin reposo", s: "Vuelve a sus actividades" },
+        { i: "follow", t: "3 a 4 meses", s: "Duración habitual del efecto" },
+      ],
       forWho: [
         "Personas con líneas en la frente, el entrecejo o las \"patas de gallo\".",
         "Quienes desean prevenir que las líneas de expresión se marquen más.",
@@ -978,6 +992,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Soften expression lines on the forehead, between the brows and around the eyes with a natural result.",
       what: "Botulinum toxin, known as Botox, temporarily relaxes the muscles that create expression lines when you make facial movements. The skin looks smoother and the face more rested, without losing your expression. It is applied with micro-injections at precise points, in a short session with no surgery.",
+      art: {
+        labels: [
+          { t: "Forehead", s: "horizontal lines" },
+          { t: "Frown lines", s: "between the brows" },
+          { t: "Crow's feet", s: "around the eyes" },
+        ],
+        caption: "Micro-injections at precise points relax the muscle and soften the lines.",
+      },
+      facts: [
+        { i: "tag", t: "RD$28,000", s: "Touch-up included" },
+        { i: "time", t: "Effect in days", s: "Complete at 2 weeks" },
+        { i: "home", t: "No downtime", s: "Back to your activities" },
+        { i: "follow", t: "3 to 4 months", s: "Usual duration of the effect" },
+      ],
       forWho: [
         "People with lines on the forehead, between the brows or crow's feet.",
         "Those who want to prevent expression lines from deepening.",
@@ -1010,6 +1038,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Un plan que combina tratamientos para equilibrar las proporciones de su rostro, sin cirugía.",
       what: "La armonización facial no es un solo tratamiento, sino un plan. La doctora analiza las proporciones de su rostro (frente, pómulos, nariz, labios, mentón y mandíbula) y combina técnicas como el bótox, el ácido hialurónico y los hilos para equilibrarlas. Por su formación en cirugía maxilofacial, conoce en detalle la estructura del rostro, lo que permite planificar cambios sutiles y naturales.",
+      art: {
+        labels: [
+          { t: "Proporciones", s: "tercios del rostro" },
+          { t: "Pómulos", s: "volumen y soporte" },
+          { t: "Mentón", s: "perfil equilibrado" },
+        ],
+        caption: "Se analizan las proporciones del rostro y se combinan tratamientos para equilibrarlas.",
+      },
+      facts: [
+        { i: "plan", t: "Plan a medida", s: "Según sus proporciones" },
+        { i: "follow", t: "Por etapas", s: "En una o varias citas" },
+        { i: "home", t: "Sin cirugía", s: "Vuelve a sus actividades" },
+        { i: "sparkle", t: "Resultado natural", s: "Se ve como usted, más armónico" },
+      ],
       forWho: [
         "Personas que sienten que algún rasgo no está en equilibrio con el resto del rostro.",
         "Quienes desean un cambio global y natural, no un solo detalle.",
@@ -1032,6 +1074,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "A plan that combines treatments to balance your facial proportions, without surgery.",
       what: "Facial harmonization is not a single treatment but a plan. The doctor analyzes your facial proportions (forehead, cheekbones, nose, lips, chin and jaw) and combines techniques such as Botox, hyaluronic acid and threads to balance them. Her training in maxillofacial surgery gives her detailed knowledge of the facial structure, which allows subtle, natural changes to be planned.",
+      art: {
+        labels: [
+          { t: "Proportions", s: "facial thirds" },
+          { t: "Cheekbones", s: "volume and support" },
+          { t: "Chin", s: "balanced profile" },
+        ],
+        caption: "Your facial proportions are analyzed and treatments are combined to balance them.",
+      },
+      facts: [
+        { i: "plan", t: "Tailored plan", s: "Based on your proportions" },
+        { i: "follow", t: "In stages", s: "One or several visits" },
+        { i: "home", t: "No surgery", s: "Back to your activities" },
+        { i: "sparkle", t: "Natural result", s: "You, more balanced" },
+      ],
       forWho: [
         "People who feel a feature is out of balance with the rest of the face.",
         "Those who want an overall, natural change rather than a single detail.",
@@ -1060,6 +1116,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Devuelva volumen e hidratación a labios, pómulos, mentón y surcos con un resultado inmediato y natural.",
       what: "El ácido hialurónico es una sustancia que el cuerpo produce de forma natural y que retiene agua en la piel. Con los años disminuye, y el rostro pierde volumen. Los rellenos de ácido hialurónico se aplican en zonas concretas para devolver volumen, perfilar o suavizar surcos. El producto que usamos incluye anestésico (lidocaína) para que la aplicación sea más cómoda. El precio es por área tratada.",
+      art: {
+        labels: [
+          { t: "Surcos", s: "se suavizan" },
+          { t: "Labios", s: "volumen natural" },
+          { t: "Hialurónico", s: "con anestésico incluido" },
+        ],
+        caption: "El ácido hialurónico devuelve volumen e hidratación donde el rostro lo ha perdido.",
+      },
+      facts: [
+        { i: "tag", t: "RD$30,000", s: "Por área" },
+        { i: "sparkle", t: "Resultado inmediato", s: "Se ve al terminar" },
+        { i: "anest", t: "Con lidocaína", s: "Aplicación más cómoda" },
+        { i: "plan", t: "Varias áreas", s: "Labios, pómulos, surcos y más" },
+      ],
       forWho: [
         "Pómulos que han perdido volumen.",
         "Labios que desea perfilar o hidratar.",
@@ -1087,6 +1157,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Restore volume and hydration to lips, cheeks, chin and folds with an immediate, natural result.",
       what: "Hyaluronic acid is a substance the body produces naturally that holds water in the skin. It decreases with age, and the face loses volume. Hyaluronic acid fillers are applied to specific areas to restore volume, contour or soften folds. The product we use contains an anesthetic (lidocaine) for a more comfortable application. The price is per area treated.",
+      art: {
+        labels: [
+          { t: "Folds", s: "softened" },
+          { t: "Lips", s: "natural volume" },
+          { t: "Hyaluronic", s: "with anesthetic" },
+        ],
+        caption: "Hyaluronic acid restores volume and hydration where the face has lost it.",
+      },
+      facts: [
+        { i: "tag", t: "RD$30,000", s: "Per area" },
+        { i: "sparkle", t: "Immediate result", s: "Visible right away" },
+        { i: "anest", t: "With lidocaine", s: "A more comfortable application" },
+        { i: "plan", t: "Several areas", s: "Lips, cheeks, folds and more" },
+      ],
       forWho: [
         "Cheekbones that have lost volume.",
         "Lips you want to contour or hydrate.",
@@ -1120,6 +1204,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Protocolos para mejorar la textura, la firmeza y la luminosidad de la piel, adaptados a su tipo de piel.",
       what: "Con el tiempo, el sol y el estrés, la piel pierde luminosidad, firmeza y uniformidad. El rejuvenecimiento facial reúne tratamientos que trabajan la calidad de la piel desde distintos ángulos. La doctora diseña el protocolo según su tipo de piel y lo que desea mejorar, y lo complementa con productos profesionales para el cuidado en casa.",
+      art: {
+        labels: [
+          { t: "Textura", s: "más uniforme" },
+          { t: "Luminosidad", s: "brillo natural" },
+          { t: "Firmeza", s: "líneas finas suavizadas" },
+        ],
+        caption: "Un protocolo a medida mejora la textura, la firmeza y la luminosidad de la piel.",
+      },
+      facts: [
+        { i: "plan", t: "Protocolo a medida", s: "Según su tipo de piel" },
+        { i: "time", t: "Por sesiones", s: "La doctora indica la frecuencia" },
+        { i: "home", t: "Sin reposo", s: "Vuelve a sus actividades" },
+        { i: "sun", t: "Protector solar", s: "Todos los días" },
+      ],
       forWho: [
         "Personas con piel opaca, cansada o con textura irregular.",
         "Quienes notan pérdida de firmeza o líneas finas.",
@@ -1142,6 +1240,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Protocols to improve skin texture, firmness and radiance, adapted to your skin type.",
       what: "Over time, sun and stress make the skin lose radiance, firmness and evenness. Facial rejuvenation brings together treatments that work on skin quality from different angles. The doctor designs the protocol around your skin type and what you want to improve, and complements it with professional products for home care.",
+      art: {
+        labels: [
+          { t: "Texture", s: "more even" },
+          { t: "Radiance", s: "natural glow" },
+          { t: "Firmness", s: "fine lines softened" },
+        ],
+        caption: "A tailored protocol improves skin texture, firmness and radiance.",
+      },
+      facts: [
+        { i: "plan", t: "Tailored protocol", s: "Based on your skin type" },
+        { i: "time", t: "In sessions", s: "The doctor sets the frequency" },
+        { i: "home", t: "No downtime", s: "Back to your activities" },
+        { i: "sun", t: "Sunscreen", s: "Every day" },
+      ],
       forWho: [
         "People with dull, tired or uneven skin.",
         "Those noticing a loss of firmness or fine lines.",

@@ -5,7 +5,7 @@ import ReplayInView from "@/components/ReplayInView";
 // Las ilustraciones se eligen por el slug del tratamiento; los textos vienen de lib/treatments.ts.
 
 export type ArtLabel = { t: string; s: string };
-export type FactIcon = "anest" | "titanium" | "fixed" | "crown" | "xray" | "home" | "tag" | "plan" | "follow" | "scar" | "time" | "band" | "people";
+export type FactIcon = "anest" | "titanium" | "fixed" | "crown" | "xray" | "home" | "tag" | "plan" | "follow" | "scar" | "time" | "band" | "people" | "sparkle" | "sun";
 export type Fact = { i: FactIcon; t: string; s: string };
 
 const css = (v: Record<string, string | number>) => v as React.CSSProperties;
@@ -697,6 +697,246 @@ function WartsDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// ───────── Medicina estética ─────────
+function SkinBg({ id }: { id: string }) {
+  return (
+    <radialGradient id={id}>
+      <stop offset="0" stopColor="#f6ede1" />
+      <stop offset="0.8" stopColor="#f3e8da" stopOpacity="0.85" />
+      <stop offset="1" stopColor="#f3e8da" stopOpacity="0" />
+    </radialGradient>
+  );
+}
+
+// Bótox: líneas de expresión → microinyecciones en puntos precisos → las líneas se suavizan.
+function BotoxDiagram({ labels }: { labels: ArtLabel[] }) {
+  const lines = [
+    "M54 112 C 90 104, 150 104, 186 112",
+    "M58 126 C 92 119, 148 119, 182 126",
+    "M64 140 C 96 134, 144 134, 176 140",
+    "M112 150 L 114 166",
+    "M128 150 L 126 166",
+    "M206 184 l 12 -7 M208 193 l 14 0 M206 202 l 12 7",
+    "M34 184 l -12 -7 M32 193 l -14 0 M34 202 l -12 7",
+  ];
+  const dots = [
+    [84, 119], [120, 116], [156, 119], [120, 158], [214, 193], [26, 193],
+  ];
+  return (
+    <svg className="tx-svg" viewBox="0 84 374 176" role="img" aria-label={aria(labels)}>
+      <defs>
+        <SkinBg id="txBotoxBg" />
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <ellipse cx="120" cy="170" rx="122" ry="88" fill="url(#txBotoxBg)" />
+        <g fill="none" stroke="#5a4c42" strokeWidth="5.5" strokeLinecap="round">
+          <path d="M40 172 C 60 162, 84 160, 104 168" />
+          <path d="M136 168 C 156 160, 180 162, 200 172" />
+        </g>
+        <g fill="#fff" stroke="#253035" strokeWidth="2.2">
+          <path d="M46 196 C 60 182, 84 182, 98 196 C 84 208, 60 208, 46 196 Z" />
+          <path d="M142 196 C 156 182, 180 182, 194 196 C 180 208, 156 208, 142 196 Z" />
+        </g>
+        <circle cx="72" cy="195" r="7" fill="#4d5d63" />
+        <circle cx="168" cy="195" r="7" fill="#4d5d63" />
+      </g>
+      {/* líneas de expresión */}
+      {lines.map((d, k) => (
+        <g key={k} className="tx-soft" style={css({ "--d": 2.7 })}>
+          <path className="tx-draw" pathLength={1} style={css({ "--d": 0.3 + k * 0.08 })} d={d} fill="none" stroke="#c49a80" strokeWidth="2" strokeLinecap="round" />
+        </g>
+      ))}
+      {/* microinyecciones */}
+      {dots.map(([x, y], k) => (
+        <g key={k} className="tx-zone" style={css({ "--d": 1.4 + k * 0.15 })}>
+          <circle cx={x} cy={y} r="8" fill="rgba(190,157,97,0.25)" />
+          <circle cx={x} cy={y} r="3" fill="#be9d61" />
+        </g>
+      ))}
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M186 112 L 206 112 H226", x: 186, y: 112, ly: 112, t: 0.9 },
+          { d: "M128 158 L 206 160 H226", x: 128, y: 158, ly: 160, t: 1.3 },
+          { d: "M220 200 L 214 226 H226", x: 220, y: 200, ly: 226, t: 1.7 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Armonización facial: guías de proporción (tercios) y zonas que se trabajan en conjunto.
+function HarmonyDiagram({ labels }: { labels: ArtLabel[] }) {
+  const FACE = "M120 96 C 162 96, 182 132, 178 172 C 174 206, 156 246, 120 252 C 84 246, 66 206, 62 172 C 58 132, 78 96, 120 96 Z";
+  const guides = [112, 166, 198, 250];
+  const zones = [
+    { x: 88, y: 186, t: 2.0 },
+    { x: 152, y: 186, t: 2.2 },
+    { x: 120, y: 216, t: 2.5 },
+    { x: 120, y: 240, t: 2.8 },
+  ];
+  return (
+    <svg className="tx-svg" viewBox="0 88 374 214" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txFaceH" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#efe3d2" />
+        </linearGradient>
+        <radialGradient id="txZoneH">
+          <stop offset="0" stopColor="rgba(190,157,97,0.5)" />
+          <stop offset="1" stopColor="rgba(190,157,97,0)" />
+        </radialGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M100 246 L 98 300 M140 246 L 142 300" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+        <path d={FACE} fill="url(#txFaceH)" stroke="#253035" strokeWidth="2.2" />
+        <FrontFace />
+      </g>
+      {guides.map((y, k) => (
+        <path key={y} className="tx-draw" pathLength={1} style={css({ "--d": 0.6 + k * 0.2 })} d={`M40 ${y} H200`} stroke="#be9d61" strokeWidth="1.2" strokeDasharray="1" />
+      ))}
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 1.4 })} d="M120 100 V 256" stroke="#be9d61" strokeWidth="1" opacity="0.6" />
+      {zones.map((z, k) => (
+        <g key={k} className="tx-zone" style={css({ "--d": z.t })}>
+          <circle cx={z.x} cy={z.y} r="16" fill="url(#txZoneH)" />
+          <circle cx={z.x} cy={z.y} r="3.4" fill="#be9d61" />
+        </g>
+      ))}
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M200 112 H226", x: 200, y: 112, ly: 116, t: 1.2 },
+          { d: "M152 186 L 206 182 H226", x: 152, y: 186, ly: 182, t: 2.3 },
+          { d: "M120 240 L 206 254 H226", x: 120, y: 240, ly: 254, t: 2.9 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Ácido hialurónico: los labios ganan volumen y los surcos se suavizan.
+function FillerDiagram({ labels }: { labels: ArtLabel[] }) {
+  const drops = [
+    [100, 200, 1.4], [140, 200, 1.55], [78, 168, 1.7], [162, 168, 1.85],
+  ];
+  return (
+    <svg className="tx-svg" viewBox="0 100 374 172" role="img" aria-label={aria(labels)}>
+      <defs>
+        <SkinBg id="txFillBg" />
+        <linearGradient id="txLip" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#d9958a" />
+          <stop offset="1" stopColor="#c47c72" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <ellipse cx="120" cy="184" rx="120" ry="86" fill="url(#txFillBg)" />
+        <g fill="none" stroke="#253035" strokeWidth="2" strokeLinecap="round">
+          <path d="M100 132 C 108 142, 132 142, 140 132" />
+          <path d="M96 128 q -6 -10 4 -14 M144 128 q 6 -10 -4 -14" />
+        </g>
+      </g>
+      {/* surcos */}
+      <g className="tx-soft" style={css({ "--d": 2.5 })}>
+        <g className="tx-in" style={css({ "--d": 0.3 })} fill="none" stroke="#c49a80" strokeWidth="2.4" strokeLinecap="round">
+          <path d="M88 142 C 74 160, 68 178, 72 196" />
+          <path d="M152 142 C 166 160, 172 178, 168 196" />
+        </g>
+      </g>
+      {/* labios */}
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <g className="tx-plump">
+          <path d="M80 200 C 94 190, 108 186, 120 192 C 132 186, 146 190, 160 200 C 146 204, 132 206, 120 204 C 108 206, 94 204, 80 200 Z" fill="url(#txLip)" />
+          <path d="M82 202 C 94 206, 108 208, 120 208 C 132 208, 146 206, 158 202 C 148 222, 132 228, 120 228 C 108 228, 92 222, 82 202 Z" fill="url(#txLip)" />
+          <path d="M80 201 C 100 205, 140 205, 160 201" fill="none" stroke="#a5645c" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M104 214 q 10 4 22 0" fill="none" stroke="#f3cfc6" strokeWidth="2.4" strokeLinecap="round" opacity="0.8" />
+        </g>
+      </g>
+      {/* gotas de ácido hialurónico */}
+      {drops.map(([x, y, t], k) => (
+        <g key={k} className="tx-zone" style={css({ "--d": t })}>
+          <g className="tx-out" style={css({ "--d": 2.9 })}>
+            <path d={`M${x} ${y - 7} c 3 4, 5 6, 5 8.5 a 5 5 0 0 1 -10 0 c 0 -2.5, 2 -4.5, 5 -8.5z`} fill="#be9d61" opacity="0.85" />
+          </g>
+        </g>
+      ))}
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M170 176 L 206 140 H226", x: 170, y: 176, ly: 140, t: 1.0 },
+          { d: "M160 204 L 206 196 H226", x: 160, y: 204, ly: 196, t: 2.4 },
+          { d: "M140 200 L 206 250 H226", x: 140, y: 200, ly: 250, t: 1.8 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Rejuvenecimiento: una lupa sobre la piel; pasa un brillo, la textura se uniforma y aparece la luminosidad.
+function GlowDiagram({ labels }: { labels: ArtLabel[] }) {
+  const spots = [
+    [86, 160, 3], [110, 150, 2.4], [142, 166, 3.2], [96, 204, 2.6], [130, 214, 3], [158, 196, 2.4], [116, 182, 2],
+  ];
+  const fine = ["M84 176 q 10 -4 20 0", "M126 150 q 10 -4 20 0", "M134 232 q 10 -4 20 0", "M70 196 q 8 -3 16 0"];
+  return (
+    <svg className="tx-svg" viewBox="0 100 374 190" role="img" aria-label={aria(labels)}>
+      <defs>
+        <clipPath id="txLens">
+          <circle cx="118" cy="190" r="72" />
+        </clipPath>
+        <linearGradient id="txLensSkin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#efe1cf" />
+          <stop offset="1" stopColor="#e6d4be" />
+        </linearGradient>
+        <linearGradient id="txSweep" x1="0" x2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#fff" stopOpacity="0.85" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <radialGradient id="txGlowR">
+          <stop offset="0" stopColor="#fffaf2" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#fffaf2" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M168 240 L 200 272" stroke="#253035" strokeWidth="10" strokeLinecap="round" />
+        <circle cx="118" cy="190" r="72" fill="url(#txLensSkin)" />
+      </g>
+      <g clipPath="url(#txLens)">
+        {spots.map(([x, y, r], k) => (
+          <g key={k} className="tx-in" style={css({ "--d": 0.3 + k * 0.06 })}>
+            <g className="tx-out" style={css({ "--d": 2.4 + k * 0.08 })}>
+              <circle cx={x} cy={y} r={r} fill="#c9a184" opacity="0.7" />
+            </g>
+          </g>
+        ))}
+        {fine.map((d, k) => (
+          <g key={k} className="tx-in" style={css({ "--d": 0.6 + k * 0.08 })}>
+            <g className="tx-out" style={css({ "--d": 2.6 })}>
+              <path d={d} fill="none" stroke="#b89076" strokeWidth="1.6" strokeLinecap="round" />
+            </g>
+          </g>
+        ))}
+        <g className="tx-show" style={css({ "--d": 2.5 })}>
+          <circle cx="132" cy="176" r="58" fill="url(#txGlowR)" />
+        </g>
+        <g className="tx-sweep">
+          <rect x="20" y="110" width="60" height="170" fill="url(#txSweep)" transform="rotate(18 50 195)" />
+        </g>
+      </g>
+      <circle className="tx-in" style={css({ "--d": 0 })} cx="118" cy="190" r="72" fill="none" stroke="#253035" strokeWidth="4" />
+      <path className="tx-spark" d="M150 150 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3z" fill="#be9d61" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M96 166 L 206 132 H226", x: 96, y: 166, ly: 132, t: 1.0 },
+          { d: "M150 196 L 206 190 H226", x: 150, y: 196, ly: 190, t: 3.0 },
+          { d: "M134 228 L 206 250 H226", x: 134, y: 228, ly: 250, t: 1.4 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
@@ -709,6 +949,10 @@ const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = 
   "lifting-facial-cuello": FaceliftDiagram,
   lobuloplastia: EarlobeDiagram,
   "eliminacion-verrugas": WartsDiagram,
+  botox: BotoxDiagram,
+  "armonizacion-facial": HarmonyDiagram,
+  "acido-hialuronico-rellenos": FillerDiagram,
+  "rejuvenecimiento-facial": GlowDiagram,
 };
 
 const factIcons: Record<FactIcon, React.ReactNode> = {
@@ -724,6 +968,8 @@ const factIcons: Record<FactIcon, React.ReactNode> = {
   time: <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5V12l3 2" />,
   band: <path d="M3.5 9.5h17v5h-17zM8 9.5v5M16 9.5v5M11 12h2" />,
   people: <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M16.5 11a2.5 2.5 0 1 0 0-5M16 14.2c2.6.4 4.5 2.6 4.5 5.3" />,
+  sparkle: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z" />,
+  sun: <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" />,
   crown: <path d="M7 3.5c2-.8 3.5-.2 5 .8 1.5-1 3-1.6 5-.8 2.3 1 2.7 4 1.8 7.3L17 19c-.4 1.6-2.4 1.6-2.7 0L13 13.5c-.3-1.2-1.7-1.2-2 0L9.7 19c-.3 1.6-2.3 1.6-2.7 0l-1.8-8.2C4.3 7.5 4.7 4.5 7 3.5z" />,
 };
 
