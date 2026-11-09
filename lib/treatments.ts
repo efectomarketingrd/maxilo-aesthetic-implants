@@ -1635,6 +1635,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Tratamiento de fracturas de la mandíbula, los pómulos, la nariz y otras lesiones de la cara, cuidando la función y la estética.",
       what: "Un golpe, una caída, un accidente de tránsito o una práctica deportiva pueden fracturar los huesos de la cara o lesionar sus tejidos. El tratamiento busca devolver los huesos a su posición, recuperar la mordida, la respiración y la movilidad, y lograr que el rostro conserve su forma. La doctora se formó como cirujana maxilofacial con residencia en el Hospital Dr. Darío Contreras, centro de referencia en traumatología del país.",
+      art: {
+        labels: [
+          { t: "Fractura", s: "el hueso se desplaza" },
+          { t: "Placa", s: "titanio, fija el hueso" },
+          { t: "Consolidación", s: "el hueso se une" },
+        ],
+        caption: "El hueso vuelve a su posición y se fija con placas de titanio mientras consolida.",
+      },
+      facts: [
+        { i: "xray", t: "Diagnóstico preciso", s: "Radiografía o tomografía" },
+        { i: "titanium", t: "Placas de titanio", s: "Pueden quedarse de por vida" },
+        { i: "time", t: "Consolidación", s: "El hueso tarda varias semanas" },
+        { i: "follow", t: "Controles", s: "Hasta recuperar la función" },
+      ],
       forWho: [
         "Fracturas de mandíbula, maxilar, pómulos, nariz o del contorno de los ojos.",
         "Dientes que ya no encajan como antes después de un golpe.",
@@ -1659,6 +1673,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Treatment of fractures of the jaw, cheekbones, nose and other facial injuries, caring for both function and appearance.",
       what: "A blow, a fall, a traffic accident or a sports injury can fracture the facial bones or damage the facial tissues. Treatment aims to return the bones to their position, restore the bite, breathing and movement, and preserve the shape of the face. The doctor trained as a maxillofacial surgeon with a residency at Hospital Dr. Darío Contreras, the country's reference center for trauma.",
+      art: {
+        labels: [
+          { t: "Fracture", s: "displaced bone" },
+          { t: "Plate", s: "titanium fixation" },
+          { t: "Healing", s: "the bone knits" },
+        ],
+        caption: "The bone is returned to its position and fixed with titanium plates while it heals.",
+      },
+      facts: [
+        { i: "xray", t: "Precise diagnosis", s: "X-ray or CT scan" },
+        { i: "titanium", t: "Titanium plates", s: "Can stay for life" },
+        { i: "time", t: "Bone healing", s: "Takes several weeks" },
+        { i: "follow", t: "Follow-up", s: "Until function is restored" },
+      ],
       forWho: [
         "Fractures of the jaw, upper jaw, cheekbones, nose or around the eyes.",
         "Teeth that no longer fit together as before after a blow.",
@@ -1689,6 +1717,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Corrección de alteraciones en el desarrollo de los maxilares y la cara para mejorar la mordida, la función y la armonía del rostro.",
       what: "Algunas personas nacen o crecen con los maxilares en una posición o tamaño que no corresponde: la mandíbula muy adelantada o atrasada, una mordida abierta o un rostro asimétrico. Estas alteraciones pueden afectar la masticación, la respiración, el habla y la apariencia. La cirugía de los maxilares (cirugía ortognática) los reposiciona para que la mordida y el rostro queden en equilibrio. Por lo general se planifica junto con el ortodoncista.",
+      art: {
+        labels: [
+          { t: "Mandíbula", s: "adelantada" },
+          { t: "Nueva posición", s: "mordida equilibrada" },
+          { t: "Perfil", s: "más armónico" },
+        ],
+        caption: "La cirugía reposiciona los maxilares para que la mordida y el perfil queden en equilibrio.",
+      },
+      facts: [
+        { i: "plan", t: "Con ortodoncia", s: "Antes y después de la cirugía" },
+        { i: "xray", t: "Planificación digital", s: "Con estudios y tomografía" },
+        { i: "scar", t: "Sin cicatriz visible", s: "Incisiones dentro de la boca" },
+        { i: "follow", t: "Función y armonía", s: "Masticar, respirar y hablar mejor" },
+      ],
       forWho: [
         "Mandíbula muy adelantada (prognatismo) o muy atrasada (retrognatismo).",
         "Mordida abierta o dientes que no encajan aunque se haya hecho ortodoncia.",
@@ -1713,6 +1755,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Correction of developmental changes of the jaws and face to improve the bite, function and facial harmony.",
       what: "Some people are born with or develop jaws in a position or size that does not match: a jaw that sits too far forward or back, an open bite or an asymmetric face. These conditions can affect chewing, breathing, speech and appearance. Jaw surgery (orthognathic surgery) repositions the jaws so the bite and the face are in balance. It is usually planned together with the orthodontist.",
+      art: {
+        labels: [
+          { t: "Lower jaw", s: "too far forward" },
+          { t: "New position", s: "balanced bite" },
+          { t: "Profile", s: "more harmonious" },
+        ],
+        caption: "Surgery repositions the jaws so the bite and the profile are in balance.",
+      },
+      facts: [
+        { i: "plan", t: "With orthodontics", s: "Before and after surgery" },
+        { i: "xray", t: "Digital planning", s: "With records and CT scan" },
+        { i: "scar", t: "No visible scar", s: "Incisions inside the mouth" },
+        { i: "follow", t: "Function and harmony", s: "Chew, breathe and speak better" },
+      ],
       forWho: [
         "A lower jaw too far forward (prognathism) or too far back (retrognathism).",
         "An open bite, or teeth that do not fit together even after orthodontics.",
@@ -1743,6 +1799,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Recupere la forma y la función de los maxilares y el rostro después de una lesión, una enfermedad o la pérdida de hueso.",
       what: "La reconstrucción maxilofacial restaura estructuras de la cara y los maxilares que se han perdido o dañado: hueso que desapareció tras perder dientes, defectos que quedan después de retirar quistes o lesiones, o secuelas de traumatismos. Para ello se utilizan injertos de hueso, materiales de regeneración y, cuando conviene, derivados de la propia sangre del paciente que favorecen la cicatrización. El objetivo es devolver la función y preparar el terreno, por ejemplo, para colocar implantes.",
+      art: {
+        labels: [
+          { t: "Defecto", s: "hueso perdido" },
+          { t: "Injerto", s: "rellena el espacio" },
+          { t: "Hueso nuevo", s: "listo para implantes" },
+        ],
+        caption: "El injerto rellena el hueso perdido y, al integrarse, permite colocar implantes.",
+      },
+      facts: [
+        { i: "xray", t: "Tomografía", s: "Para medir el defecto" },
+        { i: "plan", t: "Injerto a medida", s: "Hueso propio o material aprobado" },
+        { i: "time", t: "Integración", s: "Varios meses" },
+        { i: "titanium", t: "Implantes después", s: "Si el plan lo incluye" },
+      ],
       forWho: [
         "Pérdida de hueso en los maxilares que impide colocar implantes.",
         "Defectos después de retirar quistes, tumores benignos u otras lesiones.",
@@ -1766,6 +1836,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Restore the form and function of the jaws and face after an injury, a disease or bone loss.",
       what: "Maxillofacial reconstruction restores facial and jaw structures that have been lost or damaged: bone that disappeared after losing teeth, defects left after removing cysts or lesions, or after-effects of trauma. Bone grafts, regenerative materials and, when appropriate, concentrates from the patient's own blood that support healing are used. The goal is to restore function and prepare the ground, for example, for dental implants.",
+      art: {
+        labels: [
+          { t: "Defect", s: "lost bone" },
+          { t: "Graft", s: "fills the space" },
+          { t: "New bone", s: "ready for implants" },
+        ],
+        caption: "The graft fills the lost bone and, once integrated, allows implants to be placed.",
+      },
+      facts: [
+        { i: "xray", t: "CT scan", s: "To measure the defect" },
+        { i: "plan", t: "Tailored graft", s: "Your own bone or approved material" },
+        { i: "time", t: "Integration", s: "Several months" },
+        { i: "titanium", t: "Implants later", s: "If the plan includes them" },
+      ],
       forWho: [
         "Bone loss in the jaws that prevents placing implants.",
         "Defects after removing cysts, benign tumors or other lesions.",

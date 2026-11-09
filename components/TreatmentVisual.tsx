@@ -1146,6 +1146,182 @@ function BiostimDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// ───────── Cirugía reconstructiva ─────────
+const MANDIBLE =
+  "M36 204 C 30 224, 42 246, 72 248 L 176 246 C 192 244, 202 232, 204 214 L 210 140 C 212 126, 202 118, 194 122 C 188 126, 190 138, 186 146 L 178 196 L 52 198 C 44 198, 38 200, 36 204 Z";
+
+function JawPiece({ teeth }: { teeth: number[] }) {
+  return (
+    <>
+      <path d={MANDIBLE} fill="url(#txBoneJ)" stroke="#c9b48c" strokeWidth="2" />
+      {teeth.map((x) => (
+        <rect key={x} x={x} y="176" width="16" height="24" rx="6" fill="#fff" stroke="#d6cdbd" strokeWidth="1.6" />
+      ))}
+    </>
+  );
+}
+
+// Fracturas: el hueso desplazado vuelve a su sitio, se fija con una placa de titanio y consolida.
+function FractureDiagram({ labels }: { labels: ArtLabel[] }) {
+  return (
+    <svg className="tx-svg" viewBox="0 104 374 160" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txBoneJ" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f3e9d8" />
+          <stop offset="1" stopColor="#e6d6bc" />
+        </linearGradient>
+        <linearGradient id="txTi2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#e9eef0" />
+          <stop offset="1" stopColor="#8f9ca1" />
+        </linearGradient>
+        <clipPath id="txFracL">
+          <polygon points="0,100 112,100 110,198 104,212 114,226 106,250 106,300 0,300" />
+        </clipPath>
+        <clipPath id="txFracR">
+          <polygon points="112,100 260,100 260,300 106,300 106,250 114,226 104,212 110,198" />
+        </clipPath>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <g clipPath="url(#txFracR)">
+          <JawPiece teeth={[118, 138, 158]} />
+        </g>
+      </g>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <g className="tx-frac">
+          <g clipPath="url(#txFracL)">
+            <JawPiece teeth={[54, 74, 94]} />
+          </g>
+        </g>
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.4 })}>
+        <g className="tx-out" style={css({ "--d": 3.3 })}>
+          <path d="M110 198 L 104 212 L 114 226 L 106 248" fill="none" stroke="#b5574e" strokeWidth="2" strokeLinejoin="round" />
+        </g>
+      </g>
+      {/* placa de titanio */}
+      <g className="tx-show" style={css({ "--d": 2.2 })}>
+        <rect x="84" y="226" width="52" height="10" rx="5" fill="url(#txTi2)" stroke="#7f8d92" strokeWidth="1" />
+      </g>
+      {[92, 103, 117, 128].map((x, k) => (
+        <g key={x} className="tx-zone" style={css({ "--d": 2.5 + k * 0.12 })}>
+          <circle cx={x} cy="231" r="3" fill="#66757a" />
+        </g>
+      ))}
+      <path className="tx-spark" d="M150 160 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3z" fill="#be9d61" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M106 246 L 206 252 H226", x: 106, y: 246, ly: 248, t: 0.8 },
+          { d: "M136 231 L 206 196 H226", x: 136, y: 231, ly: 196, t: 2.4 },
+          { d: "M112 206 L 206 140 H226", x: 112, y: 206, ly: 140, t: 3.4 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Malformaciones: la mandíbula adelantada se reposiciona y el perfil queda en equilibrio.
+const TOP2 =
+  "M90 122 C 84 134, 70 144, 64 152 C 62 156, 70 160, 78 160 C 76 166, 70 170, 72 176 C 74 180, 78 182, 76 186";
+const JAW_FWD = " C 64 192, 56 202, 60 212 C 62 224, 56 238, 70 248 C 90 260, 124 258, 136 266 L 140 310";
+const JAW_OK = " C 72 190, 70 194, 74 198 C 80 202, 84 206, 80 214 C 78 222, 82 230, 96 236 C 112 242, 128 244, 136 252 L 140 310";
+function OrthognathicDiagram({ labels }: { labels: ArtLabel[] }) {
+  const BACK2 = " L 232 310 L 232 110 L 92 110 Z";
+  return (
+    <svg className="tx-svg" viewBox="0 110 374 200" role="img" aria-label={aria(labels)}>
+      <defs>
+        <SkinDefs />
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <g className="tx-out" style={css({ "--d": 2.2 })}>
+          <path d={TOP2 + JAW_FWD + BACK2} fill="url(#txSkinH)" />
+          <path d={TOP2 + JAW_FWD} fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+        </g>
+      </g>
+      <g className="tx-show" style={css({ "--d": 2.2 })}>
+        <path d={TOP2 + JAW_OK + BACK2} fill="url(#txSkinH)" />
+        <path d={"M76 186" + JAW_FWD} fill="none" stroke="#be9d61" strokeWidth="1.5" strokeDasharray="4 4" />
+        <path d={TOP2 + JAW_OK} fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 1.1 })} d="M36 250 H 60" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" />
+      <path className="tx-show" style={css({ "--d": 1.6 })} d="M54 245 L 61 250 L 54 255" fill="none" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M66 244 L 200 268 H226", x: 66, y: 244, ly: 268, t: 0.8 },
+          { d: "M82 226 L 206 216 H226", x: 82, y: 226, ly: 216, t: 2.6 },
+          { d: "M90 124 L 206 156 H226", x: 90, y: 124, ly: 156, t: 3.0 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Reconstrucción: un defecto en el hueso se rellena con injerto, se regenera y queda listo para un implante.
+function GraftDiagram({ labels }: { labels: ArtLabel[] }) {
+  const NOTCH = "M90 172 C 96 214, 144 214, 150 172 Z";
+  const granules = [[104, 182], [116, 190], [128, 184], [138, 180], [110, 198], [124, 202], [134, 194], [98, 176], [120, 178], [142, 176]];
+  return (
+    <svg className="tx-svg" viewBox="0 96 374 200" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txBoneR" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f1e7d6" />
+          <stop offset="1" stopColor="#e8dbc4" />
+        </linearGradient>
+        <linearGradient id="txTi3" x1="0" x2="1">
+          <stop offset="0" stopColor="#8f9ca1" />
+          <stop offset="0.5" stopColor="#e9eef0" />
+          <stop offset="1" stopColor="#7f8d92" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M10 172 H 90 C 96 214, 144 214, 150 172 H 230 V 270 Q 230 290 210 290 H 30 Q 10 290 10 270 Z" fill="url(#txBoneR)" />
+        <g fill="#e0cfb2">
+          {[[30, 200], [60, 236], [40, 270], [180, 210], [206, 244], [170, 272], [110, 260], [146, 240]].map(([x, y], k) => (
+            <ellipse key={k} cx={x} cy={y} rx="7" ry="4.5" />
+          ))}
+        </g>
+        <path d="M10 160 C 40 146, 70 148, 90 158 L 150 158 C 170 148, 200 146, 230 160 L 230 174 L 150 174 C 144 166, 96 166, 90 174 L 10 174 Z" fill="#edd3c7" />
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.3 })}>
+        <g className="tx-out" style={css({ "--d": 1.6 })}>
+          <path d="M90 172 C 96 214, 144 214, 150 172" fill="none" stroke="#b89a6e" strokeWidth="2" strokeDasharray="3 3" />
+        </g>
+      </g>
+      {/* injerto */}
+      <g className="tx-show" style={css({ "--d": 1.5 })}>
+        <g className="tx-out" style={css({ "--d": 3.0 })}>
+          <path d={NOTCH} fill="rgba(190,157,97,0.35)" />
+        </g>
+      </g>
+      {granules.map(([x, y], k) => (
+        <g key={k} className="tx-zone" style={css({ "--d": 1.6 + k * 0.06 })}>
+          <g className="tx-out" style={css({ "--d": 3.0 })}>
+            <circle cx={x} cy={y} r="3.4" fill="#be9d61" />
+          </g>
+        </g>
+      ))}
+      {/* hueso regenerado */}
+      <g className="tx-show" style={css({ "--d": 3.0 })}>
+        <path d={NOTCH} fill="url(#txBoneR)" />
+        <ellipse cx="120" cy="192" rx="7" ry="4.5" fill="#e0cfb2" />
+      </g>
+      {/* listo para implante */}
+      <g className="tx-show" style={css({ "--d": 3.6 })}>
+        <path d="M107 168 H133 L128 238 Q120 250 112 238 Z" fill="none" stroke="#be9d61" strokeWidth="1.5" strokeDasharray="4 4" />
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M120 204 L 206 254 H226", x: 120, y: 204, ly: 254, t: 0.8 },
+          { d: "M142 182 L 206 196 H226", x: 142, y: 182, ly: 196, t: 1.8 },
+          { d: "M133 172 L 206 136 H226", x: 133, y: 172, ly: 136, t: 3.4 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
@@ -1166,6 +1342,9 @@ const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = 
   "prp-facial": FacePrpDiagram,
   "lifting-hilos-tensores": ThreadLiftDiagram,
   "bioestimulacion-colageno-hilos": BiostimDiagram,
+  "fracturas-traumatismos-faciales": FractureDiagram,
+  "malformaciones-faciales": OrthognathicDiagram,
+  "reconstruccion-maxilofacial": GraftDiagram,
 };
 
 const factIcons: Record<FactIcon, React.ReactNode> = {
