@@ -21,7 +21,7 @@ function ImplantDiagram({ labels }: { labels: ArtLabel[] }) {
     [98, 190], [142, 186], [100, 222], [140, 230], [104, 254], [136, 258], [112, 280], [128, 282],
   ];
   return (
-    <svg className="tx-svg" viewBox="0 56 340 240" role="img" aria-label={labels.map((l) => `${l.t} ${l.s}`).join(", ")}>
+    <svg className="tx-svg" viewBox="0 56 374 240" role="img" aria-label={labels.map((l) => `${l.t} ${l.s}`).join(", ")}>
       <defs>
         <linearGradient id="txTi" x1="0" x2="1">
           <stop offset="0" stopColor="#8f9ca1" />
@@ -132,7 +132,7 @@ const MOLAR =
 // Cordal retenida: la muela del juicio inclinada empuja al molar vecino; luego se retira y queda el espacio libre.
 function WisdomDiagram({ labels }: { labels: ArtLabel[] }) {
   return (
-    <svg className="tx-svg" viewBox="0 56 340 240" role="img" aria-label={labels.map((l) => `${l.t} ${l.s}`).join(", ")}>
+    <svg className="tx-svg" viewBox="0 56 374 240" role="img" aria-label={labels.map((l) => `${l.t} ${l.s}`).join(", ")}>
       <defs>
         <linearGradient id="txBone2" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#f1e7d6" />
@@ -211,7 +211,7 @@ function FaceZonesDiagram({ labels }: { labels: ArtLabel[] }) {
     { x: 120, y: 232, t: 3.3 }, // mandíbula
   ];
   return (
-    <svg className="tx-svg" viewBox="0 50 340 250" role="img" aria-label={labels.map((l) => `${l.t} ${l.s}`).join(", ")}>
+    <svg className="tx-svg" viewBox="0 50 374 250" role="img" aria-label={labels.map((l) => `${l.t} ${l.s}`).join(", ")}>
       <defs>
         <radialGradient id="txZone">
           <stop offset="0" stopColor="rgba(190,157,97,0.55)" />
