@@ -486,6 +486,217 @@ function EarDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// Cabeza de frente (rasgos y cabello) reutilizable
+function FrontFace() {
+  return (
+    <>
+      <path d="M68 168 C 62 112, 92 96, 120 96 C 148 96, 178 112, 172 168 C 166 132, 150 120, 120 120 C 90 120, 74 132, 68 168 Z" fill="#2e3b41" />
+      <g fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round">
+        <path d="M96 170 q 8 6 16 0 M128 170 q 8 6 16 0 M120 178 l -4 16 h 8 M108 214 q 12 8 24 0" />
+      </g>
+    </>
+  );
+}
+
+// Bichectomía: las bolsas de Bichat se reducen y el contorno de la cara se estiliza.
+function BuccalDiagram({ labels }: { labels: ArtLabel[] }) {
+  const BEFORE = "M120 96 C 162 96, 184 132, 184 176 C 184 224, 158 252, 120 252 C 82 252, 56 224, 56 176 C 56 132, 78 96, 120 96 Z";
+  const AFTER = "M120 96 C 162 96, 182 132, 178 172 C 174 206, 156 246, 120 252 C 84 246, 66 206, 62 172 C 58 132, 78 96, 120 96 Z";
+  return (
+    <svg className="tx-svg" viewBox="0 84 374 216" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txFaceV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#efe3d2" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M100 246 L 98 300 M140 246 L 142 300" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+      </g>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <g className="tx-out" style={css({ "--d": 2.4 })}>
+          <path d={BEFORE} fill="url(#txFaceV)" stroke="#253035" strokeWidth="2.2" />
+        </g>
+      </g>
+      <g className="tx-show" style={css({ "--d": 2.4 })}>
+        <path d={AFTER} fill="url(#txFaceV)" stroke="#253035" strokeWidth="2.2" />
+        <path d={BEFORE} fill="none" stroke="#be9d61" strokeWidth="1.4" strokeDasharray="4 4" />
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <FrontFace />
+      </g>
+      {/* bolsas de Bichat */}
+      <g className="tx-zone" style={css({ "--d": 0.8 })}>
+        <g className="tx-out" style={css({ "--d": 2.3 })} fill="rgba(190,157,97,0.32)" stroke="#be9d61" strokeWidth="1.2">
+          <ellipse cx="80" cy="204" rx="15" ry="11" />
+          <ellipse cx="160" cy="204" rx="15" ry="11" />
+        </g>
+      </g>
+      {/* incisiones por dentro de la boca */}
+      <g className="tx-show" style={css({ "--d": 1.8 })} stroke="#be9d61" strokeWidth="2.6" strokeLinecap="round">
+        <path d="M96 206 l 6 -3 M144 206 l -6 -3" />
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M181 166 L 206 140 H226", x: 181, y: 166, ly: 140, t: 2.8 },
+          { d: "M160 204 L 206 198 H226", x: 160, y: 204, ly: 198, t: 1.0 },
+          { d: "M142 205 L 206 254 H226", x: 142, y: 205, ly: 254, t: 2.0 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Lifting facial y de cuello: los tejidos se reposicionan hacia arriba; incisión alrededor de la oreja.
+function FaceliftDiagram({ labels }: { labels: ArtLabel[] }) {
+  const SIL =
+    "M128 58 C 104 64, 94 84, 96 104 C 96 112, 92 116, 90 122 C 84 134, 70 144, 64 152 C 62 156, 70 160, 78 160 C 76 166, 70 170, 72 176 C 74 180, 78 182, 76 186 C 72 190, 70 194, 74 198 C 80 202, 84 206, 80 214 C 78 222, 82 230, 96 236 C 112 242, 128 244, 136 252 L 140 300";
+  const arrows = [
+    { d: "M104 200 Q 128 186 150 164", h: "M141 165 L150 164 L148 173", t: 1.4 },
+    { d: "M112 234 Q 140 226 166 208", h: "M157 207 L166 208 L161 216", t: 1.7 },
+    { d: "M148 276 Q 166 266 186 252", h: "M177 251 L186 252 L182 260", t: 2.0 },
+  ];
+  return (
+    <svg className="tx-svg" viewBox="0 50 374 250" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txSkin2" x1="0" x2="1">
+          <stop offset="0" stopColor="#f6eee3" />
+          <stop offset="1" stopColor="#efe4d4" />
+        </linearGradient>
+      </defs>
+      <path className="tx-in" style={css({ "--d": 0 })} d={SIL + " L 214 300 C 206 270, 204 246, 210 220 C 220 180, 216 120, 196 92 C 180 68, 154 54, 128 58 Z"} fill="url(#txSkin2)" />
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.1 })} d={SIL} fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.4 })} d="M168 146 C 178 136, 190 146, 186 162 C 184 172, 176 174, 174 182" fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round" />
+      {/* flacidez */}
+      <g className="tx-in" style={css({ "--d": 0.6 })}>
+        <g className="tx-out" style={css({ "--d": 2.5 })} fill="none" stroke="#c9a98d" strokeWidth="2" strokeLinecap="round">
+          <path d="M92 222 C 104 240, 124 244, 140 238" />
+          <path d="M118 256 C 128 266, 140 270, 150 268" />
+        </g>
+      </g>
+      {/* reposición */}
+      {arrows.map((a, i) => (
+        <g key={i}>
+          <path className="tx-draw" pathLength={1} style={css({ "--d": a.t })} d={a.d} fill="none" stroke="#be9d61" strokeWidth="2.2" strokeLinecap="round" />
+          <path className="tx-show" style={css({ "--d": a.t + 0.6 })} d={a.h} fill="none" stroke="#be9d61" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      ))}
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 2.6 })} d="M162 122 C 160 140, 160 160, 166 176 C 170 186, 172 196, 180 204" fill="none" stroke="#be9d61" strokeWidth="1.8" strokeLinecap="round" />
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 3.0 })} d="M100 240 C 116 244, 130 248, 138 256" fill="none" stroke="#253035" strokeWidth="1.4" opacity="0.35" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M150 164 L 206 126 H226", x: 150, y: 164, ly: 126, t: 2.0 },
+          { d: "M164 178 L 206 186 H226", x: 164, y: 178, ly: 186, t: 2.8 },
+          { d: "M186 252 L 206 248 H226", x: 186, y: 252, ly: 248, t: 2.3 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Lobuloplastia: el lóbulo rasgado se cierra con puntos y luego se puede volver a perforar.
+function EarlobeDiagram({ labels }: { labels: ArtLabel[] }) {
+  const EAR_BIG =
+    "M120 86 C 170 80, 198 120, 192 168 C 190 196, 172 208, 166 226 C 160 260, 122 270, 112 244 C 106 226, 112 214, 104 200 C 92 176, 86 150, 90 122 C 94 100, 104 88, 120 86 Z";
+  return (
+    <svg className="tx-svg" viewBox="0 74 374 206" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txEarG" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#ecdcc8" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d={EAR_BIG} fill="url(#txEarG)" stroke="#253035" strokeWidth="2.2" />
+        <g fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round" opacity="0.75">
+          <path d="M126 104 C 166 100, 180 140, 166 174 C 158 192, 146 198, 134 192" />
+          <path d="M126 146 C 142 140, 152 158, 142 174" />
+        </g>
+      </g>
+      {/* desgarro */}
+      <g className="tx-in" style={css({ "--d": 0.4 })}>
+        <g className="tx-close">
+          <path d="M138 226 C 136 240, 132 252, 126 266 L 152 266 C 146 252, 140 240, 138 226 Z" fill="#fff" />
+          <path d="M126 262 C 132 250, 136 240, 138 226 C 140 240, 144 250, 150 260" fill="none" stroke="#c79a85" strokeWidth="1.8" strokeLinecap="round" />
+          <circle cx="138" cy="222" r="3.2" fill="#fff" stroke="#c79a85" strokeWidth="1.5" />
+        </g>
+      </g>
+      {/* cierre con puntos */}
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 2.6 })} d="M138 222 L 139 260" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" />
+      {[0, 1, 2].map((k) => (
+        <path key={k} className="tx-show" style={css({ "--d": 2.9 + k * 0.12 })} d={`M133 ${232 + k * 11} L145 ${232 + k * 11}`} stroke="#be9d61" strokeWidth="1.6" strokeLinecap="round" />
+      ))}
+      {/* nueva perforación */}
+      <g className="tx-zone" style={css({ "--d": 3.6 })}>
+        <circle cx="122" cy="230" r="7" fill="none" stroke="#be9d61" strokeWidth="1.4" />
+        <circle cx="122" cy="230" r="2.6" fill="#be9d61" />
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M122 230 L 206 150 H226", x: 122, y: 230, ly: 150, t: 3.6 },
+          { d: "M139 240 L 206 204 H226", x: 139, y: 240, ly: 204, t: 2.8 },
+          { d: "M140 258 H226", x: 140, y: 258, ly: 258, t: 0.8 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Verrugas: varias lesiones en un área se retiran y la piel queda lisa (la marca se aclara).
+function WartsDiagram({ labels }: { labels: ArtLabel[] }) {
+  const spots = [
+    [82, 172, 8],
+    [108, 198, 6.5],
+    [88, 226, 7.5],
+    [114, 236, 5],
+  ];
+  return (
+    <svg className="tx-svg" viewBox="0 96 374 196" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txSkinP" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#ecdcc8" />
+        </linearGradient>
+        <radialGradient id="txWart" cx="0.4" cy="0.35">
+          <stop offset="0" stopColor="#c9a184" />
+          <stop offset="1" stopColor="#9c7358" />
+        </radialGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <rect x="18" y="104" width="200" height="180" rx="26" fill="url(#txSkinP)" />
+        <g fill="none" stroke="#e2cfb6" strokeWidth="1.2" strokeLinecap="round">
+          <path d="M40 130 q 20 -6 40 0 M150 124 q 22 -6 44 0 M160 262 q 20 -6 40 0 M34 266 q 18 -6 36 0" />
+        </g>
+      </g>
+      {/* área tratada */}
+      <rect className="tx-draw" pathLength={1} style={css({ "--d": 1.3 })} x="56" y="148" width="84" height="110" rx="20" fill="none" stroke="#be9d61" strokeWidth="1.6" strokeDasharray="1" />
+      {spots.map(([x, y, r], k) => (
+        <g key={k}>
+          <circle className="tx-show" style={css({ "--d": 2.6 + k * 0.2 })} cx={x} cy={y} r={r * 0.8} fill="#e9c9b8" opacity="0.6" />
+          <g className="tx-in" style={css({ "--d": 0.3 + k * 0.15 })}>
+            <g className="tx-out" style={css({ "--d": 2.3 + k * 0.2 })}>
+              <circle cx={x} cy={y} r={r} fill="url(#txWart)" />
+              <circle cx={x - r * 0.3} cy={y - r * 0.35} r={r * 0.25} fill="#e0c2ac" />
+            </g>
+          </g>
+        </g>
+      ))}
+      <path className="tx-spark" d="M160 182 l3 7.5 7.5 3 -7.5 3 -3 7.5 -3 -7.5 -7.5 -3 7.5 -3z" fill="#be9d61" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M140 170 L 206 140 H226", x: 140, y: 170, ly: 140, t: 1.7 },
+          { d: "M108 198 L 206 200 H226", x: 108, y: 198, ly: 200, t: 0.8 },
+          { d: "M114 236 L 206 258 H226", x: 114, y: 236, ly: 258, t: 3.2 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
@@ -494,6 +705,10 @@ const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = 
   platismoplastia: NeckBandsDiagram,
   blefaroplastia: EyelidDiagram,
   otoplastia: EarDiagram,
+  bichectomia: BuccalDiagram,
+  "lifting-facial-cuello": FaceliftDiagram,
+  lobuloplastia: EarlobeDiagram,
+  "eliminacion-verrugas": WartsDiagram,
 };
 
 const factIcons: Record<FactIcon, React.ReactNode> = {

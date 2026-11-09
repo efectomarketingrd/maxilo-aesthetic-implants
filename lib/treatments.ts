@@ -619,6 +619,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Afine las mejillas y estilice el rostro retirando las bolsas de Bichat, sin cicatrices visibles.",
       what: "Las bolsas de Bichat son depósitos de grasa ubicados en la parte baja de las mejillas. Cuando son grandes, dan un aspecto de cara redonda o de mejillas muy llenas. La bichectomía retira parte de esa grasa a través de una pequeña incisión por dentro de la boca, por lo que no deja cicatrices en la piel.",
+      art: {
+        labels: [
+          { t: "Contorno", s: "rostro más estilizado" },
+          { t: "Bichat", s: "grasa de la mejilla" },
+          { t: "Incisión", s: "por dentro de la boca" },
+        ],
+        caption: "Se reduce la grasa de las mejillas desde dentro de la boca, sin cicatrices en la piel.",
+      },
+      facts: [
+        { i: "scar", t: "Sin cicatriz visible", s: "La incisión es dentro de la boca" },
+        { i: "anest", t: "Anestesia local", s: "Procedimiento corto" },
+        { i: "plan", t: "Valoración cuidadosa", s: "No todos los rostros lo necesitan" },
+        { i: "follow", t: "Resultado progresivo", s: "Se afina en los meses siguientes" },
+      ],
       forWho: [
         "Personas con mejillas muy llenas o rostro redondeado por las bolsas de Bichat.",
         "Quienes desean un rostro más estilizado y pómulos más marcados.",
@@ -642,6 +656,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Slim the cheeks and refine the face by removing the buccal fat pads, with no visible scars.",
       what: "The buccal fat pads (Bichat's fat pads) are fat deposits in the lower cheeks. When they are large, they give a round face or very full cheeks. Buccal fat removal takes out part of this fat through a small incision inside the mouth, so it leaves no scars on the skin.",
+      art: {
+        labels: [
+          { t: "Contour", s: "slimmer face" },
+          { t: "Buccal fat", s: "cheek fat pad" },
+          { t: "Incision", s: "inside the mouth" },
+        ],
+        caption: "Cheek fat is reduced from inside the mouth, with no scars on the skin.",
+      },
+      facts: [
+        { i: "scar", t: "No visible scar", s: "The incision is inside the mouth" },
+        { i: "anest", t: "Local anesthesia", s: "A short procedure" },
+        { i: "plan", t: "Careful assessment", s: "Not every face needs it" },
+        { i: "follow", t: "Gradual result", s: "Refines over the following months" },
+      ],
       forWho: [
         "People with very full cheeks or a round face due to buccal fat.",
         "Those who want a more sculpted face and more defined cheekbones.",
@@ -671,6 +699,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Trate la flacidez del rostro y el cuello reposicionando los tejidos, con un resultado natural.",
       what: "Con el paso del tiempo, la piel y los tejidos de la cara pierden firmeza y descienden: se marcan los surcos, se pierde la línea de la mandíbula y aparece flacidez en el cuello. El lifting facial y de cuello reposiciona los tejidos profundos y retira el exceso de piel. Las incisiones se ubican alrededor de la oreja y en la línea del cabello, donde quedan disimuladas. El objetivo es verse descansado y más joven, no diferente.",
+      art: {
+        labels: [
+          { t: "Reposición", s: "tejidos hacia arriba" },
+          { t: "Incisión", s: "alrededor de la oreja" },
+          { t: "Cuello", s: "contorno más firme" },
+        ],
+        caption: "Los tejidos se reposicionan hacia arriba y atrás para un resultado natural.",
+      },
+      facts: [
+        { i: "plan", t: "Plan a medida", s: "Rostro, cuello o ambos" },
+        { i: "scar", t: "Incisiones ocultas", s: "Alrededor de la oreja y el cabello" },
+        { i: "time", t: "Recuperación", s: "Vida social en unas semanas" },
+        { i: "follow", t: "Resultado natural", s: "Descansado, no diferente" },
+      ],
       forWho: [
         "Personas con flacidez moderada o marcada en el rostro y el cuello.",
         "Quienes han perdido la definición de la línea de la mandíbula.",
@@ -694,6 +736,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Treat sagging of the face and neck by repositioning the tissues, with a natural result.",
       what: "Over time, the skin and tissues of the face lose firmness and descend: folds deepen, the jawline loses definition and the neck sags. A face and neck lift repositions the deeper tissues and removes excess skin. The incisions are placed around the ear and along the hairline, where they stay hidden. The goal is to look rested and younger, not different.",
+      art: {
+        labels: [
+          { t: "Lift", s: "tissues moved upward" },
+          { t: "Incision", s: "around the ear" },
+          { t: "Neck", s: "firmer contour" },
+        ],
+        caption: "The tissues are repositioned upward and back for a natural result.",
+      },
+      facts: [
+        { i: "plan", t: "Tailored plan", s: "Face, neck or both" },
+        { i: "scar", t: "Hidden incisions", s: "Around the ear and hairline" },
+        { i: "time", t: "Recovery", s: "Social life within a few weeks" },
+        { i: "follow", t: "Natural result", s: "Rested, not different" },
+      ],
       forWho: [
         "People with moderate or marked sagging of the face and neck.",
         "Those who have lost definition along the jawline.",
@@ -723,6 +779,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Repare el lóbulo de la oreja rasgado o estirado por el uso de aretes, en un procedimiento corto.",
       what: "El uso de aretes pesados, un tirón accidental o las expansiones pueden rasgar o alargar el agujero del lóbulo. La lobuloplastia cierra y remodela el lóbulo para devolverle una forma natural. Es un procedimiento sencillo, con anestesia local, que se realiza en el consultorio.",
+      art: {
+        labels: [
+          { t: "Perforación", s: "lejos de la cicatriz" },
+          { t: "Cierre", s: "con puntos finos" },
+          { t: "Lóbulo rasgado", s: "por aretes pesados" },
+        ],
+        caption: "El lóbulo se cierra con puntos finos y, al cicatrizar, se puede volver a perforar.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "En el consultorio" },
+        { i: "home", t: "Mismo día", s: "Vuelve a sus actividades" },
+        { i: "time", t: "Puntos", s: "Se retiran en una semana" },
+        { i: "tag", t: "RD$10,000", s: "Por oreja" },
+      ],
       forWho: [
         "Personas con el lóbulo rasgado total o parcialmente.",
         "Quienes tienen el agujero del arete muy alargado.",
@@ -749,6 +819,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Repair an earlobe torn or stretched by earrings in a short procedure.",
       what: "Heavy earrings, an accidental tug or ear gauges can tear or stretch the earlobe hole. Lobuloplasty closes and reshapes the earlobe to restore a natural shape. It is a simple procedure, under local anesthesia, done in the office.",
+      art: {
+        labels: [
+          { t: "Piercing", s: "away from the scar" },
+          { t: "Closure", s: "with fine stitches" },
+          { t: "Torn earlobe", s: "from heavy earrings" },
+        ],
+        caption: "The earlobe is closed with fine stitches and, once healed, can be pierced again.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "In the office" },
+        { i: "home", t: "Same day", s: "Back to your activities" },
+        { i: "time", t: "Stitches", s: "Removed in about a week" },
+        { i: "tag", t: "RD$10,000", s: "Per ear" },
+      ],
       forWho: [
         "People with a fully or partially torn earlobe.",
         "Those with a very stretched earring hole.",
@@ -781,6 +865,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Retire verrugas y pequeñas lesiones benignas de la piel del rostro y el cuerpo de forma segura.",
       what: "Las verrugas y otras lesiones benignas de la piel, como los fibromas o \"acrocordones\", pueden ser molestas, rozar con la ropa o simplemente no gustar. La doctora las retira con la técnica más adecuada para cada lesión, cuidando que la piel cicatrice de la forma más discreta posible. Se cobra por área, de modo que una sola sesión puede incluir varias lesiones pequeñas agrupadas.",
+      art: {
+        labels: [
+          { t: "Un área", s: "lesiones agrupadas" },
+          { t: "Lesiones", s: "verrugas o fibromas" },
+          { t: "Piel lisa", s: "la marca se aclara" },
+        ],
+        caption: "Las lesiones de un área se retiran en una sola sesión y la piel cicatriza de forma discreta.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Procedimiento rápido" },
+        { i: "tag", t: "RD$8,000", s: "Por área" },
+        { i: "time", t: "1 a 2 semanas", s: "Para cicatrizar" },
+        { i: "plan", t: "Estudio si hace falta", s: "La lesión se envía a análisis" },
+      ],
       forWho: [
         "Personas con verrugas en el rostro, el cuello o el cuerpo.",
         "Quienes tienen pequeñas lesiones agrupadas, por ejemplo en el cuello o las axilas.",
@@ -807,6 +905,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Safely remove warts and small benign skin lesions from the face and body.",
       what: "Warts and other benign skin lesions, such as skin tags, can be bothersome, rub against clothing or simply be unwanted. The doctor removes them with the most suitable technique for each lesion, taking care that the skin heals as discreetly as possible. The price is per area, so one session can include several small clustered lesions.",
+      art: {
+        labels: [
+          { t: "One area", s: "clustered lesions" },
+          { t: "Lesions", s: "warts or skin tags" },
+          { t: "Smooth skin", s: "the mark fades" },
+        ],
+        caption: "Lesions in one area are removed in a single session and the skin heals discreetly.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "A quick procedure" },
+        { i: "tag", t: "RD$8,000", s: "Per area" },
+        { i: "time", t: "1 to 2 weeks", s: "To heal" },
+        { i: "plan", t: "Analysis if needed", s: "The lesion is sent to the lab" },
+      ],
       forWho: [
         "People with warts on the face, neck or body.",
         "Those with small clustered lesions, for example on the neck or underarms.",

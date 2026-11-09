@@ -12318,3 +12318,28 @@ body:has(.bk2-page) .wa-float {
     transform: scaleX(0.8) !important;
   }
 }
+
+/* Lobuloplastia: el desgarro se cierra */
+.tx-close {
+  transform-box: fill-box;
+  transform-origin: center top;
+}
+
+.tx-art.is-in .tx-close {
+  animation: tx-close 0.8s cubic-bezier(0.5, 0, 0.3, 1) 2.1s forwards;
+}
+
+@keyframes tx-close {
+  to { opacity: 0; transform: scaleX(0.05); }
+}
+
+/* Verrugas: destello al terminar */
+.tx-art.is-in .tx-spark {
+  animation: br-spark 2.4s ease-in-out 3.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tx-art.js-anim .tx-close {
+    opacity: 0 !important;
+  }
+}
