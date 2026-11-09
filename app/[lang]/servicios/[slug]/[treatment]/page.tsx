@@ -139,6 +139,14 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                 </li>
               ))}
             </InView>
+            {d.alert && (
+              <p className="tr-alert" role="note">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 2.5 20h19zM12 10v4.5M12 17.2v.3" />
+                </svg>
+                {d.alert}
+              </p>
+            )}
           </div>
         </section>
 

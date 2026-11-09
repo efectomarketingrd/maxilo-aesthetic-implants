@@ -9,6 +9,7 @@ export type TreatmentDetail = {
   summary: string;
   what: string;
   forWho: string[];
+  alert?: string; // aviso destacado (por ejemplo, urgencias)
   steps: { t: string; d: string }[];
   recovery: string;
   price?: { lines: { label: string; value: string }[]; note?: string };
@@ -1081,6 +1082,167 @@ export const treatments: Treatment[] = [
         { q: "What is the difference from tensor threads?", a: "Tensor threads lift and reposition tissues. Biostimulation threads do not lift; they improve firmness and skin quality by stimulating collagen." },
         { q: "When will I see the result?", a: "The change is gradual: it shows over the following weeks and months as new collagen forms." },
         { q: "Can both types of threads be combined?", a: "Yes. They are often combined to lift and, at the same time, improve skin quality." },
+      ],
+    },
+  },
+  // ───────── CIRUGÍA RECONSTRUCTIVA ─────────
+  {
+    service: "cirugia-reconstructiva",
+    index: 0,
+    slug: "fracturas-traumatismos-faciales",
+    booking: { s: "reconstructiva", withOption: true },
+    es: {
+      summary: "Tratamiento de fracturas de la mandíbula, los pómulos, la nariz y otras lesiones de la cara, cuidando la función y la estética.",
+      what: "Un golpe, una caída, un accidente de tránsito o una práctica deportiva pueden fracturar los huesos de la cara o lesionar sus tejidos. El tratamiento busca devolver los huesos a su posición, recuperar la mordida, la respiración y la movilidad, y lograr que el rostro conserve su forma. La doctora se formó como cirujana maxilofacial con residencia en el Hospital Dr. Darío Contreras, centro de referencia en traumatología del país.",
+      forWho: [
+        "Fracturas de mandíbula, maxilar, pómulos, nariz o del contorno de los ojos.",
+        "Dientes que ya no encajan como antes después de un golpe.",
+        "Heridas en la cara que requieren reparación cuidadosa.",
+        "Secuelas de fracturas antiguas que no consolidaron bien.",
+      ],
+      alert: "Ante un golpe reciente con sangrado, dificultad para respirar, pérdida de conocimiento o problemas de visión, acuda primero a emergencias.",
+      steps: [
+        { t: "Evaluación", d: "La doctora examina la lesión y solicita radiografías o tomografía para conocer con precisión el tipo de fractura." },
+        { t: "Plan de tratamiento", d: "Según la fractura, se decide entre un tratamiento conservador o una cirugía para reposicionar y fijar los huesos." },
+        { t: "Tratamiento", d: "Cuando hace falta cirugía, los huesos se reposicionan y se fijan con placas y tornillos de titanio, buscando incisiones discretas." },
+        { t: "Seguimiento", d: "Se controla la consolidación del hueso, la mordida y la cicatrización hasta recuperar la función." },
+      ],
+      recovery: "Depende del tipo de fractura. En las primeras semanas suele indicarse dieta blanda o líquida, reposo relativo, buena higiene oral y los medicamentos necesarios. El hueso tarda varias semanas en consolidar, por lo que es importante asistir a todos los controles.",
+      faqs: [
+        { q: "¿Debo ir a emergencias o venir al centro?", a: "Si el golpe es reciente y hay sangrado abundante, dificultad para respirar, pérdida de conocimiento o problemas de visión, acuda primero a emergencias. Después, la doctora puede encargarse del tratamiento maxilofacial." },
+        { q: "¿Las placas se retiran?", a: "En la mayoría de los casos las placas de titanio pueden quedarse de forma permanente sin causar molestias. La doctora le indicará si su caso requiere retirarlas." },
+        { q: "¿Se puede corregir una fractura antigua?", a: "En muchos casos sí. La doctora evalúa la secuela y le explica las opciones para mejorar la función y la forma." },
+        { q: "¿Cuánto cuesta?", a: "Depende del tipo de lesión y del tratamiento. Después de la evaluación, el centro le confirmará el costo." },
+      ],
+    },
+    en: {
+      summary: "Treatment of fractures of the jaw, cheekbones, nose and other facial injuries, caring for both function and appearance.",
+      what: "A blow, a fall, a traffic accident or a sports injury can fracture the facial bones or damage the facial tissues. Treatment aims to return the bones to their position, restore the bite, breathing and movement, and preserve the shape of the face. The doctor trained as a maxillofacial surgeon with a residency at Hospital Dr. Darío Contreras, the country's reference center for trauma.",
+      forWho: [
+        "Fractures of the jaw, upper jaw, cheekbones, nose or around the eyes.",
+        "Teeth that no longer fit together as before after a blow.",
+        "Facial wounds that need careful repair.",
+        "After-effects of old fractures that did not heal properly.",
+      ],
+      alert: "After a recent blow with bleeding, difficulty breathing, loss of consciousness or vision problems, go to the emergency room first.",
+      steps: [
+        { t: "Evaluation", d: "The doctor examines the injury and orders X-rays or a CT scan to know the exact type of fracture." },
+        { t: "Treatment plan", d: "Depending on the fracture, either conservative treatment or surgery to reposition and fix the bones is chosen." },
+        { t: "Treatment", d: "When surgery is needed, the bones are repositioned and fixed with titanium plates and screws, using discreet incisions." },
+        { t: "Follow-up", d: "Bone healing, bite and scarring are monitored until function is restored." },
+      ],
+      recovery: "It depends on the type of fracture. During the first weeks, a soft or liquid diet, relative rest, good oral hygiene and the necessary medication are usually prescribed. Bone takes several weeks to heal, so attending every follow-up is important.",
+      faqs: [
+        { q: "Should I go to the ER or come to the clinic?", a: "If the injury is recent and there is heavy bleeding, difficulty breathing, loss of consciousness or vision problems, go to the emergency room first. The doctor can then take care of the maxillofacial treatment." },
+        { q: "Are the plates removed?", a: "In most cases titanium plates can stay permanently without causing problems. The doctor will tell you if your case requires removal." },
+        { q: "Can an old fracture be corrected?", a: "In many cases, yes. The doctor assesses the after-effects and explains the options to improve function and shape." },
+        { q: "How much does it cost?", a: "It depends on the injury and the treatment. After the evaluation, the clinic will confirm the cost." },
+      ],
+    },
+  },
+  {
+    service: "cirugia-reconstructiva",
+    index: 1,
+    slug: "malformaciones-faciales",
+    booking: { s: "reconstructiva", withOption: true },
+    es: {
+      summary: "Corrección de alteraciones en el desarrollo de los maxilares y la cara para mejorar la mordida, la función y la armonía del rostro.",
+      what: "Algunas personas nacen o crecen con los maxilares en una posición o tamaño que no corresponde: la mandíbula muy adelantada o atrasada, una mordida abierta o un rostro asimétrico. Estas alteraciones pueden afectar la masticación, la respiración, el habla y la apariencia. La cirugía de los maxilares (cirugía ortognática) los reposiciona para que la mordida y el rostro queden en equilibrio. Por lo general se planifica junto con el ortodoncista.",
+      forWho: [
+        "Mandíbula muy adelantada (prognatismo) o muy atrasada (retrognatismo).",
+        "Mordida abierta o dientes que no encajan aunque se haya hecho ortodoncia.",
+        "Asimetrías del rostro o de la mandíbula.",
+        "Dificultad para masticar, respirar o hablar relacionada con la posición de los maxilares.",
+        "Personas que ya terminaron su crecimiento (la edad se evalúa en cada caso).",
+      ],
+      steps: [
+        { t: "Evaluación", d: "La doctora analiza su rostro, su mordida y sus estudios (fotos, modelos, tomografía) para entender la causa." },
+        { t: "Planificación conjunta", d: "Con el ortodoncista se define el plan completo: la preparación con ortodoncia y la cirugía, planificada de forma digital." },
+        { t: "Cirugía", d: "Los maxilares se reposicionan y se fijan con placas de titanio, por lo general a través de incisiones por dentro de la boca." },
+        { t: "Recuperación y ortodoncia final", d: "Tras la cirugía, se controla la cicatrización y se completa el ajuste final de la mordida." },
+      ],
+      recovery: "Es una cirugía mayor que requiere una recuperación planificada. Las primeras semanas se indica dieta líquida o blanda y reposo relativo, y la inflamación disminuye de forma progresiva. La doctora le acompañará en cada etapa con controles frecuentes.",
+      faqs: [
+        { q: "¿Necesito ortodoncia?", a: "En la mayoría de los casos sí. La ortodoncia prepara los dientes antes de la cirugía y ajusta la mordida al final." },
+        { q: "¿Las cicatrices se ven?", a: "Por lo general las incisiones se hacen por dentro de la boca, por lo que no quedan cicatrices visibles en la cara." },
+        { q: "¿El cambio es solo estético?", a: "No. El objetivo principal es mejorar la función (masticar, respirar, hablar), y como resultado el rostro también gana armonía." },
+        { q: "¿Cuánto cuesta?", a: "Depende de cada caso. Después de la evaluación y los estudios, el centro le confirmará el costo." },
+      ],
+    },
+    en: {
+      summary: "Correction of developmental changes of the jaws and face to improve the bite, function and facial harmony.",
+      what: "Some people are born with or develop jaws in a position or size that does not match: a jaw that sits too far forward or back, an open bite or an asymmetric face. These conditions can affect chewing, breathing, speech and appearance. Jaw surgery (orthognathic surgery) repositions the jaws so the bite and the face are in balance. It is usually planned together with the orthodontist.",
+      forWho: [
+        "A lower jaw too far forward (prognathism) or too far back (retrognathism).",
+        "An open bite, or teeth that do not fit together even after orthodontics.",
+        "Asymmetry of the face or jaw.",
+        "Difficulty chewing, breathing or speaking related to jaw position.",
+        "People who have finished growing (age is assessed case by case).",
+      ],
+      steps: [
+        { t: "Evaluation", d: "The doctor analyzes your face, bite and records (photos, models, CT scan) to understand the cause." },
+        { t: "Joint planning", d: "Together with the orthodontist, the full plan is defined: orthodontic preparation and digitally planned surgery." },
+        { t: "Surgery", d: "The jaws are repositioned and fixed with titanium plates, usually through incisions inside the mouth." },
+        { t: "Recovery and final orthodontics", d: "After surgery, healing is monitored and the final bite adjustment is completed." },
+      ],
+      recovery: "This is major surgery that requires a planned recovery. For the first weeks a liquid or soft diet and relative rest are prescribed, and swelling decreases gradually. The doctor will accompany you at every stage with frequent follow-ups.",
+      faqs: [
+        { q: "Do I need orthodontics?", a: "In most cases, yes. Orthodontics prepares the teeth before surgery and adjusts the bite at the end." },
+        { q: "Are the scars visible?", a: "The incisions are usually made inside the mouth, so there are no visible scars on the face." },
+        { q: "Is the change only cosmetic?", a: "No. The main goal is to improve function (chewing, breathing, speaking), and as a result the face also gains harmony." },
+        { q: "How much does it cost?", a: "It depends on each case. After the evaluation and records, the clinic will confirm the cost." },
+      ],
+    },
+  },
+  {
+    service: "cirugia-reconstructiva",
+    index: 2,
+    slug: "reconstruccion-maxilofacial",
+    booking: { s: "reconstructiva", withOption: true },
+    es: {
+      summary: "Recupere la forma y la función de los maxilares y el rostro después de una lesión, una enfermedad o la pérdida de hueso.",
+      what: "La reconstrucción maxilofacial restaura estructuras de la cara y los maxilares que se han perdido o dañado: hueso que desapareció tras perder dientes, defectos que quedan después de retirar quistes o lesiones, o secuelas de traumatismos. Para ello se utilizan injertos de hueso, materiales de regeneración y, cuando conviene, derivados de la propia sangre del paciente que favorecen la cicatrización. El objetivo es devolver la función y preparar el terreno, por ejemplo, para colocar implantes.",
+      forWho: [
+        "Pérdida de hueso en los maxilares que impide colocar implantes.",
+        "Defectos después de retirar quistes, tumores benignos u otras lesiones.",
+        "Secuelas de traumatismos o cirugías anteriores.",
+        "Personas que desean recuperar la función y la forma de una zona del rostro.",
+      ],
+      steps: [
+        { t: "Evaluación y estudios", d: "Con tomografía y otros estudios, la doctora mide el defecto y planifica la reconstrucción." },
+        { t: "Plan personalizado", d: "Se elige la técnica y el material más adecuado: injerto de hueso, regeneración guiada u otras opciones." },
+        { t: "Cirugía", d: "Se realiza la reconstrucción con la anestesia adecuada para el caso." },
+        { t: "Integración y siguiente paso", d: "Se controla la cicatrización y la integración del injerto. Si el plan lo incluye, después se colocan los implantes." },
+      ],
+      recovery: "Depende del tipo de reconstrucción. Es habitual indicar dieta blanda, buena higiene y medicamentos durante los primeros días. Los injertos de hueso necesitan varios meses para integrarse antes del siguiente paso del tratamiento.",
+      faqs: [
+        { q: "¿De dónde se obtiene el hueso para el injerto?", a: "Puede ser del propio paciente o de materiales de injerto seguros y aprobados. La doctora le explicará la mejor opción para su caso." },
+        { q: "¿Podré ponerme implantes después?", a: "En muchos casos, sí. Uno de los objetivos de la reconstrucción es justamente crear el hueso necesario para colocarlos." },
+        { q: "¿Cuánto tiempo dura todo el proceso?", a: "Depende del defecto y del plan. Si se coloca un injerto, se espera a que se integre antes del siguiente paso, lo que suele tomar varios meses." },
+        { q: "¿Cuánto cuesta?", a: "Depende de cada caso. Después de la evaluación y los estudios, el centro le confirmará el costo." },
+      ],
+    },
+    en: {
+      summary: "Restore the form and function of the jaws and face after an injury, a disease or bone loss.",
+      what: "Maxillofacial reconstruction restores facial and jaw structures that have been lost or damaged: bone that disappeared after losing teeth, defects left after removing cysts or lesions, or after-effects of trauma. Bone grafts, regenerative materials and, when appropriate, concentrates from the patient's own blood that support healing are used. The goal is to restore function and prepare the ground, for example, for dental implants.",
+      forWho: [
+        "Bone loss in the jaws that prevents placing implants.",
+        "Defects after removing cysts, benign tumors or other lesions.",
+        "After-effects of trauma or previous surgery.",
+        "People who want to restore the function and shape of an area of the face.",
+      ],
+      steps: [
+        { t: "Evaluation and imaging", d: "Using a CT scan and other tests, the doctor measures the defect and plans the reconstruction." },
+        { t: "Personalized plan", d: "The most suitable technique and material are chosen: bone graft, guided regeneration or other options." },
+        { t: "Surgery", d: "The reconstruction is performed with the anesthesia appropriate for the case." },
+        { t: "Integration and next step", d: "Healing and graft integration are monitored. If the plan includes it, implants are placed afterwards." },
+      ],
+      recovery: "It depends on the type of reconstruction. A soft diet, good hygiene and medication are usually prescribed for the first days. Bone grafts need several months to integrate before the next step of treatment.",
+      faqs: [
+        { q: "Where does the graft bone come from?", a: "It can come from the patient or from safe, approved graft materials. The doctor will explain the best option for your case." },
+        { q: "Will I be able to get implants afterwards?", a: "In many cases, yes. One goal of reconstruction is precisely to build the bone needed to place them." },
+        { q: "How long does the whole process take?", a: "It depends on the defect and the plan. If a graft is placed, it must integrate before the next step, which usually takes several months." },
+        { q: "How much does it cost?", a: "It depends on each case. After the evaluation and imaging, the clinic will confirm the cost." },
       ],
     },
   },
