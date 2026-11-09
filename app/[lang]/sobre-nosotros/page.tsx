@@ -149,7 +149,7 @@ export default async function About({ params }: { params: Promise<{ lang: string
                 <Link href={`/${lang}/servicios/implantes-cirugia-oral/extraccion-cordales`}>
                   {t.services.items[0].procedures[1].name} <Arrow size={13} />
                 </Link>
-                <Link href={`/${lang}/servicios/medicina-estetica`}>
+                <Link href={`/${lang}/servicios/medicina-estetica/prp-facial`}>
                   PRP <Arrow size={13} />
                 </Link>
               </div>
