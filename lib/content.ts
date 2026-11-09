@@ -149,7 +149,7 @@ const es = {
         intro:
           "Tratamientos sin cirugía para suavizar arrugas, recuperar volumen y mejorar la calidad de la piel, con resultados naturales y una recuperación rápida.",
         procedures: [
-          { name: "Bótox", desc: "Suaviza las líneas de expresión de la frente, el entrecejo y el contorno de los ojos." },
+          { name: "Bótox", desc: "Suaviza las líneas de expresión de la frente, el entrecejo y el contorno de los ojos, y levanta las comisuras de la boca." },
           { name: "Armonización facial", desc: "Combinación de tratamientos para equilibrar las proporciones del rostro." },
           { name: "Ácido hialurónico y rellenos", desc: "Devuelve volumen e hidratación a labios, pómulos, mentón y surcos." },
           { name: "Rejuvenecimiento facial", desc: "Protocolos para mejorar la textura, la firmeza y la luminosidad de la piel." },
@@ -303,7 +303,7 @@ const es = {
     aestheticText: "La toxina botulínica, los rellenos de ácido hialurónico y los hilos que utilizamos son de laboratorios reconocidos y cuentan con registro sanitario. En su valoración, la doctora le indica el producto adecuado para su caso.",
     aestheticLead: "Productos de un laboratorio con más de 20 años de trayectoria, aplicados por la doctora según cada caso.",
     aesthetic: [
-      { k: "toxin", cat: "Toxina botulínica tipo A", name: "Neuronox", logo: "/brand/marcas/neuronox.png", maker: "Medytox · Corea del Sur", d: "Suaviza las líneas de expresión de la frente, el entrecejo y el contorno de los ojos.", link: "medicina-estetica" },
+      { k: "toxin", cat: "Toxina botulínica tipo A", name: "Neuronox", logo: "/brand/marcas/neuronox.png", maker: "Medytox · Corea del Sur", d: "Suaviza las líneas de expresión de la frente, el entrecejo y el contorno de los ojos, y levanta las comisuras de la boca.", link: "medicina-estetica" },
       { k: "filler", cat: "Ácido hialurónico", name: "Neuramis Deep", logo: "/brand/marcas/neuramis-deep.png", maker: "Medytox · Corea del Sur", d: "Relleno con lidocaína para dar volumen y suavizar surcos, con mayor comodidad durante la aplicación.", link: "medicina-estetica" },
     ],
     aestheticNote: "Productos de uso médico, aplicados exclusivamente por la doctora tras una valoración.",
@@ -784,7 +784,7 @@ const en: Dict = {
         short: "Botox, hyaluronic acid, facial harmonization, rejuvenation, PRP and thread lifts.",
         intro: "Non-surgical treatments to soften wrinkles, restore volume and improve skin quality, with natural results and quick recovery.",
         procedures: [
-          { name: "Botox", desc: "Softens expression lines on the forehead, between the brows and around the eyes." },
+          { name: "Botox", desc: "Softens expression lines on the forehead, between the brows and around the eyes, and lifts the corners of the mouth." },
           { name: "Facial harmonization", desc: "A combination of treatments to balance facial proportions." },
           { name: "Hyaluronic acid & fillers", desc: "Restores volume and hydration to lips, cheeks, chin and folds." },
           { name: "Facial rejuvenation", desc: "Protocols to improve skin texture, firmness and radiance." },
@@ -937,7 +937,7 @@ const en: Dict = {
     aestheticText: "The botulinum toxin, hyaluronic acid fillers and threads we use come from recognized laboratories and hold health registration. At your assessment, the doctor will recommend the right product for your case.",
     aestheticLead: "Products from a laboratory with over 20 years of experience, applied by the doctor according to each case.",
     aesthetic: [
-      { k: "toxin", cat: "Botulinum toxin type A", name: "Neuronox", logo: "/brand/marcas/neuronox.png", maker: "Medytox · South Korea", d: "Softens expression lines on the forehead, between the brows and around the eyes.", link: "medicina-estetica" },
+      { k: "toxin", cat: "Botulinum toxin type A", name: "Neuronox", logo: "/brand/marcas/neuronox.png", maker: "Medytox · South Korea", d: "Softens expression lines on the forehead, between the brows and around the eyes, and lifts the corners of the mouth.", link: "medicina-estetica" },
       { k: "filler", cat: "Hyaluronic acid", name: "Neuramis Deep", logo: "/brand/marcas/neuramis-deep.png", maker: "Medytox · South Korea", d: "Filler with lidocaine to add volume and smooth folds, with greater comfort during application.", link: "medicina-estetica" },
     ],
     aestheticNote: "Medical-use products, applied exclusively by the doctor after an assessment.",

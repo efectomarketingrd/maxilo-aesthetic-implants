@@ -950,15 +950,16 @@ export const treatments: Treatment[] = [
     slug: "botox",
     booking: { s: "medicina-estetica", withOption: true },
     es: {
-      summary: "Suavice las líneas de expresión de la frente, el entrecejo y el contorno de los ojos con un resultado natural.",
-      what: "La toxina botulínica, conocida como bótox, relaja de forma temporal los músculos que forman las arrugas de expresión al gesticular. Así la piel se ve más lisa y el rostro más descansado, sin perder la expresión. Se aplica con microinyecciones en puntos precisos, en una sesión corta y sin cirugía.",
+      summary: "Suavice las líneas de expresión de la frente, el entrecejo y el contorno de los ojos, y levante las comisuras de la boca, con un resultado natural.",
+      what: "La toxina botulínica, conocida como bótox, relaja de forma temporal los músculos que forman las arrugas de expresión al gesticular. Así la piel se ve más lisa y el rostro más descansado, sin perder la expresión. En la parte baja del rostro, relaja el músculo que tira de las comisuras de la boca hacia abajo: las comisuras dejan de caer y el rostro deja de verse triste o cansado. También suaviza las líneas finas alrededor de los labios. Se aplica con microinyecciones en puntos precisos, en una sesión corta y sin cirugía.",
       art: {
         labels: [
           { t: "Frente", s: "líneas horizontales" },
           { t: "Entrecejo", s: "líneas verticales" },
           { t: "Patas de gallo", s: "contorno de los ojos" },
+          { t: "Comisuras", s: "expresión menos triste" },
         ],
-        caption: "Microinyecciones en puntos precisos relajan el músculo y suavizan las líneas.",
+        caption: "Microinyecciones en puntos precisos relajan el músculo: las líneas se suavizan y las comisuras dejan de caer.",
       },
       facts: [
         { i: "tag", t: "RD$28,000", s: "Incluye el retoque" },
@@ -968,6 +969,7 @@ export const treatments: Treatment[] = [
       ],
       forWho: [
         "Personas con líneas en la frente, el entrecejo o las \"patas de gallo\".",
+        "Comisuras de la boca caídas que dan una expresión triste o cansada, y líneas finas alrededor de los labios.",
         "Quienes desean prevenir que las líneas de expresión se marquen más.",
         "Quienes buscan un resultado natural, sin perder la expresión del rostro.",
         "No se recomienda durante el embarazo o la lactancia (se revisa en la valoración).",
@@ -981,24 +983,26 @@ export const treatments: Treatment[] = [
       recovery: "Puede volver a sus actividades enseguida. Pueden aparecer pequeñas marcas en los puntos de aplicación, que desaparecen en horas. Las primeras horas se recomienda no acostarse, no masajear la zona y evitar el ejercicio intenso, según las indicaciones de la doctora.",
       price: {
         lines: [{ label: "Tratamiento con bótox", value: "RD$28,000" }],
-        note: "Incluye la aplicación y un retoque a las 2 semanas.",
+        note: "Incluye la aplicación y un retoque a las 2 semanas. El precio es el mismo si se tratan también las comisuras y el contorno de los labios.",
       },
       faqs: [
         { q: "¿Voy a quedar con la cara congelada?", a: "No es el objetivo. La dosis se ajusta para suavizar las líneas manteniendo una expresión natural." },
         { q: "¿Cuánto dura el efecto?", a: "Suele durar entre 3 y 4 meses, aunque varía según cada persona. Con aplicaciones regulares, muchas personas notan que el efecto se mantiene más tiempo." },
         { q: "¿Duele?", a: "Las agujas son muy finas y la molestia es mínima. La aplicación dura pocos minutos." },
+        { q: "¿El bótox sirve para los surcos que van de la nariz a la boca?", a: "Esos surcos se deben sobre todo a la pérdida de volumen y se tratan con ácido hialurónico. El bótox en las comisuras puede ayudar como complemento. La doctora le indicará la mejor combinación para su caso." },
       ],
     },
     en: {
-      summary: "Soften expression lines on the forehead, between the brows and around the eyes with a natural result.",
-      what: "Botulinum toxin, known as Botox, temporarily relaxes the muscles that create expression lines when you make facial movements. The skin looks smoother and the face more rested, without losing your expression. It is applied with micro-injections at precise points, in a short session with no surgery.",
+      summary: "Soften expression lines on the forehead, between the brows and around the eyes, and lift the corners of the mouth, with a natural result.",
+      what: "Botulinum toxin, known as Botox, temporarily relaxes the muscles that create expression lines when you make facial movements. The skin looks smoother and the face more rested, without losing your expression. In the lower face, it relaxes the muscle that pulls the corners of the mouth down: the corners stop drooping and the face no longer looks sad or tired. It also softens fine lines around the lips. It is applied with micro-injections at precise points, in a short session with no surgery.",
       art: {
         labels: [
           { t: "Forehead", s: "horizontal lines" },
           { t: "Frown lines", s: "between the brows" },
           { t: "Crow's feet", s: "around the eyes" },
+          { t: "Mouth corners", s: "a less sad expression" },
         ],
-        caption: "Micro-injections at precise points relax the muscle and soften the lines.",
+        caption: "Micro-injections at precise points relax the muscle: lines soften and the mouth corners stop drooping.",
       },
       facts: [
         { i: "tag", t: "RD$28,000", s: "Touch-up included" },
@@ -1008,6 +1012,7 @@ export const treatments: Treatment[] = [
       ],
       forWho: [
         "People with lines on the forehead, between the brows or crow's feet.",
+        "Drooping mouth corners that give a sad or tired look, and fine lines around the lips.",
         "Those who want to prevent expression lines from deepening.",
         "Those looking for a natural result that keeps their expression.",
         "Not recommended during pregnancy or breastfeeding (checked at the assessment).",
@@ -1021,12 +1026,13 @@ export const treatments: Treatment[] = [
       recovery: "You can return to your activities right away. Small marks may appear at the injection points and disappear within hours. For the first hours, avoid lying down, massaging the area and intense exercise, as the doctor indicates.",
       price: {
         lines: [{ label: "Botox treatment", value: "RD$28,000" }],
-        note: "Includes the application and a touch-up after 2 weeks.",
+        note: "Includes the application and a touch-up after 2 weeks. The price is the same if the mouth corners and lip lines are also treated.",
       },
       faqs: [
         { q: "Will my face look frozen?", a: "That is not the goal. The dose is adjusted to soften lines while keeping a natural expression." },
         { q: "How long does it last?", a: "It usually lasts 3 to 4 months, though it varies by person. With regular treatments, many people find the effect lasts longer." },
         { q: "Does it hurt?", a: "The needles are very fine and discomfort is minimal. The application takes a few minutes." },
+        { q: "Does Botox help the folds from the nose to the mouth?", a: "Those folds are mainly caused by volume loss and are treated with hyaluronic acid. Botox in the mouth corners can help as a complement. The doctor will recommend the best combination for your case." },
       ],
     },
   },

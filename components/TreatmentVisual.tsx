@@ -718,17 +718,23 @@ function BotoxDiagram({ labels }: { labels: ArtLabel[] }) {
     "M128 150 L 126 166",
     "M206 184 l 12 -7 M208 193 l 14 0 M206 202 l 12 7",
     "M34 184 l -12 -7 M32 193 l -14 0 M34 202 l -12 7",
+    "M108 250 l -1 -6 M116 249 l 0 -6 M124 249 l 0 -6 M132 250 l 1 -6",
+    "M88 270 l -4 14 M152 270 l 4 14",
   ];
   const dots = [
-    [84, 119], [120, 116], [156, 119], [120, 158], [214, 193], [26, 193],
+    [84, 119], [120, 116], [156, 119], [120, 158], [214, 193], [26, 193], [84, 282], [156, 282],
   ];
   return (
-    <svg className="tx-svg" viewBox="0 84 374 176" role="img" aria-label={aria(labels)}>
+    <svg className="tx-svg" viewBox="0 84 374 220" role="img" aria-label={aria(labels)}>
       <defs>
         <SkinBg id="txBotoxBg" />
+        <linearGradient id="txLipB" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#d9958a" />
+          <stop offset="1" stopColor="#c47c72" />
+        </linearGradient>
       </defs>
       <g className="tx-in" style={css({ "--d": 0 })}>
-        <ellipse cx="120" cy="170" rx="122" ry="88" fill="url(#txBotoxBg)" />
+        <ellipse cx="120" cy="194" rx="124" ry="112" fill="url(#txBotoxBg)" />
         <g fill="none" stroke="#5a4c42" strokeWidth="5.5" strokeLinecap="round">
           <path d="M40 172 C 60 162, 84 160, 104 168" />
           <path d="M136 168 C 156 160, 180 162, 200 172" />
@@ -739,6 +745,19 @@ function BotoxDiagram({ labels }: { labels: ArtLabel[] }) {
         </g>
         <circle cx="72" cy="195" r="7" fill="#4d5d63" />
         <circle cx="168" cy="195" r="7" fill="#4d5d63" />
+        <path d="M114 206 C 112 222, 106 232, 110 238 C 114 242, 126 242, 130 238 C 134 232, 128 222, 126 206" fill="none" stroke="#c9b48c" strokeWidth="1.8" strokeLinecap="round" />
+      </g>
+      {/* boca: comisuras caídas → comisuras que suben */}
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <g className="tx-out" style={css({ "--d": 2.6 })}>
+          <path d="M88 270 C 94 262, 104 256, 120 257 C 136 256, 146 262, 152 270 C 140 268, 130 266, 120 267 C 110 266, 100 268, 88 270 Z" fill="url(#txLipB)" />
+          <path d="M88 270 C 98 272, 108 280, 120 280 C 132 280, 142 272, 152 270" fill="#c47c72" stroke="#a5645c" strokeWidth="1.2" />
+        </g>
+      </g>
+      <g className="tx-show" style={css({ "--d": 2.6 })}>
+        <path d="M88 262 C 96 258, 106 254, 120 256 C 134 254, 144 258, 152 262 C 140 264, 130 265, 120 265 C 110 265, 100 264, 88 262 Z" fill="url(#txLipB)" />
+        <path d="M88 262 C 98 270, 108 278, 120 278 C 132 278, 142 270, 152 262" fill="#c47c72" stroke="#a5645c" strokeWidth="1.2" />
+        <path d="M86 272 C 98 282, 142 282, 154 272" fill="none" stroke="#be9d61" strokeWidth="1.3" strokeDasharray="3 4" opacity="0.7" />
       </g>
       {/* líneas de expresión */}
       {lines.map((d, k) => (
@@ -748,7 +767,7 @@ function BotoxDiagram({ labels }: { labels: ArtLabel[] }) {
       ))}
       {/* microinyecciones */}
       {dots.map(([x, y], k) => (
-        <g key={k} className="tx-zone" style={css({ "--d": 1.4 + k * 0.15 })}>
+        <g key={k} className="tx-zone" style={css({ "--d": 1.4 + k * 0.13 })}>
           <circle cx={x} cy={y} r="8" fill="rgba(190,157,97,0.25)" />
           <circle cx={x} cy={y} r="3" fill="#be9d61" />
         </g>
@@ -758,7 +777,8 @@ function BotoxDiagram({ labels }: { labels: ArtLabel[] }) {
         items={[
           { d: "M186 112 L 206 112 H226", x: 186, y: 112, ly: 112, t: 0.9 },
           { d: "M128 158 L 206 160 H226", x: 128, y: 158, ly: 160, t: 1.3 },
-          { d: "M220 200 L 214 226 H226", x: 220, y: 200, ly: 226, t: 1.7 },
+          { d: "M220 200 L 214 214 H226", x: 220, y: 200, ly: 214, t: 1.7 },
+          { d: "M156 282 L 206 270 H226", x: 156, y: 282, ly: 270, t: 2.9 },
         ]}
       />
     </svg>
