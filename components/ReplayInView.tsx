@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 // Como InView, pero la animación se repite: se queda completa un rato, se desvanece y vuelve a empezar.
 // Solo corre mientras está en pantalla; al salir se reinicia. Con "reducir movimiento" no se repite.
-export default function ReplayInView({ className = "", every = 11000, children }: { className?: string; every?: number; children: React.ReactNode }) {
+export default function ReplayInView({ className = "", every = 22000, children }: { className?: string; every?: number; children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [inView, setInView] = useState(false);
