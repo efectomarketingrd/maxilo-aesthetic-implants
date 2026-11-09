@@ -19,6 +19,13 @@ export const serviceImg: Record<string, string> = {
   "cirugia-reconstructiva": img.reconstructiva,
 };
 
+// Imagen de cada tratamiento (página de detalle). Si falta, se usa la del servicio.
+export const treatmentImg: Record<string, string> = {
+  "implantes-dentales": `${CDN}/hf_20261109_140421_85684e79-dfaf-4b12-a020-4ca0f17fd3a8.png`,
+  "extraccion-cordales": `${CDN}/hf_20261109_140421_48b0488e-3ea2-4f23-9052-419d87d60c89.png`,
+  "cirugia-oral-maxilofacial": `${CDN}/hf_20261109_140421_bc394dff-0fd6-4466-803b-7d05c9110ea5.png`,
+};
+
 // Imagen de cada opción en la agenda
 export const bookingImg: Record<string, string> = {
   implantes: img.implantes,

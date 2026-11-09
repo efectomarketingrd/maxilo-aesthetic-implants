@@ -10,7 +10,7 @@ import ServiceIcon from "@/components/ServiceIcon";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { locales, site, type Locale } from "@/lib/site";
-import { serviceImg } from "@/lib/images";
+import { serviceImg, treatmentImg } from "@/lib/images";
 import { bookingHref, findTreatment, treatments, treatmentsFor } from "@/lib/treatments";
 
 type Params = Promise<{ lang: string; slug: string; treatment: string }>;
@@ -115,7 +115,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
           <div className="container sv-wrap">
             <div className="tr-what">
               <span className="tr-what__img">
-                <Image src={serviceImg[s.slug]} alt="" fill sizes="(min-width: 900px) 320px, 92vw" />
+                <Image src={treatmentImg[treatment] ?? serviceImg[s.slug]} alt="" fill sizes="(min-width: 900px) 320px, 92vw" />
               </span>
               <div>
                 <h2 className="loc-h2">{k.what}</h2>
