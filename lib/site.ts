@@ -37,3 +37,13 @@ export type Locale = (typeof locales)[number];
 export function waLink(text: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 }
+
+// Spa del segundo nivel (marca propia, reservas aparte)
+export const spa = {
+  name: "Terrenas Massage",
+  wa: "18293710276",
+  instagram: "https://www.instagram.com/terrenasmassage/",
+  email: "terrenasmassagerd@gmail.com",
+};
+
+export const spaWa = (msg: string) => `https://wa.me/${spa.wa}?text=${encodeURIComponent(msg)}`;

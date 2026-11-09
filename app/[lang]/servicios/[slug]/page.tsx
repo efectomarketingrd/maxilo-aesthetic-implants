@@ -151,7 +151,7 @@ export default async function ServicePage({ params }: { params: Params }) {
           </div>
         </section>
       </main>
-      <Footer t={t} lang={lang} />
+      <Footer t={t} lang={lang} offer={s.slug === "implantes-cirugia-oral"} />
     </>
   );
 }

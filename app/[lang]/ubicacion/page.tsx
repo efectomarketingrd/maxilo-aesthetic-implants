@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CtaCard from "@/components/CtaCard";
+import SpaCard from "@/components/SpaCard";
 import InView from "@/components/InView";
 import { Arrow, Clock, Mail, Phone, Pin, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
@@ -280,6 +281,8 @@ export default async function LocationPage({ params }: { params: Params }) {
             </div>
           </div>
         </section>
+
+        <SpaCard t={t} compact />
 
         <CtaCard t={t} lang={lang} />
       </main>

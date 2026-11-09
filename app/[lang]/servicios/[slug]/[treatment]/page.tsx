@@ -249,7 +249,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
           </section>
         )}
       </main>
-      <Footer t={t} lang={lang} />
+      <Footer t={t} lang={lang} offer={treatment === "implantes-dentales"} />
     </>
   );
 }

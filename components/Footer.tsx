@@ -1,20 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Dict } from "@/lib/content";
-import { site, waLink, type Locale } from "@/lib/site";
+import { site, spa, waLink, type Locale } from "@/lib/site";
 import { Mail, Phone, Pin, WaIcon } from "./Icons";
 import OfferCard from "./OfferCard";
+import SpaCard from "./SpaCard";
 
-export default function Footer({ t, lang, offer = false }: { t: Dict; lang: Locale; offer?: boolean }) {
+export default function Footer({ t, lang, offer = false, spaCard = false }: { t: Dict; lang: Locale; offer?: boolean; spaCard?: boolean }) {
   const home = `/${lang}`;
   return (
     <>
       {offer && <OfferCard t={t} lang={lang} />}
+      {spaCard && <SpaCard t={t} />}
 
       <footer className="footer">
         <div className="container footer__grid">
           <div className="footer__brand">
             <Image src="/brand/logo-light.png" alt="Maxilo Aesthetic Implants — Dra. Celia Hernández Mauricio" width={220} height={130} />
+            <a className="footer__spa" href={spa.instagram} target="_blank" rel="noopener noreferrer">
+              <span>{t.spa.footer}</span>
+              <Image src="/brand/spa/terrenas-massage-blanco.png" alt={spa.name} width={824} height={180} sizes="150px" />
+            </a>
           </div>
           <div>
             <h4>{t.footer.quick}</h4>
