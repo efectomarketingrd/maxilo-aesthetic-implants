@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Tab = { id: string; label: string; icon: React.ReactNode; art: React.ReactNode; panel: React.ReactNode };
+type Tab = { id: string; label: string; icon: React.ReactNode; art: React.ReactNode; seals: string[]; panel: React.ReactNode };
 
 // Pestañas de la página de marcas: implantes, medicina estética y cuidado de la piel.
 // Se puede entrar directo a una pestaña con #implantes, #estetica o #piel.
 // La ilustración de la portada cambia con la pestaña activa.
-export default function BrandTabs({ tabs, label, intro }: { tabs: Tab[]; label: string; intro: React.ReactNode }) {
+export default function BrandTabs({ tabs, label, intro, sealIcons }: { tabs: Tab[]; label: string; intro: React.ReactNode; sealIcons: React.ReactNode[] }) {
   const [active, setActive] = useState(0);
   const bar = useRef<HTMLDivElement>(null);
 
@@ -36,7 +36,19 @@ export default function BrandTabs({ tabs, label, intro }: { tabs: Tab[]; label: 
           <div key={tabs[active].id} className="br-hero__art" aria-hidden="true">
             {tabs[active].art}
           </div>
-          {intro}
+          <div>
+            {intro}
+            <ul key={tabs[active].id} className="br-seals">
+              {tabs[active].seals.map((x, i) => (
+                <li key={x} className="bk2-rise" style={{ "--d": 3 + i * 0.6 } as React.CSSProperties}>
+                  <span className="br-seals__ico">
+                    <svg viewBox="0 0 24 24">{sealIcons[i]}</svg>
+                  </span>
+                  {x}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
       <div className="br-tabs__bar" ref={bar}>

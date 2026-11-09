@@ -262,7 +262,11 @@ const es = {
     title: "Calidad que se nota",
     titleAccent: "en cada tratamiento.",
     text: "Materiales de fabricantes reconocidos, con respaldo internacional.",
-    seals: ["Autorización FDA 510(k)", "Corea del Sur · Israel", "Registro sanitario"],
+    seals: [
+      ["Autorización FDA 510(k)", "Corea del Sur · Israel", "Registro sanitario"],
+      ["Laboratorio Medytox", "Fabricados en Corea del Sur", "Aplicación médica tras valoración"],
+      ["Cosmética profesional", "España · más de 60 años", "Según su tipo de piel"],
+    ],
     metaDesc: "Implantes Cowellmedi (Corea del Sur) y AB Dental (Israel), productos de medicina estética con registro sanitario y cosmética Germaine de Capuccini en Maxilo Aesthetic Implants, Las Terrenas.",
     tabs: ["Implantes", "Estética", "Piel"],
     implantsTitle: "Implantes dentales",
@@ -304,7 +308,7 @@ const es = {
     ],
     aestheticNote: "Productos de uso médico, aplicados exclusivamente por la doctora tras una valoración.",
     skinTitle: "Cuidado de la piel",
-    skin: { name: "Germaine de Capuccini", text: "Cosmética profesional para el cuidado de la piel, disponible en el centro. Le recomendamos los productos según su tipo de piel y su tratamiento." },
+    skin: { name: "Germaine de Capuccini", origin: "Alicante, España", product: "Cosmética profesional", points: ["Laboratorio español con más de 60 años en el cuidado profesional de la piel.", "Le recomendamos los productos según su tipo de piel y su tratamiento.", "Disponible en el centro."] },
     legal: "Las marcas mencionadas pertenecen a sus respectivos titulares. Su mención es informativa y no implica patrocinio.",
     items: [
       { name: "Germaine de Capuccini", category: "Cuidado de la piel" },
@@ -892,7 +896,11 @@ const en: Dict = {
     title: "Quality you can see",
     titleAccent: "in every treatment.",
     text: "Materials from recognized manufacturers, with international backing.",
-    seals: ["FDA 510(k) cleared", "South Korea · Israel", "Health registration"],
+    seals: [
+      ["FDA 510(k) cleared", "South Korea · Israel", "Health registration"],
+      ["Medytox laboratory", "Made in South Korea", "Medical use after assessment"],
+      ["Professional skincare", "Spain · over 60 years", "Chosen for your skin type"],
+    ],
     metaDesc: "Cowellmedi (South Korea) and AB Dental (Israel) implants, registered aesthetic medicine products and Germaine de Capuccini skincare at Maxilo Aesthetic Implants, Las Terrenas.",
     tabs: ["Implants", "Aesthetics", "Skincare"],
     implantsTitle: "Dental implants",
@@ -934,7 +942,7 @@ const en: Dict = {
     ],
     aestheticNote: "Medical-use products, applied exclusively by the doctor after an assessment.",
     skinTitle: "Skincare",
-    skin: { name: "Germaine de Capuccini", text: "Professional skincare available at the clinic. We recommend products according to your skin type and treatment." },
+    skin: { name: "Germaine de Capuccini", origin: "Alicante, Spain", product: "Professional skincare", points: ["Spanish laboratory with over 60 years in professional skincare.", "We recommend products according to your skin type and treatment.", "Available at the clinic."] },
     legal: "The brands mentioned belong to their respective owners. They are mentioned for information only and do not imply sponsorship.",
     items: [
       { name: "Germaine de Capuccini", category: "Skincare" },

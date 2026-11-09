@@ -11835,3 +11835,55 @@ body:has(.bk2-page) .wa-float {
   display: grid;
   place-items: center;
 }
+
+/* Estética: mismas tarjetas que implantes (tarjeta blanca, logo sobre marfil) */
+.br-card--med {
+  background: var(--white);
+  box-shadow: 0 12px 28px rgba(37, 48, 53, 0.06);
+}
+
+.br-card--med .br-card__logo--med {
+  background: var(--ivory);
+}
+
+/* Piel: tarjeta con el nombre de la marca en tipografía (hasta tener el logo oficial) */
+.br-cards--one {
+  max-width: 520px;
+}
+
+.br-word {
+  display: grid;
+  justify-items: center;
+  line-height: 1;
+  color: var(--slate);
+}
+
+.br-word span {
+  font-family: var(--f-title);
+  font-size: 1.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.br-word em {
+  margin-top: 6px;
+  font-family: var(--f-accent, "Cormorant Garamond", serif);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+}
+
+.js-anim.br-cards .br-word {
+  clip-path: inset(0 100% 0 0);
+}
+
+.js-anim.br-cards.is-in .br-word {
+  animation: br-logo-in 1.1s cubic-bezier(0.6, 0, 0.3, 1) 0.3s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-anim.br-cards .br-word {
+    clip-path: none;
+    animation: none;
+  }
+}
