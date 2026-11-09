@@ -122,6 +122,21 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Retiro seguro de las cordales o muelas del juicio que causan dolor, infecciones o falta de espacio.",
       what: "Los terceros molares, conocidos como cordales o muelas del juicio, son los últimos dientes en salir, generalmente entre los 17 y los 25 años. Con frecuencia no tienen espacio suficiente y quedan atrapados en el hueso o salen torcidos, lo que puede causar dolor, inflamación, infecciones o daños en el molar vecino. La extracción quirúrgica los retira de forma controlada.",
+      art: {
+        labels: [
+          { t: "Segundo molar", s: "el diente vecino" },
+          { t: "Presión", s: "dolor e inflamación" },
+          { t: "Cordal", s: "atrapada, sin espacio" },
+          { t: "Hueso", s: "la sostiene inclinada" },
+        ],
+        caption: "Cuando la cordal no tiene espacio, empuja al molar vecino. Al retirarla, desaparece la presión.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Sin dolor durante la extracción" },
+        { i: "xray", t: "Radiografía previa", s: "Para planificar cada cordal" },
+        { i: "home", t: "Ambulatorio", s: "Se va a casa el mismo día" },
+        { i: "tag", t: "Desde RD$7,000", s: "Por cordal, si se extraen las 4" },
+      ],
       forWho: [
         "Dolor o presión en el fondo de la boca.",
         "Inflamación o infecciones repetidas de la encía alrededor de la cordal.",
@@ -152,6 +167,21 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Safe removal of wisdom teeth that cause pain, infection or crowding.",
       what: "Third molars, known as wisdom teeth, are the last teeth to come in, usually between ages 17 and 25. They often lack space and stay trapped in the bone or grow in crooked, which can cause pain, swelling, infection or damage to the neighboring molar. Surgical extraction removes them in a controlled way.",
+      art: {
+        labels: [
+          { t: "Second molar", s: "the neighboring tooth" },
+          { t: "Pressure", s: "pain and swelling" },
+          { t: "Wisdom tooth", s: "trapped, no room" },
+          { t: "Bone", s: "holds it at an angle" },
+        ],
+        caption: "When a wisdom tooth has no room, it pushes on the neighboring molar. Removing it relieves the pressure.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "No pain during the extraction" },
+        { i: "xray", t: "X-ray first", s: "To plan each tooth" },
+        { i: "home", t: "Outpatient", s: "You go home the same day" },
+        { i: "tag", t: "From RD$7,000", s: "Per tooth, when all 4 are removed" },
+      ],
       forWho: [
         "Pain or pressure at the back of the mouth.",
         "Repeated swelling or infection of the gum around the wisdom tooth.",
@@ -188,6 +218,21 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Tratamiento quirúrgico de problemas de la boca, los maxilares y la cara, realizado por una cirujana especialista.",
       what: "La cirugía oral y maxilofacial es la especialidad que trata quirúrgicamente las enfermedades, lesiones y alteraciones de la boca, los maxilares y la cara. Incluye procedimientos como la extracción de dientes retenidos (por ejemplo, caninos), el tratamiento de quistes y lesiones de la boca, la corrección de frenillos, la preparación del hueso para prótesis o implantes, y la valoración de alteraciones de la mordida, entre otros.",
+      art: {
+        labels: [
+          { t: "Articulación", s: "abrir y cerrar la boca" },
+          { t: "Maxilar", s: "hueso superior" },
+          { t: "Boca y encías", s: "quistes, lesiones, frenillos" },
+          { t: "Mandíbula", s: "hueso inferior y mordida" },
+        ],
+        caption: "Una sola especialista para la boca, los maxilares y la cara.",
+      },
+      facts: [
+        { i: "xray", t: "Estudios", s: "Radiografía o tomografía según el caso" },
+        { i: "plan", t: "Plan claro", s: "Le explicamos opciones y tiempos" },
+        { i: "anest", t: "Anestesia", s: "Adecuada a cada procedimiento" },
+        { i: "follow", t: "Seguimiento", s: "Controles hasta su recuperación" },
+      ],
       forWho: [
         "Pacientes referidos por su odontólogo para un procedimiento quirúrgico.",
         "Dientes retenidos que no han salido, como los caninos.",
@@ -210,6 +255,21 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Surgical treatment of problems of the mouth, jaws and face, performed by a specialist surgeon.",
       what: "Oral and maxillofacial surgery is the specialty that surgically treats diseases, injuries and conditions of the mouth, jaws and face. It includes procedures such as removing impacted teeth (for example, canines), treating cysts and lesions of the mouth, correcting frenulums, preparing the bone for prostheses or implants, and assessing bite problems, among others.",
+      art: {
+        labels: [
+          { t: "Jaw joint", s: "opening and closing" },
+          { t: "Upper jaw", s: "maxilla" },
+          { t: "Mouth and gums", s: "cysts, lesions, frenulum" },
+          { t: "Lower jaw", s: "mandible and bite" },
+        ],
+        caption: "One specialist for the mouth, the jaws and the face.",
+      },
+      facts: [
+        { i: "xray", t: "Imaging", s: "X-ray or CT scan as needed" },
+        { i: "plan", t: "Clear plan", s: "We explain options and timing" },
+        { i: "anest", t: "Anesthesia", s: "Suited to each procedure" },
+        { i: "follow", t: "Follow-up", s: "Check-ups until you recover" },
+      ],
       forWho: [
         "Patients referred by their dentist for a surgical procedure.",
         "Impacted teeth that have not come in, such as canines.",

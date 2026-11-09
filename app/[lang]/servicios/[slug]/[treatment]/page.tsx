@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import CtaCard from "@/components/CtaCard";
 import InView from "@/components/InView";
 import ServiceIcon from "@/components/ServiceIcon";
-import TreatmentVisual from "@/components/TreatmentVisual";
+import TreatmentVisual, { hasVisual } from "@/components/TreatmentVisual";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { locales, site, type Locale } from "@/lib/site";
@@ -114,10 +114,13 @@ export default async function TreatmentPage({ params }: { params: Params }) {
         {/* ¿Qué es? */}
         <section className="sv-sec">
           <div className="container sv-wrap">
-            <div className="tr-what">
-              <span className="tr-what__img">
-                <Image src={treatmentImg[treatment] ?? serviceImg[s.slug]} alt="" fill sizes="(min-width: 900px) 320px, 92vw" />
-              </span>
+            {/* Con infografía animada no se muestra la foto, para no recargar la página */}
+            <div className={hasVisual(treatment) ? "tr-what tr-what--solo" : "tr-what"}>
+              {!hasVisual(treatment) && (
+                <span className="tr-what__img">
+                  <Image src={treatmentImg[treatment] ?? serviceImg[s.slug]} alt="" fill sizes="(min-width: 900px) 320px, 92vw" />
+                </span>
+              )}
               <div>
                 <h2 className="loc-h2">{k.what}</h2>
                 <p className="tr-p">{d.what}</p>
