@@ -278,7 +278,7 @@ const es = {
         ],
       },
       {
-        logo: "/brand/marcas/ab.png",
+        logo: "/brand/marcas/ab-dental.png",
         maker: "AB Dental",
         origin: "Ashdod, Israel",
         product: "Implante I-ON",
@@ -907,7 +907,7 @@ const en: Dict = {
         ],
       },
       {
-        logo: "/brand/marcas/ab.png",
+        logo: "/brand/marcas/ab-dental.png",
         maker: "AB Dental",
         origin: "Ashdod, Israel",
         product: "I-ON implant",
