@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Tab = { id: string; label: string; icon: React.ReactNode; panel: React.ReactNode };
+type Tab = { id: string; label: string; icon: React.ReactNode; art: React.ReactNode; panel: React.ReactNode };
 
 // Pestañas de la página de marcas: implantes, medicina estética y cuidado de la piel.
 // Se puede entrar directo a una pestaña con #implantes, #estetica o #piel.
-export default function BrandTabs({ tabs, label }: { tabs: Tab[]; label: string }) {
+// La ilustración de la portada cambia con la pestaña activa.
+export default function BrandTabs({ tabs, label, intro }: { tabs: Tab[]; label: string; intro: React.ReactNode }) {
   const [active, setActive] = useState(0);
   const bar = useRef<HTMLDivElement>(null);
 
@@ -30,6 +31,14 @@ export default function BrandTabs({ tabs, label }: { tabs: Tab[]; label: string 
 
   return (
     <div className="br-tabs">
+      <section className="bk2-hero br-hero">
+        <div className="container br-wrap br-hero__grid">
+          <div key={tabs[active].id} className="br-hero__art" aria-hidden="true">
+            {tabs[active].art}
+          </div>
+          {intro}
+        </div>
+      </section>
       <div className="br-tabs__bar" ref={bar}>
         <div className="container br-wrap">
           <div className="br-tabs__list" role="tablist" aria-label={label} style={{ "--pos": active, "--n": tabs.length } as React.CSSProperties}>

@@ -125,6 +125,55 @@ function SyringeArt() {
   );
 }
 
+// Ilustración: el tarro de crema se abre, la crema se dibuja, crece una hoja y suben gotas
+function SkinArt() {
+  return (
+    <svg className="br-skn" viewBox="0 0 200 220">
+      <defs>
+        <radialGradient id="sknHalo">
+          <stop offset="0" stopColor="rgba(190,157,97,0.28)" />
+          <stop offset="1" stopColor="rgba(190,157,97,0)" />
+        </radialGradient>
+        <linearGradient id="sknJar" x1="0" x2="1">
+          <stop offset="0" stopColor="#ffffff" />
+          <stop offset="0.55" stopColor="#f8f6f2" />
+          <stop offset="1" stopColor="#e9e2d5" />
+        </linearGradient>
+      </defs>
+      <circle className="br-art__halo" cx="100" cy="110" r="96" fill="url(#sknHalo)" />
+      <circle className="br-art__ring" cx="100" cy="110" r="84" fill="none" stroke="#be9d61" strokeWidth="1" strokeDasharray="2 6" />
+      {/* hoja */}
+      <g className="br-skn__leaf">
+        <path className="br-skn__draw" pathLength={1} d="M44 122 C 28 92, 42 62, 74 54 C 80 86, 70 110, 44 122 Z" fill="rgba(190,157,97,0.14)" stroke="#be9d61" strokeWidth="2" strokeLinejoin="round" />
+        <path className="br-skn__draw br-skn__draw--2" pathLength={1} d="M44 122 C 52 100, 62 78, 72 58" fill="none" stroke="#be9d61" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+      {/* tarro */}
+      <g className="br-skn__jar">
+        <rect x="52" y="122" width="96" height="70" rx="16" fill="url(#sknJar)" stroke="#d8c39b" strokeWidth="2" />
+        <rect x="52" y="150" width="96" height="16" fill="#253035" />
+        <line x1="66" y1="158" x2="134" y2="158" stroke="#d8c39b" strokeWidth="1.4" strokeDasharray="3 4" />
+        <ellipse cx="100" cy="122" rx="48" ry="9" fill="#f1e6d4" stroke="#d8c39b" strokeWidth="2" />
+      </g>
+      {/* crema */}
+      <path className="br-skn__cream" pathLength={1} d="M76 120 C 80 104, 118 102, 122 116 C 124 126, 96 126, 94 116 C 92 108, 108 106, 106 112" fill="none" stroke="#e6d6b9" strokeWidth="7" strokeLinecap="round" />
+      {/* tapa */}
+      <g className="br-skn__lid">
+        <rect x="48" y="102" width="104" height="20" rx="8" fill="#253035" />
+        <rect x="48" y="116" width="104" height="6" rx="3" fill="#1c2529" />
+        <line x1="62" y1="109" x2="138" y2="109" stroke="#be9d61" strokeWidth="1.4" />
+      </g>
+      {/* gotas */}
+      {[0, 1, 2].map((k) => (
+        <circle key={k} className="br-skn__bubble" cx={84 + k * 16} cy="104" r={3 - k * 0.6} fill="#be9d61" style={{ "--b": k } as React.CSSProperties} />
+      ))}
+      <g className="br-art__spark" fill="#be9d61">
+        <path d="M150 140 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z" />
+        <circle cx="34" cy="150" r="2.5" />
+      </g>
+    </svg>
+  );
+}
+
 export default async function Brands({ params }: { params: Promise<{ lang: string }> }) {
   const { lang: l } = await params;
   const lang = l as Locale;
@@ -135,12 +184,9 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
     <>
       <Header t={t} lang={lang} />
       <main className="br">
-        {/* Portada */}
-        <section className="bk2-hero br-hero">
-          <div className="container br-wrap br-hero__grid">
-            <div className="br-hero__art" aria-hidden="true">
-              <ImplantArt />
-            </div>
+        <BrandTabs
+          label={b.eyebrow}
+          intro={
             <div>
               <p className="eyebrow bk2-rise">{b.eyebrow}</p>
               <h1 className="bk2-rise" style={{ "--d": 1 } as React.CSSProperties}>
@@ -167,15 +213,12 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
                 ))}
               </ul>
             </div>
-          </div>
-        </section>
-
-        <BrandTabs
-          label={b.eyebrow}
+          }
           tabs={[
             {
               id: "implantes",
               label: b.tabs[0],
+              art: <ImplantArt />,
               icon: <svg className="br-tabs__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10c1.7 0 3 1.4 3 3.2 0 2-1.2 3.3-2 4.8H6c-.8-1.5-2-2.8-2-4.8C4 4.4 5.3 3 7 3zM9 11v2h6v-2M9.5 13l.5 8h4l.5-8M9.6 15.5h4.8M9.8 18h4.4" /></svg>,
               panel: (
                 <>
@@ -233,21 +276,15 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
             {
               id: "estetica",
               label: b.tabs[1],
+              art: <SyringeArt />,
               icon: <svg className="br-tabs__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v3h4V3M8 6h8v13a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2zM8 11h8" /></svg>,
               panel: (
                 <>
         {/* Medicina estética */}
         <section className="ab-sec">
           <div className="container br-wrap">
-            <div className="br-med">
-              <InView className="br-med__art">
-                <SyringeArt />
-              </InView>
-              <div>
-                <h2 className="loc-h2">{b.aestheticTitle}</h2>
-                <p className="tr-p">{b.aestheticLead}</p>
-              </div>
-            </div>
+            <h2 className="loc-h2">{b.aestheticTitle}</h2>
+            <p className="tr-p br-lead">{b.aestheticLead}</p>
             <InView className="br-cards br-cards--med">
               {b.aesthetic.map((m, i) => (
                 <article key={m.name} className="br-card br-card--med" style={{ "--i": i } as React.CSSProperties}>
@@ -283,6 +320,7 @@ export default async function Brands({ params }: { params: Promise<{ lang: strin
             {
               id: "piel",
               label: b.tabs[2],
+              art: <SkinArt />,
               icon: <svg className="br-tabs__ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.5 4.2 6 7.6 6 10.6A6 6 0 0 1 6 13.6C6 10.6 8.5 7.2 12 3z" /></svg>,
               panel: (
                 <>
