@@ -454,13 +454,17 @@ function EarDiagram({ labels }: { labels: ArtLabel[] }) {
         </g>
       </g>
       {/* oreja izquierda (normal) */}
-      <g className="tx-in" style={css({ "--d": 0.2 })} transform="translate(65 172) scale(-0.8 1)">
-        <path d={EAR} fill="url(#txHead)" stroke="#253035" strokeWidth="2" />
-        <path d={EAR_IN} fill="none" stroke="#253035" strokeWidth="1.5" strokeLinecap="round" />
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <g transform="translate(65 172) scale(-0.8 1)">
+          <path d={EAR} fill="url(#txHead)" stroke="#253035" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+          <path d={EAR_IN} fill="none" stroke="#253035" strokeWidth="1.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </g>
       </g>
       {/* posición anterior */}
-      <g className="tx-show" style={css({ "--d": 2.4 })} transform="translate(175 172) scale(1.5 1)">
-        <path d={EAR} fill="none" stroke="#be9d61" strokeWidth="1.3" strokeDasharray="4 4" vectorEffect="non-scaling-stroke" />
+      <g className="tx-show" style={css({ "--d": 2.4 })}>
+        <g transform="translate(175 172) scale(1.5 1)">
+          <path d={EAR} fill="none" stroke="#be9d61" strokeWidth="1.3" strokeDasharray="4 4" vectorEffect="non-scaling-stroke" />
+        </g>
       </g>
       {/* oreja derecha */}
       <g transform="translate(175 172)">
