@@ -5,7 +5,7 @@ import ReplayInView from "@/components/ReplayInView";
 // Las ilustraciones se eligen por el slug del tratamiento; los textos vienen de lib/treatments.ts.
 
 export type ArtLabel = { t: string; s: string };
-export type FactIcon = "anest" | "titanium" | "fixed" | "crown" | "xray" | "home" | "tag" | "plan" | "follow";
+export type FactIcon = "anest" | "titanium" | "fixed" | "crown" | "xray" | "home" | "tag" | "plan" | "follow" | "scar" | "time" | "band" | "people";
 export type Fact = { i: FactIcon; t: string; s: string };
 
 const css = (v: Record<string, string | number>) => v as React.CSSProperties;
@@ -265,10 +265,231 @@ function FaceZonesDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// ───────── Cirugía estética facial ─────────
+const PROFILE_TOP =
+  "M90 122 C 84 134, 70 144, 64 152 C 62 156, 70 160, 78 160 C 76 166, 70 170, 72 176 C 74 180, 78 182, 76 186 C 72 190, 70 194, 74 198 C 80 202, 84 206, 80 214";
+const CHIN_BEFORE = " C 76 232, 92 254, 118 258 C 132 260, 138 272, 140 310";
+const CHIN_AFTER = " C 80 226, 90 232, 106 234 C 122 236, 134 238, 140 246 L 142 310";
+const BACK = " L 232 310 L 232 110 L 92 110 Z";
+
+function SkinDefs() {
+  return (
+    <>
+      <linearGradient id="txSkinH" x1="0" x2="1">
+        <stop offset="0" stopColor="#f6ede1" />
+        <stop offset="0.75" stopColor="#f3e8da" stopOpacity="0.8" />
+        <stop offset="1" stopColor="#f3e8da" stopOpacity="0" />
+      </linearGradient>
+      <radialGradient id="txZone2">
+        <stop offset="0" stopColor="rgba(190,157,97,0.55)" />
+        <stop offset="1" stopColor="rgba(190,157,97,0)" />
+      </radialGradient>
+    </>
+  );
+}
+
+const aria = (labels: ArtLabel[]) => labels.map((l) => `${l.t} ${l.s}`).join(", ");
+
+// Lipopapada: la papada (contorno lleno) pasa a un perfil definido; queda la silueta anterior punteada.
+function DoubleChinDiagram({ labels }: { labels: ArtLabel[] }) {
+  return (
+    <svg className="tx-svg" viewBox="0 110 374 200" role="img" aria-label={aria(labels)}>
+      <defs>
+        <SkinDefs />
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <g className="tx-out" style={css({ "--d": 2.2 })}>
+          <path d={PROFILE_TOP + CHIN_BEFORE + BACK} fill="url(#txSkinH)" />
+          <path d={PROFILE_TOP + CHIN_BEFORE} fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+        </g>
+      </g>
+      <g className="tx-show" style={css({ "--d": 2.2 })}>
+        <path d={PROFILE_TOP + CHIN_AFTER + BACK} fill="url(#txSkinH)" />
+        <path d={"M80 214" + CHIN_BEFORE} fill="none" stroke="#be9d61" strokeWidth="1.5" strokeDasharray="4 4" />
+        <path d={PROFILE_TOP + CHIN_AFTER} fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+      </g>
+      <g className="tx-zone" style={css({ "--d": 0.9 })}>
+        <g className="tx-out" style={css({ "--d": 2.1 })}>
+          <circle cx="108" cy="246" r="24" fill="url(#txZone2)" />
+        </g>
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 2.9 })} d="M84 214 C 112 232, 152 228, 178 192" fill="none" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" />
+      <path className="tx-show" style={css({ "--d": 2.6 })} d="M86 228 l 10 3" stroke="#be9d61" strokeWidth="3" strokeLinecap="round" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M110 250 L 200 266 H226", x: 110, y: 250, ly: 266, t: 1.0 },
+          { d: "M91 230 L 200 216 H226", x: 91, y: 230, ly: 216, t: 2.6 },
+          { d: "M150 226 L 200 166 H226", x: 150, y: 226, ly: 166, t: 3.0 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Platismoplastia: las bandas del cuello se juntan en el centro y el músculo se une.
+function NeckBandsDiagram({ labels }: { labels: ArtLabel[] }) {
+  return (
+    <svg className="tx-svg" viewBox="0 100 374 210" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txNeck" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#efe3d2" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M40 110 C 52 170, 88 200, 120 202 C 152 200, 188 170, 200 110 Z" fill="url(#txNeck)" />
+        <path d="M74 186 C 78 230, 76 268, 66 310 L 174 310 C 164 268, 162 230, 166 186 Z" fill="url(#txNeck)" />
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.2 })} d="M40 110 C 52 170, 88 200, 120 202 C 152 200, 188 170, 200 110" fill="none" stroke="#253035" strokeWidth="2.2" strokeLinecap="round" />
+      <g className="tx-in" style={css({ "--d": 0.3 })} fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round">
+        <path d="M100 140 C 108 134, 114 136, 120 139 C 126 136, 132 134, 140 140" />
+        <path d="M100 140 C 110 152, 130 152, 140 140" />
+        <path d="M114 170 q 6 3 12 0" stroke="#c9b48c" />
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.4 })} d="M74 186 C 78 230, 76 268, 66 310" fill="none" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 0.4 })} d="M166 186 C 162 230, 164 268, 174 310" fill="none" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+      {/* bandas */}
+      <g className="tx-band-l">
+        <path className="tx-draw" pathLength={1} style={css({ "--d": 0.8 })} d="M104 206 C 100 236, 98 266, 94 306" fill="none" stroke="#c79a85" strokeWidth="3.2" strokeLinecap="round" />
+      </g>
+      <g className="tx-band-r">
+        <path className="tx-draw" pathLength={1} style={css({ "--d": 0.8 })} d="M136 206 C 140 236, 142 266, 146 306" fill="none" stroke="#c79a85" strokeWidth="3.2" strokeLinecap="round" />
+      </g>
+      <g className="tx-show" style={css({ "--d": 3.0 })} fill="none" stroke="#be9d61" strokeWidth="1.3" strokeDasharray="3 4" opacity="0.6">
+        <path d="M104 206 C 100 236, 98 266, 94 306" />
+        <path d="M136 206 C 140 236, 142 266, 146 306" />
+      </g>
+      {/* unión central */}
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 2.8 })} d="M120 208 L 120 306" stroke="#be9d61" strokeWidth="2.4" strokeLinecap="round" />
+      {[0, 1, 2, 3, 4].map((k) => (
+        <path key={k} className="tx-show" style={css({ "--d": 3.1 + k * 0.1 })} d={`M114 ${222 + k * 19} L126 ${222 + k * 19}`} stroke="#be9d61" strokeWidth="1.6" strokeLinecap="round" />
+      ))}
+      <path className="tx-show" style={css({ "--d": 2.5 })} d="M106 212 C 114 216, 126 216, 134 212" fill="none" stroke="#be9d61" strokeWidth="2.6" strokeLinecap="round" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M145 288 L 200 286 H226", x: 145, y: 288, ly: 286, t: 1.3 },
+          { d: "M120 250 L 200 236 H226", x: 120, y: 250, ly: 236, t: 3.1 },
+          { d: "M132 214 L 200 178 H226", x: 132, y: 214, ly: 178, t: 2.6 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Blefaroplastia: la piel sobrante del párpado se retira y aparece el pliegue natural; las bolsas se suavizan.
+function EyelidDiagram({ labels }: { labels: ArtLabel[] }) {
+  const EYE = "M40 192 C 80 152, 160 152, 200 192 C 160 224, 80 224, 40 192 Z";
+  return (
+    <svg className="tx-svg" viewBox="0 90 374 180" role="img" aria-label={aria(labels)}>
+      <defs>
+        <radialGradient id="txFace">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="0.8" stopColor="#f3e8da" stopOpacity="0.8" />
+          <stop offset="1" stopColor="#f3e8da" stopOpacity="0" />
+        </radialGradient>
+        <clipPath id="txEyeClip">
+          <path d={EYE} />
+        </clipPath>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <ellipse cx="120" cy="180" rx="118" ry="88" fill="url(#txFace)" />
+        <path d="M36 124 C 80 100, 150 98, 206 118" fill="none" stroke="#5a4c42" strokeWidth="6" strokeLinecap="round" />
+      </g>
+      <g className="tx-in" style={css({ "--d": 0.2 })}>
+        <path d={EYE} fill="#fff" />
+        <g clipPath="url(#txEyeClip)">
+          <circle cx="120" cy="190" r="25" fill="#4d5d63" />
+          <circle cx="120" cy="190" r="10" fill="#1c2529" />
+          <circle cx="129" cy="181" r="4.5" fill="#fff" />
+        </g>
+        <path d={EYE} fill="none" stroke="#253035" strokeWidth="2.4" />
+      </g>
+      {/* piel sobrante */}
+      <g className="tx-in" style={css({ "--d": 0.4 })}>
+        <g className="tx-lift" style={css({ "--d": 2.3 })}>
+          <path d="M36 188 C 66 138, 174 134, 204 186 C 172 170, 70 172, 36 188 Z" fill="#ead8c4" stroke="#d2b896" strokeWidth="1.6" />
+        </g>
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 2.8 })} d="M52 170 C 88 144, 152 142, 190 166" fill="none" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" />
+      {/* bolsas */}
+      <g className="tx-in" style={css({ "--d": 0.5 })}>
+        <g className="tx-out" style={css({ "--d": 2.6 })}>
+          <path d="M58 214 C 84 246, 156 246, 182 214 C 150 232, 90 232, 58 214 Z" fill="rgba(160,120,90,0.16)" />
+          <path d="M58 214 C 84 246, 156 246, 182 214" fill="none" stroke="#c9a98d" strokeWidth="2.4" strokeLinecap="round" />
+        </g>
+      </g>
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 3.0 })} d="M62 218 C 92 230, 148 230, 178 218" fill="none" stroke="#d6bea2" strokeWidth="1.8" strokeLinecap="round" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M176 156 L 206 130 H226", x: 176, y: 156, ly: 130, t: 3.0 },
+          { d: "M150 166 L 206 182 H226", x: 150, y: 166, ly: 182, t: 1.0 },
+          { d: "M150 236 H226", x: 150, y: 236, ly: 236, t: 1.4 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Otoplastia: la oreja prominente se acerca a la cabeza; queda su posición anterior punteada.
+const EAR = "M0 -26 C 14 -34, 30 -24, 28 -4 C 26 12, 16 18, 10 28 C 6 34, 0 32, 0 26 Z";
+const EAR_IN = "M6 -16 C 16 -20, 22 -12, 20 -2 C 18 8, 12 10, 9 16";
+function EarDiagram({ labels }: { labels: ArtLabel[] }) {
+  return (
+    <svg className="tx-svg" viewBox="0 80 374 225" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txHead" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f6ede1" />
+          <stop offset="1" stopColor="#efe3d2" />
+        </linearGradient>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M98 244 L 96 304 M142 244 L 144 304" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+        <ellipse cx="120" cy="174" rx="56" ry="76" fill="url(#txHead)" stroke="#253035" strokeWidth="2.2" />
+        <path d="M64 168 C 60 112, 90 98, 120 98 C 150 98, 180 112, 176 168 C 168 132, 150 120, 120 120 C 90 120, 72 132, 64 168 Z" fill="#2e3b41" />
+        <g fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round">
+          <path d="M96 176 q 8 6 16 0 M128 176 q 8 6 16 0 M120 184 l -4 16 h 8 M108 216 q 12 8 24 0" />
+        </g>
+      </g>
+      {/* oreja izquierda (normal) */}
+      <g className="tx-in" style={css({ "--d": 0.2 })} transform="translate(65 172) scale(-0.8 1)">
+        <path d={EAR} fill="url(#txHead)" stroke="#253035" strokeWidth="2" />
+        <path d={EAR_IN} fill="none" stroke="#253035" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+      {/* posición anterior */}
+      <g className="tx-show" style={css({ "--d": 2.4 })} transform="translate(175 172) scale(1.5 1)">
+        <path d={EAR} fill="none" stroke="#be9d61" strokeWidth="1.3" strokeDasharray="4 4" vectorEffect="non-scaling-stroke" />
+      </g>
+      {/* oreja derecha */}
+      <g transform="translate(175 172)">
+        <g className="tx-ear">
+          <path d={EAR} fill="url(#txHead)" stroke="#253035" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+          <path d={EAR_IN} fill="none" stroke="#253035" strokeWidth="1.5" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+        </g>
+      </g>
+      <path className="tx-show" style={css({ "--d": 3.0 })} d="M177 150 L 177 196" stroke="#be9d61" strokeWidth="2.4" strokeDasharray="3 4" strokeLinecap="round" />
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M214 160 L 220 132 H226", x: 214, y: 160, ly: 132, t: 0.9 },
+          { d: "M196 176 H226", x: 196, y: 176, ly: 182, t: 2.8 },
+          { d: "M177 196 L 206 232 H226", x: 177, y: 196, ly: 232, t: 3.2 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
   "cirugia-oral-maxilofacial": FaceZonesDiagram,
+  "lipopapada-perfilamiento-mandibular": DoubleChinDiagram,
+  platismoplastia: NeckBandsDiagram,
+  blefaroplastia: EyelidDiagram,
+  otoplastia: EarDiagram,
 };
 
 const factIcons: Record<FactIcon, React.ReactNode> = {
@@ -280,6 +501,10 @@ const factIcons: Record<FactIcon, React.ReactNode> = {
   tag: <path d="M3.5 12.5 12 4h7.5v7.5L11 20zM16 8h.01" />,
   plan: <path d="M8 4h8v3H8zM6 5.5H5v15h14v-15h-1M8.5 12l2 2 4-4M8.5 17h7" />,
   follow: <path d="M5 6h14v14H5zM5 10h14M9 4v4M15 4v4M9 14l2 2 4-4" />,
+  scar: <path d="M4 12h16M7.5 9l1 6M11.5 9l1 6M15.5 9l1 6" />,
+  time: <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5V12l3 2" />,
+  band: <path d="M3.5 9.5h17v5h-17zM8 9.5v5M16 9.5v5M11 12h2" />,
+  people: <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3.5 20c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5M16.5 11a2.5 2.5 0 1 0 0-5M16 14.2c2.6.4 4.5 2.6 4.5 5.3" />,
   crown: <path d="M7 3.5c2-.8 3.5-.2 5 .8 1.5-1 3-1.6 5-.8 2.3 1 2.7 4 1.8 7.3L17 19c-.4 1.6-2.4 1.6-2.7 0L13 13.5c-.3-1.2-1.7-1.2-2 0L9.7 19c-.3 1.6-2.3 1.6-2.7 0l-1.8-8.2C4.3 7.5 4.7 4.5 7 3.5z" />,
 };
 

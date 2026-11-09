@@ -299,6 +299,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Reduzca la grasa bajo el mentón y defina el contorno de la mandíbula para un perfil más armónico.",
       what: "La lipopapada es una liposucción localizada que retira la grasa acumulada bajo el mentón a través de incisiones muy pequeñas. Se puede combinar con el perfilamiento mandibular, que trabaja la grasa del borde de la mandíbula para marcar mejor el ángulo entre el cuello y la cara. El objetivo es un perfil más definido sin perder la naturalidad del rostro.",
+      art: {
+        labels: [
+          { t: "Papada", s: "grasa bajo el mentón" },
+          { t: "Incisión", s: "mínima, bajo el mentón" },
+          { t: "Mandíbula", s: "contorno más definido" },
+        ],
+        caption: "Se retira la grasa bajo el mentón para un perfil más definido.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Con o sin sedación, según el caso" },
+        { i: "scar", t: "Incisiones mínimas", s: "Casi imperceptibles" },
+        { i: "band", t: "Mentonera", s: "Por lo general 1 a 2 semanas" },
+        { i: "follow", t: "Resultado final", s: "Cuando baja la inflamación" },
+      ],
       forWho: [
         "Personas con grasa acumulada bajo el mentón que no disminuye con dieta ni ejercicio.",
         "Quienes desean un contorno de mandíbula más definido.",
@@ -322,6 +336,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Reduce fat under the chin and define the jawline for a more balanced profile.",
       what: "Double-chin liposuction removes fat stored under the chin through very small incisions. It can be combined with jawline contouring, which treats the fat along the edge of the jaw to better define the angle between the neck and the face. The goal is a sharper profile that still looks natural.",
+      art: {
+        labels: [
+          { t: "Double chin", s: "fat under the chin" },
+          { t: "Incision", s: "tiny, under the chin" },
+          { t: "Jawline", s: "sharper contour" },
+        ],
+        caption: "Fat under the chin is removed for a sharper profile.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "With or without sedation" },
+        { i: "scar", t: "Tiny incisions", s: "Barely visible" },
+        { i: "band", t: "Chin strap", s: "Usually 1 to 2 weeks" },
+        { i: "follow", t: "Final result", s: "Once the swelling goes down" },
+      ],
       forWho: [
         "People with fat under the chin that does not go away with diet or exercise.",
         "Those who want a more defined jawline.",
@@ -351,6 +379,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Corrija las bandas verticales del cuello y defina el ángulo entre el cuello y la mandíbula.",
       what: "El platisma es un músculo delgado que cubre la parte delantera del cuello. Con los años, sus bordes se separan y se marcan como bandas verticales, y el cuello pierde definición. La platismoplastia une y tensa este músculo, por lo general a través de una pequeña incisión bajo el mentón, para devolverle al cuello un contorno más firme y joven.",
+      art: {
+        labels: [
+          { t: "Bandas", s: "músculo separado" },
+          { t: "Unión central", s: "el músculo se tensa" },
+          { t: "Incisión", s: "discreta, bajo el mentón" },
+        ],
+        caption: "Se unen los bordes del músculo para un cuello más firme y definido.",
+      },
+      facts: [
+        { i: "scar", t: "Incisión discreta", s: "Bajo el mentón" },
+        { i: "plan", t: "Combinable", s: "Con lipopapada o lifting" },
+        { i: "band", t: "Vendaje", s: "Los primeros días" },
+        { i: "follow", t: "Controles", s: "Hasta el resultado final" },
+      ],
       forWho: [
         "Personas con bandas verticales visibles en el cuello.",
         "Quienes notan pérdida de definición entre el cuello y la mandíbula.",
@@ -374,6 +416,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Correct vertical neck bands and define the angle between the neck and the jaw.",
       what: "The platysma is a thin muscle covering the front of the neck. Over the years its edges separate and show as vertical bands, and the neck loses definition. Platysmaplasty joins and tightens this muscle, usually through a small incision under the chin, to give the neck a firmer, younger contour.",
+      art: {
+        labels: [
+          { t: "Neck bands", s: "separated muscle" },
+          { t: "Central repair", s: "muscle is tightened" },
+          { t: "Incision", s: "discreet, under the chin" },
+        ],
+        caption: "The muscle edges are joined for a firmer, more defined neck.",
+      },
+      facts: [
+        { i: "scar", t: "Discreet incision", s: "Under the chin" },
+        { i: "plan", t: "Can be combined", s: "With chin liposuction or a lift" },
+        { i: "band", t: "Bandage", s: "For the first days" },
+        { i: "follow", t: "Follow-up", s: "Until the final result" },
+      ],
       forWho: [
         "People with visible vertical bands on the neck.",
         "Those who notice a loss of definition between the neck and the jaw.",
@@ -403,6 +459,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Retire el exceso de piel o las bolsas de los párpados para una mirada más descansada.",
       what: "La blefaroplastia es la cirugía de los párpados. En el párpado superior retira el exceso de piel que hace ver la mirada cansada y que, en algunos casos, llega a molestar la visión. En el párpado inferior corrige las bolsas. Las incisiones siguen los pliegues naturales del ojo, por lo que la cicatriz queda muy disimulada.",
+      art: {
+        labels: [
+          { t: "Pliegue", s: "aquí queda la cicatriz" },
+          { t: "Exceso de piel", s: "se retira" },
+          { t: "Bolsas", s: "se corrigen" },
+        ],
+        caption: "Se retira la piel sobrante y la cicatriz queda en el pliegue natural del párpado.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Con o sin sedación" },
+        { i: "scar", t: "Cicatriz oculta", s: "En el pliegue del párpado" },
+        { i: "time", t: "Puntos", s: "Se retiran en pocos días" },
+        { i: "follow", t: "1 a 2 semanas", s: "De inflamación y moretones" },
+      ],
       forWho: [
         "Personas con piel sobrante en los párpados superiores.",
         "Quienes tienen bolsas marcadas bajo los ojos.",
@@ -426,6 +496,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Remove excess skin or bags from the eyelids for a more rested look.",
       what: "Blepharoplasty is eyelid surgery. On the upper eyelid it removes the excess skin that makes the eyes look tired and, in some cases, can even get in the way of vision. On the lower eyelid it corrects under-eye bags. The incisions follow the natural folds of the eye, so the scar is very well hidden.",
+      art: {
+        labels: [
+          { t: "Eyelid crease", s: "where the scar hides" },
+          { t: "Excess skin", s: "removed" },
+          { t: "Bags", s: "corrected" },
+        ],
+        caption: "Excess skin is removed and the scar sits in the natural eyelid crease.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "With or without sedation" },
+        { i: "scar", t: "Hidden scar", s: "In the eyelid crease" },
+        { i: "time", t: "Stitches", s: "Removed within a few days" },
+        { i: "follow", t: "1 to 2 weeks", s: "Of swelling and bruising" },
+      ],
       forWho: [
         "People with excess skin on the upper eyelids.",
         "Those with noticeable bags under the eyes.",
@@ -455,6 +539,20 @@ export const treatments: Treatment[] = [
     es: {
       summary: "Corrija las orejas prominentes y llévelas a una posición más armónica con el rostro.",
       what: "La otoplastia remodela el cartílago de la oreja para acercarla a la cabeza o corregir su forma. Es una de las cirugías más agradecidas, porque con un cambio pequeño se logra mucha armonía en el rostro. La incisión se hace por detrás de la oreja, donde la cicatriz queda oculta.",
+      art: {
+        labels: [
+          { t: "Prominente", s: "posición anterior" },
+          { t: "Nueva posición", s: "más cerca de la cabeza" },
+          { t: "Incisión", s: "oculta tras la oreja" },
+        ],
+        caption: "El cartílago se remodela para que la oreja quede más cerca de la cabeza.",
+      },
+      facts: [
+        { i: "scar", t: "Cicatriz oculta", s: "Detrás de la oreja" },
+        { i: "band", t: "Banda elástica", s: "Para dormir, las primeras semanas" },
+        { i: "people", t: "Niños y adultos", s: "Desde la edad que indique la doctora" },
+        { i: "follow", t: "Resultado duradero", s: "En la gran mayoría de los casos" },
+      ],
       forWho: [
         "Niños, a partir de la edad que indique la doctora, y adultos con orejas separadas o prominentes.",
         "Personas con orejas de forma o tamaño diferente entre sí.",
@@ -478,6 +576,20 @@ export const treatments: Treatment[] = [
     en: {
       summary: "Correct prominent ears and bring them into a more balanced position with the face.",
       what: "Otoplasty reshapes the ear cartilage to bring the ear closer to the head or correct its shape. It is one of the most rewarding surgeries, because a small change brings a lot of harmony to the face. The incision is made behind the ear, where the scar stays hidden.",
+      art: {
+        labels: [
+          { t: "Prominent", s: "previous position" },
+          { t: "New position", s: "closer to the head" },
+          { t: "Incision", s: "hidden behind the ear" },
+        ],
+        caption: "The cartilage is reshaped so the ear sits closer to the head.",
+      },
+      facts: [
+        { i: "scar", t: "Hidden scar", s: "Behind the ear" },
+        { i: "band", t: "Headband", s: "For sleeping, first weeks" },
+        { i: "people", t: "Children and adults", s: "From the age the doctor advises" },
+        { i: "follow", t: "Lasting result", s: "In the vast majority of cases" },
+      ],
       forWho: [
         "Children, from the age the doctor recommends, and adults with protruding or prominent ears.",
         "People whose ears differ in shape or size.",
