@@ -51,7 +51,7 @@ Cada push publica la web en Vercel en ~1 minuto.
 
 Lugar de la cita (solo presencial): Maxilo (centro principal, agenda con horario) u otros centros donde la doctora atiende POR CITA, sin horario fijo: Centro Galeno Integral y Clínica Especializada Internacional (Las Terrenas), Centro Médico de Especialidades Samaná ("Los Cubanos", Samaná), Clínica Rudy Moya (Sánchez; en internet figura como "Centro Médico Dr. Moya", confirmar nombre). En esos centros el paciente elige el día (lun–sáb) y la hora se confirma; mismo precio; consultas y procedimientos (primero se valora; el procedimiento puede hacerse allí o en el centro principal). Datos en `centers` (`lib/site.ts`); también listados en Ubicación.
 
-Citas Presencial / Online. Se envían por WhatsApp o por correo (dracelia.maxiloestetica@gmail.com).
+Citas Presencial / Online. Se envían por WhatsApp o por correo (dracelia.maxiloestetica@gmail.com). Además, al enviar se crea un evento "Por confirmar" en el Google Calendar del centro + correo (Apps Script, ver `docs/agenda-google-calendar.md`; variables BOOKING_HOOK_URL y BOOKING_HOOK_TOKEN en Vercel). El paciente tiene "Añadir a mi calendario" (Google / .ics).
 Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recargo por pagar con tarjeta: Ley 358-05, art. 87). Datos de transferencia (Banco Popular) y apps para pagar desde el extranjero en `lib/site.ts`.
 
 ## Pendientes (los aporta la doctora / el cliente)

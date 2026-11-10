@@ -12846,3 +12846,42 @@ body:has(.bk2-page) .wa-float {
   font-size: 0.78rem;
   white-space: nowrap;
 }
+
+/* Agenda: añadir a mi calendario */
+.bk2-addcal {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #fbf8f2;
+  border: 1px solid var(--line);
+}
+
+.bk2-addcal p {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.bk2-addcal div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bk2-addcal button.faq-chip {
+  font: inherit;
+  cursor: pointer;
+}
+
+.bk2-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}

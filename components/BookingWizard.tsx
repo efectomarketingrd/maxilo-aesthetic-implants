@@ -107,6 +107,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const maxDate = useMemo(() => new Date(today.getFullYear(), today.getMonth(), today.getDate() + agenda.maxDaysAhead), [today]);
 
   const [step, setStep] = useState<Step>(0);
+  const honey = useRef<HTMLInputElement>(null);
   const [dir, setDir] = useState<"fwd" | "back">("fwd");
   const [reached, setReached] = useState<Step>(0);
   const [nudge, setNudge] = useState(0);
@@ -370,13 +371,111 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     return lines.filter((l, i) => l !== "" || (i > 0 && lines[i - 1] !== "")).join("\n").trim();
   }
 
+  // Datos de la cita para el calendario (centro y paciente)
+  const rawTime = ext ? "" : special ? specialTime : time ?? "";
+  const minutes = isProc ? 60 : 30;
+  const placeText = effMode === "presencial" ? `${center.name}, ${center.town}` : b.modes.online;
+
+  // Aviso al centro: evento "Por confirmar" en su Google Calendar + correo (vía /api/solicitud)
+  const lastSent = useRef("");
+  function notifyCenter() {
+    if (!date) return;
+    const data = {
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      service: svcFull,
+      place: placeText,
+      date: toKey(date),
+      time: rawTime,
+      minutes,
+      dateLabel,
+      message: message(),
+      website: honey.current?.value ?? "",
+    };
+    const json = JSON.stringify(data);
+    if (json === lastSent.current) return;
+    lastSent.current = json;
+    fetch("/api/solicitud", { method: "POST", headers: { "Content-Type": "application/json" }, body: json, keepalive: true }).catch(() => {});
+  }
+
+  // "Añadir a mi calendario" para el paciente
+  const pad = (n: number) => String(n).padStart(2, "0");
+  function calRange() {
+    if (!date) return null;
+    const ymd = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}`;
+    if (!rawTime) {
+      const n = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+      return { allDay: true, a: ymd, z: `${n.getFullYear()}${pad(n.getMonth() + 1)}${pad(n.getDate())}`, start: date, end: n };
+    }
+    const [h, m] = rawTime.split(":").map(Number);
+    const start = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
+    const end = new Date(start.getTime() + minutes * 60000);
+    const f = (d: Date) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+    return { allDay: false, a: f(start), z: f(end), start, end };
+  }
+  const calDetails = () => `${svcFull}\n${b.calNote}\n${site.phones[0]} · ${site.email}`;
+  function googleCal() {
+    const r = calRange();
+    if (!r) return "#";
+    const q = new URLSearchParams({
+      action: "TEMPLATE",
+      text: b.calTitle,
+      dates: `${r.a}/${r.z}`,
+      details: calDetails(),
+      location: placeText,
+      ctz: "America/Santo_Domingo",
+    });
+    return `https://calendar.google.com/calendar/render?${q.toString()}`;
+  }
+  function downloadIcs() {
+    const r = calRange();
+    if (!r) return;
+    // República Dominicana: UTC-4 todo el año (sin horario de verano)
+    const utc = (d: Date) => {
+      const u = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 4, d.getMinutes()));
+      return `${u.getUTCFullYear()}${pad(u.getUTCMonth() + 1)}${pad(u.getUTCDate())}T${pad(u.getUTCHours())}${pad(u.getUTCMinutes())}00Z`;
+    };
+    const esc = (x: string) => x.replace(/([,;])/g, "\\$1");
+    const ics = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Maxilo Aesthetic Implants//Agenda//ES",
+      "BEGIN:VEVENT",
+      `UID:${Date.now()}@maxilo-aesthetic-implants`,
+      `DTSTAMP:${utc(new Date())}`,
+      r.allDay ? `DTSTART;VALUE=DATE:${r.a}` : `DTSTART:${utc(r.start)}`,
+      r.allDay ? `DTEND;VALUE=DATE:${r.z}` : `DTEND:${utc(r.end)}`,
+      `SUMMARY:${esc(b.calTitle)}`,
+      `DESCRIPTION:${esc(calDetails()).replace(/\n/g, "\\n")}`,
+      `LOCATION:${esc(placeText)}`,
+      "BEGIN:VALARM",
+      "TRIGGER:-PT2H",
+      "ACTION:DISPLAY",
+      `DESCRIPTION:${esc(b.calTitle)}`,
+      "END:VALARM",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cita-maxilo.ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
   function sendWa() {
     if (!valid) return;
+    notifyCenter();
     window.open(waLink(message()), "_blank", "noopener");
   }
 
   function sendMail() {
     if (!valid) return;
+    notifyCenter();
     const subject = `${b.mailSubject} — ${svcName} — ${date ? toKey(date) : ""}`;
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message())}`;
   }
@@ -1054,6 +1153,18 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <Mail size={18} /> {b.sendMail}
                 </button>
               </div>
+              <div className="bk2-addcal">
+                <p>{b.addCal}</p>
+                <div>
+                  <a className="faq-chip" href={googleCal()} target="_blank" rel="noopener noreferrer">
+                    Google Calendar
+                  </a>
+                  <button type="button" className="faq-chip" onClick={downloadIcs}>
+                    {b.addCalIcs}
+                  </button>
+                </div>
+              </div>
+              <input ref={honey} type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="bk2-hp" />
               <p className="bk2-confirm">{b.confirmNote}</p>
             </div>
           )}
