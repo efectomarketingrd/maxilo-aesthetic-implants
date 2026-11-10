@@ -12847,41 +12847,191 @@ body:has(.bk2-page) .wa-float {
   white-space: nowrap;
 }
 
-/* Agenda: añadir a mi calendario */
-.bk2-addcal {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  padding: 14px;
-  border-radius: 16px;
-  background: #fbf8f2;
-  border: 1px solid var(--line);
-}
-
-.bk2-addcal p {
-  margin: 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--slate);
-}
-
-.bk2-addcal div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.bk2-addcal button.faq-chip {
-  font: inherit;
-  cursor: pointer;
-}
-
 .bk2-hp {
   position: absolute;
   left: -9999px;
   width: 1px;
   height: 1px;
   opacity: 0;
+}
+
+/* Agenda: guardar en el calendario (versión diseñada) */
+.bk2-addcal {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+  justify-items: stretch;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #fbf8f2, #f5efe4);
+  border: 1px solid rgba(190, 157, 97, 0.35);
+  text-align: left;
+}
+
+.bk2-addcal__sheet {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 78px;
+  padding: 14px 6px 9px;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 10px 22px rgba(37, 48, 53, 0.12);
+  overflow: hidden;
+  transform-origin: top center;
+  animation: bk2-sheet 0.9s cubic-bezier(0.34, 1.4, 0.64, 1) 0.2s both;
+}
+
+.bk2-addcal__sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 24px;
+  background: var(--slate);
+}
+
+.bk2-addcal__rings {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  z-index: 1;
+}
+
+.bk2-addcal__rings i {
+  width: 6px;
+  height: 11px;
+  border-radius: 4px;
+  background: var(--gold);
+}
+
+.bk2-addcal__month {
+  position: relative;
+  margin-top: -9px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.bk2-addcal__day {
+  margin-top: 8px;
+  font-family: var(--f-title);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--slate);
+}
+
+.bk2-addcal__time {
+  margin-top: 5px;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: #8a6d3b;
+  text-align: center;
+}
+
+.bk2-addcal__title {
+  margin: 0;
+  font-family: var(--f-title);
+  font-size: 1rem;
+  color: var(--slate);
+}
+
+.bk2-addcal__note {
+  margin: 3px 0 10px;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.bk2-addcal__btns {
+  display: grid;
+  gap: 8px;
+}
+
+.bk2-addcal__btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--slate);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.bk2-addcal__btn:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.bk2-addcal__btn svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bk2-addcal__mark {
+  opacity: 0;
+  stroke-dasharray: 12;
+  stroke-dashoffset: 12;
+}
+
+.bk2-addcal__btn.is-saved {
+  border-color: var(--gold);
+  background: var(--slate);
+  color: var(--ivory);
+}
+
+.bk2-addcal__btn.is-saved svg {
+  stroke: var(--gold-soft);
+}
+
+.bk2-addcal__btn.is-saved .bk2-addcal__mark {
+  opacity: 1;
+  animation: bk2-mark 0.5s ease forwards;
+}
+
+@keyframes bk2-sheet {
+  0% { opacity: 0; transform: translateY(-14px) rotate(-8deg); }
+  100% { opacity: 1; transform: none; }
+}
+
+@keyframes bk2-mark {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (max-width: 340px) {
+  .bk2-addcal {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bk2-addcal__sheet,
+  .bk2-addcal__btn.is-saved .bk2-addcal__mark {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
 }

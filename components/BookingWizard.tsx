@@ -108,6 +108,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const [step, setStep] = useState<Step>(0);
   const honey = useRef<HTMLInputElement>(null);
+  const [calSaved, setCalSaved] = useState<"" | "g" | "i">("");
   const [dir, setDir] = useState<"fwd" | "back">("fwd");
   const [reached, setReached] = useState<Step>(0);
   const [nudge, setNudge] = useState(0);
@@ -1153,17 +1154,54 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <Mail size={18} /> {b.sendMail}
                 </button>
               </div>
-              <div className="bk2-addcal">
-                <p>{b.addCal}</p>
-                <div>
-                  <a className="faq-chip" href={googleCal()} target="_blank" rel="noopener noreferrer">
-                    Google Calendar
-                  </a>
-                  <button type="button" className="faq-chip" onClick={downloadIcs}>
-                    {b.addCalIcs}
-                  </button>
+              {date && (
+                <div className="bk2-addcal">
+                  <div className="bk2-addcal__sheet" aria-hidden="true">
+                    <span className="bk2-addcal__rings">
+                      <i />
+                      <i />
+                    </span>
+                    <span className="bk2-addcal__month">{date.toLocaleDateString(locale, { month: "short" }).replace(".", "")}</span>
+                    <strong className="bk2-addcal__day">{date.getDate()}</strong>
+                    <span className="bk2-addcal__time">{timeLabel}</span>
+                  </div>
+                  <div className="bk2-addcal__body">
+                    <p className="bk2-addcal__title">{b.addCal}</p>
+                    <p className="bk2-addcal__note">{b.calNote}</p>
+                    <div className="bk2-addcal__btns">
+                      <a
+                        className={`bk2-addcal__btn ${calSaved === "g" ? "is-saved" : ""}`}
+                        href={googleCal()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setCalSaved("g")}
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
+                          <path d="M3.5 10h17M8 3v4M16 3v4" />
+                          <path className="bk2-addcal__mark" d="M9 15l2 2 4-4.5" />
+                        </svg>
+                        <span>{calSaved === "g" ? b.calSaved : "Google Calendar"}</span>
+                      </a>
+                      <button
+                        type="button"
+                        className={`bk2-addcal__btn ${calSaved === "i" ? "is-saved" : ""}`}
+                        onClick={() => {
+                          downloadIcs();
+                          setCalSaved("i");
+                        }}
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <rect x="6.5" y="2.5" width="11" height="19" rx="2.6" />
+                          <path d="M6.5 7h11M10.5 19h3" />
+                          <path className="bk2-addcal__mark" d="M9.5 13l1.8 1.8 3.4-3.8" />
+                        </svg>
+                        <span>{calSaved === "i" ? b.calSaved : b.addCalIcs}</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
               <input ref={honey} type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="bk2-hp" />
               <p className="bk2-confirm">{b.confirmNote}</p>
             </div>
