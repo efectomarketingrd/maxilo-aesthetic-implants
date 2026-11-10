@@ -47,3 +47,12 @@ export const spa = {
 };
 
 export const spaWa = (msg: string) => `https://wa.me/${spa.wa}?text=${encodeURIComponent(msg)}`;
+
+// Centros donde atiende la doctora. El principal tiene agenda propia; en los demás atiende por cita (el paciente elige el día y se confirma la hora).
+export const centers = [
+  { id: "maxilo", name: "Maxilo Aesthetic Implants", town: "Las Terrenas", main: true },
+  { id: "galeno", name: "Centro Galeno Integral", town: "Las Terrenas", main: false },
+  { id: "cei", name: "Clínica Especializada Internacional", town: "Las Terrenas", main: false },
+  { id: "cmes", name: "Centro Médico de Especialidades Samaná", town: "Samaná", main: false },
+  { id: "moya", name: "Clínica Rudy Moya", town: "Sánchez", main: false },
+] as const;

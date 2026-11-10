@@ -5,7 +5,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
-import { site, waLink, type Locale } from "@/lib/site";
+import { centers, site, waLink, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
 
 function startOfDay(d: Date) {
@@ -131,6 +131,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [type, setType] = useState<SlotType>("consulta");
   const [mode, setMode] = useState<"presencial" | "online">("presencial");
   const effMode = type === "procedimiento" ? "presencial" : mode;
+  // Lugar: centro principal (agenda propia) u otro centro (por cita: se elige el día y se confirma la hora)
+  const [place, setPlace] = useState<string>("maxilo");
+  const ext = effMode === "presencial" && place !== "maxilo";
+  const center = centers.find((c) => c.id === place) ?? centers[0];
   const [cursor, setCursor] = useState(() => new Date(minDate.getFullYear(), minDate.getMonth(), 1));
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
@@ -172,7 +176,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const selectable = (d: Date) => {
     if (!inRange(d)) return false;
     if (agenda.closedDates.includes(toKey(d))) return false;
-    return special ? true : isOpenDay(d);
+    return special || ext ? d.getDay() !== 0 : isOpenDay(d);
   };
 
   const canPrev = new Date(cursor.getFullYear(), cursor.getMonth(), 0) >= firstDate;
@@ -190,7 +194,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   }, [firstKey]);
   const canNext = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1) <= maxDate;
 
-  const daySlots = date && !special ? slotsFor(date).filter((s) => s.type === type) : [];
+  const daySlots = date && !special && !ext ? slotsFor(date).filter((s) => s.type === type) : [];
   const weekHeads = [1, 2, 3, 4, 5, 6, 0].map((i) => b.days[i]);
 
   const svcName = b.services.find((s) => s.id === service)?.name ?? "";
@@ -273,7 +277,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     setWarts(null);
   }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
-  const timeLabel = special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
+  const timeLabel = ext ? (date ? b.timeTbd : "") : special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
   const slotInfo = !special && time ? agenda.slots.find((s) => s.time === time && s.type === type) : undefined;
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
@@ -349,9 +353,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       `${b.service}: ${svcFull}`,
       `${b.type}: ${b.types[type]}`,
       `${b.mode}: ${b.modes[effMode]}`,
+      effMode === "presencial" ? `${b.place}: ${center.name} (${center.town})` : "",
       `${b.date}: ${dateLabel}`,
       `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
-      special ? b.msgSpecial : "",
+      special && !ext ? b.msgSpecial : "",
       `${b.cost.msg}: ${costLine}`,
       planFull ? `${b.cost.msgPlanFull} (${money(planFull)})` : "",
       showDeposit ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
@@ -649,6 +654,49 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <p className="bk2-help bk2-help--sm" key={effMode + type}>
                     {type === "procedimiento" ? b.modeOnlyPresencial : b.modeHelp[effMode]}
                   </p>
+                  {effMode === "presencial" && (
+                    <div className="bk2-place bk2-in" role="radiogroup" aria-label={b.placeLabel}>
+                      <p className="bk2-label">{b.placeLabel}</p>
+                      <div className="bk2-place__list">
+                        {centers.map((c, i) => (
+                          <button
+                            type="button"
+                            role="radio"
+                            key={c.id}
+                            aria-checked={place === c.id}
+                            style={{ "--i": i } as React.CSSProperties}
+                            className={`bk2-place__opt ${place === c.id ? "is-on" : ""}`}
+                            onClick={() => {
+                              if (c.id === place) return;
+                              setPlace(c.id);
+                              setDate(null);
+                              setTime(null);
+                              setSpecial(false);
+                            }}
+                          >
+                            <span className="bk2-place__pin" aria-hidden="true">
+                              <svg viewBox="0 0 24 24">
+                                <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" />
+                                <circle cx="12" cy="10" r="2.4" />
+                              </svg>
+                            </span>
+                            <span className="bk2-place__txt">
+                              <strong>{c.name}</strong>
+                              <small>
+                                {c.town}
+                                {c.main && <em>{b.placeMain}</em>}
+                              </small>
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                      {ext && (
+                        <p className="bk2-help bk2-help--sm" key={`x-${place}-${type}`}>
+                          {type === "procedimiento" ? `${b.placeExt} ${b.placeProc}` : b.placeExt}
+                        </p>
+                      )}
+                    </div>
+                  )}
                   <p className="bk2-price" key={`p-${effMode}-${type}`}>
                     <span>{isProc ? b.cost.proc : b.cost.consult[effMode]}</span>
                     <strong>{isProc ? b.cost.toConfirm : money(base)}</strong>
@@ -715,6 +763,13 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
               <div className="bk2-times">
                 {!date ? (
                   <p className="bk2-help bk2-times__empty">{b.pickDay}</p>
+                ) : ext ? (
+                  <div className="bk2-in bk2-ext" key={`ext-${toKey(date)}`}>
+                    <p className="times__title">
+                      {center.name} · {date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long" })}
+                    </p>
+                    <p className="bk2-help">{b.extTime}</p>
+                  </div>
                 ) : special ? (
                   <div className="bk2-in" key="special">
                     <p className="times__title">{b.specialTime}</p>
@@ -763,7 +818,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
                 {type === "procedimiento" && <p className="bk2-procweek">{b.procWeek}</p>}
 
-                <label className={`special bk2-special ${special ? "is-on" : ""}`}>
+                {!ext && <label className={`special bk2-special ${special ? "is-on" : ""}`}>
                   <input
                     type="checkbox"
                     checked={special}
@@ -777,7 +832,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     <strong>{b.special}</strong>
                     {b.specialWhy}
                   </span>
-                </label>
+                </label>}
               </div>
             </div>
           )}
@@ -828,10 +883,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   {[
                     { k: b.service, v: svcFull, to: 0 as Step },
                     { k: b.type, v: `${b.types[type]} · ${b.modes[effMode]}`, to: 0 as Step },
+                    ...(effMode === "presencial" ? [{ k: b.place, v: `${center.name} · ${center.town}`, to: 0 as Step }] : []),
                     { k: b.date, v: dateLabel, to: 1 as Step, cls: "summary__date" },
                     {
                       k: b.time,
-                      v: `${timeLabel}${slotInfo?.alt ? ` · ${b.alt}` : ""}${special && timeLabel ? ` · ${b.alt}` : ""}`,
+                      v: `${timeLabel}${slotInfo?.alt ? ` · ${b.alt}` : ""}${special && !ext && timeLabel ? ` · ${b.alt}` : ""}`,
                       to: 1 as Step,
                     },
                     { k: b.name, v: `${form.name.trim()} · ${form.phone.trim()}`, to: 2 as Step },

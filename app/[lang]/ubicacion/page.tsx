@@ -8,7 +8,7 @@ import SpaCard from "@/components/SpaCard";
 import InView from "@/components/InView";
 import { Arrow, Clock, Mail, Phone, Pin, WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { locales, site, waLink, type Locale } from "@/lib/site";
+import { centers, locales, site, waLink, type Locale } from "@/lib/site";
 
 type Params = Promise<{ lang: string }>;
 
@@ -279,6 +279,27 @@ export default async function LocationPage({ params }: { params: Params }) {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Otros centros donde atiende la doctora */}
+        <section className="loc-sec loc-sec--white">
+          <div className="container loc-wrap loc-also">
+            <h2 className="loc-h2">{c.alsoTitle}</h2>
+            <p className="tr-p">{c.alsoText}</p>
+            <ul>
+              {centers
+                .filter((x) => !x.main)
+                .map((x) => (
+                  <li key={x.id}>
+                    <strong>{x.name}</strong>
+                    <span>{x.town}</span>
+                  </li>
+                ))}
+            </ul>
+            <a className="faq-chip" href={`/${lang}/agendar`}>
+              {c.alsoCta}
+            </a>
           </div>
         </section>
 
