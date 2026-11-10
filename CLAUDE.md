@@ -54,7 +54,7 @@ Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recar
 
 ## Pendientes (los aporta la doctora / el cliente)
 
-- Sobre nosotros ya tiene formación (UCE 2012 Cum Laude, exequátur 2013, especialidad UASD 2013–2017 con residencia en Hospital Dr. Darío Contreras, tesis PRF 2017, cursos prácticos avanzados (no mencionar "cadáver") con Faces Team y Maxilofacial Dexeus) y membresías CDO, SDIO, SODOCIBUMAX (activa) y SECOM CyC. Pendiente confirmar: AO Foundation (miembro o curso, año). Omar no quiere aparecer en la web (ni como equipo ni como crédito).
+- Sobre nosotros: la doctora pidió NO destacar la odontología (UCE) ni el exequátur ni años de experiencia/residencia; se resalta la especialidad maxilofacial. Foto de la historia: public/brand/dra-historia.jpg (recorte vertical de dra-letrero.jpg). Pendiente: cursos de estética que confirmará la doctora (se añaden a la línea de Formación). Datos: especialidad UASD 2013–2017 con residencia en Hospital Dr. Darío Contreras, tesis PRF 2017, cursos prácticos avanzados (no mencionar "cadáver") con Faces Team y Maxilofacial Dexeus) y membresías CDO, SDIO, SODOCIBUMAX (activa) y SECOM CyC. Pendiente confirmar: AO Foundation (miembro o curso, año). Omar no quiere aparecer en la web (ni como equipo ni como crédito).
 - Reseñas reales de pacientes.
 - Marcas (solo está Germaine de Capuccini) e instituciones.
 - Precios, hoteles y duración del paquete de implantes + estadía.

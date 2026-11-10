@@ -40,11 +40,9 @@ export default async function About({ params }: { params: Promise<{ lang: string
     medicalSpecialty: ["Dentistry", "PlasticSurgery"],
     knowsLanguage: ["es", "en"],
     alumniOf: [
-      { "@type": "CollegeOrUniversity", name: "Universidad Central del Este (UCE)" },
       { "@type": "CollegeOrUniversity", name: "Universidad Autónoma de Santo Domingo (UASD)" },
     ],
     hasCredential: [
-      { "@type": "EducationalOccupationalCredential", credentialCategory: "degree", name: "Doctor en Odontología (Cum Laude)" },
       { "@type": "EducationalOccupationalCredential", credentialCategory: "Specialty", name: "Especialidad en Cirugía Bucomaxilofacial" },
     ],
     memberOf: p.members.map((m) => ({ "@type": "Organization", name: m.n })),
@@ -99,7 +97,7 @@ export default async function About({ params }: { params: Promise<{ lang: string
         <section className="ab-sec">
           <div className="container ab-wrap ab-story">
             <div className="ab-story__img">
-              <Image src="/brand/dra-retrato-v.jpg" alt={site.doctor} width={900} height={1348} sizes="(min-width: 900px) 340px, 70vw" />
+              <Image src="/brand/dra-historia.jpg" alt={site.doctor} width={960} height={1200} sizes="(min-width: 900px) 340px, 70vw" />
             </div>
             <div>
               <h2 className="loc-h2">{p.storyTitle}</h2>
