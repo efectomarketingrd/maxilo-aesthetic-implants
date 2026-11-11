@@ -658,6 +658,7 @@ const es = {
   },
   urgent: {
     nav: "Urgencias",
+    pill: "Urgencias",
     metaTitle: "Atención de urgencia el mismo día | Dra. Celia Hernández · Las Terrenas",
     metaDesc: "Accidentes, golpes en la cara o la boca, fracturas y dolor intenso: la Dra. Celia Hernández, cirujana maxilofacial, trata de atenderle el mismo día en Las Terrenas, Samaná y Sánchez.",
     eyebrow: "Atención el mismo día",
@@ -1370,6 +1371,7 @@ const en: Dict = {
   },
   urgent: {
     nav: "Urgent care",
+    pill: "Urgent",
     metaTitle: "Same-day urgent care | Dr. Celia Hernández · Las Terrenas",
     metaDesc: "Accidents, blows to the face or mouth, fractures and severe pain: Dr. Celia Hernández, oral & maxillofacial surgeon, tries to see you the same day in Las Terrenas, Samaná and Sánchez.",
     eyebrow: "Same-day care",
