@@ -299,7 +299,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const priced: { label: string; detail: string; amount: number }[] = [
     ...(molarN ? [{ label: b.cost.molars, detail: `${molarN} × ${rd(molarUnit)}`, amount: molarN * molarUnit }] : []),
     ...(hasBotox ? [{ label: botoxOpt, detail: b.cost.botoxIncl, amount: agenda.botoxPrice }] : []),
-    ...(needAreas && areas.length ? [{ label: fillerOpt, detail: `${areas.length} × ${rd(agenda.fillerPrice)} · ${areas.join(", ")}`, amount: areas.length * agenda.fillerPrice }] : []),
+    ...(needAreas && areas.length ? [{ label: fillerOpt, detail: `${areas.length} × ${rd(areas.length > 1 ? agenda.fillerPriceMulti : agenda.fillerPrice)} · ${areas.join(", ")}`, amount: areas.length * (areas.length > 1 ? agenda.fillerPriceMulti : agenda.fillerPrice) }] : []),
     ...(inMed && subs.includes(prpFacialOpt) ? [{ label: prpFacialOpt, detail: `1 × ${rd(agenda.prpFacialPrice)}`, amount: agenda.prpFacialPrice }] : []),
     ...(inMed && subs.includes(liftOpt) ? [{ label: liftOpt, detail: "", amount: agenda.threadLiftPrice }] : []),
     ...(inMed && subs.includes(bioOpt) ? [{ label: bioOpt, detail: "", amount: agenda.threadBioPrice }] : []),

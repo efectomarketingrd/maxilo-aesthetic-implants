@@ -65,7 +65,8 @@ export const agenda = {
   botoxPrice: 28000,
 
   // Rellenos de ácido hialurónico: precio por área
-  fillerPrice: 30000,
+  fillerPrice: 30000, // 1 área
+  fillerPriceMulti: 25000, // desde 2 áreas, cada una (7 áreas en total)
   // PRP facial: por sesión
   prpFacialPrice: 10000,
   // Hilos (fijados en pesos; equivalen a US$500 y US$400)

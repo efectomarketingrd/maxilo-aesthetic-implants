@@ -11950,6 +11950,51 @@ body:has(.bk2-page) .wa-float {
   fill: #7a8589;
 }
 
+.tx-svg--face {
+  max-width: 230px;
+}
+
+.tx-num {
+  font-family: var(--f-body);
+  font-size: 8px;
+  font-weight: 700;
+  fill: #fff;
+  text-anchor: middle;
+}
+
+.tx-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 12px;
+  max-width: 420px;
+  margin: 14px auto 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tx-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 0.76rem;
+  line-height: 1.25;
+  color: var(--slate);
+}
+
+.tx-legend span {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #be9d61;
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
 .tx-cap {
   margin: 10px 4px 0;
   font-family: var(--f-accent);

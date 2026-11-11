@@ -834,60 +834,78 @@ function HarmonyDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
-// Ácido hialurónico: los labios ganan volumen y los surcos se suavizan.
+// Ácido hialurónico: mapa de las 7 áreas tratables, numeradas, que se encienden en orden (leyenda debajo).
+const FILL_FACE = "M118 92 C 170 92, 192 136, 188 184 C 184 228, 162 280, 118 290 C 74 280, 52 228, 48 184 C 44 136, 66 92, 118 92 Z";
 function FillerDiagram({ labels }: { labels: ArtLabel[] }) {
-  const drops = [
-    [100, 200, 1.4], [140, 200, 1.55], [78, 168, 1.7], [162, 168, 1.85],
+  const t = (k: number) => 0.8 + k * 0.35;
+  const G = "#be9d61";
+  // cada área: zonas de brillo, trazos propios y posición del número
+  const areas: { glow: [number, number, number][]; paths: string[]; badge: [number, number] }[] = [
+    { glow: [[92, 184, 11], [144, 184, 11]], paths: ["M83 181 q 9 6 18 0", "M135 181 q 9 6 18 0"], badge: [80, 192] },
+    { glow: [[70, 206, 17], [166, 206, 17]], paths: [], badge: [166, 206] },
+    { glow: [], paths: ["M108 210 C 100 218, 96 228, 98 237", "M128 210 C 136 218, 140 228, 138 237"], badge: [89, 222] },
+    { glow: [[118, 242, 15]], paths: [], badge: [118, 228] },
+    { glow: [], paths: ["M99 243 C 97 252, 97 260, 101 268", "M137 243 C 139 252, 139 260, 135 268"], badge: [148, 258] },
+    { glow: [[118, 276, 13]], paths: [], badge: [118, 278] },
+    { glow: [], paths: ["M48 184 C 52 228, 74 280, 118 290", "M188 184 C 184 228, 162 280, 118 290"], badge: [66, 250] },
   ];
   return (
-    <svg className="tx-svg" viewBox="0 100 374 172" role="img" aria-label={aria(labels)}>
-      <defs>
-        <SkinBg id="txFillBg" />
-        <linearGradient id="txLip" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#d9958a" />
-          <stop offset="1" stopColor="#c47c72" />
-        </linearGradient>
-      </defs>
-      <g className="tx-in" style={css({ "--d": 0 })}>
-        <ellipse cx="120" cy="184" rx="120" ry="86" fill="url(#txFillBg)" />
-        <g fill="none" stroke="#253035" strokeWidth="2" strokeLinecap="round">
-          <path d="M100 132 C 108 142, 132 142, 140 132" />
-          <path d="M96 128 q -6 -10 4 -14 M144 128 q 6 -10 -4 -14" />
-        </g>
-      </g>
-      {/* surcos */}
-      <g className="tx-soft" style={css({ "--d": 2.5 })}>
-        <g className="tx-in" style={css({ "--d": 0.3 })} fill="none" stroke="#c49a80" strokeWidth="2.4" strokeLinecap="round">
-          <path d="M88 142 C 74 160, 68 178, 72 196" />
-          <path d="M152 142 C 166 160, 172 178, 168 196" />
-        </g>
-      </g>
-      {/* labios */}
-      <g className="tx-in" style={css({ "--d": 0.2 })}>
-        <g className="tx-plump">
-          <path d="M80 200 C 94 190, 108 186, 120 192 C 132 186, 146 190, 160 200 C 146 204, 132 206, 120 204 C 108 206, 94 204, 80 200 Z" fill="url(#txLip)" />
-          <path d="M82 202 C 94 206, 108 208, 120 208 C 132 208, 146 206, 158 202 C 148 222, 132 228, 120 228 C 108 228, 92 222, 82 202 Z" fill="url(#txLip)" />
-          <path d="M80 201 C 100 205, 140 205, 160 201" fill="none" stroke="#a5645c" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M104 214 q 10 4 22 0" fill="none" stroke="#f3cfc6" strokeWidth="2.4" strokeLinecap="round" opacity="0.8" />
-        </g>
-      </g>
-      {/* gotas de ácido hialurónico */}
-      {drops.map(([x, y, t], k) => (
-        <g key={k} className="tx-zone" style={css({ "--d": t })}>
-          <g className="tx-out" style={css({ "--d": 2.9 })}>
-            <path d={`M${x} ${y - 7} c 3 4, 5 6, 5 8.5 a 5 5 0 0 1 -10 0 c 0 -2.5, 2 -4.5, 5 -8.5z`} fill="#be9d61" opacity="0.85" />
+    <>
+      <svg className="tx-svg tx-svg--face" viewBox="40 84 156 220" role="img" aria-label={aria(labels)}>
+        <defs>
+          <linearGradient id="txFaceF" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#f6ede1" />
+            <stop offset="1" stopColor="#efe3d2" />
+          </linearGradient>
+          <radialGradient id="txZoneF">
+            <stop offset="0" stopColor="rgba(190,157,97,0.55)" />
+            <stop offset="1" stopColor="rgba(190,157,97,0)" />
+          </radialGradient>
+          <linearGradient id="txLipF" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#d9958a" />
+            <stop offset="1" stopColor="#c47c72" />
+          </linearGradient>
+        </defs>
+        <g className="tx-in" style={css({ "--d": 0 })}>
+          <path d="M98 284 L 96 304 M138 284 L 140 304" stroke="#253035" strokeWidth="2" strokeLinecap="round" />
+          <path d={FILL_FACE} fill="url(#txFaceF)" stroke="#253035" strokeWidth="2" />
+          <path d="M48 184 C 40 120, 80 88, 118 88 C 156 88, 196 120, 188 184 C 182 140, 160 122, 118 122 C 76 122, 54 140, 48 184 Z" fill="#2e3b41" />
+          <g fill="none" stroke="#253035" strokeWidth="1.8" strokeLinecap="round">
+            <path d="M80 158 q 12 -6 24 0 M132 158 q 12 -6 24 0" />
+            <path d="M82 171 q 10 7 20 0 M134 171 q 10 7 20 0" />
           </g>
+          <path d="M114 178 C 112 194, 106 202, 110 208 C 114 212, 122 212, 126 208 C 130 202, 124 194, 122 178" fill="none" stroke="#c9b48c" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M98 238 C 106 232, 112 230, 118 234 C 124 230, 130 232, 138 238 C 130 240, 124 241, 118 240 C 112 241, 106 240, 98 238 Z" fill="url(#txLipF)" />
+          <path d="M99 239 C 106 242, 112 243, 118 243 C 124 243, 130 242, 137 239 C 132 250, 124 253, 118 253 C 112 253, 104 250, 99 239 Z" fill="url(#txLipF)" />
         </g>
-      ))}
-      <Labels
-        labels={labels}
-        items={[
-          { d: "M170 176 L 206 140 H226", x: 170, y: 176, ly: 140, t: 1.0 },
-          { d: "M160 204 L 206 196 H226", x: 160, y: 204, ly: 196, t: 2.4 },
-          { d: "M140 200 L 206 250 H226", x: 140, y: 200, ly: 250, t: 1.8 },
-        ]}
-      />
-    </svg>
+        {areas.map((a, k) => (
+          <g key={k}>
+            {a.glow.map(([x, y, r], m) => (
+              <g key={m} className="tx-zone" style={css({ "--d": t(k) })}>
+                <circle cx={x} cy={y} r={r} fill="url(#txZoneF)" />
+              </g>
+            ))}
+            {a.paths.map((d, m) => (
+              <path key={m} className="tx-draw" pathLength={1} style={css({ "--d": t(k) })} d={d} fill="none" stroke={G} strokeWidth="1.8" strokeLinecap="round" strokeDasharray="1" />
+            ))}
+            <g className="tx-lab" style={css({ "--d": t(k) - 0.2 })}>
+              <circle cx={a.badge[0]} cy={a.badge[1]} r="6.5" fill={G} stroke="#fff" strokeWidth="1.2" />
+              <text className="tx-num" x={a.badge[0]} y={a.badge[1] + 3}>
+                {k + 1}
+              </text>
+            </g>
+          </g>
+        ))}
+      </svg>
+      <ol className="tx-legend">
+        {labels.map((l, k) => (
+          <li key={l.t} className="tx-lab" style={css({ "--d": t(k) - 0.2 })}>
+            <span aria-hidden="true">{k + 1}</span>
+            {l.t}
+          </li>
+        ))}
+      </ol>
+    </>
   );
 }
 
