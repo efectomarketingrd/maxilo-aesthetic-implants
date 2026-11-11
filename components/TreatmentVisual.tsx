@@ -1342,6 +1342,69 @@ function GraftDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// Hilos PDO en espiral: la zona hundida recibe hilos en espiral, se forma colágeno y la superficie recupera volumen.
+function PdoSpiralDiagram({ labels }: { labels: ArtLabel[] }) {
+  const coil = (y: number, x0: number, x1: number) => {
+    let d = `M${x0} ${y}`;
+    for (let x = x0; x < x1; x += 10) d += ` q 2.5 -7 5 0 t 5 0`;
+    return d;
+  };
+  const coils = [
+    { y: 186, x0: 46, x1: 196, t: 0.8 },
+    { y: 212, x0: 40, x1: 200, t: 1.05 },
+    { y: 238, x0: 50, x1: 190, t: 1.3 },
+  ];
+  const fibers = [[60, 198], [100, 200], [146, 196], [182, 200], [70, 226], [128, 224], [172, 228], [92, 252], [150, 254]];
+  return (
+    <svg className="tx-svg" viewBox="0 112 374 168" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txDerm2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f3e3d1" />
+          <stop offset="1" stopColor="#e8d2ba" />
+        </linearGradient>
+        <clipPath id="txDermClip2">
+          <rect x="20" y="138" width="196" height="132" rx="18" />
+        </clipPath>
+      </defs>
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <rect x="20" y="138" width="196" height="132" rx="18" fill="url(#txDerm2)" />
+      </g>
+      <g clipPath="url(#txDermClip2)">
+        {/* superficie hundida → superficie llena */}
+        <g className="tx-in" style={css({ "--d": 0.1 })}>
+          <g className="tx-out" style={css({ "--d": 2.9 })}>
+            <path d="M20 138 H 216 V 150 C 170 150, 150 172, 118 172 C 86 172, 66 150, 20 150 Z" fill="#fff" />
+            <path d="M20 150 C 66 150, 86 172, 118 172 C 150 172, 170 150, 216 150" fill="none" stroke="#c49a80" strokeWidth="2.2" />
+          </g>
+        </g>
+        <g className="tx-show" style={css({ "--d": 2.9 })}>
+          <path d="M20 138 H 216 V 146 H 20 Z" fill="#fff" />
+          <path d="M20 146 H 216" stroke="#d8b59c" strokeWidth="2.2" />
+          <path d="M20 150 C 66 150, 86 172, 118 172 C 150 172, 170 150, 216 150" fill="none" stroke="#be9d61" strokeWidth="1.4" strokeDasharray="4 4" />
+        </g>
+        {/* hilos en espiral */}
+        {coils.map((c, k) => (
+          <g key={k} className="tx-soft" style={css({ "--d": 3.3 })}>
+            <path className="tx-draw" pathLength={1} style={css({ "--d": c.t })} d={coil(c.y, c.x0, c.x1)} fill="none" stroke="#7d8b90" strokeWidth="1.6" strokeLinecap="round" />
+          </g>
+        ))}
+        {/* colágeno nuevo */}
+        {fibers.map(([x, y], k) => (
+          <path key={k} className="tx-show" style={css({ "--d": 1.9 + k * 0.09 })} d={`M${x - 11} ${y} q 5.5 -6 11 0 t 11 0`} fill="none" stroke="#be9d61" strokeWidth="2" strokeLinecap="round" />
+        ))}
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M196 212 L 206 196 H226", x: 196, y: 212, ly: 190, t: 1.4 },
+          { d: "M172 228 L 206 250 H226", x: 172, y: 228, ly: 250, t: 2.4 },
+          { d: "M180 146 L 206 128 H226", x: 180, y: 146, ly: 128, t: 3.2 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
@@ -1362,6 +1425,7 @@ const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = 
   "prp-facial": FacePrpDiagram,
   "lifting-hilos-tensores": ThreadLiftDiagram,
   "bioestimulacion-colageno-hilos": BiostimDiagram,
+  "hilos-pdo-colageno": PdoSpiralDiagram,
   "fracturas-traumatismos-faciales": FractureDiagram,
   "malformaciones-faciales": OrthognathicDiagram,
   "reconstruccion-maxilofacial": GraftDiagram,

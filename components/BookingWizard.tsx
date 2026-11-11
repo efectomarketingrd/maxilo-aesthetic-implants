@@ -229,6 +229,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const prpFacialOpt = med[5] ?? "";
   const liftOpt = med[6] ?? "";
   const bioOpt = med[7] ?? "";
+  const pdoOpt = med[8] ?? "";
   const lobuleOpt = est[6] ?? "";
   const wartOpt = est[7] ?? "";
   const inMed = service === "medicina-estetica";
@@ -303,6 +304,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     ...(inMed && subs.includes(prpFacialOpt) ? [{ label: prpFacialOpt, detail: `1 × ${rd(agenda.prpFacialPrice)}`, amount: agenda.prpFacialPrice }] : []),
     ...(inMed && subs.includes(liftOpt) ? [{ label: liftOpt, detail: "", amount: agenda.threadLiftPrice }] : []),
     ...(inMed && subs.includes(bioOpt) ? [{ label: bioOpt, detail: "", amount: agenda.threadBioPrice }] : []),
+    ...(inMed && subs.includes(pdoOpt) ? [{ label: pdoOpt, detail: "", amount: agenda.threadPdoPrice }] : []),
     ...(earN ? [{ label: lobuleOpt, detail: `${earN} × ${rd(agenda.lobulePrice)}`, amount: earN * agenda.lobulePrice }] : []),
     ...(wartN ? [{ label: wartOpt, detail: `${wartN} × ${rd(agenda.wartPrice)}`, amount: wartN * agenda.wartPrice }] : []),
     ...(needPrp && prpPlan ? [{ label: prpOpt, detail: prpPlan.sessions > 1 ? `${prpText} · ${b.cost.prpPaid}` : prpText, amount: prpPlan.price }] : []),
@@ -313,7 +315,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     (x === botoxOpt && hasBotox) ||
     (x === prpOpt && needPrp && !!prp) ||
     (inMed && x === fillerOpt && areas.length > 0) ||
-    (inMed && (x === prpFacialOpt || x === liftOpt || x === bioOpt)) ||
+    (inMed && (x === prpFacialOpt || x === liftOpt || x === bioOpt || x === pdoOpt)) ||
     (x === lobuleOpt && earN > 0) ||
     (x === wartOpt && wartN > 0);
   const unpriced = subs.some((x) => x !== b.unsure && !isPriced(x)) || subs.includes(b.unsure);
