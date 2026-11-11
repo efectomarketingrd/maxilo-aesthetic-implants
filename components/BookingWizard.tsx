@@ -1065,7 +1065,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                       </span>
                       <strong>{deposit ? <Amt n={deposit} /> : b.cost.depositTbd}</strong>
                     </div>
-                    <p>{extDeposit ? b.cost.extDepositWhy.replace("{rest}", rd(base - deposit)) : b.cost.depositWhy}</p>
+                    <p>{extDeposit ? b.cost.extDepositWhy.replace("{rest}", rd(base - deposit)).replace("{phone}", site.phones[0]) : b.cost.depositWhy}</p>
                     {ext && <p className="bk2-deposit__cancel">{b.cost.cancel}</p>}
                   </div>
                 )}
@@ -1106,7 +1106,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     {b.cost.bank.open}
                   </summary>
                   <div className="bk2-bank__body">
-                    <p className="bk2-bank__when">{ext ? b.cost.bankWhenExt : b.cost.bank.when}</p>
+                    <p className="bk2-bank__when">{ext ? b.cost.bankWhenExt.replace("{phone}", site.phones[0]) : b.cost.bank.when}</p>
                     <dl>
                       <div>
                         <dt>{b.cost.bank.holder}</dt>
