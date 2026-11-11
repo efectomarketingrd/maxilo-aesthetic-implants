@@ -3,6 +3,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Arrow } from "@/components/Icons";
+import PlanFace from "@/components/PlanFace";
+import { rd } from "@/lib/agenda";
+import { planTotal, type PlanItem } from "@/lib/plan";
 import { dictionaries } from "@/lib/content";
 import type { Locale } from "@/lib/site";
 
@@ -22,6 +25,9 @@ export default async function Plans({ params }: { params: Promise<{ lang: string
   const t = dictionaries[lang];
   const p = t.plan;
   const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
+  const names = p.b.items;
+  const buildChips = [names[0].name, names[1].name.split(" (")[0]];
+  const demoTotal = planTotal([{ id: "botox", zones: [0, 2] }, { id: "filler", zones: [1, 3, 5] }]);
 
   return (
     <>
@@ -36,29 +42,49 @@ export default async function Plans({ params }: { params: Promise<{ lang: string
             <p className="pl-hero__text bk2-rise" style={d(2)}>{p.intro}</p>
             <div className="pl-choices">
               <Link className="pl-choice pl-choice--main bk2-rise" style={d(3)} href={`/${lang}/planes/crear`}>
-                <span className="pl-choice__ico" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M24 6c9 0 14 7 13 15-1 9-6 18-13 20-7-2-12-11-13-20C10 13 15 6 24 6z" />
-                    <circle className="pl-dot" cx="18" cy="24" r="2.4" fill="currentColor" />
-                    <circle className="pl-dot" cx="30" cy="24" r="2.4" fill="currentColor" style={{ animationDelay: ".4s" }} />
-                    <circle className="pl-dot" cx="24" cy="33" r="2.4" fill="currentColor" style={{ animationDelay: ".8s" }} />
-                  </svg>
-                </span>
-                <strong>{p.createT}</strong>
-                <small>{p.createD}</small>
+                <div className="pl-stage pl-stage--build" aria-hidden="true">
+                  <div className="pl-stage__face">
+                    <PlanFace layers={[{ kind: "botox", on: [0, 2] }, { kind: "filler", on: [1, 3, 5] }]} label="" combined />
+                  </div>
+                  <ul className="pl-steps">
+                    {buildChips.map((c, k) => (
+                      <li key={c} style={{ "--k": k } as React.CSSProperties}>
+                        <span>✓</span>
+                        {c}
+                      </li>
+                    ))}
+                    <li className="pl-steps__total" style={{ "--k": buildChips.length } as React.CSSProperties}>
+                      <small>{p.b.total}</small>
+                      <strong>{rd(demoTotal)}</strong>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pl-choice__txt">
+                  <strong>{p.createT}</strong>
+                  <small>{p.createD}</small>
+                </div>
                 <span className="pl-choice__go">
                   <Arrow size={16} />
                 </span>
               </Link>
-              <Link className="pl-choice bk2-rise" style={d(3.5)} href={`/${lang}/planes/recomendados`}>
-                <span className="pl-choice__ico" aria-hidden="true">
-                  <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="9" y="8" width="30" height="34" rx="5" />
-                    <path d="M16 18h16M16 25h16M16 32h10" />
-                  </svg>
-                </span>
-                <strong>{p.readyT}</strong>
-                <small>{p.readyD}</small>
+              <Link className="pl-choice pl-choice--rec bk2-rise" style={d(3.5)} href={`/${lang}/planes/recomendados`}>
+                <div className="pl-stage pl-stage--rec" aria-hidden="true">
+                  {p.rec.plans.slice(0, 3).map((r, k) => (
+                    <div key={r.id} className="pl-mini" style={{ "--k": k } as React.CSSProperties}>
+                      <span className="pl-mini__dots">
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                      <strong>{r.name}</strong>
+                      <small>{rd(planTotal(r.items as PlanItem[]))}</small>
+                    </div>
+                  ))}
+                </div>
+                <div className="pl-choice__txt">
+                  <strong>{p.readyT}</strong>
+                  <small>{p.readyD}</small>
+                </div>
                 <span className="pl-choice__go pl-choice__go--light">
                   <Arrow size={16} />
                 </span>

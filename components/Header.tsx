@@ -46,7 +46,7 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
     { href: `${home}/blog`, label: t.nav.news },
     { href: `${home}/ubicacion`, label: t.location.nav },
   ];
-  const drawerLinks = [...links, { href: `${home}/planes`, label: t.plan.nav }, { href: `${home}/urgencias`, label: t.urgent.nav }];
+  const drawerLinks = [...links, { href: `${home}/urgencias`, label: t.urgent.nav }];
   const isHome = pathname === home;
   const close = () => {
     setOpen(false);
@@ -85,6 +85,10 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
                   {s.label}
                 </Link>
               ))}
+              <Link href={`${home}/planes`} className="dropdown__plan" onClick={close}>
+                <span aria-hidden="true">✦</span>
+                {t.plan.nav}
+              </Link>
               <a href={`${home}#servicios`} className="dropdown__all" onClick={close}>
                 {t.nav.allServices}
               </a>
@@ -152,6 +156,9 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
               ))}
             </div>
           </div>
+          <a href={`${home}/planes`} onClick={close}>
+            {t.plan.nav}
+          </a>
           {drawerLinks.slice(1).map((l) => (
             <a key={l.href} href={l.href} onClick={close}>
               {l.label}
