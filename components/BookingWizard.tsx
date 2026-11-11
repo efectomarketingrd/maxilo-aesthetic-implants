@@ -328,8 +328,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   // Planes de PRP (más de 1 sesión): pago completo; lo demás: anticipo del 50%
   const planFull = isProc && needPrp && prpPlan && prpPlan.sessions > 1 ? prpPlan.price : 0;
   const depositBase = pricedSum - planFull;
-  const deposit = isProc && depositBase > 0 ? Math.ceil((depositBase * agenda.procDeposit) / 100) : 0;
-  const showDeposit = isProc && (deposit > 0 || procTbd);
+  // Consulta en otros centros: anticipo del 50% para confirmar (el resto, el día de la cita)
+  const extDeposit = ext && !isProc;
+  const deposit = isProc && depositBase > 0 ? Math.ceil((depositBase * agenda.procDeposit) / 100) : extDeposit ? Math.ceil(base / 2) : 0;
+  const showDeposit = (isProc && (deposit > 0 || procTbd)) || extDeposit;
   const valid = okStep[0] && okStep[1] && okStep[2];
 
   function go(n: Step) {
@@ -361,7 +363,10 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       special && !ext ? b.msgSpecial : "",
       `${b.cost.msg}: ${costLine}`,
       planFull ? `${b.cost.msgPlanFull} (${money(planFull)})` : "",
-      showDeposit ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
+      showDeposit && !extDeposit ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
+      extDeposit ? `${b.cost.msgDepositExt}: ${money(deposit)} — ${b.cost.msgPending}` : "",
+      extDeposit ? `${b.cost.msgRest}: ${money(base - deposit)}` : "",
+      ext ? b.cost.cancel : "",
       "",
       `${b.name}: ${form.name.trim()}`,
       `${b.phone}: ${form.phone.trim()}`,
@@ -1056,11 +1061,12 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     <div>
                       <span>
                         {b.cost.deposit}
-                        <small>{b.cost.depositPct}</small>
+                        <small>{extDeposit ? b.cost.extDepositPct : b.cost.depositPct}</small>
                       </span>
                       <strong>{deposit ? <Amt n={deposit} /> : b.cost.depositTbd}</strong>
                     </div>
-                    <p>{b.cost.depositWhy}</p>
+                    <p>{extDeposit ? b.cost.extDepositWhy.replace("{rest}", rd(base - deposit)) : b.cost.depositWhy}</p>
+                    {ext && <p className="bk2-deposit__cancel">{b.cost.cancel}</p>}
                   </div>
                 )}
                 <div className="bk2-pay">
@@ -1092,7 +1098,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     ))}
                   </ul>
                 </div>
-                <details className="bk2-bank">
+                <details className="bk2-bank" open={extDeposit || undefined}>
                   <summary>
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18" />
@@ -1100,7 +1106,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     {b.cost.bank.open}
                   </summary>
                   <div className="bk2-bank__body">
-                    <p className="bk2-bank__when">{b.cost.bank.when}</p>
+                    <p className="bk2-bank__when">{ext ? b.cost.bankWhenExt : b.cost.bank.when}</p>
                     <dl>
                       <div>
                         <dt>{b.cost.bank.holder}</dt>

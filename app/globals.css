@@ -13377,7 +13377,7 @@ body:has(.bk2-page) .wa-float {
   margin: 10px 0 0;
   font-size: 0.74rem;
   line-height: 1.5;
-  color: var(--muted);
+  color: rgba(248, 246, 242, 0.72);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -13385,4 +13385,15 @@ body:has(.bk2-page) .wa-float {
   .urg-banner__pulse::after {
     animation: none;
   }
+}
+
+.bk2-deposit__cancel {
+  margin-top: 6px !important;
+  font-weight: 600;
+  color: var(--gold-soft) !important;
+}
+
+.urg-cost__note strong {
+  color: var(--slate);
+  font-weight: 600;
 }

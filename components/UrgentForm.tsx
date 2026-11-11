@@ -30,7 +30,7 @@ export default function UrgentForm({ t }: { t: Dict }) {
       f.referred.trim() ? `${u.msgReferred}: ${f.referred.trim()}` : "",
       `${u.msgPlace}: ${center.name} (${center.town})`,
       "",
-      `${u.msgCost}: ${rd(price)} (≈ ${usd(price)})`,
+      `${u.msgCost}: ${rd(price)} (≈ ${usd(price)}) — ${u.payOnArrival}`,
       u.costNote,
     ]
       .filter((l, i, a) => l !== "" || (i > 0 && a[i - 1] !== ""))
@@ -107,7 +107,9 @@ export default function UrgentForm({ t }: { t: Dict }) {
             {rd(price)} <small>≈ {usd(price)}</small>
           </strong>
         </p>
-        <p className="urg-cost__note">{u.costNote}</p>
+        <p className="urg-cost__note">
+          <strong>{u.payOnArrival}</strong> {u.costNote}
+        </p>
       </div>
 
       <input ref={honey} type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="bk2-hp" />
