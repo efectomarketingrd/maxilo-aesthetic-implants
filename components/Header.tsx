@@ -99,13 +99,6 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
 
         <div className="header__actions">
           {/* Enlace normal (no Link): el cambio de idioma recarga la página y empieza arriba */}
-          <a href={`${home}/urgencias`} className="header__urg" onClick={close} aria-label={t.urgent.nav} title={t.urgent.nav}>
-            <span className="header__urg-dot" aria-hidden="true" />
-            <svg className="header__urg-ico" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z" />
-            </svg>
-            <span className="header__urg-txt">{t.urgent.pill}</span>
-          </a>
           <a href={otherPath} className="header__lang" hrefLang={other} lang={other}>
             {other.toUpperCase()}
           </a>

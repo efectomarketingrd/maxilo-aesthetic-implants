@@ -13495,3 +13495,55 @@ body:has(.bk2-page) .wa-float {
     height: 32px;
   }
 }
+
+/* Inicio: acceso discreto a Urgencias bajo "Agendar ahora" */
+.h5-bookwrap {
+  grid-area: book;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.h5-bookwrap .h5-book {
+  grid-area: auto;
+}
+
+.h5-urg {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 8px;
+  padding: 6px 10px;
+  color: var(--slate);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  opacity: 0;
+  animation: bk2-rise 0.6s ease 0.9s forwards;
+}
+
+.h5-urg:hover {
+  color: #9b4a42;
+}
+
+.h5-urg svg {
+  transition: transform 0.25s ease;
+}
+
+.h5-urg:hover svg {
+  transform: translateX(3px);
+}
+
+.h5-urg__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c4554a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .h5-urg {
+    opacity: 1;
+    animation: none;
+  }
+}

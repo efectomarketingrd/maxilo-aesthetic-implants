@@ -89,6 +89,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <TreatmentFinder t={t} lang={lang} />
             </div>
 
+            <div className="h5-bookwrap">
             <Link className="h5-book" href={`/${lang}/agendar`}>
               <span className="h5-book__copy">
                 <strong>{h.bookTitle}</strong>
@@ -99,6 +100,12 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               </span>
               <CalendarArt />
             </Link>
+            <Link className="h5-urg" href={`/${lang}/urgencias`}>
+              <span className="h5-urg__dot" aria-hidden="true" />
+              {t.urgent.homeLink}
+              <Arrow size={12} />
+            </Link>
+            </div>
           </div>
         </section>
 
