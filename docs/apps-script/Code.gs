@@ -21,6 +21,26 @@ function doPost(e) {
     var d = JSON.parse(e.postData.contents);
     if (!d.token || d.token !== props.getProperty('TOKEN')) return out({ ok: false, error: 'token' });
 
+    // Urgencia: evento rojo para hoy, desde ahora, con aviso inmediato
+    if (d.urgent) {
+      var now = new Date();
+      var us = new Date(Math.ceil((now.getTime() + 5 * 60000) / (15 * 60000)) * (15 * 60000));
+      var ue = CalendarApp.getDefaultCalendar().createEvent(
+        'URGENCIA · ' + d.name + ' · ' + String(d.service || '').replace(/^URGEN(CIA|T)\s*—\s*/, ''),
+        us, new Date(us.getTime() + 60 * 60000),
+        { location: d.place || '', description: (d.referred ? 'Referido por: ' + d.referred + '\n\n' : '') + (d.message || '') }
+      );
+      ue.setColor(CalendarApp.EventColor.RED);
+      ue.removeAllReminders();
+      ue.addPopupReminder(0);
+      MailApp.sendEmail({
+        to: props.getProperty('CORREO') || Session.getEffectiveUser().getEmail(),
+        subject: 'URGENCIA HOY · ' + d.name + ' · ' + (d.phone || ''),
+        body: (d.message || '') + '\n\n— Guardada en Google Calendar como URGENCIA (rojo). Confirme la hora con el paciente.',
+      });
+      return out({ ok: true });
+    }
+
     var p = String(d.date).split('-').map(Number);
     var hasTime = /^\d{1,2}:\d{2}$/.test(d.time || '');
     var hm = hasTime ? d.time.split(':').map(Number) : [9, 0];

@@ -30,4 +30,6 @@ Si la hora es "a confirmar" (otros centros), el evento se crea a las 9:00 a. m. 
 
 Mientras esas variables no existan, la web funciona igual que antes (no se crea evento).
 
-Si se cambia el código del script: Implementar → Gestionar implementaciones → editar → Versión nueva (la URL no cambia).
+Si se cambia el código del script: Implementar → Gestionar implementaciones → editar (lápiz) → Versión: Nueva versión → Implementar (la URL no cambia).
+
+Urgencias (/urgencias): el script crea un evento ROJO "URGENCIA · nombre" para hoy, que empieza unos minutos después, con aviso inmediato, y envía un correo "URGENCIA HOY".

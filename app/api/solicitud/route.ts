@@ -43,6 +43,8 @@ export async function POST(req: Request) {
     minutes: Number(d.minutes) === 60 ? 60 : 30,
     dateLabel: str(d.dateLabel, 80),
     message: str(d.message, 4000),
+    urgent: d.urgent === true,
+    referred: str(d.referred, 160),
   };
   if (!payload.name || !payload.phone || !/^\d{4}-\d{2}-\d{2}$/.test(payload.date)) {
     return NextResponse.json({ ok: false }, { status: 400 });

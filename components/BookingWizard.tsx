@@ -1028,6 +1028,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     </li>
                   )}
                 </ul>
+                {!isProc && effMode === "presencial" && <p className="bk2-cost__credit">{b.cost.consultCredit}</p>}
                 <div className="bk2-cost__total">
                   <span>{b.cost.total}</span>
                   {isProc && !priced.length ? (

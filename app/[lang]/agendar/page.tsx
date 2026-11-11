@@ -68,6 +68,14 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
 
         <section className="bk2-main">
           <div className="container">
+            <a className="urg-banner" href={`/${lang}/urgencias`}>
+              <span className="urg-banner__pulse" aria-hidden="true" />
+              <span className="urg-banner__txt">
+                <strong>{t.urgent.banner}</strong>
+                <small>{t.urgent.anyDay}</small>
+              </span>
+              <span className="urg-banner__cta">{t.urgent.bannerCta} →</span>
+            </a>
             <BookingWizard t={t} lang={lang} />
           </div>
         </section>

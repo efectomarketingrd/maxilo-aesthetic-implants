@@ -13035,3 +13035,354 @@ body:has(.bk2-page) .wa-float {
     stroke-dashoffset: 0;
   }
 }
+
+/* ───────── Urgencias ───────── */
+.urg-wrap {
+  max-width: 640px;
+}
+
+.urg-hero {
+  padding: 34px 0 10px;
+}
+
+.urg-hero h1 {
+  margin: 6px 0 12px;
+}
+
+.urg-hero__text {
+  margin: 0;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.urg-hero__day {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(181, 87, 78, 0.1);
+  color: #9b4a42;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.urg-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #b5574e;
+}
+
+.urg-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(181, 87, 78, 0.5);
+  animation: urg-pulse 1.8s ease-out infinite;
+}
+
+@keyframes urg-pulse {
+  from { opacity: 1; transform: scale(0.6); }
+  to { opacity: 0; transform: scale(1.9); }
+}
+
+.urg-quick {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.urg-quick .btn {
+  justify-content: center;
+  gap: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.8rem;
+}
+
+.urg-alert {
+  margin-top: 16px;
+}
+
+.urg-sec {
+  padding: 16px 0 44px;
+}
+
+.urg-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.urg-steps li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 12px;
+  align-items: center;
+}
+
+.urg-steps li span {
+  grid-row: span 2;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--slate);
+  color: var(--gold-soft);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.urg-steps strong {
+  font-size: 0.9rem;
+  color: var(--slate);
+}
+
+.urg-steps small {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.urg-form {
+  padding: 22px 18px;
+  border-radius: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 30px rgba(37, 48, 53, 0.07);
+}
+
+.urg-form h2 {
+  margin: 0;
+  font-family: var(--f-title);
+  font-size: 1.25rem;
+  color: var(--slate);
+}
+
+.urg-form__text {
+  margin: 6px 0 16px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.urg-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.urg-field span,
+.urg-field__label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.urg-field input,
+.urg-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--ivory);
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--slate);
+}
+
+.urg-field input:focus,
+.urg-field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--white);
+}
+
+.urg-places {
+  display: grid;
+  gap: 6px;
+  margin: 6px 0 16px;
+}
+
+.urg-places button {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+  font: inherit;
+  text-align: left;
+  color: var(--slate);
+  cursor: pointer;
+}
+
+.urg-places button strong {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.urg-places button small {
+  flex: none;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.urg-places button.is-on {
+  border-color: var(--gold);
+  background: #fbf8f2;
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+.urg-cost {
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #fbf8f2;
+  border: 1px dashed var(--gold-soft);
+}
+
+.urg-cost__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--slate);
+}
+
+.urg-cost__row strong {
+  display: grid;
+  justify-items: end;
+  white-space: nowrap;
+}
+
+.urg-cost__row small {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+@media (min-width: 600px) {
+  .urg-quick {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.urg-cost__note {
+  margin: 8px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.urg-need {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  color: #9b4a42;
+}
+
+.urg-callbtn {
+  margin-top: 10px;
+}
+
+.urg-sent {
+  margin: 12px 0 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(37, 211, 102, 0.1);
+  font-size: 0.82rem;
+  color: var(--slate);
+}
+
+/* Banner de urgencias en Agendar */
+.urg-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--slate);
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.urg-banner__pulse {
+  position: relative;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e07a6e;
+}
+
+.urg-banner__pulse::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid rgba(224, 122, 110, 0.6);
+  animation: urg-pulse 1.8s ease-out infinite;
+}
+
+.urg-banner__txt {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.urg-banner__txt strong {
+  font-size: 0.85rem;
+}
+
+.urg-banner__txt small {
+  font-size: 0.72rem;
+  color: rgba(248, 246, 242, 0.65);
+}
+
+.urg-banner__cta {
+  display: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gold-soft);
+  white-space: nowrap;
+}
+
+@media (min-width: 600px) {
+  .urg-banner__cta {
+    display: inline;
+  }
+}
+
+.tr-alert__link {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--gold-soft);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Agenda: nota de descuento de la consulta */
+.bk2-cost__credit {
+  margin: 10px 0 0;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .urg-dot::after,
+  .urg-banner__pulse::after {
+    animation: none;
+  }
+}
