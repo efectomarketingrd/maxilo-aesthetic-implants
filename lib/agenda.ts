@@ -71,7 +71,6 @@ export const agenda = {
   // Hilos (fijados en pesos; equivalen a US$500 y US$400)
   threadLiftPrice: 31000,
   threadBioPrice: 24500,
-  threadPdoPrice: 31000, // Hilos PDO estimulantes de colágeno (mismo precio que los tensores)
   // Lobuloplastia: por oreja · Eliminación de verrugas: por área
   lobulePrice: 10000,
   wartPrice: 8000,

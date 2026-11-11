@@ -157,7 +157,6 @@ const es = {
           { name: "PRP facial", desc: "Utiliza componentes de su propia sangre para estimular la regeneración de la piel del rostro." },
           { name: "Lifting con hilos tensores", desc: "Hilos reabsorbibles que reposicionan y tensan los tejidos del rostro para un efecto lifting sin cirugía." },
           { name: "Bioestimulación de colágeno con hilos", desc: "Hilos finos que estimulan la producción de colágeno para mejorar la firmeza y la calidad de la piel." },
-          { name: "Hilos PDO estimulantes de colágeno", desc: "Hilos PDO en espiral que estimulan colágeno y dan más volumen y firmeza a zonas como mejillas, surcos y cuello." },
         ],
       },
       {
@@ -871,7 +870,6 @@ const en: Dict = {
           { name: "Facial PRP", desc: "Uses components of your own blood to stimulate skin regeneration on the face." },
           { name: "Thread lift", desc: "Absorbable threads that reposition and tighten facial tissues for a lifting effect without surgery." },
           { name: "Collagen biostimulation with threads", desc: "Fine threads that stimulate collagen production to improve skin firmness and quality." },
-          { name: "Collagen-stimulating PDO threads", desc: "Spiral PDO threads that stimulate collagen and add volume and firmness to areas such as the cheeks, folds and neck." },
         ],
       },
       {
