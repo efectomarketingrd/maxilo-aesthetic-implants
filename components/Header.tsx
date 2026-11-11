@@ -46,7 +46,7 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
     { href: `${home}/blog`, label: t.nav.news },
     { href: `${home}/ubicacion`, label: t.location.nav },
   ];
-  const drawerLinks = [...links, { href: `${home}/urgencias`, label: t.urgent.nav }];
+  const drawerLinks = [...links, { href: `${home}/planes`, label: t.plan.nav }, { href: `${home}/urgencias`, label: t.urgent.nav }];
   const isHome = pathname === home;
   const close = () => {
     setOpen(false);

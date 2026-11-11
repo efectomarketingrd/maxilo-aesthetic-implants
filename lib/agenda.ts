@@ -97,7 +97,7 @@ export function rd(n: number) {
 
 // Equivalente aproximado en dólares, redondeado a múltiplos de 5
 export function usd(n: number) {
-  return `US$${Math.max(5, Math.round(n / agenda.usdRate / 5) * 5)}`;
+  return `US$${Math.max(5, Math.round(n / agenda.usdRate / 5) * 5).toLocaleString("en-US")}`;
 }
 
 export function toKey(d: Date) {

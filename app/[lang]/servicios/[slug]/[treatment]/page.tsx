@@ -52,6 +52,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
   const k = t.treat;
   const url = `${site.url}/${lang}/servicios/${slug}/${treatment}`;
   const book = bookingHref(lang, slug, tr.index, proc.name);
+  const planItem = t.plan.b.items.find((i) => i.slug === tr.slug);
   const siblings = s.procedures
     .map((p, i) => ({ p, i, tr: treatmentsFor(slug).find((z) => z.index === i) }))
     .filter((z) => z.i !== tr.index);
@@ -202,6 +203,11 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                 <Link className="btn btn--gold btn--sm h5-btn-shine tr-price__btn" href={book}>
                   {k.book} <Arrow size={14} />
                 </Link>
+                {planItem && (
+                  <Link className="tr-plan" href={`/${lang}/planes/crear?add=${planItem.id}`}>
+                    <span aria-hidden="true">+</span> {t.plan.b.fromLink}
+                  </Link>
+                )}
               </div>
             )}
           </div>

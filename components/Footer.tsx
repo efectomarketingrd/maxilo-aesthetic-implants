@@ -33,6 +33,7 @@ export default function Footer({ t, lang, offer = false, spaCard = false }: { t:
               <li><Link href={`${home}/paquete-implantes`}>{t.pkg.nav}</Link></li>
               <li><Link href={`${home}/blog`}>{t.nav.news}</Link></li>
               <li><Link href={`${home}/ubicacion`}>{t.location.nav}</Link></li>
+              <li><Link href={`${home}/planes`}>{t.plan.nav}</Link></li>
               <li><Link href={`${home}/urgencias`}>{t.urgent.nav}</Link></li>
               <li><a href={`${home}/agendar`}>{t.nav.cta}</a></li>
             </ul>
