@@ -5,7 +5,7 @@ import { treatments } from "@/lib/treatments";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = ["", "/agendar", "/paquete-implantes", "/blog", "/sobre-nosotros", "/preguntas", "/ubicacion", "/urgencias", "/planes", "/planes/crear", "/marcas", "/instituciones", ...dictionaries.es.services.items.map((s) => `/servicios/${s.slug}`), ...treatments.map((tr) => `/servicios/${tr.service}/${tr.slug}`)];
+  const paths = ["", "/agendar", "/paquete-implantes", "/blog", "/sobre-nosotros", "/preguntas", "/ubicacion", "/urgencias", "/planes", "/planes/crear", "/planes/recomendados", "/marcas", "/instituciones", ...dictionaries.es.services.items.map((s) => `/servicios/${s.slug}`), ...treatments.map((tr) => `/servicios/${tr.service}/${tr.slug}`)];
   const articles = posts.flatMap((p) =>
     (["es", "en"] as const)
       .filter((l) => p[l])

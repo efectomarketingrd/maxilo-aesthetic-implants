@@ -50,17 +50,19 @@ export default async function Plans({ params }: { params: Promise<{ lang: string
                   <Arrow size={16} />
                 </span>
               </Link>
-              <div className="pl-choice pl-choice--soon bk2-rise" style={d(3.5)} aria-disabled="true">
+              <Link className="pl-choice bk2-rise" style={d(3.5)} href={`/${lang}/planes/recomendados`}>
                 <span className="pl-choice__ico" aria-hidden="true">
                   <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="9" y="8" width="30" height="34" rx="5" />
                     <path d="M16 18h16M16 25h16M16 32h10" />
                   </svg>
                 </span>
-                <span className="pl-soon">{p.soon}</span>
                 <strong>{p.readyT}</strong>
                 <small>{p.readyD}</small>
-              </div>
+                <span className="pl-choice__go pl-choice__go--light">
+                  <Arrow size={16} />
+                </span>
+              </Link>
             </div>
           </div>
         </section>

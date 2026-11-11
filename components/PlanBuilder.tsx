@@ -5,27 +5,14 @@ import Link from "next/link";
 import type { Dict } from "@/lib/content";
 import { agenda, rd, usd } from "@/lib/agenda";
 import { waLink, type Locale } from "@/lib/site";
-import PlanFace, { type PlanKind } from "./PlanFace";
+import PlanFace from "./PlanFace";
+import { planPrice, type PlanKind } from "@/lib/plan";
 import { WaIcon } from "./Icons";
 
 type Plan = { id: PlanKind; zones: number[] }[];
 
 // Zonas marcadas al añadir cada tratamiento (el paciente las cambia)
 const DEFAULTS: Record<PlanKind, number[]> = { botox: [0, 1, 2], filler: [3], lift: [0, 1], bio: [0] };
-
-// Precio de cada tratamiento según las zonas marcadas
-export function planPrice(id: PlanKind, zones: number[]) {
-  switch (id) {
-    case "botox":
-      return agenda.botoxPrice;
-    case "filler":
-      return zones.length * (zones.length > 1 ? agenda.fillerPriceMulti : agenda.fillerPrice);
-    case "lift":
-      return agenda.threadLiftPrice;
-    case "bio":
-      return agenda.threadBioPrice;
-  }
-}
 
 const fromPrice: Record<PlanKind, number> = {
   botox: agenda.botoxPrice,
@@ -47,8 +34,11 @@ export default function PlanBuilder({ t, lang }: { t: Dict; lang: Locale }) {
 
   // ?add=botox (desde la página del tratamiento)
   useEffect(() => {
-    const add = new URLSearchParams(window.location.search).get("add") as PlanKind | null;
-    if (add && add in DEFAULTS) setPlan([{ id: add, zones: DEFAULTS[add] }]);
+    const q = new URLSearchParams(window.location.search);
+    const add = q.get("add") as PlanKind | null;
+    const rec = (t.plan.rec.plans as { id: string; items: Plan }[]).find((r) => r.id === q.get("plan"));
+    if (rec) setPlan(rec.items.map((i) => ({ ...i, zones: [...i.zones] })));
+    else if (add && add in DEFAULTS) setPlan([{ id: add, zones: DEFAULTS[add] }]);
   }, []);
 
   // la barra del total (móvil) se oculta cuando el resumen ya está en pantalla
@@ -161,7 +151,7 @@ export default function PlanBuilder({ t, lang }: { t: Dict; lang: Locale }) {
                 </header>
                 <div className="pb-card__body">
                   <div className="pb-face">
-                    <PlanFace kind={l.id} on={l.zones} label={`${l.it.name}: ${l.zoneNames.join(", ")}`} />
+                    <PlanFace layers={[{ kind: l.id, on: l.zones }]} label={`${l.it.name}: ${l.zoneNames.join(", ")}`} />
                   </div>
                   <div className="pb-zones">
                     <p className="pb-zones__q">{b.zonesQ}</p>

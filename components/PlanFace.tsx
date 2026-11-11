@@ -4,7 +4,7 @@ import { useId } from "react";
 
 // Rostro de frente para el armador de planes: cada tratamiento tiene sus zonas
 // y solo se encienden (con número) las que el paciente marca. Las demás quedan como guía tenue.
-export type PlanKind = "botox" | "filler" | "lift" | "bio";
+import type { PlanKind } from "@/lib/plan";
 
 const FACE = "M118 92 C 170 92, 192 136, 188 184 C 184 228, 162 280, 118 290 C 74 280, 52 228, 48 184 C 44 136, 66 92, 118 92 Z";
 const GOLD = "#be9d61";
@@ -57,13 +57,11 @@ const ZONES: Record<PlanKind, Zone[]> = {
   ],
 };
 
-export function zoneCount(kind: PlanKind) {
-  return ZONES[kind].length;
-}
-
-export default function PlanFace({ kind, on, label }: { kind: PlanKind; on: number[]; label: string }) {
+// layers: uno o varios tratamientos con sus zonas marcadas.
+// combined: modo resumen (planes recomendados): sin números y sin las zonas apagadas.
+export default function PlanFace({ layers, label, combined = false }: { layers: { kind: PlanKind; on: number[] }[]; label: string; combined?: boolean }) {
   const id = useId().replace(/[^a-zA-Z0-9]/g, "");
-  const zones = ZONES[kind];
+  let seq = 0;
   return (
     <svg className="pf-svg" viewBox="34 84 168 240" role="img" aria-label={label}>
       <defs>
@@ -96,10 +94,13 @@ export default function PlanFace({ kind, on, label }: { kind: PlanKind; on: numb
       <path d="M99 239 C 106 242, 112 243, 118 243 C 124 243, 130 242, 137 239 C 132 250, 124 253, 118 253 C 112 253, 104 250, 99 239 Z" fill={`url(#${id}l)`} />
 
       {/* zonas */}
-      {zones.map((z, k) => {
+      {layers.flatMap(({ kind, on }) =>
+        ZONES[kind].map((z, k) => {
         const active = on.includes(k);
+        if (combined && !active) return null;
+        const order = active ? seq++ : 0;
         return (
-          <g key={k} className={`pf-z${active ? " is-on" : ""}`}>
+          <g key={`${kind}${k}`} className={`pf-z${active ? " is-on" : ""}`} style={combined ? ({ "--o": order } as React.CSSProperties) : undefined}>
             {z.glow?.map(([x, y, r], m) => (
               <circle key={`g${m}`} className="pf-pop" cx={x} cy={y} r={r} fill={`url(#${id}g)`} />
             ))}
@@ -124,15 +125,17 @@ export default function PlanFace({ kind, on, label }: { kind: PlanKind; on: numb
                 <circle cx={x} cy={y} r="2.3" fill={GOLD} />
               </g>
             ))}
-            <g className="pf-b">
-              <circle cx={z.badge[0]} cy={z.badge[1]} r="6.5" fill={GOLD} stroke="#fff" strokeWidth="1.2" />
-              <text className="tx-num" x={z.badge[0]} y={z.badge[1] + 3}>
-                {k + 1}
-              </text>
-            </g>
+            {!combined && (
+              <g className="pf-b">
+                <circle cx={z.badge[0]} cy={z.badge[1]} r="6.5" fill={GOLD} stroke="#fff" strokeWidth="1.2" />
+                <text className="tx-num" x={z.badge[0]} y={z.badge[1] + 3}>
+                  {k + 1}
+                </text>
+              </g>
+            )}
           </g>
         );
-      })}
+      }))}
     </svg>
   );
 }

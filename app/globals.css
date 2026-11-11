@@ -13728,28 +13728,22 @@ body:has(.bk2-page) .wa-float {
   padding-right: 48px;
 }
 
-.pl-choice--soon {
-  border-style: dashed;
-  box-shadow: none;
-  background: transparent;
+.pl-choice small {
+  padding-right: 48px;
 }
 
-.pl-choice--soon strong,
-.pl-choice--soon small,
-.pl-choice--soon .pl-choice__ico {
-  opacity: 0.6;
-}
-
-.pl-soon {
-  justify-self: start;
-  padding: 5px 11px;
-  border-radius: 999px;
+.pl-choice__go--light {
   background: var(--gold-tint);
-  color: #8a6d3b;
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.pl-choice:not(.pl-choice--main) {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.pl-choice:not(.pl-choice--main):hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
 }
 
 .pl-dot {
@@ -14340,5 +14334,182 @@ body:has(.bk2-page) .wa-float {
   .pf-z,
   .pf-b {
     transition: none;
+  }
+}
+
+/* Planes recomendados */
+.rc-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.rc-card {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border-radius: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 14px 30px rgba(37, 48, 53, 0.07);
+}
+
+.rc-face {
+  padding: 12px;
+  border-radius: 18px;
+  background: var(--ivory);
+}
+
+.rc-face .pf-svg {
+  max-width: 190px;
+}
+
+.rc-body h2 {
+  margin: 0;
+  font-family: var(--f-title);
+  font-size: 1.15rem;
+  color: var(--slate);
+}
+
+.rc-goal {
+  margin: 4px 0 0;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+.rc-desc {
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.rc-inc {
+  margin: 14px 0 4px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.rc-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rc-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--slate);
+}
+
+.rc-list li span {
+  min-width: 0;
+}
+
+.rc-list small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.rc-list strong {
+  flex: none;
+}
+
+.rc-total {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0 12px;
+  margin: 12px 0 14px;
+}
+
+.rc-total span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rc-total strong {
+  font-size: 1.3rem;
+  color: var(--slate);
+}
+
+.rc-total small {
+  grid-column: 2;
+  justify-self: end;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.rc-btn {
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+}
+
+.rc-note {
+  margin: 22px 0 0;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.rc-own {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--slate);
+}
+
+/* rostro del plan: las zonas se encienden en orden al entrar en pantalla */
+.pf-rec .pf-z {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.pf-rec .pf-z.is-on .pf-pop,
+.pf-rec .pf-z.is-on .pf-draw {
+  animation: none;
+}
+
+.pf-rec.is-lit .pf-z {
+  animation: pf-pop 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--o, 0) * 0.35s + 0.3s);
+}
+
+@media (min-width: 640px) {
+  .rc-card {
+    grid-template-columns: 190px 1fr;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1040px) {
+  .rc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-rec .pf-z {
+    opacity: 1;
+  }
+
+  .pf-rec.is-lit .pf-z {
+    animation: none;
   }
 }
