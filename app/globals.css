@@ -13109,6 +13109,20 @@ body:has(.bk2-page) .wa-float {
   margin-top: 16px;
 }
 
+.urg-ref {
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.urg-ref a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--gold, #be9d61);
+  text-underline-offset: 3px;
+}
+
 .urg-sec {
   padding: 16px 0 44px;
 }
