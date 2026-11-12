@@ -4,7 +4,7 @@ Cliente: **Dra. Celia Hernández Mauricio** · Maxilo Aesthetic Implants · Las 
 Agencia: **Efecto Marketing** (Omar) · efectomarketingrd@gmail.com
 
 - Repositorio: https://github.com/efectomarketingrd/maxilo-aesthetic-implants (rama `main`)
-- Producción: https://maxilo-aesthetic-implants.vercel.app (Vercel despliega solo al hacer push a `main`)
+- Producción: https://maxiloaestheticimplants.com (también https://maxilo-aesthetic-implants.vercel.app) (Vercel despliega solo al hacer push a `main`)
 - Stack: Next.js 16 (App Router), TypeScript, CSS propio en `app/globals.css`, sin librerías de UI.
 
 ## Cómo trabajar
@@ -63,7 +63,7 @@ Horario especial sujeto a disponibilidad, sin costo adicional (no se cobra recar
 - Marcas (solo está Germaine de Capuccini) e instituciones.
 - Precios, hoteles y duración del paquete de implantes + estadía.
 - Aprobar la frase "Cada rostro merece un plan pensado solo para él." y la descripción de Platismoplastia.
-- Dominio propio → configurar `NEXT_PUBLIC_SITE_URL` en Vercel. Pasar a Vercel Pro antes del lanzamiento comercial.
+- HECHO (12 nov 2026): equipo Efectomarketingrd en Vercel Pro (US$20/mes) y dominio maxiloaestheticimplants.com comprado en Vercel y conectado al proyecto (el código ya usa ese dominio por defecto en `lib/site.ts`; no hace falta NEXT_PUBLIC_SITE_URL). Pendiente: añadir www (redirección al dominio sin www), Google Search Console y actualizar enlaces en Google/Instagram/Facebook/WhatsApp.
 - Pedir permiso a Wise, Remitly y Western Union para usar sus logos (por ahora solo botones con nombre y enlace).
 - **Recordar a Omar:** sección "¿Cómo es el proceso?" en las páginas de servicios (Valoración → Plan personalizado → Tratamiento → Seguimiento). Aprobada como idea; se hará más adelante y el texto lo revisa la doctora.
 - **Para contenidos (blog y página de Medicina estética), aún no trabajar:** explicación del PRP capilar — fase inicial de 3–5 sesiones mensuales (usamos 4) + mantenimiento cada 4–6 meses (meses 8 y 12) = 6 sesiones en 12 meses; cambios desde el mes 2–3, más densidad a los 3–6 meses, resultado más lleno a los 6–12 meses; no hay evidencia de que 12 sesiones mensuales mejoren el resultado. Fuentes: J Cutan Med Surg 2023 (pubmed 37533146), revisión PMC8664169.
