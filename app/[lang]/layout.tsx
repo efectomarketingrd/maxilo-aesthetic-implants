@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 import "@fontsource/cinzel/500.css";
 import "@fontsource/cinzel/600.css";
 import "@fontsource/cormorant-garamond/400.css";
@@ -53,6 +54,7 @@ export default async function LangLayout({ children, params }: { children: React
       <body>
         <ScrollTop />
         {children}
+        <Analytics />
       </body>
     </html>
   );

@@ -656,6 +656,7 @@ const es = {
     by: "Por",
     related: "Más artículos",
     ctaTitle: "¿Quiere saber si este tratamiento es para usted?",
+    share: { title: "¿Le fue útil? Compártalo con alguien a quien le pueda servir", label: "Compartir", copy: "Copiar enlace", copied: "Enlace copiado", more: "Más" },
   },
   urgent: {
     nav: "Urgencias",
@@ -1469,6 +1470,7 @@ const en: Dict = {
     by: "By",
     related: "More articles",
     ctaTitle: "Want to know if this treatment is right for you?",
+    share: { title: "Found it useful? Share it with someone who might need it", label: "Share", copy: "Copy link", copied: "Link copied", more: "More" },
   },
   urgent: {
     nav: "Urgent care",

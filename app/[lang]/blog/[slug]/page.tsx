@@ -9,6 +9,7 @@ import { BlogChecklist, BlogDoc, BlogCompare, BlogFaq, BlogMap, BlogPoints, Blog
 import { dictionaries } from "@/lib/content";
 import { findPost, formatDate, posts, postsFor, type Block } from "@/lib/blog";
 import { bookingHref, findTreatment } from "@/lib/treatments";
+import ShareBar from "@/components/ShareBar";
 import { locales, site, waLink, type Locale } from "@/lib/site";
 
 type Params = Promise<{ lang: string; slug: string }>;
@@ -132,6 +133,7 @@ export default async function PostPage({ params }: { params: Params }) {
                   <small>{formatDate(p.date, lang)} · {p.readMinutes} min</small>
                 </span>
               </div>
+              <ShareBar url={url} title={p.v.title} s={t.news.share} />
             </div>
           </header>
 
@@ -145,6 +147,8 @@ export default async function PostPage({ params }: { params: Params }) {
             {p.v.body.map((b, i) => (
               <Render b={b} t={t} lang={lang} key={i} />
             ))}
+
+            <ShareBar url={url} title={p.v.title} s={t.news.share} variant="end" />
 
             <div className="post__cta">
               <h3>{t.news.ctaTitle}</h3>

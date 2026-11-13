@@ -16069,3 +16069,123 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+/* Compartir artículo */
+.share--top {
+  margin-top: 18px;
+}
+
+.share--end {
+  margin: 2.4em 0 0;
+  padding: 22px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--ivory);
+  border: 1px solid rgba(190, 157, 97, 0.25);
+  text-align: center;
+}
+
+.post__body .share__title {
+  margin: 0 0 14px;
+  font-family: var(--f-accent);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  color: var(--slate);
+}
+
+.share__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.share--end .share__row {
+  justify-content: center;
+}
+
+.share__label {
+  margin-right: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.share__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 48, 53, 0.18);
+  background: #fff;
+  color: var(--slate);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.share__btn svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.share__btn:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.share__btn--wa {
+  background: #25d366;
+  border-color: #25d366;
+  color: #fff;
+}
+
+.share__btn--wa:hover {
+  border-color: #1fb457;
+  background: #1fb457;
+}
+
+.share__btn.is-done {
+  border-color: var(--gold);
+  background: rgba(190, 157, 97, 0.12);
+}
+
+/* En el móvil, arriba solo WhatsApp lleva texto; los demás son iconos redondos */
+@media (max-width: 639px) {
+  .share--top .share__btn:not(.share__btn--wa) {
+    width: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .share--top .share__label {
+    display: none;
+  }
+
+  .share--top .share__btn:not(.share__btn--wa) span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .share__btn {
+    transition: none;
+  }
+
+  .share__btn:hover {
+    transform: none;
+  }
+}
