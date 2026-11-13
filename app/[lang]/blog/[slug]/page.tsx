@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Arrow, WaIcon } from "@/components/Icons";
-import { BlogChecklist, BlogCompare, BlogFaq, BlogMap, BlogPoints, BlogRefs, BlogTimeline } from "@/components/BlogBlocks";
+import { BlogChecklist, BlogDoc, BlogCompare, BlogFaq, BlogMap, BlogPoints, BlogRefs, BlogTimeline } from "@/components/BlogBlocks";
 import { dictionaries } from "@/lib/content";
 import { findPost, formatDate, posts, postsFor, type Block } from "@/lib/blog";
+import { bookingHref, findTreatment } from "@/lib/treatments";
 import { locales, site, waLink, type Locale } from "@/lib/site";
 
 type Params = Promise<{ lang: string; slug: string }>;
@@ -40,13 +41,19 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 const abs = (src: string) => (src.startsWith("http") ? src : `${site.url}${src}`);
 
-function Render({ b, t }: { b: Block; t: (typeof dictionaries)["es"] }) {
+function Render({ b, t, lang }: { b: Block; t: (typeof dictionaries)["es"]; lang: Locale }) {
   if ("h" in b) return <h2>{b.h}</h2>;
   if ("map" in b) return <BlogMap zones={t.plan.b.items.find((i) => i.id === b.map)!.zones} caption={b.caption} phases={b.phases} />;
   if ("timeline" in b) return <BlogTimeline steps={b.timeline} />;
   if ("compare" in b) return <BlogCompare yes={b.compare.yes} no={b.compare.no} />;
   if ("points" in b) return <BlogPoints points={b.points} />;
   if ("faq" in b) return <BlogFaq items={b.faq} />;
+  if ("doc" in b) {
+    const tr = findTreatment(b.doc.service, b.doc.slug);
+    const proc = t.services.items.find((s) => s.slug === b.doc.service)?.procedures[tr?.index ?? 0];
+    const bookHref = tr && proc ? bookingHref(lang, b.doc.service, tr.index, proc.name) : `/${lang}/agendar`;
+    return <BlogDoc {...b.doc} lang={lang} bookHref={bookHref} />;
+  }
   if ("checklist" in b) return <BlogChecklist items={b.checklist.items} done={b.checklist.done} />;
   if ("refs" in b) return <BlogRefs title={t.news.sources} refs={b.refs} />;
   if ("ul" in b) return <ul>{b.ul.map((x) => <li key={x}>{x}</li>)}</ul>;
@@ -136,7 +143,7 @@ export default async function PostPage({ params }: { params: Params }) {
 
           <div className="container post__body">
             {p.v.body.map((b, i) => (
-              <Render b={b} t={t} key={i} />
+              <Render b={b} t={t} lang={lang} key={i} />
             ))}
 
             <div className="post__cta">

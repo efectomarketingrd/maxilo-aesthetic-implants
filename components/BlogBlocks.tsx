@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import InView from "./InView";
 import type { CheckIcon } from "@/lib/blog";
 import PlanFace from "./PlanFace";
@@ -211,6 +213,39 @@ export function BlogChecklist({ items, done }: { items: (Pair & { ic: CheckIcon 
       <div className="bb-chk__bar" style={{ "--n": items.length } as React.CSSProperties}>
         <span className="bb-chk__fill" />
         <p>{done}</p>
+      </div>
+    </InView>
+  );
+}
+
+// Tarjeta de la doctora: foto recortada sobre un círculo dorado, datos clave y botones.
+export function BlogDoc({ eyebrow, name, role, text, chips, book, more, service, slug, lang, bookHref }: { eyebrow: string; name: string; role: string; text: string; chips: string[]; book: string; more: string; service: string; slug: string; lang: "es" | "en"; bookHref: string }) {
+  return (
+    <InView className="bb-doc">
+      <div className="bb-doc__photo">
+        <span className="bb-doc__halo" aria-hidden="true" />
+        <Image src="/brand/doctora-hd.png" alt={name} width={640} height={1062} sizes="(max-width: 640px) 50vw, 240px" />
+      </div>
+      <div className="bb-doc__body">
+        <p className="bb-doc__eyebrow">{eyebrow}</p>
+        <h3>{name}</h3>
+        <p className="bb-doc__role">{role}</p>
+        <p className="bb-doc__text">{text}</p>
+        <ul className="bb-doc__chips">
+          {chips.map((c, k) => (
+            <li key={c} style={{ "--k": k } as React.CSSProperties}>
+              {c}
+            </li>
+          ))}
+        </ul>
+        <div className="bb-doc__ctas">
+          <Link className="btn btn--gold btn--sm h5-btn-shine" href={bookHref}>
+            {book}
+          </Link>
+          <Link className="bb-doc__more" href={`/${lang}/servicios/${service}/${slug}`}>
+            {more} →
+          </Link>
+        </div>
       </div>
     </InView>
   );

@@ -19,6 +19,7 @@ import { img } from "./images";
 //   { points: [{ t, d, ic? }] }    → tarjetas numeradas (ic: anatomy | needle | face | shield → ícono animado)
 //   { faq: [{ q, a }] }            → preguntas frecuentes (también van al schema FAQPage)
 //   { refs: [{ t, url }] }         → fuentes
+//   { doc: { eyebrow, name, role, text, chips, book, more, service, slug } } → tarjeta de la doctora con botones
 //   { checklist: { items: [{ ic, t, d }], done } } → lista de verificación animada (ic: person | box | clipboard | clinic | tag | calendar)
 
 type Pair = { t: string; d: string };
@@ -33,7 +34,8 @@ export type Block =
   | { points: (Pair & { ic?: "anatomy" | "needle" | "face" | "shield" })[] }
   | { faq: { q: string; a: string }[] }
   | { refs: { t: string; url: string }[] }
-  | { checklist: { items: (Pair & { ic: CheckIcon })[]; done: string } };
+  | { checklist: { items: (Pair & { ic: CheckIcon })[]; done: string } }
+  | { doc: { eyebrow: string; name: string; role: string; text: string; chips: string[]; book: string; more: string; service: ServiceSlug; slug: string } };
 
 export type CheckIcon = "person" | "box" | "clipboard" | "clinic" | "tag" | "calendar";
 
@@ -113,7 +115,19 @@ export const posts: Post[] = [
             done: "6 de 6: lista para elegir con seguridad",
           },
         },
-        { img: "/brand/doctora-cara.jpg", tip: "En Maxilo Aesthetic Implants, en Las Terrenas, la Dra. Celia Hernández Mauricio, cirujana maxilofacial, aplica toxina botulínica tipo A (Neuronox, de Medytox, Corea del Sur) con valoración previa y retoque a las 2 semanas incluido." },
+        {
+          doc: {
+            eyebrow: "Dónde aplicarse bótox en Las Terrenas",
+            name: "Dra. Celia Hernández Mauricio",
+            role: "Cirujana maxilofacial · Maxilo Aesthetic Implants",
+            text: "Aplica toxina botulínica tipo A después de una valoración, en un entorno clínico y con seguimiento de su resultado.",
+            chips: ["Neuronox · Medytox, Corea del Sur", "Valoración previa", "Retoque a las 2 semanas incluido", "RD$28,000"],
+            book: "Agendar mi valoración",
+            more: "Ver el tratamiento",
+            service: "medicina-estetica",
+            slug: "botox",
+          },
+        },
         { h: "Preguntas frecuentes" },
         {
           faq: [
@@ -185,7 +199,19 @@ export const posts: Post[] = [
             done: "6 of 6: ready to choose safely",
           },
         },
-        { img: "/brand/doctora-cara.jpg", tip: "At Maxilo Aesthetic Implants in Las Terrenas, Dr. Celia Hernández Mauricio, maxillofacial surgeon, applies botulinum toxin type A (Neuronox, by Medytox, South Korea) with a prior assessment and a touch-up at 2 weeks included." },
+        {
+          doc: {
+            eyebrow: "Where to get Botox in Las Terrenas",
+            name: "Dr. Celia Hernández Mauricio",
+            role: "Maxillofacial surgeon · Maxilo Aesthetic Implants",
+            text: "She applies botulinum toxin type A after an assessment, in a clinical setting and with follow-up of your result.",
+            chips: ["Neuronox · Medytox, South Korea", "Prior assessment", "Touch-up at 2 weeks included", "RD$28,000"],
+            book: "Book my assessment",
+            more: "See the treatment",
+            service: "medicina-estetica",
+            slug: "botox",
+          },
+        },
         { h: "Frequently asked questions" },
         {
           faq: [
