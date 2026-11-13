@@ -15690,3 +15690,171 @@ body:has(.bk2-page) .wa-float {
     gap: 12px;
   }
 }
+
+/* Lista de verificación animada (blog) */
+.bb-chk {
+  margin: 1.2em 0 1.8em;
+}
+
+.bb-chk__grid {
+  display: grid;
+  gap: 10px;
+}
+
+.bb-chk__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 46px 1fr 26px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 14px 14px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: 0 10px 22px rgba(37, 48, 53, 0.05);
+  transition: border-color 0.4s ease, background 0.4s ease;
+}
+
+.bb-chk__ico {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: var(--ivory);
+  color: var(--gold);
+}
+
+.bb-chk__card h3 {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--slate);
+}
+
+.post__body .bb-chk__card p {
+  margin: 2px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.bb-chk__tick {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  color: var(--white);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.bb-chk__tick path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.bb-chk__card {
+  --t: calc(var(--k) * 0.45s + 0.3s);
+}
+
+.bb-chk__bar {
+  position: relative;
+  margin-top: 14px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+.bb-chk__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+}
+
+.bb-chk__bar p {
+  position: relative;
+  margin: 0 !important;
+  line-height: 40px;
+  text-align: center;
+  font-size: 0.8rem !important;
+  font-weight: 600;
+  color: var(--slate) !important;
+}
+
+/* animación (solo con JS y al entrar en pantalla) */
+.bb-chk.js-anim .bb-chk__card {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.4s ease;
+  transition-delay: var(--t), var(--t), calc(var(--t) + 0.35s);
+}
+
+.bb-chk.js-anim .bb-chk__tick {
+  transition-delay: calc(var(--t) + 0.35s);
+}
+
+.bb-chk.js-anim .bb-chk__tick path {
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.4s ease;
+  transition-delay: calc(var(--t) + 0.45s);
+}
+
+.bb-chk.js-anim .bb-chk__fill {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform calc(var(--n) * 0.45s) cubic-bezier(0.4, 0, 0.2, 1) 0.6s;
+}
+
+.bb-chk.js-anim .bb-chk__bar p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  transition-delay: calc(var(--n) * 0.45s + 0.7s);
+}
+
+.bb-chk.js-anim.is-in .bb-chk__card,
+.bb-chk:not(.js-anim) .bb-chk__card {
+  opacity: 1;
+  transform: none;
+  border-color: rgba(190, 157, 97, 0.45);
+}
+
+.bb-chk.js-anim.is-in .bb-chk__tick,
+.bb-chk:not(.js-anim) .bb-chk__tick {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+.bb-chk.js-anim.is-in .bb-chk__tick path {
+  stroke-dashoffset: 0;
+}
+
+.bb-chk.js-anim.is-in .bb-chk__fill {
+  transform: none;
+}
+
+.bb-chk.js-anim.is-in .bb-chk__bar p {
+  opacity: 1;
+}
+
+@media (min-width: 640px) {
+  .bb-chk__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-chk.js-anim .bb-chk__card,
+  .bb-chk.js-anim .bb-chk__tick,
+  .bb-chk.js-anim .bb-chk__tick path,
+  .bb-chk.js-anim .bb-chk__fill,
+  .bb-chk.js-anim .bb-chk__bar p {
+    transition: none;
+  }
+}

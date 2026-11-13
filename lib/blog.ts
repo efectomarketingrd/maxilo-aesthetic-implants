@@ -19,6 +19,7 @@ import { img } from "./images";
 //   { points: [{ t, d, ic? }] }    → tarjetas numeradas (ic: anatomy | needle | face | shield → ícono animado)
 //   { faq: [{ q, a }] }            → preguntas frecuentes (también van al schema FAQPage)
 //   { refs: [{ t, url }] }         → fuentes
+//   { checklist: { items: [{ ic, t, d }], done } } → lista de verificación animada (ic: person | box | clipboard | clinic | tag | calendar)
 
 type Pair = { t: string; d: string };
 export type Block =
@@ -31,7 +32,10 @@ export type Block =
   | { compare: { yes: { t: string; items: string[] }; no: { t: string; items: string[] } } }
   | { points: (Pair & { ic?: "anatomy" | "needle" | "face" | "shield" })[] }
   | { faq: { q: string; a: string }[] }
-  | { refs: { t: string; url: string }[] };
+  | { refs: { t: string; url: string }[] }
+  | { checklist: { items: (Pair & { ic: CheckIcon })[]; done: string } };
+
+export type CheckIcon = "person" | "box" | "clipboard" | "clinic" | "tag" | "calendar";
 
 type PostVersion = {
   title: string;
@@ -97,14 +101,17 @@ export const posts: Post[] = [
         { p: "Por su formación, el maxilofacial también conoce los usos de la toxina en los músculos de la masticación, por ejemplo en el bruxismo (apretar o rechinar los dientes). Si es su caso, coméntelo en la valoración." },
         { h: "Cómo elegir dónde aplicarse bótox en República Dominicana" },
         {
-          ul: [
-            "Pregunte quién lo aplica y cuál es su especialidad.",
-            "Pida ver el producto: marca, lote, registro sanitario y fecha de vencimiento.",
-            "Exija una valoración previa con su historia clínica.",
-            "Elija un consultorio o centro médico, no un salón.",
-            "Desconfíe de precios muy por debajo de lo habitual.",
-            "Pregunte si incluye control y retoque a las 2 semanas.",
-          ],
+          checklist: {
+            items: [
+              { ic: "person", t: "¿Quién lo aplica?", d: "Pregunte su nombre y su especialidad." },
+              { ic: "box", t: "El producto, a la vista", d: "Marca, lote, registro sanitario y fecha de vencimiento." },
+              { ic: "clipboard", t: "Valoración previa", d: "Con su historia clínica, antes de aplicar." },
+              { ic: "clinic", t: "Un lugar adecuado", d: "Un consultorio o centro médico, no un salón." },
+              { ic: "tag", t: "Un precio razonable", d: "Desconfíe de precios muy por debajo de lo habitual." },
+              { ic: "calendar", t: "Control y retoque", d: "Pregunte si incluye la revisión a las 2 semanas." },
+            ],
+            done: "6 de 6: lista para elegir con seguridad",
+          },
         },
         { img: "/brand/doctora-cara.jpg", tip: "En Maxilo Aesthetic Implants, en Las Terrenas, la Dra. Celia Hernández Mauricio, cirujana maxilofacial, aplica toxina botulínica tipo A (Neuronox, de Medytox, Corea del Sur) con valoración previa y retoque a las 2 semanas incluido." },
         { h: "Preguntas frecuentes" },
@@ -166,14 +173,17 @@ export const posts: Post[] = [
         { p: "Thanks to their training, maxillofacial surgeons also know the uses of the toxin in the chewing muscles, for example for bruxism (clenching or grinding the teeth). If that is your case, mention it at your assessment." },
         { h: "How to choose where to get Botox in the Dominican Republic" },
         {
-          ul: [
-            "Ask who applies it and what their specialty is.",
-            "Ask to see the product: brand, batch, sanitary registration and expiry date.",
-            "Expect a prior assessment with your medical history.",
-            "Choose a medical office or clinic, not a salon.",
-            "Be wary of prices far below the usual.",
-            "Ask whether a check-up and touch-up at 2 weeks are included.",
-          ],
+          checklist: {
+            items: [
+              { ic: "person", t: "Who applies it?", d: "Ask for their name and specialty." },
+              { ic: "box", t: "The product, in plain view", d: "Brand, batch, sanitary registration and expiry date." },
+              { ic: "clipboard", t: "A prior assessment", d: "With your medical history, before the injection." },
+              { ic: "clinic", t: "The right place", d: "A medical office or clinic, not a salon." },
+              { ic: "tag", t: "A reasonable price", d: "Be wary of prices far below the usual." },
+              { ic: "calendar", t: "Check-up and touch-up", d: "Ask whether the 2-week review is included." },
+            ],
+            done: "6 of 6: ready to choose safely",
+          },
         },
         { img: "/brand/doctora-cara.jpg", tip: "At Maxilo Aesthetic Implants in Las Terrenas, Dr. Celia Hernández Mauricio, maxillofacial surgeon, applies botulinum toxin type A (Neuronox, by Medytox, South Korea) with a prior assessment and a touch-up at 2 weeks included." },
         { h: "Frequently asked questions" },

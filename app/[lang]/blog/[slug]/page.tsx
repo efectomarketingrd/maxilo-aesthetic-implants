@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Arrow, WaIcon } from "@/components/Icons";
-import { BlogCompare, BlogFaq, BlogMap, BlogPoints, BlogRefs, BlogTimeline } from "@/components/BlogBlocks";
+import { BlogChecklist, BlogCompare, BlogFaq, BlogMap, BlogPoints, BlogRefs, BlogTimeline } from "@/components/BlogBlocks";
 import { dictionaries } from "@/lib/content";
 import { findPost, formatDate, posts, postsFor, type Block } from "@/lib/blog";
 import { locales, site, waLink, type Locale } from "@/lib/site";
@@ -47,6 +47,7 @@ function Render({ b, t }: { b: Block; t: (typeof dictionaries)["es"] }) {
   if ("compare" in b) return <BlogCompare yes={b.compare.yes} no={b.compare.no} />;
   if ("points" in b) return <BlogPoints points={b.points} />;
   if ("faq" in b) return <BlogFaq items={b.faq} />;
+  if ("checklist" in b) return <BlogChecklist items={b.checklist.items} done={b.checklist.done} />;
   if ("refs" in b) return <BlogRefs title={t.news.sources} refs={b.refs} />;
   if ("ul" in b) return <ul>{b.ul.map((x) => <li key={x}>{x}</li>)}</ul>;
   if ("tip" in b)

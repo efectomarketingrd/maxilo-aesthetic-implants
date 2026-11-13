@@ -1,4 +1,5 @@
 import InView from "./InView";
+import type { CheckIcon } from "@/lib/blog";
 import PlanFace from "./PlanFace";
 
 // Bloques animados del blog (ver tipos en lib/blog.ts). Las animaciones arrancan al entrar en pantalla.
@@ -171,5 +172,46 @@ export function BlogRefs({ title, refs }: { title: string; refs: { t: string; ur
         ))}
       </ol>
     </div>
+  );
+}
+
+const CHECK_ICONS: Record<CheckIcon, string> = {
+  person: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4.5 20.5c.8-3.8 3.8-6 7.5-6s6.7 2.2 7.5 6",
+  box: "M4 8l8-4 8 4v8l-8 4-8-4z M4 8l8 4 8-4 M12 12v8",
+  clipboard: "M8 5h8v3H8z M6 6.5H5v14h14v-14h-1 M8.5 13l2 2 4.5-4.5",
+  clinic: "M4 20V9l8-5 8 5v11z M10 20v-5h4v5 M12 8.5v4 M10 10.5h4",
+  tag: "M3.5 12.5V4h8.5l8.5 8.5-8.5 8.5z M8 8.5h.01",
+  calendar: "M4 6h16v14H4z M4 10h16 M8 4v4 M16 4v4 M9 15l2 2 4-4",
+};
+
+// Lista de verificación: las tarjetas aparecen una a una, se marca un ✓ en cada una y se llena la barra.
+export function BlogChecklist({ items, done }: { items: (Pair & { ic: CheckIcon })[]; done: string }) {
+  return (
+    <InView className="bb-chk">
+      <div className="bb-chk__grid">
+        {items.map((it, k) => (
+          <div key={it.t} className="bb-chk__card" style={{ "--k": k } as React.CSSProperties}>
+            <span className="bb-chk__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d={CHECK_ICONS[it.ic]} />
+              </svg>
+            </span>
+            <div>
+              <h3>{it.t}</h3>
+              <p>{it.d}</p>
+            </div>
+            <span className="bb-chk__tick" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <path pathLength={1} d="M5 12.5l4.5 4.5L19 7.5" />
+              </svg>
+            </span>
+          </div>
+        ))}
+      </div>
+      <div className="bb-chk__bar" style={{ "--n": items.length } as React.CSSProperties}>
+        <span className="bb-chk__fill" />
+        <p>{done}</p>
+      </div>
+    </InView>
   );
 }
