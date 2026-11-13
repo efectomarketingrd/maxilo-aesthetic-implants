@@ -16,7 +16,7 @@ import { img } from "./images";
 //   { map: "botox", caption }      → rostro con las zonas que se encienden (usa las zonas del armador de planes)
 //   { timeline: [{ t, d }] }       → línea de tiempo animada
 //   { compare: { yes, no } }       → dos columnas: sí / no
-//   { points: [{ t, d }] }         → tarjetas numeradas
+//   { points: [{ t, d, ic? }] }    → tarjetas numeradas (ic: anatomy | needle | face | shield → ícono animado)
 //   { faq: [{ q, a }] }            → preguntas frecuentes (también van al schema FAQPage)
 //   { refs: [{ t, url }] }         → fuentes
 
@@ -29,7 +29,7 @@ export type Block =
   | { map: "botox"; caption: string }
   | { timeline: Pair[] }
   | { compare: { yes: { t: string; items: string[] }; no: { t: string; items: string[] } } }
-  | { points: Pair[] }
+  | { points: (Pair & { ic?: "anatomy" | "needle" | "face" | "shield" })[] }
   | { faq: { q: string; a: string }[] }
   | { refs: { t: string; url: string }[] };
 
@@ -88,10 +88,10 @@ export const posts: Post[] = [
         { p: "El cirujano oral y maxilofacial es el especialista en la cirugía de la cara, la boca y los maxilares. Trabaja todos los días en las mismas zonas donde se aplica el bótox, y eso se nota en la seguridad y en el resultado." },
         {
           points: [
-            { t: "Anatomía facial a fondo", d: "Conoce los músculos de la expresión y de la masticación, y el recorrido de vasos y nervios, porque opera en esas zonas." },
-            { t: "Precisión con la aguja", d: "Está entrenado en técnicas de anestesia e infiltración en el rostro y la boca." },
-            { t: "Visión del rostro completo", d: "Evalúa huesos, músculos y sonrisa en conjunto, para un resultado armónico y no solo para borrar una arruga." },
-            { t: "Manejo de complicaciones", d: "Como cirujano, sabe reconocer y tratar a tiempo una reacción o una complicación." },
+            { ic: "anatomy", t: "Anatomía facial a fondo", d: "Conoce los músculos de la expresión y de la masticación, y el recorrido de vasos y nervios, porque opera en esas zonas." },
+            { ic: "needle", t: "Precisión con la aguja", d: "Está entrenado en técnicas de anestesia e infiltración en el rostro y la boca." },
+            { ic: "face", t: "Visión del rostro completo", d: "Evalúa huesos, músculos y sonrisa en conjunto, para un resultado armónico y no solo para borrar una arruga." },
+            { ic: "shield", t: "Manejo de complicaciones", d: "Como cirujano, sabe reconocer y tratar a tiempo una reacción o una complicación." },
           ],
         },
         { p: "Por su formación, el maxilofacial también conoce los usos de la toxina en los músculos de la masticación, por ejemplo en el bruxismo (apretar o rechinar los dientes). Si es su caso, coméntelo en la valoración." },
@@ -157,10 +157,10 @@ export const posts: Post[] = [
         { p: "The oral and maxillofacial surgeon specializes in surgery of the face, mouth and jaws. They work every day in the same areas where Botox is applied, and that shows in both safety and results." },
         {
           points: [
-            { t: "In-depth facial anatomy", d: "They know the muscles of expression and chewing, and the path of vessels and nerves, because they operate in those areas." },
-            { t: "Precision with the needle", d: "They are trained in anesthesia and infiltration techniques in the face and mouth." },
-            { t: "A view of the whole face", d: "They assess bones, muscles and smile together, for a balanced result rather than just erasing a line." },
-            { t: "Managing complications", d: "As surgeons, they know how to recognize and treat a reaction or complication early." },
+            { ic: "anatomy", t: "In-depth facial anatomy", d: "They know the muscles of expression and chewing, and the path of vessels and nerves, because they operate in those areas." },
+            { ic: "needle", t: "Precision with the needle", d: "They are trained in anesthesia and infiltration techniques in the face and mouth." },
+            { ic: "face", t: "A view of the whole face", d: "They assess bones, muscles and smile together, for a balanced result rather than just erasing a line." },
+            { ic: "shield", t: "Managing complications", d: "As surgeons, they know how to recognize and treat a reaction or complication early." },
           ],
         },
         { p: "Thanks to their training, maxillofacial surgeons also know the uses of the toxin in the chewing muscles, for example for bruxism (clenching or grinding the teeth). If that is your case, mention it at your assessment." },
