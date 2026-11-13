@@ -42,7 +42,7 @@ const abs = (src: string) => (src.startsWith("http") ? src : `${site.url}${src}`
 
 function Render({ b, t }: { b: Block; t: (typeof dictionaries)["es"] }) {
   if ("h" in b) return <h2>{b.h}</h2>;
-  if ("map" in b) return <BlogMap zones={t.plan.b.items.find((i) => i.id === b.map)!.zones} caption={b.caption} />;
+  if ("map" in b) return <BlogMap zones={t.plan.b.items.find((i) => i.id === b.map)!.zones} caption={b.caption} phases={b.phases} />;
   if ("timeline" in b) return <BlogTimeline steps={b.timeline} />;
   if ("compare" in b) return <BlogCompare yes={b.compare.yes} no={b.compare.no} />;
   if ("points" in b) return <BlogPoints points={b.points} />;

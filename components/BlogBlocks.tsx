@@ -1,17 +1,27 @@
 import InView from "./InView";
-import RecFace from "./RecFace";
+import PlanFace from "./PlanFace";
 
 // Bloques animados del blog (ver tipos en lib/blog.ts). Las animaciones arrancan al entrar en pantalla.
 
 type Pair = { t: string; d: string };
 
-export function BlogMap({ zones, caption }: { zones: string[]; caption: string }) {
+// Mapa del bótox: ciclo de ~12 s que se repite mientras está en pantalla:
+// líneas marcadas → puntos de aplicación zona por zona (y la leyenda se resalta) → líneas suavizadas.
+export function BlogMap({ zones, caption, phases }: { zones: string[]; caption: string; phases?: [string, string] }) {
   return (
-    <figure className="bb-map">
+    <InView className="bb-map">
       <div className="bb-map__face">
-        <RecFace items={[{ id: "botox", zones: zones.map((_, k) => k) }]} label={caption} />
+        {phases && (
+          <div className="bb-map__phase" aria-hidden="true">
+            <span>{phases[0]}</span>
+            <span>{phases[1]}</span>
+          </div>
+        )}
+        <div className="pf-story">
+          <PlanFace layers={[{ kind: "botox", on: zones.map((_, k) => k) }]} label={caption} combined />
+        </div>
       </div>
-      <InView className="bb-map__legend">
+      <div className="bb-map__legend">
         <ol>
           {zones.map((z, k) => (
             <li key={z} style={{ "--k": k } as React.CSSProperties}>
@@ -21,8 +31,8 @@ export function BlogMap({ zones, caption }: { zones: string[]; caption: string }
           ))}
         </ol>
         <figcaption>{caption}</figcaption>
-      </InView>
-    </figure>
+      </div>
+    </InView>
   );
 }
 

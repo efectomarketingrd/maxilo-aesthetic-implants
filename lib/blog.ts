@@ -26,7 +26,7 @@ export type Block =
   | { p: string }
   | { ul: string[] }
   | { tip: string; img?: string }
-  | { map: "botox"; caption: string }
+  | { map: "botox"; caption: string; phases?: [string, string] }
   | { timeline: Pair[] }
   | { compare: { yes: { t: string; items: string[] }; no: { t: string; items: string[] } } }
   | { points: (Pair & { ic?: "anatomy" | "needle" | "face" | "shield" })[] }
@@ -66,7 +66,7 @@ export const posts: Post[] = [
         { h: "¿Qué es el bótox y cómo actúa?" },
         { p: "El bótox es la toxina botulínica tipo A, un medicamento que se inyecta en cantidades muy pequeñas para relajar de forma temporal los músculos que forman las arrugas de expresión. No rellena: relaja. Por eso la piel se ve más lisa sin perder la expresión del rostro." },
         { p: "En Estados Unidos, la FDA aprobó su uso estético en el entrecejo en 2002, en las patas de gallo en 2013, en la frente en 2017 y en las bandas del cuello en 2024." },
-        { map: "botox", caption: "Zonas del rostro que más se tratan con bótox." },
+        { map: "botox", caption: "Zonas del rostro que más se tratan con bótox.", phases: ["Líneas de expresión", "Músculo relajado, piel más lisa"] },
         { h: "Qué esperar después de la aplicación" },
         {
           timeline: [
@@ -135,7 +135,7 @@ export const posts: Post[] = [
         { h: "What is Botox and how does it work?" },
         { p: "Botox is botulinum toxin type A, a medicine injected in very small amounts to temporarily relax the muscles that create expression lines. It does not fill: it relaxes. That is why the skin looks smoother without losing facial expression." },
         { p: "In the United States, the FDA approved its aesthetic use between the brows in 2002, for crow's feet in 2013, on the forehead in 2017 and for neck bands in 2024." },
-        { map: "botox", caption: "The areas of the face most often treated with Botox." },
+        { map: "botox", caption: "The areas of the face most often treated with Botox.", phases: ["Expression lines", "Relaxed muscle, smoother skin"] },
         { h: "What to expect after treatment" },
         {
           timeline: [

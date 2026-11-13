@@ -179,7 +179,7 @@ export default function PlanFace({ layers, label, combined = false, quiet = fals
               </g>
             ))}
             {z.lines?.map((d, m) => (
-              <path key={`l${m}`} d={d} fill="none" stroke={LINE} strokeWidth="1.8" strokeLinecap="round" />
+              <path key={`l${m}`} className="pf-line" d={d} fill="none" stroke={LINE} strokeWidth="1.8" strokeLinecap="round" />
             ))}
             {z.threads?.map((d, m) => (
               <path key={`t${m}`} className="pf-draw" pathLength={1} d={d} fill="none" stroke={GOLD} strokeWidth="1.8" strokeLinecap="round" />

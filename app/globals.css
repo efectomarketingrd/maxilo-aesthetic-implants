@@ -15108,16 +15108,112 @@ body:has(.bk2-page) .wa-float {
   color: var(--muted);
 }
 
-.bb-map__legend.js-anim li {
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  transition-delay: calc(var(--k) * 0.35s + 0.3s);
+/* Ciclo animado del mapa de bótox (12 s, se repite) */
+.bb-map__phase {
+  position: relative;
+  height: 26px;
+  margin-bottom: 4px;
+  text-align: center;
 }
 
-.bb-map__legend.js-anim.is-in li {
+.bb-map__phase span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #8a6d3b;
+}
+
+.bb-map__phase span:last-child {
+  opacity: 0;
+}
+
+.bb-map .pf-story .pf-z {
   opacity: 1;
-  transform: none;
+}
+
+.bb-map .pf-story .pf-z .pf-pop {
+  opacity: 0;
+  animation: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.bb-map.is-in .pf-story .pf-line {
+  animation: bx-line 12s ease-in-out infinite;
+  animation-delay: calc(var(--o, 0) * 0.6s);
+}
+
+.bb-map.is-in .pf-story .pf-z .pf-pop {
+  animation: bx-dot 12s ease-out infinite;
+  animation-delay: calc(var(--o, 0) * 0.6s);
+}
+
+.bb-map__legend li {
+  padding: 3px 6px;
+  border-radius: 999px;
+}
+
+.bb-map.is-in .bb-map__legend li {
+  animation: bx-leg 12s ease infinite;
+  animation-delay: calc(var(--k, 0) * 0.6s);
+}
+
+.bb-map.is-in .bb-map__phase span:first-child {
+  animation: bx-ph1 12s ease infinite;
+}
+
+.bb-map.is-in .bb-map__phase span:last-child {
+  animation: bx-ph2 12s ease infinite;
+}
+
+/* las líneas se ven marcadas y se suavizan después de la aplicación */
+@keyframes bx-line {
+  0%, 52% { opacity: 1; stroke-width: 1.8; }
+  64%, 90% { opacity: 0.18; stroke-width: 1.2; }
+  100% { opacity: 1; stroke-width: 1.8; }
+}
+
+/* punto de aplicación: destello y luego desaparece */
+@keyframes bx-dot {
+  0%, 12% { opacity: 0; transform: scale(0.3); }
+  17% { opacity: 1; transform: scale(1.35); }
+  21%, 60% { opacity: 1; transform: none; }
+  70%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes bx-leg {
+  0%, 12% { background: transparent; }
+  16%, 24% { background: rgba(190, 157, 97, 0.2); }
+  32%, 100% { background: transparent; }
+}
+
+@keyframes bx-ph1 {
+  0%, 56% { opacity: 1; }
+  62%, 94% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes bx-ph2 {
+  0%, 58% { opacity: 0; transform: translateY(4px); }
+  64%, 92% { opacity: 1; transform: none; }
+  98%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-map.is-in .pf-story .pf-line,
+  .bb-map.is-in .pf-story .pf-z .pf-pop,
+  .bb-map.is-in .bb-map__legend li,
+  .bb-map.is-in .bb-map__phase span {
+    animation: none;
+  }
+
+  .bb-map .pf-story .pf-z .pf-pop {
+    opacity: 1;
+  }
 }
 
 /* Línea de tiempo */
@@ -15424,7 +15520,6 @@ body:has(.bk2-page) .wa-float {
     transition: none;
   }
 
-  .bb-map__legend.js-anim li,
   .bb-time.js-anim li,
   .bb-cmp.js-anim li,
   .bb-pts.js-anim .bb-pts__card {
