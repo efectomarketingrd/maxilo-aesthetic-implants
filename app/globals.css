@@ -14716,3 +14716,118 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+/* Armador: pestañas por servicio */
+.pb-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 0 -16px 12px;
+  padding: 2px 16px 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pb-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.pb-tab {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--slate);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.pb-tab span {
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--white);
+  font-size: 0.64rem;
+}
+
+.pb-tab.is-on {
+  background: var(--slate);
+  border-color: var(--slate);
+  color: var(--ivory);
+}
+
+.pb-pick .pb-opt {
+  animation: bk2-rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--k, 0) * 0.05s);
+}
+
+.pb-chips--single .pb-chip span {
+  font-size: 0.7rem;
+}
+
+.pb-card__body--solo {
+  grid-template-columns: 1fr !important;
+}
+
+.pb-card__body--solo .pb-face {
+  max-width: 260px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.pb-price--tbc,
+.pb-sum li strong.is-tbc {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.pb-sum li strong.is-tbc {
+  color: var(--gold-soft);
+  opacity: 0.8;
+}
+
+.pb-sum__tbc {
+  margin: -4px 0 10px;
+  font-size: 0.72rem;
+  color: var(--gold-soft);
+  text-align: right;
+}
+
+.pb-note a {
+  color: #b25c46;
+  font-weight: 600;
+}
+
+.pf-side {
+  font-family: var(--f-body);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: var(--muted);
+  text-transform: uppercase;
+}
+
+@media (min-width: 720px) {
+  .pb-tabs {
+    margin: 0 0 12px;
+    padding: 2px 0 4px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pb-pick .pb-opt {
+    animation: none;
+  }
+}

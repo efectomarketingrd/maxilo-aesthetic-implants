@@ -26,7 +26,8 @@ export default async function Plans({ params }: { params: Promise<{ lang: string
   const p = t.plan;
   const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
   const names = p.b.items;
-  const buildChips = [names[0].name, names[1].name.split(" (")[0]];
+  const nameOf = (id: string) => names.find((n) => n.id === id)!.name;
+  const buildChips = [nameOf("botox"), nameOf("filler").split(" (")[0]];
   const demoTotal = planTotal([{ id: "botox", zones: [0, 2] }, { id: "filler", zones: [1, 3, 5] }]);
 
   return (

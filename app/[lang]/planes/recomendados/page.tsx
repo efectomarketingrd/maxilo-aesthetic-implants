@@ -67,7 +67,7 @@ export default async function RecPlans({ params }: { params: Promise<{ lang: str
                                 {it.name}
                                 <small>{i.zones.map((z) => it.zones[z]).join(" · ")}</small>
                               </span>
-                              <strong>{rd(planPrice(i.id, i.zones))}</strong>
+                              <strong>{rd(planPrice(i.id, i.zones) ?? 0)}</strong>
                             </li>
                           );
                         })}
