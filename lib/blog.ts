@@ -60,7 +60,7 @@ export const posts: Post[] = [
   {
     slug: "botox-republica-dominicana-que-especialista-debe-aplicarlo",
     date: "2026-11-13",
-    cover: img.medicina,
+    cover: "/blog/botox-republica-dominicana.jpg",
     service: "medicina-estetica",
     readMinutes: 6,
     es: {
