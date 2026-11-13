@@ -14841,3 +14841,51 @@ body:has(.bk2-page) .wa-float {
 .pb-bar strong {
   white-space: nowrap;
 }
+
+/* Planes recomendados: filtros y nota de tiempo */
+.rc-filters {
+  display: flex;
+  gap: 8px;
+  margin: 0 -16px 16px;
+  padding: 2px 16px 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.rc-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.rc-slot[hidden] {
+  display: none;
+}
+
+.rc-slot > .rc-card {
+  height: 100%;
+}
+
+.rc-when {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--gold-tint);
+  color: #8a6d3b;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.rc-list strong.is-tbc {
+  font-size: 0.74rem;
+  color: var(--gold);
+}
+
+@media (min-width: 720px) {
+  .rc-filters {
+    margin: 0 0 18px;
+    padding: 2px 0 4px;
+    flex-wrap: wrap;
+  }
+}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RecFace from "@/components/RecFace";
+import RecFilter from "@/components/RecFilter";
 import { Arrow } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { rd, usd } from "@/lib/agenda";
@@ -44,16 +45,27 @@ export default async function RecPlans({ params }: { params: Promise<{ lang: str
         </section>
         <section className="pl-build">
           <div className="container pl-wrap pl-wrap--wide">
-            <div className="rc-grid">
+            <RecFilter filters={r.filters} tags={r.plans.map((p) => p.tags)}>
               {r.plans.map((p, k) => {
                 const items = p.items as PlanItem[];
                 const total = planTotal(items);
+                const pending = items.filter((i) => planPrice(i.id, i.zones) === null).length;
+                const when = (p as { when?: string }).when;
                 return (
-                  <article key={p.id} className="rc-card bk2-rise" style={d(2.5 + k * 0.3)}>
+                  <article key={p.id} className="rc-card bk2-rise" style={d(2.5 + Math.min(k, 3) * 0.3)}>
                     <div className="rc-face">
                       <RecFace items={items} label={p.name} />
                     </div>
                     <div className="rc-body">
+                      {when && (
+                        <p className="rc-when">
+                          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="8.5" />
+                            <path d="M12 7.5V12l3 2" />
+                          </svg>
+                          {when}
+                        </p>
+                      )}
                       <h2>{p.name}</h2>
                       <p className="rc-goal">{p.goal}</p>
                       <p className="rc-desc">{p.desc}</p>
@@ -65,17 +77,17 @@ export default async function RecPlans({ params }: { params: Promise<{ lang: str
                             <li key={i.id}>
                               <span>
                                 {it.name}
-                                <small>{i.zones.map((z) => it.zones[z]).join(" · ")}</small>
+                                {it.zones.length > 0 && <small>{i.zones.map((z) => it.zones[z]).join(" · ")}</small>}
                               </span>
-                              <strong>{rd(planPrice(i.id, i.zones) ?? 0)}</strong>
+                              <strong className={planPrice(i.id, i.zones) === null ? "is-tbc" : ""}>{planPrice(i.id, i.zones) === null ? t.plan.b.tbc : rd(planPrice(i.id, i.zones)!)}</strong>
                             </li>
                           );
                         })}
                       </ul>
                       <div className="rc-total">
                         <span>{r.total}</span>
-                        <strong>{rd(total)}</strong>
-                        <small>≈ {usd(total)}</small>
+                        <strong>{total ? rd(total) : t.plan.b.tbc}</strong>
+                        {total > 0 && <small>≈ {usd(total)}{pending > 0 && ` · + ${pending} ${r.tbcPlus}`}</small>}
                       </div>
                       <Link className="btn btn--dark btn--sm rc-btn" href={`/${lang}/planes/crear?plan=${p.id}`}>
                         {r.use} <Arrow size={14} />
@@ -84,7 +96,7 @@ export default async function RecPlans({ params }: { params: Promise<{ lang: str
                   </article>
                 );
               })}
-            </div>
+            </RecFilter>
             <p className="rc-note">{r.note}</p>
             <Link className="rc-own" href={`/${lang}/planes/crear`}>
               {r.own} →
