@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Dict } from "@/lib/content";
-import { site, spa, waLink, type Locale } from "@/lib/site";
+import { agency, site, spa, waLink, type Locale } from "@/lib/site";
 import { Mail, Phone, Pin, WaIcon } from "./Icons";
 import OfferCard from "./OfferCard";
 import SpaCard from "./SpaCard";
@@ -52,6 +52,16 @@ export default function Footer({ t, lang, offer = false, spaCard = false }: { t:
         <div className="container footer__bottom">
           <span>© {new Date().getFullYear()} {site.name}. {t.footer.rights}</span>
           <a href={lang === "es" ? "/en" : "/es"} hrefLang={lang === "es" ? "en" : "es"}>{t.footer.lang}</a>
+        </div>
+        <div className="container footer__credit">
+          <span>{t.footer.credit}</span>
+          {agency.url ? (
+            <a href={agency.url} target="_blank" rel="noopener" aria-label={agency.name}>
+              <Image src="/brand/efecto-marketing.png" alt={agency.name} width={560} height={457} />
+            </a>
+          ) : (
+            <Image src="/brand/efecto-marketing.png" alt={agency.name} width={560} height={457} />
+          )}
         </div>
       </footer>
 

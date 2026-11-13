@@ -56,3 +56,6 @@ export const centers = [
   { id: "cmes", name: "Centro Médico de Especialidades Samaná", town: "Samaná", main: false },
   { id: "moya", name: "Clínica Rudy Moya", town: "Sánchez", main: false },
 ] as const;
+
+// Agencia que diseñó la web (crédito en el pie). Cuando exista su web, poner la dirección en `url`.
+export const agency: { name: string; url: string | null } = { name: "Efecto Marketing", url: null };

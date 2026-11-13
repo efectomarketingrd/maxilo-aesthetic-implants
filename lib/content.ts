@@ -825,6 +825,7 @@ const es = {
     contact: "Contacto",
     address: "Las Terrenas, Samaná, R.D. 32000",
     rights: "Todos los derechos reservados.",
+    credit: "Diseño y desarrollo web",
     lang: "English",
   },
 };
@@ -1636,6 +1637,7 @@ const en: Dict = {
     contact: "Contact",
     address: "Las Terrenas, Samaná, Dominican Republic 32000",
     rights: "All rights reserved.",
+    credit: "Web design and development",
     lang: "Español",
   },
 };
