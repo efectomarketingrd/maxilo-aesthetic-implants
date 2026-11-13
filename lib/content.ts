@@ -645,6 +645,7 @@ const es = {
     cta: "Ir a la agenda",
   },
   news: {
+    sources: "Fuentes",
     eyebrow: "Blog",
     title: "Blog: noticias y consejos",
     text: "Artículos de la Dra. Celia Hernández y su equipo sobre implantes dentales, cirugía maxilofacial, cuidados después de una cirugía y tratamientos estéticos.",
@@ -1457,6 +1458,7 @@ const en: Dict = {
     cta: "Go to booking",
   },
   news: {
+    sources: "Sources",
     eyebrow: "Blog",
     title: "Blog: news & advice",
     text: "Articles by Dr. Celia Hernández and her team about dental implants, maxillofacial surgery, post-surgery care and aesthetic treatments.",

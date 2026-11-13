@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Arrow, WaIcon } from "@/components/Icons";
+import { BlogCompare, BlogFaq, BlogMap, BlogPoints, BlogRefs, BlogTimeline } from "@/components/BlogBlocks";
 import { dictionaries } from "@/lib/content";
 import { findPost, formatDate, posts, postsFor, type Block } from "@/lib/blog";
 import { locales, site, waLink, type Locale } from "@/lib/site";
@@ -37,8 +38,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-function Render({ b }: { b: Block }) {
+const abs = (src: string) => (src.startsWith("http") ? src : `${site.url}${src}`);
+
+function Render({ b, t }: { b: Block; t: (typeof dictionaries)["es"] }) {
   if ("h" in b) return <h2>{b.h}</h2>;
+  if ("map" in b) return <BlogMap zones={t.plan.b.items.find((i) => i.id === b.map)!.zones} caption={b.caption} />;
+  if ("timeline" in b) return <BlogTimeline steps={b.timeline} />;
+  if ("compare" in b) return <BlogCompare yes={b.compare.yes} no={b.compare.no} />;
+  if ("points" in b) return <BlogPoints points={b.points} />;
+  if ("faq" in b) return <BlogFaq items={b.faq} />;
+  if ("refs" in b) return <BlogRefs title={t.news.sources} refs={b.refs} />;
   if ("ul" in b) return <ul>{b.ul.map((x) => <li key={x}>{x}</li>)}</ul>;
   if ("tip" in b) return <aside className="post__tip">{b.tip}</aside>;
   return <p>{b.p}</p>;
@@ -64,11 +73,17 @@ export default async function PostPage({ params }: { params: Params }) {
         datePublished: p.date,
         inLanguage: lang,
         url,
-        image: `${site.url}${p.cover ?? "/brand/og.png"}`,
+        image: abs(p.cover ?? "/brand/og.png"),
         author: { "@id": `${site.url}/#doctor` },
         publisher: { "@id": `${site.url}/#clinic` },
         mainEntityOfPage: url,
       },
+      ...p.v.body
+        .filter((b): b is Extract<Block, { faq: unknown }> => "faq" in b)
+        .map((b) => ({
+          "@type": "FAQPage",
+          mainEntity: b.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        })),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -112,7 +127,7 @@ export default async function PostPage({ params }: { params: Params }) {
 
           <div className="container post__body">
             {p.v.body.map((b, i) => (
-              <Render b={b} key={i} />
+              <Render b={b} t={t} key={i} />
             ))}
 
             <div className="post__cta">
