@@ -14831,3 +14831,13 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+.pb-sum__total strong.is-tbc {
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.pb-sum__total strong,
+.pb-bar strong {
+  white-space: nowrap;
+}

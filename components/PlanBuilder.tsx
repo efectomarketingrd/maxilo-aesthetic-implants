@@ -230,7 +230,7 @@ export default function PlanBuilder({ t, lang }: { t: Dict; lang: Locale }) {
           )}
           <div className="pb-sum__total">
             <span>{b.total}</span>
-            <strong key={total}>{total || !pending ? rd(total) : b.tbc}</strong>
+            <strong key={total} className={!total && pending ? "is-tbc" : ""}>{total || !pending ? rd(total) : b.tbc}</strong>
             {total > 0 && <small>≈ {usd(total)}</small>}
           </div>
           {pending > 0 && total > 0 && (
