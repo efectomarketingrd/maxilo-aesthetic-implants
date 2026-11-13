@@ -785,6 +785,7 @@ const es = {
       note: "Precios estimados según la tarifa de cada tratamiento. La consulta de valoración (RD$3,000) se paga aparte.",
       own: "¿Prefiere elegir usted? Cree su propio plan",
       tbcPlus: "a confirmar",
+      filterLabel: "Objetivo",
       filters: [{ id: "todos", label: "Todos" }, { id: "rostro", label: "Rostro" }, { id: "mirada", label: "Mirada" }, { id: "labios", label: "Labios" }, { id: "piel", label: "Piel y cabello" }, { id: "cirugia", label: "Con cirugía" }],
       plans: [
         { id: "mirada", tags: ["mirada"], name: "Mirada descansada", goal: "Para una mirada más fresca y menos cansada", desc: "Suaviza las líneas de la frente y del contorno de los ojos y rellena las ojeras hundidas.", items: [{ id: "botox", zones: [0, 1, 2] }, { id: "filler", zones: [0] }] },
@@ -1595,6 +1596,7 @@ const en: Dict = {
       note: "Estimated prices based on each treatment's rate. The assessment consultation (RD$3,000) is paid separately.",
       own: "Prefer to choose yourself? Build your own plan",
       tbcPlus: "to be confirmed",
+      filterLabel: "Goal",
       filters: [{ id: "todos", label: "All" }, { id: "rostro", label: "Face" }, { id: "mirada", label: "Eyes" }, { id: "labios", label: "Lips" }, { id: "piel", label: "Skin and hair" }, { id: "cirugia", label: "With surgery" }],
       plans: [
         { id: "mirada", tags: ["mirada"], name: "Rested eyes", goal: "For a fresher, less tired look", desc: "Softens forehead and eye-area lines and fills hollow under-eyes.", items: [{ id: "botox", zones: [0, 1, 2] }, { id: "filler", zones: [0] }] },

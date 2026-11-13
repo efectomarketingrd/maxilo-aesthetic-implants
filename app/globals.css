@@ -14844,16 +14844,147 @@ body:has(.bk2-page) .wa-float {
 
 /* Planes recomendados: filtros y nota de tiempo */
 .rc-filters {
-  display: flex;
-  gap: 8px;
-  margin: 0 -16px 16px;
-  padding: 2px 16px 4px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  display: none;
 }
 
-.rc-filters::-webkit-scrollbar {
+/* Desplegable de objetivos (móvil) */
+.rc-drop {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 16px;
+}
+
+.rc-drop__btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 8px 20px rgba(37, 48, 53, 0.06);
+  font: inherit;
+  color: var(--slate);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rc-drop.is-open .rc-drop__btn {
+  border-color: var(--gold);
+  box-shadow: 0 10px 26px rgba(37, 48, 53, 0.12);
+}
+
+.rc-drop__lbl {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.rc-drop__btn strong {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.rc-drop__n {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--gold-tint);
+  color: #8a6d3b;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.rc-drop__chev {
+  flex: none;
+  color: var(--muted);
+  transition: transform 0.3s ease;
+}
+
+.rc-drop.is-open .rc-drop__chev {
+  transform: rotate(180deg);
+}
+
+.rc-drop__list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 18px 40px rgba(37, 48, 53, 0.16);
+  transform-origin: top center;
+  animation: rc-drop 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rc-drop__list[hidden] {
   display: none;
+}
+
+.rc-drop__list li {
+  animation: bk2-rise 0.32s ease both;
+  animation-delay: calc(var(--k, 0) * 0.03s);
+}
+
+.rc-drop__list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 12px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--slate);
+  text-align: left;
+  cursor: pointer;
+}
+
+.rc-drop__list button .rc-drop__n {
+  margin-left: auto;
+}
+
+.rc-drop__list button:hover,
+.rc-drop__list button.is-on {
+  background: var(--ivory);
+}
+
+.rc-drop__list button.is-on {
+  font-weight: 600;
+}
+
+.rc-drop__check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  color: var(--gold);
+}
+
+@keyframes rc-drop {
+  from { opacity: 0; transform: translateY(-6px) scaleY(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-drop__list,
+  .rc-drop__list li {
+    animation: none;
+  }
 }
 
 .rc-slot[hidden] {
@@ -14883,9 +15014,14 @@ body:has(.bk2-page) .wa-float {
 }
 
 @media (min-width: 720px) {
+  .rc-drop {
+    display: none;
+  }
+
   .rc-filters {
-    margin: 0 0 18px;
-    padding: 2px 0 4px;
+    display: flex;
     flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 18px;
   }
 }

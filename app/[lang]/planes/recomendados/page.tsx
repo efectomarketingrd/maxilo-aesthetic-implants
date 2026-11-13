@@ -45,7 +45,7 @@ export default async function RecPlans({ params }: { params: Promise<{ lang: str
         </section>
         <section className="pl-build">
           <div className="container pl-wrap pl-wrap--wide">
-            <RecFilter filters={r.filters} tags={r.plans.map((p) => p.tags)}>
+            <RecFilter label={r.filterLabel} filters={r.filters} tags={r.plans.map((p) => p.tags)}>
               {r.plans.map((p, k) => {
                 const items = p.items as PlanItem[];
                 const total = planTotal(items);
