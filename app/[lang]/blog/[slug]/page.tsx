@@ -49,7 +49,15 @@ function Render({ b, t }: { b: Block; t: (typeof dictionaries)["es"] }) {
   if ("faq" in b) return <BlogFaq items={b.faq} />;
   if ("refs" in b) return <BlogRefs title={t.news.sources} refs={b.refs} />;
   if ("ul" in b) return <ul>{b.ul.map((x) => <li key={x}>{x}</li>)}</ul>;
-  if ("tip" in b) return <aside className="post__tip">{b.tip}</aside>;
+  if ("tip" in b)
+    return b.img ? (
+      <aside className="post__tip post__tip--doc">
+        <Image src={b.img} alt={site.doctor} width={240} height={240} />
+        <span>{b.tip}</span>
+      </aside>
+    ) : (
+      <aside className="post__tip">{b.tip}</aside>
+    );
   return <p>{b.p}</p>;
 }
 

@@ -15570,3 +15570,28 @@ body:has(.bk2-page) .wa-float {
     opacity: 1;
   }
 }
+
+/* Recuadro con foto de la doctora (blog) */
+.post__tip--doc {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.post__tip--doc img {
+  flex: none;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 0 5px rgba(190, 157, 97, 0.15);
+}
+
+@media (max-width: 420px) {
+  .post__tip--doc {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
