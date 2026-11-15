@@ -75,7 +75,12 @@ export default async function TreatmentPage({ params }: { params: Params }) {
       },
       {
         "@type": "FAQPage",
-        mainEntity: d.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        // Para Google, la respuesta incluye también los puntos del mini gráfico (en la página se ven como etiquetas)
+        mainEntity: d.faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.viz?.kind === "chips" ? `${f.a} ${f.viz.items.map((v) => v.t).join(" · ")}.` : f.a },
+        })),
       },
       {
         "@type": "BreadcrumbList",

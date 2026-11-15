@@ -71,7 +71,7 @@ export const treatments: Treatment[] = [
         "Pacientes con buena salud general y hueso suficiente, o que puedan prepararse para ello (se evalúa en la valoración).",
       ],
       steps: [
-        { t: "Valoración y estudios", d: "Traiga su radiografía el día de la consulta. La doctora revisa su boca y su historia clínica y, con la radiografía (o una tomografía si hace falta), mide el hueso disponible para planificar cada implante." },
+        { t: "Valoración y estudios", d: "Traiga su radiografía el día de la consulta. La doctora evalúa su caso y su historia clínica y, con la radiografía (o una tomografía si hace falta), mide el hueso disponible para planificar cada implante." },
         { t: "Colocación del implante", d: "En una cirugía con anestesia local se coloca el implante en el hueso. Es un procedimiento preciso y, por lo general, de corta duración." },
         { t: "Integración con el hueso", d: "Durante las semanas siguientes, el hueso se une al implante. Es la etapa que le da estabilidad a largo plazo." },
         { t: "Corona definitiva", d: "Una vez integrado, se coloca la corona o prótesis final, diseñada para verse como sus dientes naturales." },
@@ -103,9 +103,9 @@ export const treatments: Treatment[] = [
         ],
       },
       faqs: [
-        { q: "¿Cuánto cuesta un implante dental?", a: "Depende de cada caso. El costo cambia según cuántos dientes hay que reponer (uno, varios o toda la boca), el tipo de implante (convencional o personalizado), el material de la corona o prótesis y si el tratamiento se hace por etapas o en un solo paso. Por eso no damos un precio sin valorarle antes: en la consulta, la doctora le explica todas las opciones con sus costos y usted elige la que mejor se adapte a su presupuesto.", viz: { kind: "chips", items: [{ t: "Cuántos dientes" }, { t: "Tipo de implante" }, { t: "Material" }, { t: "Tiempo" }] } },
-        { q: "¿Qué se necesita en la primera consulta?", a: "Lo más importante es una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Traiga también otros estudios que tenga y la lista de los medicamentos que toma, y cuéntele a la doctora sobre su salud general, porque revisa su historia clínica.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
-        { q: "¿La colocación duele?", a: "Se realiza con anestesia local, por lo que durante el procedimiento no debe sentir dolor. Después puede haber molestias leves que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
+        { q: "¿Cuánto cuesta un implante dental?", a: "Depende de su caso. En la valoración, la doctora le presenta las opciones con su costo y usted elige la que mejor se adapte a su presupuesto.", viz: { kind: "chips", items: [{ t: "Cuántos dientes" }, { t: "Tipo de implante" }, { t: "Material" }, { t: "Tiempo" }] } },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta, para que la doctora evalúe su caso con detalle. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
+        { q: "¿La colocación duele?", a: "No durante el procedimiento, porque se realiza con anestesia local. Después puede haber molestias leves, que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
         { q: "¿Cuánto dura un implante?", a: "Con buena higiene, controles periódicos y hábitos saludables, un implante puede durar muchos años.", viz: { kind: "chips", items: [{ t: "Buena higiene" }, { t: "Controles periódicos" }, { t: "Hábitos saludables" }] } },
         { q: "¿Qué pasa si no tengo suficiente hueso?", a: "La doctora lo evalúa en la valoración y le explicará las opciones disponibles para su caso.", viz: { kind: "flow", items: [{ t: "Valoración", s: "Se mide el hueso disponible" }, { t: "Opciones", s: "Para su caso" }] } },
         { q: "¿Puedo hacerme el tratamiento si vengo del extranjero?", a: "Sí. Coordinamos las citas para aprovechar su estadía. También ofrecemos un paquete de implantes con hospedaje.", viz: { kind: "chips", items: [{ t: "Citas según su estadía" }, { t: "Paquete con hospedaje" }] } },
@@ -136,7 +136,7 @@ export const treatments: Treatment[] = [
         "Patients in good general health with enough bone, or who can be prepared for it (assessed at the consultation).",
       ],
       steps: [
-        { t: "Assessment and imaging", d: "Bring your X-ray on the day of your consultation. The doctor examines your mouth and medical history and, with the X-ray (or a CT scan if needed), measures the available bone to plan each implant." },
+        { t: "Assessment and imaging", d: "Bring your X-ray on the day of your consultation. The doctor assesses your case and medical history and, with the X-ray (or a CT scan if needed), measures the available bone to plan each implant." },
         { t: "Implant placement", d: "The implant is placed in the bone under local anesthesia. It is a precise and usually short procedure." },
         { t: "Bonding with the bone", d: "Over the following weeks, the bone fuses with the implant. This stage gives it long-term stability." },
         { t: "Final crown", d: "Once integrated, the final crown or prosthesis is placed, designed to look like your natural teeth." },
@@ -168,9 +168,9 @@ export const treatments: Treatment[] = [
         ],
       },
       faqs: [
-        { q: "How much does a dental implant cost?", a: "It depends on each case. The cost changes with how many teeth need replacing (one, several or the whole mouth), the type of implant (conventional or custom), the crown or prosthesis material, and whether treatment is done in stages or in a single step. That is why we do not quote a price before assessing you: at the consultation, the doctor explains every option and its cost, and you choose the one that best fits your budget.", viz: { kind: "chips", items: [{ t: "How many teeth" }, { t: "Type of implant" }, { t: "Material" }, { t: "Timing" }] } },
-        { q: "What do I need for the first consultation?", a: "The most important thing is an X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. Also bring any other studies you have and a list of the medications you take, and tell the doctor about your general health, since she reviews your medical history.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
-        { q: "Does placement hurt?", a: "It is done under local anesthesia, so you should not feel pain during the procedure. Mild discomfort afterwards is controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
+        { q: "How much does a dental implant cost?", a: "It depends on your case. At the consultation, the doctor presents the options and their cost, and you choose the one that best fits your budget.", viz: { kind: "chips", items: [{ t: "How many teeth" }, { t: "Type of implant" }, { t: "Material" }, { t: "Timing" }] } },
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
+        { q: "Does placement hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort, controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
         { q: "How long does an implant last?", a: "With good hygiene, regular check-ups and healthy habits, an implant can last many years.", viz: { kind: "chips", items: [{ t: "Good hygiene" }, { t: "Regular check-ups" }, { t: "Healthy habits" }] } },
         { q: "What if I don't have enough bone?", a: "The doctor assesses this at the consultation and will explain the options available for your case.", viz: { kind: "flow", items: [{ t: "Assessment", s: "Available bone is measured" }, { t: "Options", s: "For your case" }] } },
         { q: "Can I have treatment if I'm visiting from abroad?", a: "Yes. We schedule appointments to make the most of your stay, and we also offer an implants package with accommodation.", viz: { kind: "chips", items: [{ t: "Appointments around your stay" }, { t: "Package with accommodation" }] } },
@@ -222,7 +222,7 @@ export const treatments: Treatment[] = [
         note: "Si ya le indicaron la extracción, puede agendar directamente como procedimiento: no paga consulta.",
       },
       faqs: [
-        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta, para que la doctora evalúe su caso con detalle. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿Se pueden sacar las 4 cordales a la vez?", a: "En muchos casos sí. La doctora lo decide en la valoración según la posición de cada una y su salud general." },
         { q: "¿Cuánto tiempo de reposo necesito?", a: "Por lo general, 2 o 3 días de cuidados en casa. Depende de cuántas cordales se extraigan y de su posición." },
         { q: "¿Es obligatorio sacarlas si no duelen?", a: "No siempre. Si están bien posicionadas y no causan problemas, pueden quedarse. La valoración lo determina." },
@@ -268,7 +268,7 @@ export const treatments: Treatment[] = [
         note: "If the extraction has already been recommended, you can book it directly as a procedure: no consultation fee.",
       },
       faqs: [
-        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Can all 4 wisdom teeth be removed at once?", a: "In many cases, yes. The doctor decides at the assessment based on each tooth's position and your general health." },
         { q: "How much rest will I need?", a: "Usually 2 or 3 days of home care, depending on how many teeth are removed and their position." },
         { q: "Do they have to come out if they don't hurt?", a: "Not always. If they are well positioned and cause no problems, they can stay. The assessment determines this." },
@@ -313,7 +313,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "La recuperación depende del procedimiento. La doctora le indicará los cuidados, la medicación y el tiempo estimado de reposo para su caso.",
       faqs: [
-        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta, para que la doctora evalúe su caso con detalle. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿Necesito una referencia de mi odontólogo?", a: "No es obligatorio. Puede agendar una consulta directamente y la doctora evaluará su caso." },
         { q: "¿Cuánto cuesta?", a: "Depende del procedimiento. Después de la valoración, el centro le confirmará el costo de su tratamiento." },
       ],
@@ -351,7 +351,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "Recovery depends on the procedure. The doctor will tell you the care, medication and estimated rest time for your case.",
       faqs: [
-        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Do I need a referral from my dentist?", a: "It is not required. You can book a consultation directly and the doctor will assess your case." },
         { q: "How much does it cost?", a: "It depends on the procedure. After the assessment, the clinic will confirm the cost of your treatment." },
       ],
@@ -1837,7 +1837,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "Es una cirugía mayor que requiere una recuperación planificada. Las primeras semanas se indica dieta líquida o blanda y reposo relativo, y la inflamación disminuye de forma progresiva. La doctora le acompañará en cada etapa con controles frecuentes.",
       faqs: [
-        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta, para que la doctora evalúe su caso con detalle. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿Necesito ortodoncia?", a: "En la mayoría de los casos sí. La ortodoncia prepara los dientes antes de la cirugía y ajusta la mordida al final." },
         { q: "¿Las cicatrices se ven?", a: "Por lo general las incisiones se hacen por dentro de la boca, por lo que no quedan cicatrices visibles en la cara." },
         { q: "¿El cambio es solo estético?", a: "No. El objetivo principal es mejorar la función (masticar, respirar, hablar), y como resultado el rostro también gana armonía." },
@@ -1876,7 +1876,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "This is major surgery that requires a planned recovery. For the first weeks a liquid or soft diet and relative rest are prescribed, and swelling decreases gradually. The doctor will accompany you at every stage with frequent follow-ups.",
       faqs: [
-        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Do I need orthodontics?", a: "In most cases, yes. Orthodontics prepares the teeth before surgery and adjusts the bite at the end." },
         { q: "Are the scars visible?", a: "The incisions are usually made inside the mouth, so there are no visible scars on the face." },
         { q: "Is the change only cosmetic?", a: "No. The main goal is to improve function (chewing, breathing, speaking), and as a result the face also gains harmony." },
@@ -1920,7 +1920,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "Depende del tipo de reconstrucción. Es habitual indicar dieta blanda, buena higiene y medicamentos durante los primeros días. Los injertos de hueso necesitan varios meses para integrarse antes del siguiente paso del tratamiento.",
       faqs: [
-        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta, para que la doctora evalúe su caso con detalle. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿De dónde se obtiene el hueso para el injerto?", a: "Puede ser del propio paciente o de materiales de injerto seguros y aprobados. La doctora le explicará la mejor opción para su caso." },
         { q: "¿Podré ponerme implantes después?", a: "En muchos casos, sí. Uno de los objetivos de la reconstrucción es justamente crear el hueso necesario para colocarlos." },
         { q: "¿Cuánto tiempo dura todo el proceso?", a: "Depende del defecto y del plan. Si se coloca un injerto, se espera a que se integre antes del siguiente paso, lo que suele tomar varios meses." },
@@ -1958,7 +1958,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "It depends on the type of reconstruction. A soft diet, good hygiene and medication are usually prescribed for the first days. Bone grafts need several months to integrate before the next step of treatment.",
       faqs: [
-        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Where does the graft bone come from?", a: "It can come from the patient or from safe, approved graft materials. The doctor will explain the best option for your case." },
         { q: "Will I be able to get implants afterwards?", a: "In many cases, yes. One goal of reconstruction is precisely to build the bone needed to place them." },
         { q: "How long does the whole process take?", a: "It depends on the defect and the plan. If a graft is placed, it must integrate before the next step, which usually takes several months." },
