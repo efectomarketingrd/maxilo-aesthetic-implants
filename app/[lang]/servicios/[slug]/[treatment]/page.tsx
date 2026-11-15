@@ -178,10 +178,23 @@ export default async function TreatmentPage({ params }: { params: Params }) {
             </InView>
         </Fold>
 
-        {d.care && <RecoveryCard title={k.recovery} c={d.care} k={k} />}
+        {d.care && (
+          <RecoveryCard
+            title={k.recovery}
+            c={d.care}
+            k={k}
+            after={
+              tr.pkgLink ? (
+                <Link className="tr-pkg" href={`/${lang}/paquete-implantes`}>
+                  <span>✦</span> {k.pkg} <Arrow size={14} />
+                </Link>
+              ) : undefined
+            }
+          />
+        )}
 
         {/* Recuperación + precio */}
-        {(!d.care || d.price || tr.pkgLink) && (
+        {(!d.care || d.price) && (
         <section className="sv-sec sv-sec--white">
           {(!d.care || d.price) && (
           <div className="container sv-wrap tr-grid">
@@ -215,7 +228,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
             )}
           </div>
           )}
-          {tr.pkgLink && (
+          {tr.pkgLink && !d.care && (
             <div className="container sv-wrap">
               <Link className="tr-pkg" href={`/${lang}/paquete-implantes`}>
                 <span>✦</span> {k.pkg} <Arrow size={14} />

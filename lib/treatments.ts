@@ -19,11 +19,12 @@ export type TreatmentDetail = {
   recovery: string;
   price?: { lines: { label: string; value: string }[]; note?: string };
   cost?: { title: string; intro: string; items: { ic: CostIcon; t: string; d: string }[]; closeT: string; close: string }; // "¿De qué depende el costo?"
-  care?: { normal: string; items: { ic: CareIcon; t: string; s: string }[] }; // tarjeta "Su recuperación" (components/RecoveryCard)
+  care?: { expect: { ic: ExpectIcon; t: string; s: string }[]; items: { ic: CareIcon; t: string; s: string }[] }; // tarjeta "Su recuperación" (components/RecoveryCard)
   faqs: { q: string; a: string; viz?: FaqViz }[];
 };
 
 export type CareIcon = "pill" | "bowl" | "brush" | "calendar";
+export type ExpectIcon = "shield" | "leaf" | "crown";
 // gráfico bajo la respuesta: flow = pasos unidos por flecha · chips = puntos clave
 export type FaqViz = { kind: "flow" | "chips"; items: { t: string; s?: string }[] };
 
@@ -89,7 +90,11 @@ export const treatments: Treatment[] = [
         close: "En la valoración, la doctora le explica todas las opciones con su costo y usted decide la que mejor se adapta a su presupuesto.",
       },
       care: {
-        normal: "Molestias leves e inflamación los primeros días. Van disminuyendo y se controlan con los medicamentos que indique la doctora.",
+        expect: [
+          { ic: "shield", t: "Durante el procedimiento", s: "Con anestesia local, no debe sentir dolor." },
+          { ic: "leaf", t: "Primeros días", s: "Molestias leves y algo de inflamación, que se controlan con los medicamentos indicados." },
+          { ic: "crown", t: "Con el tiempo", s: "El hueso se une al implante y se coloca su corona definitiva." },
+        ],
         items: [
           { ic: "pill", t: "Medicamentos", s: "Los que indique la doctora" },
           { ic: "bowl", t: "Dieta blanda", s: "Alimentos suaves" },
@@ -99,6 +104,7 @@ export const treatments: Treatment[] = [
       },
       faqs: [
         { q: "¿Cuánto cuesta un implante dental?", a: "Depende de cada caso. El costo cambia según cuántos dientes hay que reponer (uno, varios o toda la boca), el tipo de implante (convencional o personalizado), el material de la corona o prótesis y si el tratamiento se hace por etapas o en un solo paso. Por eso no damos un precio sin valorarle antes: en la consulta, la doctora le explica todas las opciones con sus costos y usted elige la que mejor se adapte a su presupuesto.", viz: { kind: "chips", items: [{ t: "Cuántos dientes" }, { t: "Tipo de implante" }, { t: "Material" }, { t: "Tiempo" }] } },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Solo su cita agendada. Si tiene radiografías, tomografías o estudios previos, tráigalos o envíelos por WhatsApp: ayudan a valorar mejor su caso. Traiga también la lista de los medicamentos que toma y cuéntele a la doctora sobre su salud general, porque revisa su historia clínica. Si hace falta una radiografía o tomografía, ella se la indicará.", viz: { kind: "chips", items: [{ t: "Estudios previos, si tiene" }, { t: "Lista de medicamentos" }, { t: "Su historia de salud" }] } },
         { q: "¿La colocación duele?", a: "Se realiza con anestesia local, por lo que durante el procedimiento no debe sentir dolor. Después puede haber molestias leves que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
         { q: "¿Cuánto dura un implante?", a: "Con buena higiene, controles periódicos y hábitos saludables, un implante puede durar muchos años.", viz: { kind: "chips", items: [{ t: "Buena higiene" }, { t: "Controles periódicos" }, { t: "Hábitos saludables" }] } },
         { q: "¿Qué pasa si no tengo suficiente hueso?", a: "La doctora lo evalúa en la valoración y le explicará las opciones disponibles para su caso.", viz: { kind: "flow", items: [{ t: "Valoración", s: "Se mide el hueso disponible" }, { t: "Opciones", s: "Para su caso" }] } },
@@ -149,7 +155,11 @@ export const treatments: Treatment[] = [
         close: "At the consultation, the doctor explains every option and its cost, and you decide which one best fits your budget.",
       },
       care: {
-        normal: "Mild discomfort and swelling during the first days. They ease off and are controlled with the medication the doctor prescribes.",
+        expect: [
+          { ic: "shield", t: "During the procedure", s: "With local anesthesia, you should not feel pain." },
+          { ic: "leaf", t: "First days", s: "Mild discomfort and some swelling, controlled with the prescribed medication." },
+          { ic: "crown", t: "Over time", s: "The bone bonds with the implant and your final crown is placed." },
+        ],
         items: [
           { ic: "pill", t: "Medication", s: "As prescribed by the doctor" },
           { ic: "bowl", t: "Soft diet", s: "Gentle foods" },
@@ -159,6 +169,7 @@ export const treatments: Treatment[] = [
       },
       faqs: [
         { q: "How much does a dental implant cost?", a: "It depends on each case. The cost changes with how many teeth need replacing (one, several or the whole mouth), the type of implant (conventional or custom), the crown or prosthesis material, and whether treatment is done in stages or in a single step. That is why we do not quote a price before assessing you: at the consultation, the doctor explains every option and its cost, and you choose the one that best fits your budget.", viz: { kind: "chips", items: [{ t: "How many teeth" }, { t: "Type of implant" }, { t: "Material" }, { t: "Timing" }] } },
+        { q: "What do I need for the first consultation?", a: "Just your booked appointment. If you have X-rays, CT scans or previous studies, bring them or send them by WhatsApp: they help assess your case better. Also bring a list of the medications you take and tell the doctor about your general health, since she reviews your medical history. If an X-ray or CT scan is needed, she will request it.", viz: { kind: "chips", items: [{ t: "Previous studies, if any" }, { t: "List of medications" }, { t: "Your health history" }] } },
         { q: "Does placement hurt?", a: "It is done under local anesthesia, so you should not feel pain during the procedure. Mild discomfort afterwards is controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
         { q: "How long does an implant last?", a: "With good hygiene, regular check-ups and healthy habits, an implant can last many years.", viz: { kind: "chips", items: [{ t: "Good hygiene" }, { t: "Regular check-ups" }, { t: "Healthy habits" }] } },
         { q: "What if I don't have enough bone?", a: "The doctor assesses this at the consultation and will explain the options available for your case.", viz: { kind: "flow", items: [{ t: "Assessment", s: "Available bone is measured" }, { t: "Options", s: "For your case" }] } },
