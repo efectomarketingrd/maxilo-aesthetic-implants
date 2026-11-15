@@ -17136,3 +17136,10 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+.bk2-remind__where {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: rgba(216, 195, 155, 0.9);
+}

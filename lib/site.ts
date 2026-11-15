@@ -50,9 +50,12 @@ export const spaWa = (msg: string) => `https://wa.me/${spa.wa}?text=${encodeURIC
 
 // Centros donde atiende la doctora. El principal tiene agenda propia; en los demás atiende por cita (el paciente elige el día y se confirma la hora).
 // Centros recomendados para hacerse la radiografía panorámica (implantes, cordales, lesiones de la boca).
-// PENDIENTE: la doctora debe enviar nombres, zona, teléfono, WhatsApp y correo. Mientras esté vacío, la agenda
-// solo muestra el aviso y el botón para enviar la radiografía por WhatsApp.
-export const xrayCenters: { name: string; area: string; phone?: string; wa?: string; email?: string; maps?: string }[] = [];
+// Datos de la doctora (15 nov 2026). "maps" es una búsqueda en Google Maps por nombre y pueblo.
+export const xrayCenters: { name: string; area: string; phone?: string; wa?: string; email?: string; maps?: string }[] = [
+  { name: "Odontohealth", area: "Las Terrenas", phone: "(809) 240-9530", maps: "https://www.google.com/maps/search/?api=1&query=Odonto+Health+Las+Terrenas" },
+  { name: "Odontium", area: "Samaná", phone: "(809) 538-0011", maps: "https://www.google.com/maps/search/?api=1&query=Odontium+Samaná" },
+  { name: "Aponte Radio 3D Imágenes Diagnósticas", area: "Nagua", phone: "(809) 723-6855", maps: "https://www.google.com/maps/search/?api=1&query=Aponte+Radio+3D+Imágenes+Diagnósticas+Nagua" },
+];
 
 export const centers = [
   { id: "maxilo", name: "Maxilo Aesthetic Implants", town: "Las Terrenas", main: true },

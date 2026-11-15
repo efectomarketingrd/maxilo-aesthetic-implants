@@ -423,7 +423,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     const f = (d: Date) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
     return { allDay: false, a: f(start), z: f(end), start, end };
   }
-  const calDetails = () => `${svcFull}${pano ? `\n${b.pano.cal}` : ""}\n${b.calNote}\n${site.phones[0]} · ${site.email}`;
+  const calDetails = () =>
+    `${svcFull}${pano ? `\n${b.pano.cal}\n${b.pano.where}: ${xrayCenters.map((x) => `${x.name} (${x.area}) ${x.phone ?? ""}`.trim()).join(" · ")}` : ""}\n${b.calNote}\n${site.phones[0]} · ${site.email}`;
   function googleCal() {
     const r = calRange();
     if (!r) return "#";
@@ -835,7 +836,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                             <strong>{x.name}</strong>
                             <small>{x.area}</small>
                             <span className="bk2-pano__links">
-                              {x.phone && <a href={`tel:${x.phone.replace(/[^\d+]/g, "")}`}>{x.phone}</a>}
+                              {x.phone && <a href={`tel:+1${x.phone.replace(/\D/g, "")}`}>{x.phone}</a>}
                               {x.wa && (
                                 <a href={`https://wa.me/${x.wa}`} target="_blank" rel="noopener">
                                   WhatsApp
@@ -844,7 +845,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                               {x.email && <a href={`mailto:${x.email}`}>{x.email}</a>}
                               {x.maps && (
                                 <a href={x.maps} target="_blank" rel="noopener">
-                                  Maps
+                                  {b.pano.map}
                                 </a>
                               )}
                             </span>
@@ -1064,6 +1065,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <span>
                     <strong>{b.pano.reminderT}</strong>
                     {b.pano.reminder}
+                    {xrayCenters.length > 0 && (
+                      <small className="bk2-remind__where">
+                        {b.pano.where}: {xrayCenters.map((x) => `${x.name} (${x.area})`).join(" · ")}
+                      </small>
+                    )}
                   </span>
                 </div>
               )}
