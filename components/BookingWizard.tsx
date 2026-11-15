@@ -231,6 +231,12 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const bioOpt = med[7] ?? "";
   const lobuleOpt = est[6] ?? "";
   const wartOpt = est[7] ?? "";
+  // El costo de la consulta se descuenta solo en tratamientos que pueden hacerse el mismo día:
+  // medicina estética y los procedimientos menores de estética facial (lobuloplastia, verrugas).
+  // No aplica a implantes, cirugía oral, cirugías estéticas, reconstructiva ni paquete (requieren estudios y planificación).
+  const sameDay =
+    (service === "medicina-estetica" && subs.some((x) => med.includes(x))) ||
+    (service === "estetica-facial" && subs.some((x) => x === lobuleOpt || x === wartOpt));
   const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "");
   // implantes, cordales y lesiones de la boca: radiografía panorámica (indicación de la doctora)
   const pano = ["implantes", "cirugia-oral", "paquete"].includes(service ?? "");
@@ -1099,7 +1105,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     </li>
                   )}
                 </ul>
-                {!isProc && effMode === "presencial" && <p className="bk2-cost__credit">{b.cost.consultCredit}</p>}
+                {!isProc && effMode === "presencial" && sameDay && <p className="bk2-cost__credit">{b.cost.consultCredit}</p>}
                 <div className="bk2-cost__total">
                   <span>{b.cost.total}</span>
                   {isProc && !priced.length ? (
