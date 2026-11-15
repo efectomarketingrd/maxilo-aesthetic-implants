@@ -5,7 +5,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
-import { centers, site, waLink, type Locale } from "@/lib/site";
+import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
 
 function startOfDay(d: Date) {
@@ -232,6 +232,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const lobuleOpt = est[6] ?? "";
   const wartOpt = est[7] ?? "";
   const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "");
+  // implantes, cordales y lesiones de la boca: radiografía panorámica (indicación de la doctora)
+  const pano = ["implantes", "cirugia-oral", "paquete"].includes(service ?? "");
   const inMed = service === "medicina-estetica";
   const inEst = service === "estetica-facial";
   const needAreas = inMed && subs.includes(fillerOpt);
@@ -810,7 +812,52 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 </div>
               </div>
 
-              {/* Implantes, cirugía oral y reconstructiva: la doctora pide traer la radiografía a la consulta */}
+              {/* Implantes, cordales y lesiones de la boca: radiografía panorámica, dónde hacérsela y envío por WhatsApp */}
+              {pano ? (
+                <div className="bk2-pano" key="pano">
+                  <div className="bk2-pano__head">
+                    <span className="bk2-pano__ico" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 6h18v12H3z" />
+                        <path d="M6 12c1.5-2.5 3-3 4-1.5s1.5 1.5 2 0 2.5-1 3 .5 1.5 2 3 0" />
+                        <path d="M7.5 15h1.5M11 15h2M15 15h1.5" />
+                      </svg>
+                    </span>
+                    <strong>{b.pano.title}</strong>
+                  </div>
+                  <p>{b.pano.text}</p>
+                  {xrayCenters.length > 0 && (
+                    <div className="bk2-pano__where">
+                      <p className="bk2-pano__label">{b.pano.where}</p>
+                      <ul>
+                        {xrayCenters.map((x) => (
+                          <li key={x.name}>
+                            <strong>{x.name}</strong>
+                            <small>{x.area}</small>
+                            <span className="bk2-pano__links">
+                              {x.phone && <a href={`tel:${x.phone.replace(/[^\d+]/g, "")}`}>{x.phone}</a>}
+                              {x.wa && (
+                                <a href={`https://wa.me/${x.wa}`} target="_blank" rel="noopener">
+                                  WhatsApp
+                                </a>
+                              )}
+                              {x.email && <a href={`mailto:${x.email}`}>{x.email}</a>}
+                              {x.maps && (
+                                <a href={x.maps} target="_blank" rel="noopener">
+                                  Maps
+                                </a>
+                              )}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  <a className="btn btn--wa btn--sm bk2-pano__send" href={waLink(b.pano.waMsg)} target="_blank" rel="noopener">
+                    <WaIcon /> {b.pano.send}
+                  </a>
+                </div>
+              ) : (
               <div className={`bk2-note${xray ? " bk2-note--xray" : ""}`} key={xray ? "x" : "n"}>
                 <svg className="bk2-note__ico" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M7 3h7l5 5v13H7z" />
@@ -818,6 +865,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 </svg>
                 <span>{xray ? b.noteXray : b.note}</span>
               </div>
+              )}
             </>
           )}
 
