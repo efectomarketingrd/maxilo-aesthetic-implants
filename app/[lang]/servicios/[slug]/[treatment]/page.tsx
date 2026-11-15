@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import CostFactors from "@/components/CostFactors";
+import Fold from "@/components/Fold";
+import RecoveryCard from "@/components/RecoveryCard";
+import TreatmentFaq from "@/components/TreatmentFaq";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,7 +14,7 @@ import ServiceIcon from "@/components/ServiceIcon";
 import TreatmentVisual, { hasVisual } from "@/components/TreatmentVisual";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { locales, site, type Locale } from "@/lib/site";
+import { locales, site, waLink, type Locale } from "@/lib/site";
 import { serviceImg, treatmentImg } from "@/lib/images";
 import { bookingHref, findTreatment, treatments, treatmentsFor } from "@/lib/treatments";
 
@@ -133,20 +136,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
         </section>
 
         {/* ¿Para quién es? */}
-        <section className="sv-sec sv-sec--white">
-          <div className="container sv-wrap">
-            <h2 className="loc-h2">{k.forWho}</h2>
-            <InView className="tr-for">
-              {d.forWho.map((f, i) => (
-                <li key={f} style={{ "--i": i } as React.CSSProperties}>
-                  <span className="tr-for__ico">
-                    <Check size={14} />
-                  </span>
-                  {f}
-                </li>
-              ))}
-            </InView>
-            {d.alert && (
+        <Fold title={k.forWho} hint={`${d.forWho.length} ${k.foldPoints}`} white after={d.alert ? (
               <p className="tr-alert" role="note">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 3 2.5 20h19zM12 10v4.5M12 17.2v.3" />
@@ -160,14 +150,21 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                   )}
                 </span>
               </p>
-            )}
-          </div>
-        </section>
+        ) : undefined}>
+            <InView className="tr-for">
+              {d.forWho.map((f, i) => (
+                <li key={f} style={{ "--i": i } as React.CSSProperties}>
+                  <span className="tr-for__ico">
+                    <Check size={14} />
+                  </span>
+                  {f}
+                </li>
+              ))}
+            </InView>
+        </Fold>
 
         {/* Pasos */}
-        <section className="sv-sec">
-          <div className="container sv-wrap">
-            <h2 className="loc-h2">{k.steps}</h2>
+        <Fold title={k.steps} hint={`${d.steps.length} ${k.foldSteps}`}>
             <InView className="tr-steps">
               {d.steps.map((st, i) => (
                 <li key={st.t} style={{ "--i": i } as React.CSSProperties}>
@@ -179,16 +176,21 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                 </li>
               ))}
             </InView>
-          </div>
-        </section>
+        </Fold>
+
+        {d.care && <RecoveryCard title={k.recovery} c={d.care} k={k} wa={waLink(d.care.wa)} />}
 
         {/* Recuperación + precio */}
+        {(!d.care || d.price || tr.pkgLink) && (
         <section className="sv-sec sv-sec--white">
+          {(!d.care || d.price) && (
           <div className="container sv-wrap tr-grid">
-            <div className="tr-card">
-              <p className="tr-card__t">{k.recovery}</p>
-              <p className="tr-p">{d.recovery}</p>
-            </div>
+            {!d.care && (
+              <div className="tr-card">
+                <p className="tr-card__t">{k.recovery}</p>
+                <p className="tr-p">{d.recovery}</p>
+              </div>
+            )}
             {d.price && (
               <div className="tr-card tr-card--dark">
                 <p className="tr-card__t">{k.price}</p>
@@ -212,6 +214,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
               </div>
             )}
           </div>
+          )}
           {tr.pkgLink && (
             <div className="container sv-wrap">
               <Link className="tr-pkg" href={`/${lang}/paquete-implantes`}>
@@ -220,26 +223,19 @@ export default async function TreatmentPage({ params }: { params: Params }) {
             </div>
           )}
         </section>
+        )}
 
-        {d.cost && <CostFactors c={d.cost} book={book} bookLabel={k.book} />}
+        {d.cost && (
+          <Fold title={d.cost.title} hint={`${d.cost.items.length} ${k.foldFactors}`} className="cf-sec">
+            <CostFactors c={d.cost} book={book} bookLabel={k.book} />
+          </Fold>
+        )}
 
         {/* Preguntas */}
         <section className="sv-sec">
           <div className="container sv-wrap">
             <h2 className="loc-h2">{k.faqs}</h2>
-            <InView className="h5-faq__list faq-anim">
-              {d.faqs.map((f, i) => (
-                <details key={f.q} style={{ "--fi": i } as React.CSSProperties}>
-                  <summary>
-                    <span className="faq-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="faq-q">{f.q}</span>
-                  </summary>
-                  <div className="faq-a">
-                    <p>{f.a}</p>
-                  </div>
-                </details>
-              ))}
-            </InView>
+            <TreatmentFaq items={d.faqs} />
             <p className="tr-review">{k.reviewNote}</p>
           </div>
         </section>

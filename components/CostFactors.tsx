@@ -62,22 +62,26 @@ function Scene({ ic }: { ic: CostIcon }) {
   );
 }
 
+// Contenido sin la sección: la página lo envuelve en <Fold>.
 export default function CostFactors({ c, book, bookLabel }: { c: { title: string; intro: string; items: { ic: CostIcon; t: string; d: string }[]; closeT: string; close: string }; book: string; bookLabel: string }) {
   return (
-    <section className="sv-sec cf-sec">
-      <div className="container sv-wrap">
-        <h2 className="loc-h2">{c.title}</h2>
-        <p className="tr-p cf-intro">{c.intro}</p>
-        <InView className="cf">
+    <>
+      <p className="tr-p cf-intro">{c.intro}</p>
+      <InView className="cf">
+        <div className="cf-panel">
           <ul className="cf-grid">
             {c.items.map((it, k) => (
-              <li key={it.t} className={`cf-card cf-card--${it.ic}`} style={{ "--k": k } as React.CSSProperties}>
+              <li key={it.t} className={`cf-row cf-row--${it.ic}`} style={{ "--k": k } as React.CSSProperties}>
                 <span className="cf-ico" aria-hidden="true">
                   <Scene ic={it.ic} />
                 </span>
-                <b className="cf-n" aria-hidden="true">{String(k + 1).padStart(2, "0")}</b>
-                <h3>{it.t}</h3>
-                <p>{it.d}</p>
+                <span className="cf-txt">
+                  <h3>
+                    <b aria-hidden="true">{String(k + 1).padStart(2, "0")}</b>
+                    {it.t}
+                  </h3>
+                  <p>{it.d}</p>
+                </span>
               </li>
             ))}
           </ul>
@@ -95,8 +99,8 @@ export default function CostFactors({ c, book, bookLabel }: { c: { title: string
               {bookLabel}
             </Link>
           </div>
-        </InView>
-      </div>
-    </section>
+        </div>
+      </InView>
+    </>
   );
 }
