@@ -16191,13 +16191,30 @@ body:has(.bk2-page) .wa-float {
 }
 
 /* ¿De qué depende el costo? (tratamientos) */
+.cf-sec {
+  position: relative;
+  overflow: hidden;
+}
+
+.cf-sec::before {
+  content: "";
+  position: absolute;
+  right: -160px;
+  top: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(190, 157, 97, 0.14), rgba(190, 157, 97, 0) 70%);
+  pointer-events: none;
+}
+
 .cf-intro {
   margin: -6px 0 22px;
 }
 
 .cf-grid {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -16206,70 +16223,110 @@ body:has(.bk2-page) .wa-float {
 .cf-card {
   position: relative;
   display: grid;
-  grid-template-columns: 46px 1fr;
-  column-gap: 14px;
+  grid-template-columns: 64px 1fr;
+  column-gap: 16px;
   align-items: center;
   padding: 18px 18px 20px;
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: linear-gradient(160deg, #fff 55%, #fbf7ef);
   border: 1px solid rgba(190, 157, 97, 0.22);
-  box-shadow: 0 10px 30px -22px rgba(28, 37, 41, 0.35);
+  box-shadow: 0 14px 34px -26px rgba(28, 37, 41, 0.45);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* línea dorada que crece arriba de cada tarjeta */
+.cf-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-soft) 60%, rgba(216, 195, 155, 0));
+  transform-origin: left;
+}
+
+.cf-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(190, 157, 97, 0.45);
+  box-shadow: 0 20px 40px -26px rgba(28, 37, 41, 0.5);
 }
 
 .cf-ico {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-  background: rgba(190, 157, 97, 0.12);
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 30% 25%, #fff, rgba(190, 157, 97, 0.16));
+  border: 1px solid rgba(190, 157, 97, 0.25);
   color: var(--gold);
 }
 
 .cf-n {
   position: absolute;
-  right: 18px;
-  top: 16px;
+  right: 16px;
+  bottom: -14px;
   font-family: var(--f-accent);
   font-style: italic;
   font-weight: 500;
-  font-size: 1.15rem;
-  color: rgba(190, 157, 97, 0.7);
+  font-size: 4.2rem;
+  line-height: 1;
+  color: rgba(190, 157, 97, 0.1);
+  pointer-events: none;
 }
 
 .cf-card h3 {
-  margin: 0 30px 0 0;
+  margin: 0;
   font-family: var(--f-title);
-  font-size: 1rem;
+  font-size: 1.02rem;
   line-height: 1.3;
   color: var(--slate);
 }
 
 .cf-card p {
+  position: relative;
   grid-column: 1 / -1;
-  margin: 12px 0 0;
+  margin: 14px 0 0;
   font-size: 0.88rem;
   line-height: 1.55;
   color: var(--muted);
 }
 
 .cf-close {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 14px 14px;
+  gap: 14px;
   align-items: start;
-  margin-top: 14px;
+  margin-top: 16px;
   padding: 22px 20px;
   border-radius: var(--radius-lg);
   background: linear-gradient(150deg, var(--slate-2), var(--slate-3));
   color: var(--ivory);
+  overflow: hidden;
+}
+
+.cf-close::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  bottom: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(216, 195, 155, 0.18);
+  box-shadow: 0 0 0 26px rgba(216, 195, 155, 0.04);
+  pointer-events: none;
 }
 
 .cf-close__ico {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   background: var(--gold);
   color: var(--slate);
@@ -16278,7 +16335,7 @@ body:has(.bk2-page) .wa-float {
 .cf-close strong {
   display: block;
   font-family: var(--f-title);
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   color: var(--gold-soft);
 }
 
@@ -16290,6 +16347,8 @@ body:has(.bk2-page) .wa-float {
 }
 
 .cf-close .btn {
+  position: relative;
+  z-index: 1;
   grid-column: 1 / -1;
   justify-self: start;
   white-space: nowrap;
@@ -16303,7 +16362,7 @@ body:has(.bk2-page) .wa-float {
   .cf-close {
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding: 22px 26px;
+    padding: 24px 28px;
   }
 
   .cf-close .btn {
@@ -16311,12 +16370,40 @@ body:has(.bk2-page) .wa-float {
   }
 }
 
-/* animación */
+/* mini escenas: estado de reposo (también sin animación) */
+.cf-tooth {
+  fill: rgba(190, 157, 97, 0.18);
+}
+
+.cf-tooth[style*="--t: 0"],
+.cf-tooth[style*="--t:0"] {
+  fill: var(--gold);
+}
+
+.cf-halo {
+  opacity: 0.12;
+}
+
+.cf-shine {
+  opacity: 0;
+}
+
+.cf-dot {
+  transform: translate(37px, 12px);
+}
+
+/* entrada */
 .cf.js-anim .cf-card {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(18px);
   transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
   transition-delay: calc(var(--k) * 0.14s);
+}
+
+.cf.js-anim .cf-card::before {
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--k) * 0.14s + 0.3s);
 }
 
 .cf.js-anim .cf-d {
@@ -16331,12 +16418,12 @@ body:has(.bk2-page) .wa-float {
 
 .cf.js-anim .cf-close {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease 0.75s, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.75s;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease 0.8s, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.8s;
 }
 
 .cf.js-anim .cf-close .cf-d {
-  transition-delay: 1.2s;
+  transition-delay: 1.3s;
 }
 
 .cf.js-anim.is-in .cf-card,
@@ -16345,8 +16432,96 @@ body:has(.bk2-page) .wa-float {
   transform: none;
 }
 
+.cf.js-anim.is-in .cf-card:hover {
+  transform: translateY(-3px);
+}
+
+.cf.js-anim.is-in .cf-card::before {
+  transform: scaleX(1);
+}
+
 .cf.js-anim.is-in .cf-d {
   stroke-dashoffset: 0;
+}
+
+/* bucles (solo cuando la sección está en pantalla) */
+.cf.is-in .cf-tooth {
+  animation: cf-tooth 4.5s ease-in-out infinite;
+  animation-delay: calc(var(--t) * 0.5s + 1s);
+}
+
+@keyframes cf-tooth {
+  0%, 100% { fill: rgba(190, 157, 97, 0.18); }
+  12%, 70% { fill: var(--gold); }
+}
+
+.cf.is-in .cf-halo {
+  animation: cf-halo 3s ease-in-out 1.2s infinite;
+}
+
+@keyframes cf-halo {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.28; }
+}
+
+.cf.is-in .cf-star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cf-star 3s ease-in-out 1.2s infinite;
+}
+
+@keyframes cf-star {
+  0%, 100% { transform: scale(0.4) rotate(0deg); opacity: 0.3; }
+  50% { transform: scale(1.15) rotate(45deg); opacity: 1; }
+}
+
+.cf.is-in .cf-shine {
+  animation: cf-shine 3.6s ease-in-out 1.4s infinite;
+}
+
+@keyframes cf-shine {
+  0% { transform: translateX(0); opacity: 0; }
+  5% { opacity: 0.85; }
+  35% { transform: translateX(34px); opacity: 0.85; }
+  40%, 100% { transform: translateX(34px); opacity: 0; }
+}
+
+.cf.is-in .cf-dot {
+  animation: cf-climb 4.8s ease-in-out 1.4s infinite;
+}
+
+@keyframes cf-climb {
+  0%, 8% { transform: translate(8px, 38px); }
+  22%, 30% { transform: translate(18px, 29px); }
+  44%, 52% { transform: translate(28px, 20px); }
+  66%, 88% { transform: translate(37px, 12px); }
+  100% { transform: translate(8px, 38px); }
+}
+
+.cf.is-in .cf-flag {
+  transform-box: fill-box;
+  transform-origin: left bottom;
+  animation: cf-flag 4.8s ease-in-out 1.4s infinite;
+}
+
+@keyframes cf-flag {
+  0%, 60% { transform: scaleY(0.4); opacity: 0.35; }
+  70%, 88% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0.4); opacity: 0.35; }
+}
+
+.cf.is-in .cf-close__ico::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  animation: cf-ring 2.8s ease-out 1.8s infinite;
+}
+
+@keyframes cf-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -16357,8 +16532,29 @@ body:has(.bk2-page) .wa-float {
     transition: none;
   }
 
+  .cf.js-anim .cf-card::before {
+    transform: none;
+    transition: none;
+  }
+
   .cf.js-anim .cf-d {
     stroke-dashoffset: 0;
     transition: none;
+  }
+
+  .cf.is-in .cf-tooth,
+  .cf.is-in .cf-halo,
+  .cf.is-in .cf-star,
+  .cf.is-in .cf-shine,
+  .cf.is-in .cf-dot,
+  .cf.is-in .cf-flag,
+  .cf.is-in .cf-close__ico::before {
+    animation: none;
+  }
+
+  .cf-card,
+  .cf-card:hover {
+    transition: none;
+    transform: none;
   }
 }
