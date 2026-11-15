@@ -76,10 +76,7 @@ export default function CostFactors({ c, book, bookLabel }: { c: { title: string
                   <Scene ic={it.ic} />
                 </span>
                 <span className="cf-txt">
-                  <h3>
-                    <b aria-hidden="true">{String(k + 1).padStart(2, "0")}</b>
-                    {it.t}
-                  </h3>
+                  <h3>{it.t}</h3>
                   <p>{it.d}</p>
                 </span>
               </li>
