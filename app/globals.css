@@ -16972,3 +16972,26 @@ body:has(.bk2-page) .wa-float {
     animation: none;
   }
 }
+
+/* Agenda: aviso de radiografía (implantes, cirugía oral y reconstructiva) */
+.bk2-note--xray {
+  border: 1px solid rgba(190, 157, 97, 0.55);
+  background: #fff;
+  box-shadow: 0 10px 24px -20px rgba(28, 37, 41, 0.5);
+  animation: bk2-xray 0.5s ease both;
+}
+
+.bk2-note--xray .bk2-note__ico {
+  color: var(--gold);
+}
+
+@keyframes bk2-xray {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bk2-note--xray {
+    animation: none;
+  }
+}

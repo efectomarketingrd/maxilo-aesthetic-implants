@@ -231,6 +231,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const bioOpt = med[7] ?? "";
   const lobuleOpt = est[6] ?? "";
   const wartOpt = est[7] ?? "";
+  const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "");
   const inMed = service === "medicina-estetica";
   const inEst = service === "estetica-facial";
   const needAreas = inMed && subs.includes(fillerOpt);
@@ -809,12 +810,13 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                 </div>
               </div>
 
-              <div className="bk2-note">
+              {/* Implantes, cirugía oral y reconstructiva: la doctora pide traer la radiografía a la consulta */}
+              <div className={`bk2-note${xray ? " bk2-note--xray" : ""}`} key={xray ? "x" : "n"}>
                 <svg className="bk2-note__ico" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M7 3h7l5 5v13H7z" />
                   <path d="M14 3v5h5M10 13h6M10 17h4" />
                 </svg>
-                <span>{b.note}</span>
+                <span>{xray ? b.noteXray : b.note}</span>
               </div>
             </>
           )}

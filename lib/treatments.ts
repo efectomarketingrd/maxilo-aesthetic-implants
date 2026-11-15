@@ -222,6 +222,7 @@ export const treatments: Treatment[] = [
         note: "Si ya le indicaron la extracción, puede agendar directamente como procedimiento: no paga consulta.",
       },
       faqs: [
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Si llega sin ella, la doctora le indicará hacérsela de todas formas, por eso es mejor traerla desde el principio. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿Se pueden sacar las 4 cordales a la vez?", a: "En muchos casos sí. La doctora lo decide en la valoración según la posición de cada una y su salud general." },
         { q: "¿Cuánto tiempo de reposo necesito?", a: "Por lo general, 2 o 3 días de cuidados en casa. Depende de cuántas cordales se extraigan y de su posición." },
         { q: "¿Es obligatorio sacarlas si no duelen?", a: "No siempre. Si están bien posicionadas y no causan problemas, pueden quedarse. La valoración lo determina." },
@@ -267,6 +268,7 @@ export const treatments: Treatment[] = [
         note: "If the extraction has already been recommended, you can book it directly as a procedure: no consultation fee.",
       },
       faqs: [
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. If you arrive without it, the doctor will ask you to have one taken anyway, so it is best to bring it from the start. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Can all 4 wisdom teeth be removed at once?", a: "In many cases, yes. The doctor decides at the assessment based on each tooth's position and your general health." },
         { q: "How much rest will I need?", a: "Usually 2 or 3 days of home care, depending on how many teeth are removed and their position." },
         { q: "Do they have to come out if they don't hurt?", a: "Not always. If they are well positioned and cause no problems, they can stay. The assessment determines this." },
@@ -311,6 +313,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "La recuperación depende del procedimiento. La doctora le indicará los cuidados, la medicación y el tiempo estimado de reposo para su caso.",
       faqs: [
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Si llega sin ella, la doctora le indicará hacérsela de todas formas, por eso es mejor traerla desde el principio. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿Necesito una referencia de mi odontólogo?", a: "No es obligatorio. Puede agendar una consulta directamente y la doctora evaluará su caso." },
         { q: "¿Cuánto cuesta?", a: "Depende del procedimiento. Después de la valoración, el centro le confirmará el costo de su tratamiento." },
       ],
@@ -348,6 +351,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "Recovery depends on the procedure. The doctor will tell you the care, medication and estimated rest time for your case.",
       faqs: [
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. If you arrive without it, the doctor will ask you to have one taken anyway, so it is best to bring it from the start. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Do I need a referral from my dentist?", a: "It is not required. You can book a consultation directly and the doctor will assess your case." },
         { q: "How much does it cost?", a: "It depends on the procedure. After the assessment, the clinic will confirm the cost of your treatment." },
       ],
@@ -1750,6 +1754,7 @@ export const treatments: Treatment[] = [
       recovery: "Depende del tipo de fractura. En las primeras semanas suele indicarse dieta blanda o líquida, reposo relativo, buena higiene oral y los medicamentos necesarios. El hueso tarda varias semanas en consolidar, por lo que es importante asistir a todos los controles.",
       faqs: [
         { q: "¿Debo ir a emergencias o venir al centro?", a: "Si el golpe es reciente y hay sangrado abundante, dificultad para respirar, pérdida de conocimiento o problemas de visión, acuda primero a emergencias. Después, la doctora puede encargarse del tratamiento maxilofacial." },
+        { q: "¿Qué se necesita en la primera consulta?", a: "Si el golpe es reciente y es una urgencia, no espere a tener estudios: llame o escríbanos de inmediato y la doctora le indicará qué hacer. Para una consulta programada, por ejemplo por una fractura antigua, hágase una radiografía antes y tráigala el día de su cita; si llega sin ella, la doctora le indicará hacérsela de todas formas.", viz: { kind: "chips", items: [{ t: "Urgencia: llame de inmediato" }, { t: "Consulta programada: traiga su radiografía" }] } },
         { q: "¿Las placas se retiran?", a: "En la mayoría de los casos las placas de titanio pueden quedarse de forma permanente sin causar molestias. La doctora le indicará si su caso requiere retirarlas." },
         { q: "¿Se puede corregir una fractura antigua?", a: "En muchos casos sí. La doctora evalúa la secuela y le explica las opciones para mejorar la función y la forma." },
         { q: "¿Cuánto cuesta?", a: "Depende del tipo de lesión y del tratamiento. Después de la evaluación, el centro le confirmará el costo." },
@@ -1788,6 +1793,7 @@ export const treatments: Treatment[] = [
       recovery: "It depends on the type of fracture. During the first weeks, a soft or liquid diet, relative rest, good oral hygiene and the necessary medication are usually prescribed. Bone takes several weeks to heal, so attending every follow-up is important.",
       faqs: [
         { q: "Should I go to the ER or come to the clinic?", a: "If the injury is recent and there is heavy bleeding, difficulty breathing, loss of consciousness or vision problems, go to the emergency room first. The doctor can then take care of the maxillofacial treatment." },
+        { q: "What do I need for the first consultation?", a: "If the injury is recent and it is an emergency, do not wait for studies: call or message us right away and the doctor will tell you what to do. For a scheduled consultation, for example for an old fracture, have an X-ray taken beforehand and bring it on the day of your appointment; if you arrive without it, the doctor will ask you to have one taken anyway.", viz: { kind: "chips", items: [{ t: "Emergency: call right away" }, { t: "Scheduled visit: bring your X-ray" }] } },
         { q: "Are the plates removed?", a: "In most cases titanium plates can stay permanently without causing problems. The doctor will tell you if your case requires removal." },
         { q: "Can an old fracture be corrected?", a: "In many cases, yes. The doctor assesses the after-effects and explains the options to improve function and shape." },
         { q: "How much does it cost?", a: "It depends on the injury and the treatment. After the evaluation, the clinic will confirm the cost." },
@@ -1831,6 +1837,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "Es una cirugía mayor que requiere una recuperación planificada. Las primeras semanas se indica dieta líquida o blanda y reposo relativo, y la inflamación disminuye de forma progresiva. La doctora le acompañará en cada etapa con controles frecuentes.",
       faqs: [
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Si llega sin ella, la doctora le indicará hacérsela de todas formas, por eso es mejor traerla desde el principio. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿Necesito ortodoncia?", a: "En la mayoría de los casos sí. La ortodoncia prepara los dientes antes de la cirugía y ajusta la mordida al final." },
         { q: "¿Las cicatrices se ven?", a: "Por lo general las incisiones se hacen por dentro de la boca, por lo que no quedan cicatrices visibles en la cara." },
         { q: "¿El cambio es solo estético?", a: "No. El objetivo principal es mejorar la función (masticar, respirar, hablar), y como resultado el rostro también gana armonía." },
@@ -1869,6 +1876,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "This is major surgery that requires a planned recovery. For the first weeks a liquid or soft diet and relative rest are prescribed, and swelling decreases gradually. The doctor will accompany you at every stage with frequent follow-ups.",
       faqs: [
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. If you arrive without it, the doctor will ask you to have one taken anyway, so it is best to bring it from the start. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Do I need orthodontics?", a: "In most cases, yes. Orthodontics prepares the teeth before surgery and adjusts the bite at the end." },
         { q: "Are the scars visible?", a: "The incisions are usually made inside the mouth, so there are no visible scars on the face." },
         { q: "Is the change only cosmetic?", a: "No. The main goal is to improve function (chewing, breathing, speaking), and as a result the face also gains harmony." },
@@ -1912,6 +1920,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "Depende del tipo de reconstrucción. Es habitual indicar dieta blanda, buena higiene y medicamentos durante los primeros días. Los injertos de hueso necesitan varios meses para integrarse antes del siguiente paso del tratamiento.",
       faqs: [
+        { q: "¿Qué se necesita en la primera consulta?", a: "Una radiografía. Hágasela antes y tráigala el día de su consulta: así la doctora puede evaluar su caso con detalle en ese mismo momento. Si llega sin ella, la doctora le indicará hacérsela de todas formas, por eso es mejor traerla desde el principio. Traiga también otros estudios que tenga y la lista de los medicamentos que toma.", viz: { kind: "flow", items: [{ t: "Antes de la consulta", s: "Hágase la radiografía" }, { t: "El día de la consulta", s: "Entréguela a la doctora" }] } },
         { q: "¿De dónde se obtiene el hueso para el injerto?", a: "Puede ser del propio paciente o de materiales de injerto seguros y aprobados. La doctora le explicará la mejor opción para su caso." },
         { q: "¿Podré ponerme implantes después?", a: "En muchos casos, sí. Uno de los objetivos de la reconstrucción es justamente crear el hueso necesario para colocarlos." },
         { q: "¿Cuánto tiempo dura todo el proceso?", a: "Depende del defecto y del plan. Si se coloca un injerto, se espera a que se integre antes del siguiente paso, lo que suele tomar varios meses." },
@@ -1949,6 +1958,7 @@ export const treatments: Treatment[] = [
       ],
       recovery: "It depends on the type of reconstruction. A soft diet, good hygiene and medication are usually prescribed for the first days. Bone grafts need several months to integrate before the next step of treatment.",
       faqs: [
+        { q: "What do I need for the first consultation?", a: "An X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail right then. If you arrive without it, the doctor will ask you to have one taken anyway, so it is best to bring it from the start. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Where does the graft bone come from?", a: "It can come from the patient or from safe, approved graft materials. The doctor will explain the best option for your case." },
         { q: "Will I be able to get implants afterwards?", a: "In many cases, yes. One goal of reconstruction is precisely to build the bone needed to place them." },
         { q: "How long does the whole process take?", a: "It depends on the defect and the plan. If a graft is placed, it must integrate before the next step, which usually takes several months." },
