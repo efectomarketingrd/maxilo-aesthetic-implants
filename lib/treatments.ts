@@ -34,6 +34,7 @@ export type Treatment = {
   slug: string;
   booking: { s: string; withOption: boolean }; // servicio de la agenda y si se marca el tratamiento
   pkgLink?: boolean; // muestra el enlace al paquete implantes + estadía
+  guide?: { es: string; en: string }; // guía en PDF para pacientes (public/guias/<nombre>.pdf y .jpg de portada)
   es: TreatmentDetail;
   en: TreatmentDetail;
 };
@@ -46,6 +47,7 @@ export const treatments: Treatment[] = [
     slug: "implantes-dentales",
     booking: { s: "implantes", withOption: false },
     pkgLink: true,
+    guide: { es: "guia-implantes-dentales", en: "dental-implants-guide" },
     es: {
       summary: "Reemplace uno o varios dientes con una solución fija que se ve, se siente y funciona como un diente natural.",
       what: "Un implante dental es una pequeña pieza de titanio, compatible con el cuerpo, que se coloca en el hueso del maxilar y cumple la función de la raíz del diente. Una vez integrado al hueso, sobre él se fija una corona o una prótesis. Es la opción más estable para reponer dientes perdidos, porque no depende de los dientes vecinos ni se mueve al comer o hablar.",
