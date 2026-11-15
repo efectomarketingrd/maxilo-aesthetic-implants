@@ -232,11 +232,12 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const lobuleOpt = est[6] ?? "";
   const wartOpt = est[7] ?? "";
   // El costo de la consulta se descuenta solo en tratamientos que pueden hacerse el mismo día:
-  // medicina estética y los procedimientos menores de estética facial (lobuloplastia, verrugas).
+  // medicina estética, los procedimientos menores de estética facial (lobuloplastia, verrugas) y la extracción de cordales.
   // No aplica a implantes, cirugía oral, cirugías estéticas, reconstructiva ni paquete (requieren estudios y planificación).
   const sameDay =
     (service === "medicina-estetica" && subs.some((x) => med.includes(x))) ||
-    (service === "estetica-facial" && subs.some((x) => x === lobuleOpt || x === wartOpt));
+    (service === "estetica-facial" && subs.some((x) => x === lobuleOpt || x === wartOpt)) ||
+    (service === "cirugia-oral" && subs.includes(molarOpt)); // cordales: la doctora confirmó que puede extraerlas el mismo día
   const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "");
   // implantes, cordales y lesiones de la boca: radiografía panorámica (indicación de la doctora)
   const pano = ["implantes", "cirugia-oral", "paquete"].includes(service ?? "");
