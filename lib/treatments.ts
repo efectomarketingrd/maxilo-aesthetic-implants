@@ -19,7 +19,7 @@ export type TreatmentDetail = {
   recovery: string;
   price?: { lines: { label: string; value: string }[]; note?: string };
   cost?: { title: string; intro: string; items: { ic: CostIcon; t: string; d: string }[]; closeT: string; close: string }; // "¿De qué depende el costo?"
-  care?: { normal: string; items: { ic: CareIcon; t: string; s: string }[]; wa: string }; // tarjeta "Su recuperación" (components/RecoveryCard)
+  care?: { normal: string; items: { ic: CareIcon; t: string; s: string }[] }; // tarjeta "Su recuperación" (components/RecoveryCard)
   faqs: { q: string; a: string; viz?: FaqViz }[];
 };
 
@@ -96,7 +96,6 @@ export const treatments: Treatment[] = [
           { ic: "brush", t: "Buena higiene", s: "Para cuidar la zona" },
           { ic: "calendar", t: "Controles", s: "Asista a sus revisiones" },
         ],
-        wa: "Hola, tengo una consulta sobre mi recuperación de implantes dentales.",
       },
       faqs: [
         { q: "¿Cuánto cuesta un implante dental?", a: "Depende de cada caso. El costo cambia según cuántos dientes hay que reponer (uno, varios o toda la boca), el tipo de implante (convencional o personalizado), el material de la corona o prótesis y si el tratamiento se hace por etapas o en un solo paso. Por eso no damos un precio sin valorarle antes: en la consulta, la doctora le explica todas las opciones con sus costos y usted elige la que mejor se adapte a su presupuesto.", viz: { kind: "chips", items: [{ t: "Cuántos dientes" }, { t: "Tipo de implante" }, { t: "Material" }, { t: "Tiempo" }] } },
@@ -157,7 +156,6 @@ export const treatments: Treatment[] = [
           { ic: "brush", t: "Good hygiene", s: "To care for the area" },
           { ic: "calendar", t: "Follow-ups", s: "Attend your check-ups" },
         ],
-        wa: "Hello, I have a question about my dental implant recovery.",
       },
       faqs: [
         { q: "How much does a dental implant cost?", a: "It depends on each case. The cost changes with how many teeth need replacing (one, several or the whole mouth), the type of implant (conventional or custom), the crown or prosthesis material, and whether treatment is done in stages or in a single step. That is why we do not quote a price before assessing you: at the consultation, the doctor explains every option and its cost, and you choose the one that best fits your budget.", viz: { kind: "chips", items: [{ t: "How many teeth" }, { t: "Type of implant" }, { t: "Material" }, { t: "Timing" }] } },

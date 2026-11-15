@@ -1,8 +1,7 @@
 import InView from "./InView";
-import { WaIcon } from "./Icons";
 import type { CareIcon } from "@/lib/treatments";
 
-// "Su recuperación": qué es normal (curva que baja) + cuidados con ✓ + ayuda por WhatsApp.
+// "Su recuperación": qué es normal (curva que baja) + cuidados con ✓.
 const ICONS: Record<CareIcon, string> = {
   pill: "M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1-7-7z M7 7l7 7",
   bowl: "M3 11h18a9 9 0 0 1-18 0z M8.5 7.5c0-1.5 1-2 1-3.5 M12.5 7.5c0-1.5 1-2 1-3.5 M16.5 7.5c0-1.5 1-2 1-3.5",
@@ -11,7 +10,7 @@ const ICONS: Record<CareIcon, string> = {
 };
 const CURVE = "M16 20 C 62 22, 86 74, 134 88 S 222 102, 248 103";
 
-export default function RecoveryCard({ title, c, k, wa }: { title: string; c: { normal: string; items: { ic: CareIcon; t: string; s: string }[] }; k: { recNormal: string; recCurve: string[]; recCare: string; recHelp: string; recHelpBtn: string }; wa: string }) {
+export default function RecoveryCard({ title, c, k }: { title: string; c: { normal: string; items: { ic: CareIcon; t: string; s: string }[] }; k: { recNormal: string; recCurve: string[]; recCare: string } }) {
   return (
     <section className="sv-sec sv-sec--white">
       <div className="container sv-wrap">
@@ -64,12 +63,6 @@ export default function RecoveryCard({ title, c, k, wa }: { title: string; c: { 
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="rc-help">
-            <span>{k.recHelp}</span>
-            <a className="btn btn--wa btn--sm" href={wa} target="_blank" rel="noopener">
-              <WaIcon /> {k.recHelpBtn}
-            </a>
           </div>
         </InView>
       </div>

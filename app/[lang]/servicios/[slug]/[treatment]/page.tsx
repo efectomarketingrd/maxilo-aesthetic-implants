@@ -14,7 +14,7 @@ import ServiceIcon from "@/components/ServiceIcon";
 import TreatmentVisual, { hasVisual } from "@/components/TreatmentVisual";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { locales, site, waLink, type Locale } from "@/lib/site";
+import { locales, site, type Locale } from "@/lib/site";
 import { serviceImg, treatmentImg } from "@/lib/images";
 import { bookingHref, findTreatment, treatments, treatmentsFor } from "@/lib/treatments";
 
@@ -178,7 +178,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
             </InView>
         </Fold>
 
-        {d.care && <RecoveryCard title={k.recovery} c={d.care} k={k} wa={waLink(d.care.wa)} />}
+        {d.care && <RecoveryCard title={k.recovery} c={d.care} k={k} />}
 
         {/* Recuperación + precio */}
         {(!d.care || d.price || tr.pkgLink) && (

@@ -16716,26 +16716,9 @@ body:has(.bk2-page) .wa-float {
   color: #fff;
 }
 
-.rc-help {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px 16px;
-  padding: 14px 18px;
-  border-radius: 18px;
-  background: linear-gradient(150deg, var(--slate-2), var(--slate-3));
-  color: var(--ivory);
-  font-size: 0.9rem;
-}
-
 @media (min-width: 760px) {
   .rc {
     grid-template-columns: 1.1fr 1fr;
-  }
-
-  .rc-help {
-    grid-column: 1 / -1;
   }
 }
 
@@ -16772,19 +16755,13 @@ body:has(.bk2-page) .wa-float {
   transition-delay: calc(var(--i) * 0.35s + 1.35s);
 }
 
-.rc.js-anim .rc-help {
-  opacity: 0;
-  transition: opacity 0.6s ease 2.6s;
-}
-
 .rc.js-anim.is-in .rc-curve,
 .rc.js-anim.is-in .rc-tick path {
   stroke-dashoffset: 0;
 }
 
 .rc.js-anim.is-in .rc-area,
-.rc.js-anim.is-in .rc-end,
-.rc.js-anim.is-in .rc-help {
+.rc.js-anim.is-in .rc-end {
   opacity: 1;
 }
 
@@ -16966,7 +16943,6 @@ body:has(.bk2-page) .wa-float {
 
   .rc.js-anim .rc-area,
   .rc.js-anim .rc-end,
-  .rc.js-anim .rc-help,
   .rc.js-anim .rc-care li,
   .rc.js-anim .rc-tick {
     opacity: 1;
