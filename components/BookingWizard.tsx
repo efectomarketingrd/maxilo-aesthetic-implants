@@ -423,7 +423,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     const f = (d: Date) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
     return { allDay: false, a: f(start), z: f(end), start, end };
   }
-  const calDetails = () => `${svcFull}\n${b.calNote}\n${site.phones[0]} · ${site.email}`;
+  const calDetails = () => `${svcFull}${pano ? `\n${b.pano.cal}` : ""}\n${b.calNote}\n${site.phones[0]} · ${site.email}`;
   function googleCal() {
     const r = calRange();
     if (!r) return "#";
@@ -853,9 +853,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                       </ul>
                     </div>
                   )}
-                  <a className="btn btn--wa btn--sm bk2-pano__send" href={waLink(b.pano.waMsg)} target="_blank" rel="noopener">
-                    <WaIcon /> {b.pano.send}
-                  </a>
                 </div>
               ) : (
               <div className={`bk2-note${xray ? " bk2-note--xray" : ""}`} key={xray ? "x" : "n"}>
@@ -1057,6 +1054,19 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   ))}
                 </dl>
               </div>
+              {pano && (
+                <div className="bk2-remind" role="note">
+                  <span className="bk2-remind__ico" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z M10 20.5a2 2 0 0 0 4 0" />
+                    </svg>
+                  </span>
+                  <span>
+                    <strong>{b.pano.reminderT}</strong>
+                    {b.pano.reminder}
+                  </span>
+                </div>
+              )}
 
               <div className="bk2-cost">
                 <p className="bk2-cost__title">{b.cost.title}</p>

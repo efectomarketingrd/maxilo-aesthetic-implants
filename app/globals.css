@@ -17080,12 +17080,59 @@ body:has(.bk2-page) .wa-float {
   overflow-wrap: anywhere;
 }
 
-.bk2-pano__send {
-  margin-top: 14px;
+@media (prefers-reduced-motion: reduce) {
+  .bk2-pano {
+    animation: none;
+  }
+}
+
+/* Agenda: recordatorio de la radiografía al final */
+.bk2-remind {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: linear-gradient(150deg, var(--slate-2), var(--slate-3));
+  color: rgba(248, 246, 242, 0.88);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.bk2-remind strong {
+  display: block;
+  font-family: var(--f-title);
+  font-size: 0.95rem;
+  color: var(--gold-soft);
+}
+
+.bk2-remind__ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--slate);
+}
+
+.bk2-remind__ico svg {
+  transform-origin: 50% 20%;
+  animation: bk2-bell 3.2s ease-in-out 1s infinite;
+}
+
+@keyframes bk2-bell {
+  0%, 70%, 100% { transform: rotate(0); }
+  74% { transform: rotate(12deg); }
+  80% { transform: rotate(-10deg); }
+  86% { transform: rotate(6deg); }
+  92% { transform: rotate(-3deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bk2-pano {
+  .bk2-remind__ico svg {
     animation: none;
   }
 }
