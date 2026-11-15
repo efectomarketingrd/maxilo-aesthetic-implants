@@ -6,6 +6,8 @@ import type { ServiceSlug } from "./content";
 import type { Locale } from "./site";
 import type { ArtLabel, Fact } from "@/components/TreatmentVisual";
 
+export type CostIcon = "teeth" | "implant" | "crown" | "time";
+
 export type TreatmentDetail = {
   summary: string;
   what: string;
@@ -16,6 +18,7 @@ export type TreatmentDetail = {
   steps: { t: string; d: string }[];
   recovery: string;
   price?: { lines: { label: string; value: string }[]; note?: string };
+  cost?: { title: string; intro: string; items: { ic: CostIcon; t: string; d: string }[]; closeT: string; close: string }; // "¿De qué depende el costo?"
   faqs: { q: string; a: string }[];
 };
 
@@ -68,7 +71,20 @@ export const treatments: Treatment[] = [
         { t: "Corona definitiva", d: "Una vez integrado, se coloca la corona o prótesis final, diseñada para verse como sus dientes naturales." },
       ],
       recovery: "Las molestias suelen ser leves y se controlan con los medicamentos que indique la doctora. Es normal algo de inflamación los primeros días. Se recomienda dieta blanda, buena higiene y asistir a los controles.",
+      cost: {
+        title: "¿De qué depende el costo de un implante?",
+        intro: "Cada caso es diferente. Estos son los factores que definen su presupuesto:",
+        items: [
+          { ic: "teeth", t: "Cuántos dientes", d: "Un solo implante, varios o la rehabilitación de toda la boca." },
+          { ic: "implant", t: "Tipo de implante", d: "Hay implantes convencionales y otros personalizados." },
+          { ic: "crown", t: "Material de la prótesis", d: "El material del diente o la prótesis que se confecciona sobre el implante." },
+          { ic: "time", t: "Tiempo del tratamiento", d: "Por etapas o en un solo paso, según lo que usted prefiera." },
+        ],
+        closeT: "Usted elige",
+        close: "En la valoración, la doctora le explica todas las opciones con su costo y usted decide la que mejor se adapta a su presupuesto.",
+      },
       faqs: [
+        { q: "¿Cuánto cuesta un implante dental?", a: "Depende de cada caso. El costo cambia según cuántos dientes hay que reponer (uno, varios o toda la boca), el tipo de implante (convencional o personalizado), el material de la corona o prótesis y si el tratamiento se hace por etapas o en un solo paso. Por eso no damos un precio sin valorarle antes: en la consulta, la doctora le explica todas las opciones con sus costos y usted elige la que mejor se adapte a su presupuesto." },
         { q: "¿La colocación duele?", a: "Se realiza con anestesia local, por lo que durante el procedimiento no debe sentir dolor. Después puede haber molestias leves que se controlan con medicamentos." },
         { q: "¿Cuánto dura un implante?", a: "Con buena higiene, controles periódicos y hábitos saludables, un implante puede durar muchos años." },
         { q: "¿Qué pasa si no tengo suficiente hueso?", a: "La doctora lo evalúa en la valoración y le explicará las opciones disponibles para su caso." },
@@ -106,7 +122,20 @@ export const treatments: Treatment[] = [
         { t: "Final crown", d: "Once integrated, the final crown or prosthesis is placed, designed to look like your natural teeth." },
       ],
       recovery: "Discomfort is usually mild and controlled with the medication the doctor prescribes. Some swelling during the first days is normal. A soft diet, good hygiene and attending follow-ups are recommended.",
+      cost: {
+        title: "What determines the cost of an implant?",
+        intro: "Every case is different. These are the factors that shape your budget:",
+        items: [
+          { ic: "teeth", t: "How many teeth", d: "A single implant, several, or a full-mouth restoration." },
+          { ic: "implant", t: "Type of implant", d: "There are conventional implants and custom ones." },
+          { ic: "crown", t: "Prosthesis material", d: "The material of the tooth or prosthesis made to sit on the implant." },
+          { ic: "time", t: "Treatment timing", d: "In stages or in a single step, depending on what you prefer." },
+        ],
+        closeT: "You choose",
+        close: "At the consultation, the doctor explains every option and its cost, and you decide which one best fits your budget.",
+      },
       faqs: [
+        { q: "How much does a dental implant cost?", a: "It depends on each case. The cost changes with how many teeth need replacing (one, several or the whole mouth), the type of implant (conventional or custom), the crown or prosthesis material, and whether treatment is done in stages or in a single step. That is why we do not quote a price before assessing you: at the consultation, the doctor explains every option and its cost, and you choose the one that best fits your budget." },
         { q: "Does placement hurt?", a: "It is done under local anesthesia, so you should not feel pain during the procedure. Mild discomfort afterwards is controlled with medication." },
         { q: "How long does an implant last?", a: "With good hygiene, regular check-ups and healthy habits, an implant can last many years." },
         { q: "What if I don't have enough bone?", a: "The doctor assesses this at the consultation and will explain the options available for your case." },

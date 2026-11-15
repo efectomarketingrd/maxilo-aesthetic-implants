@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import CostFactors from "@/components/CostFactors";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -219,6 +220,8 @@ export default async function TreatmentPage({ params }: { params: Params }) {
             </div>
           )}
         </section>
+
+        {d.cost && <CostFactors c={d.cost} book={book} bookLabel={k.book} />}
 
         {/* Preguntas */}
         <section className="sv-sec">
