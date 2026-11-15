@@ -59,10 +59,9 @@ export const xrayCenters: { name: string; area: string; phone?: string; wa?: str
 
 export const centers = [
   { id: "maxilo", name: "Maxilo Aesthetic Implants", town: "Las Terrenas", main: true },
-  { id: "galeno", name: "Centro Galeno Integral", town: "Las Terrenas", main: false },
-  { id: "cei", name: "Clínica Especializada Internacional", town: "Las Terrenas", main: false },
   { id: "cmes", name: "Centro Médico de Especialidades Samaná", town: "Samaná", main: false },
   { id: "moya", name: "Clínica Rudy Moya", town: "Sánchez", main: false },
+  { id: "rdj", name: "Centro Médico de Ginecología, Obstetricia y Especialidades Doctores Rodríguez y de Jesús", town: "Sánchez", main: false },
 ] as const;
 
 // Agencia que diseñó la web (crédito en el pie). Cuando exista su web, poner la dirección en `url`.
