@@ -7,6 +7,8 @@ import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
 import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
+import CopyBtn from "./CopyBtn";
+import { citaUrl } from "@/lib/cita";
 
 function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -24,33 +26,6 @@ const halfHours = (from: number, to: number) =>
 const SPECIAL_HOURS = halfHours(15, 17).filter(
   (h) => !agenda.slots.some((s) => !s.alt && s.time === h), // nunca dentro del horario normal
 );
-
-// Botón para copiar un dato al portapapeles
-function CopyBtn({ text, label, done }: { text: string; label: string; done: string }) {
-  const [ok, setOk] = useState(false);
-  async function copy() {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-    }
-    setOk(true);
-    setTimeout(() => setOk(false), 1800);
-  }
-  return (
-    <button type="button" className={`bk2-copy ${ok ? "is-ok" : ""}`} onClick={copy} aria-live="polite">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        {ok ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <><rect x="8" y="8" width="12" height="12" rx="2.5" /><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8" /></>}
-      </svg>
-      {ok ? done : label}
-    </button>
-  );
-}
 
 // Monto en pesos con su equivalente aproximado en dólares debajo
 function Amt({ n, plus }: { n: number; plus?: boolean }) {
@@ -390,6 +365,36 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     if (step < 3) go((step + 1) as Step);
   }
 
+  // Enlace personal "Mi cita" (resumen + cómo pagar), para no tener que repetir la reserva al confirmar
+  const myCita = date
+    ? citaUrl(lang, {
+        n: form.name.trim(),
+        s: svcFull,
+        d: toKey(date),
+        h: timeLabel,
+        hm: ext ? "" : special ? specialTime : (time ?? ""),
+        p: effMode === "presencial" ? `${center.name} · ${center.town}` : b.modes.online,
+        k: isProc ? "procedimiento" : "consulta",
+        m: effMode,
+        x: extDeposit ? 1 : 0,
+        t: isProc && !priced.length ? -1 : total,
+        dep: deposit,
+        dt: showDeposit && !deposit ? 1 : 0,
+        pf: planFull,
+        r: pano ? 1 : 0,
+      })
+    : "";
+  const firstName = form.name.trim().split(/\s+/)[0] ?? "";
+  const staffReply = () =>
+    (extDeposit ? b.cita.replyExt : b.cita.reply)
+      .replace("{name}", firstName)
+      .replace("{date}", dateLabel)
+      .replace("{time}", rawTimeLabel())
+      .replace("{url}", myCita);
+  function rawTimeLabel() {
+    return !ext && timeLabel ? `${b.cita.at}${timeLabel}` : "";
+  }
+
   function message() {
     const lines = [
       b.msgTitle,
@@ -407,6 +412,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       extDeposit ? `${b.cost.msgDepositExt}: ${money(deposit)} — ${b.cost.msgPending}` : "",
       extDeposit ? `${b.cost.msgRest}: ${money(base - deposit)}` : "",
       ext ? b.cost.cancel : "",
+      myCita ? `${b.cita.msgLink}: ${myCita}` : "",
       "",
       `${b.name}: ${form.name.trim()}`,
       `${b.phone}: ${form.phone.trim()}`,
@@ -436,7 +442,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       time: rawTime,
       minutes,
       dateLabel,
-      message: message(),
+      message: `${message()}\n\n${b.cita.replyT}\n${staffReply()}`,
       website: honey.current?.value ?? "",
     };
     const json = JSON.stringify(data);
@@ -461,7 +467,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     return { allDay: false, a: f(start), z: f(end), start, end };
   }
   const calDetails = () =>
-    `${svcFull}${pano ? `\n${b.pano.cal}\n${b.pano.where}: ${xrayCenters.map((x) => `${x.name} (${x.area}) ${x.phone ?? ""}`.trim()).join(" · ")}` : ""}\n${b.calNote}\n${site.phones[0]} · ${site.email}`;
+    `${svcFull}${pano ? `\n${b.pano.cal}\n${b.pano.where}: ${xrayCenters.map((x) => `${x.name} (${x.area}) ${x.phone ?? ""}`.trim()).join(" · ")}` : ""}\n${b.calNote}${myCita ? `\n${b.cita.msgLink}: ${myCita}` : ""}\n${site.phones[0]} · ${site.email}`;
   function googleCal() {
     const r = calRange();
     if (!r) return "#";
@@ -1235,7 +1241,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     ))}
                   </ul>
                 </div>
-                <details className="bk2-bank" open={extDeposit || undefined}>
+                {extDeposit && (
+                <details className="bk2-bank" open>
                   <summary>
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18" />
@@ -1281,6 +1288,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                     <p className="bk2-bank__abroad">{b.cost.bank.abroadCard}</p>
                   </div>
                 </details>
+                )}
                 <p className="bk2-cost__pay">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="12" r="8.5" />
@@ -1289,6 +1297,26 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   {b.cost.payFirst}
                 </p>
               </div>
+
+              {myCita && (
+                <div className={`bk2-mycita${extDeposit ? " is-ext" : ""}`}>
+                  <span className="bk2-mycita__ico" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      {extDeposit ? <path d="M3 10l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18" /> : <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 7.5V12l3 2" />}
+                    </svg>
+                  </span>
+                  <div>
+                    <strong>{extDeposit ? b.cost.extDepositPct : b.cita.doneT}</strong>
+                    <p>{extDeposit ? b.cita.doneExt : b.cita.done}</p>
+                    <div className="bk2-mycita__btns">
+                      <a href={myCita} target="_blank" rel="noopener">
+                        {b.cita.open} →
+                      </a>
+                      <CopyBtn text={myCita} label={b.cita.copyLink} done={b.cita.copied} />
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="bk2-send">
                 <button type="button" className="btn btn--wa btn--block h5-btn-shine" onClick={sendWa}>
