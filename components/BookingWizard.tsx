@@ -119,6 +119,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const [prp, setPrp] = useState<string | null>(null);
   const [areas, setAreas] = useState<string[]>([]); // rellenos
   const [ears, setEars] = useState<string | null>(null); // lobuloplastia
+  const [fren, setFren] = useState<string | null>(null); // frenilectomía labial: superior, inferior o ambos
   const [warts, setWarts] = useState<string | null>(null); // verrugas
   const [cols, setCols] = useState(2);
 
@@ -214,6 +215,12 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const subList = service ? [...(subOptions[service] ?? []), b.unsure] : [];
   // Extracción de cordales: el paciente indica cuántas
   const molarOpt = procs("implantes-cirugia-oral")[1] ?? "";
+  // Frenilectomías: labial (RD$15,000 por frenillo, superior o inferior) y lingual (RD$25,000)
+  const frenLabOpt = procs("implantes-cirugia-oral")[3] ?? "";
+  const frenLingOpt = procs("implantes-cirugia-oral")[4] ?? "";
+  const needFren = service === "cirugia-oral" && subs.includes(frenLabOpt);
+  const frenN = needFren && fren && fren !== "?" ? (fren === b.frenOpts[2] ? 2 : 1) : 0;
+  const hasFrenLing = service === "cirugia-oral" && subs.includes(frenLingOpt);
   const needMolars = service === "cirugia-oral" && subs.includes(molarOpt);
   const molarText = molars ? (molars === "?" ? b.molarsTbd : `${molars} ${molars === "1" ? b.molarsOne : b.molarsMany}`) : "";
   // PRP: 1 sesión o paquete de 3
@@ -238,9 +245,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     (service === "medicina-estetica" && subs.some((x) => med.includes(x))) ||
     (service === "estetica-facial" && subs.some((x) => x === lobuleOpt || x === wartOpt)) ||
     (service === "cirugia-oral" && subs.includes(molarOpt)); // cordales: la doctora confirmó que puede extraerlas el mismo día
-  const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "");
+  // en cirugía oral, si solo se eligen frenillos no se pide radiografía
+  const onlyFren = service === "cirugia-oral" && subs.length > 0 && subs.every((x) => x === frenLabOpt || x === frenLingOpt);
+  const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "") && !onlyFren;
   // implantes, cordales y lesiones de la boca: radiografía panorámica (indicación de la doctora)
-  const pano = ["implantes", "cirugia-oral", "paquete"].includes(service ?? "");
+  const pano = ["implantes", "cirugia-oral", "paquete"].includes(service ?? "") && !onlyFren;
   const inMed = service === "medicina-estetica";
   const inEst = service === "estetica-facial";
   const needAreas = inMed && subs.includes(fillerOpt);
@@ -253,6 +262,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       if (x === prpOpt && prp) return `${x} (${prpText})`;
       if (x === fillerOpt && needAreas && areas.length) return `${x} (${areas.join(", ")})`;
       if (x === lobuleOpt && ears) return `${x} (${countText(ears, b.earWord, b.earsWord)})`;
+      if (x === frenLabOpt && fren) return `${x} (${fren === "?" ? b.molarsTbd : fren})`;
       if (x === wartOpt && warts) return `${x} (${countText(warts, b.areaWord, b.areasWord)})`;
       return x;
     })
@@ -286,6 +296,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     setPrp(null);
     setAreas([]);
     setEars(null);
+    setFren(null);
     setWarts(null);
   }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
@@ -294,7 +305,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
   const filled = (Object.keys(form) as (keyof typeof form)[]).every((k) => form[k].trim());
-  const okStep = [Boolean(service && subs.length && (!needMolars || molars) && (!needPrp || prp) && (!needAreas || areas.length) && (!needEars || ears) && (!needWarts || warts)), Boolean(date && timeLabel), filled && emailOk, true];
+  const okStep = [Boolean(service && subs.length && (!needMolars || molars) && (!needPrp || prp) && (!needAreas || areas.length) && (!needEars || ears) && (!needFren || fren) && (!needWarts || warts)), Boolean(date && timeLabel), filled && emailOk, true];
 
   // Costo estimado
   const isProc = type === "procedimiento";
@@ -314,6 +325,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     ...(inMed && subs.includes(liftOpt) ? [{ label: liftOpt, detail: "", amount: agenda.threadLiftPrice }] : []),
     ...(inMed && subs.includes(bioOpt) ? [{ label: bioOpt, detail: "", amount: agenda.threadBioPrice }] : []),
     ...(earN ? [{ label: lobuleOpt, detail: `${earN} × ${rd(agenda.lobulePrice)}`, amount: earN * agenda.lobulePrice }] : []),
+    ...(frenN ? [{ label: frenLabOpt, detail: `${frenN} × ${rd(agenda.frenLabPrice)} · ${fren}`, amount: frenN * agenda.frenLabPrice }] : []),
+    ...(hasFrenLing ? [{ label: frenLingOpt, detail: "", amount: agenda.frenLingPrice }] : []),
     ...(wartN ? [{ label: wartOpt, detail: `${wartN} × ${rd(agenda.wartPrice)}`, amount: wartN * agenda.wartPrice }] : []),
     ...(needPrp && prpPlan ? [{ label: prpOpt, detail: prpPlan.sessions > 1 ? `${prpText} · ${b.cost.prpPaid}` : prpText, amount: prpPlan.price }] : []),
   ];
@@ -325,6 +338,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     (inMed && x === fillerOpt && areas.length > 0) ||
     (inMed && (x === prpFacialOpt || x === liftOpt || x === bioOpt)) ||
     (x === lobuleOpt && earN > 0) ||
+    (x === frenLabOpt && frenN > 0) ||
+    (x === frenLingOpt && hasFrenLing) ||
     (x === wartOpt && wartN > 0);
   const unpriced = subs.some((x) => x !== b.unsure && !isPriced(x)) || subs.includes(b.unsure);
   const procTbd = isProc && (!priced.length || unpriced);
@@ -687,6 +702,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                             </div>
                           )}
                           {[
+                            { on: needFren, q: b.frenQ, info: b.frenInfo, val: fren, set: setFren, opts: [...b.frenOpts, "?"] },
                             { on: needEars, q: b.lobuleQ, info: b.lobuleInfo, val: ears, set: setEars, opts: ["1", "2"] },
                             { on: needWarts, q: b.wartQ, info: b.wartInfo, val: warts, set: setWarts, opts: ["1", "2", "3", "4", "?"] },
                           ]
@@ -701,7 +717,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                                       role="radio"
                                       aria-checked={x.val === n}
                                       key={n}
-                                      className={`${x.val === n ? "is-on" : ""} ${n === "?" ? "is-wide" : ""}`}
+                                      className={`${x.val === n ? "is-on" : ""} ${n === "?" || n.length > 2 ? "is-wide" : ""}`}
                                       style={{ "--k": k } as React.CSSProperties}
                                       onClick={() => x.set(n)}
                                     >
@@ -712,6 +728,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                                 <p className="bk2-molars__price">{x.info}</p>
                               </div>
                             ))}
+                          {hasFrenLing && (
+                            <p className="bk2-pricenote">
+                              <strong>{b.frenLingInfo}</strong>
+                            </p>
+                          )}
                           {hasBotox && (
                             <p className="bk2-pricenote">
                               <strong>

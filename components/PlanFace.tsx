@@ -62,6 +62,11 @@ const ZONES: Partial<Record<PlanKind, Zone[]>> = {
     { glow: [[76, 204, 16], [160, 204, 16]], threads: both("M92 222 L 66 182"), arrows: both("M62 190 L 65 181 L 74 184"), badge: [178, 218] },
     { glow: [[118, 306, 15]], threads: both("M108 320 L 100 298"), arrows: both("M96 305 L 99 297 L 106 300"), badge: [152, 310] },
   ],
+  frenlab: [
+    { glow: [[118, 234, 8]], dots: [[118, 234]], badge: [140, 226] },
+    { glow: [[118, 250, 8]], dots: [[118, 250]], badge: [140, 258] },
+  ],
+  frenling: [{ glow: [[118, 241, 11]], dots: [[118, 241]], badge: [144, 241] }],
   lobule: [
     { glow: [[45, 203, 8]], dots: [[45, 203]], badge: [44, 222] },
     { glow: [[191, 203, 8]], dots: [[191, 203]], badge: [192, 222] },

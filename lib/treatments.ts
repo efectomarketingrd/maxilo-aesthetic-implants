@@ -361,6 +361,236 @@ export const treatments: Treatment[] = [
   },
   // ───────── CIRUGÍA ESTÉTICA FACIAL ─────────
   {
+    service: "implantes-cirugia-oral",
+    index: 3,
+    slug: "frenilectomia-labial",
+    booking: { s: "cirugia-oral", withOption: true },
+    es: {
+      summary: "Corrección del frenillo del labio superior o inferior cuando es grueso, corto o está muy pegado a la encía.",
+      what: "El frenillo labial es el pliegue de tejido que une el labio con la encía. Cuando es grueso, corto o se inserta muy cerca de los dientes, puede separar los dientes de adelante, tirar de la encía o dificultar la higiene y el movimiento del labio. La frenilectomía labial lo libera o lo retira en una cirugía breve con anestesia local. Se puede realizar en el frenillo superior o en el inferior.",
+      art: {
+        labels: [
+          { t: "Labio", s: "se mueve con libertad" },
+          { t: "Frenillo", s: "banda que tira" },
+          { t: "Encía", s: "entre los dientes" },
+          { t: "Liberación", s: "con anestesia local" },
+        ],
+        caption: "El frenillo grueso tira de la encía y separa los dientes. Al liberarlo, el labio y la encía quedan libres.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Sin dolor durante el procedimiento" },
+        { i: "time", t: "Cirugía breve", s: "Se realiza en el consultorio" },
+        { i: "home", t: "Ambulatorio", s: "Se va a casa el mismo día" },
+        { i: "tag", t: "RD$15,000", s: "Por frenillo, superior o inferior" },
+      ],
+      forWho: [
+        "Separación entre los dientes de adelante relacionada con el frenillo.",
+        "Frenillo que tira de la encía o la hace retroceder.",
+        "Dificultad para mover el labio o para limpiar bien la zona.",
+        "Indicación de su odontólogo u ortodoncista, por ejemplo antes o después de la ortodoncia.",
+      ],
+      steps: [
+        { t: "Valoración", d: "La doctora evalúa el frenillo, la encía y los dientes, y le indica si conviene tratar el superior, el inferior o ambos." },
+        { t: "Frenilectomía", d: "Con anestesia local se libera o retira el frenillo y la zona se cierra con puntos finos." },
+        { t: "Indicaciones y control", d: "Se le explican los cuidados en casa y se programa un control para revisar la cicatrización." },
+      ],
+      recovery: "Las molestias suelen ser leves los primeros días y se controlan con los medicamentos que indique la doctora. Se recomienda dieta blanda, buena higiene y evitar estirar el labio mientras cicatriza.",
+      care: {
+        expect: [
+          { ic: "shield", t: "Durante el procedimiento", s: "Con anestesia local, no debe sentir dolor." },
+          { ic: "leaf", t: "Primeros días", s: "Molestias leves y algo de inflamación, que se controlan con los medicamentos indicados." },
+          { ic: "crown", t: "Con el tiempo", s: "La zona cicatriza y el movimiento queda libre." },
+        ],
+        items: [
+          { ic: "pill", t: "Medicamentos", s: "Los que indique la doctora" },
+          { ic: "bowl", t: "Dieta blanda", s: "Alimentos suaves" },
+          { ic: "brush", t: "Buena higiene", s: "Para cuidar la zona" },
+          { ic: "calendar", t: "Controles", s: "Asista a su revisión" },
+        ],
+      },
+      price: {
+        lines: [
+          { label: "Frenillo superior", value: "RD$15,000" },
+          { label: "Frenillo inferior", value: "RD$15,000" },
+        ],
+        note: "Precio por frenillo, con anestesia local. Si ya le indicaron la frenilectomía, puede agendarla directamente como procedimiento.",
+      },
+      faqs: [
+        { q: "¿Duele?", a: "No durante el procedimiento, porque se realiza con anestesia local. Después puede haber molestias leves, que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
+        { q: "¿Qué frenillo necesito tratar?", a: "La doctora lo determina en la valoración: puede ser el superior, el inferior o, en algunos casos, ambos. Cada frenillo tiene un costo de RD$15,000.", viz: { kind: "chips", items: [{ t: "Frenillo superior" }, { t: "Frenillo inferior" }] } },
+        { q: "¿Cuándo puedo volver a mis actividades?", a: "Al ser una cirugía breve y ambulatoria, por lo general puede retomar su rutina pronto, siguiendo los cuidados que le indique la doctora." },
+      ],
+    },
+    en: {
+      summary: "Correction of the upper or lower lip frenulum when it is thick, short or attached too close to the gum.",
+      what: "The lip frenulum is the fold of tissue that connects the lip to the gum. When it is thick, short or attached too close to the teeth, it can separate the front teeth, pull on the gum or make cleaning and lip movement harder. A lip frenectomy releases or removes it in a short procedure under local anesthesia. It can be done on the upper or the lower frenulum.",
+      art: {
+        labels: [
+          { t: "Lip", s: "moves freely" },
+          { t: "Frenulum", s: "a band that pulls" },
+          { t: "Gum", s: "between the teeth" },
+          { t: "Release", s: "under local anesthesia" },
+        ],
+        caption: "A thick frenulum pulls on the gum and separates the teeth. Once released, the lip and gum are free.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "No pain during the procedure" },
+        { i: "time", t: "Short surgery", s: "Done in the office" },
+        { i: "home", t: "Outpatient", s: "You go home the same day" },
+        { i: "tag", t: "RD$15,000", s: "Per frenulum, upper or lower" },
+      ],
+      forWho: [
+        "A gap between the front teeth related to the frenulum.",
+        "A frenulum that pulls on the gum or makes it recede.",
+        "Difficulty moving the lip or cleaning the area well.",
+        "A recommendation from your dentist or orthodontist, for example before or after braces.",
+      ],
+      steps: [
+        { t: "Assessment", d: "The doctor assesses the frenulum, gum and teeth, and tells you whether the upper, the lower or both should be treated." },
+        { t: "Frenectomy", d: "Under local anesthesia, the frenulum is released or removed and the area is closed with fine stitches." },
+        { t: "Instructions and follow-up", d: "You receive home-care instructions and a follow-up visit is scheduled to check healing." },
+      ],
+      recovery: "Discomfort is usually mild during the first days and is controlled with the medication the doctor prescribes. A soft diet, good hygiene and avoiding stretching the lip while it heals are recommended.",
+      care: {
+        expect: [
+          { ic: "shield", t: "During the procedure", s: "With local anesthesia, you should not feel pain." },
+          { ic: "leaf", t: "First days", s: "Mild discomfort and some swelling, controlled with the prescribed medication." },
+          { ic: "crown", t: "Over time", s: "The area heals and movement is free." },
+        ],
+        items: [
+          { ic: "pill", t: "Medication", s: "As prescribed by the doctor" },
+          { ic: "bowl", t: "Soft diet", s: "Gentle foods" },
+          { ic: "brush", t: "Good hygiene", s: "To care for the area" },
+          { ic: "calendar", t: "Follow-up", s: "Attend your check-up" },
+        ],
+      },
+      price: {
+        lines: [
+          { label: "Upper frenulum", value: "RD$15,000" },
+          { label: "Lower frenulum", value: "RD$15,000" },
+        ],
+        note: "Price per frenulum, local anesthesia included. If the frenectomy has already been recommended, you can book it directly as a procedure.",
+      },
+      faqs: [
+        { q: "Does it hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort, controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
+        { q: "Which frenulum do I need treated?", a: "The doctor determines this at the assessment: it may be the upper, the lower or, in some cases, both. Each frenulum costs RD$15,000.", viz: { kind: "chips", items: [{ t: "Upper frenulum" }, { t: "Lower frenulum" }] } },
+        { q: "When can I return to my activities?", a: "Since it is a short outpatient procedure, you can usually get back to your routine soon, following the care instructions the doctor gives you." },
+      ],
+    },
+  },
+  {
+    service: "implantes-cirugia-oral",
+    index: 4,
+    slug: "frenilectomia-lingual",
+    booking: { s: "cirugia-oral", withOption: true },
+    es: {
+      summary: "Liberación del frenillo de la lengua cuando es corto o grueso y limita sus movimientos.",
+      what: "El frenillo lingual es el pliegue que une la parte de abajo de la lengua con el piso de la boca. Cuando es corto o grueso, lo que se conoce como anquiloglosia o «lengua atada», limita los movimientos de la lengua y puede afectar el habla, la deglución o la higiene. La frenilectomía lingual libera la lengua en una cirugía breve con anestesia local.",
+      art: {
+        labels: [
+          { t: "Lengua", s: "se eleva con libertad" },
+          { t: "Frenillo", s: "corto, la sujeta" },
+          { t: "Piso de boca", s: "donde se une" },
+          { t: "Liberación", s: "con anestesia local" },
+        ],
+        caption: "Un frenillo corto sujeta la lengua al piso de la boca. Al liberarlo, la lengua se mueve con libertad.",
+      },
+      facts: [
+        { i: "anest", t: "Anestesia local", s: "Sin dolor durante el procedimiento" },
+        { i: "sparkle", t: "Más movilidad", s: "La lengua queda libre" },
+        { i: "home", t: "Ambulatorio", s: "Se va a casa el mismo día" },
+        { i: "tag", t: "RD$25,000", s: "Procedimiento completo" },
+      ],
+      forWho: [
+        "Dificultad para sacar la lengua o elevarla hacia el paladar.",
+        "La punta de la lengua toma forma de corazón al sacarla.",
+        "Dificultad para pronunciar algunos sonidos, cuando el especialista lo relaciona con el frenillo.",
+        "Indicación de su odontólogo, ortodoncista o terapista del lenguaje.",
+      ],
+      steps: [
+        { t: "Valoración", d: "La doctora evalúa el frenillo y el movimiento de la lengua para confirmar si la frenilectomía es la mejor opción." },
+        { t: "Frenilectomía", d: "Con anestesia local se libera el frenillo y la zona se cierra con puntos finos." },
+        { t: "Indicaciones y control", d: "Se le explican los cuidados en casa y, si la doctora lo indica, ejercicios para la lengua. Se programa un control para revisar la cicatrización." },
+      ],
+      recovery: "Las molestias suelen ser leves los primeros días y se controlan con los medicamentos que indique la doctora. Se recomienda dieta blanda, buena higiene y seguir los ejercicios que le indiquen.",
+      care: {
+        expect: [
+          { ic: "shield", t: "Durante el procedimiento", s: "Con anestesia local, no debe sentir dolor." },
+          { ic: "leaf", t: "Primeros días", s: "Molestias leves y algo de inflamación, que se controlan con los medicamentos indicados." },
+          { ic: "crown", t: "Con el tiempo", s: "La zona cicatriza y el movimiento queda libre." },
+        ],
+        items: [
+          { ic: "pill", t: "Medicamentos", s: "Los que indique la doctora" },
+          { ic: "bowl", t: "Dieta blanda", s: "Alimentos suaves" },
+          { ic: "brush", t: "Buena higiene", s: "Para cuidar la zona" },
+          { ic: "calendar", t: "Controles", s: "Asista a su revisión" },
+        ],
+      },
+      price: {
+        lines: [{ label: "Frenilectomía lingual", value: "RD$25,000" }],
+        note: "Con anestesia local. Si ya le indicaron la frenilectomía, puede agendarla directamente como procedimiento.",
+      },
+      faqs: [
+        { q: "¿Duele?", a: "No durante el procedimiento, porque se realiza con anestesia local. Después puede haber molestias leves, que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
+        { q: "¿Mejora el habla?", a: "La cirugía libera el movimiento de la lengua. Cuando hay dificultades del habla, en algunos casos también se recomienda terapia del lenguaje. La doctora le orientará según su caso." },
+        { q: "¿Cuándo puedo volver a mis actividades?", a: "Al ser una cirugía breve y ambulatoria, por lo general puede retomar su rutina pronto, siguiendo los cuidados que le indique la doctora." },
+      ],
+    },
+    en: {
+      summary: "Release of the tongue frenulum when it is short or thick and limits movement.",
+      what: "The tongue frenulum is the fold that connects the underside of the tongue to the floor of the mouth. When it is short or thick, known as ankyloglossia or \"tongue-tie\", it limits tongue movement and can affect speech, swallowing or oral hygiene. A tongue frenectomy releases the tongue in a short procedure under local anesthesia.",
+      art: {
+        labels: [
+          { t: "Tongue", s: "lifts freely" },
+          { t: "Frenulum", s: "short, holds it down" },
+          { t: "Mouth floor", s: "where it attaches" },
+          { t: "Release", s: "under local anesthesia" },
+        ],
+        caption: "A short frenulum ties the tongue to the floor of the mouth. Once released, the tongue moves freely.",
+      },
+      facts: [
+        { i: "anest", t: "Local anesthesia", s: "No pain during the procedure" },
+        { i: "sparkle", t: "More mobility", s: "The tongue is set free" },
+        { i: "home", t: "Outpatient", s: "You go home the same day" },
+        { i: "tag", t: "RD$25,000", s: "Complete procedure" },
+      ],
+      forWho: [
+        "Difficulty sticking the tongue out or lifting it toward the palate.",
+        "The tip of the tongue looks heart-shaped when stuck out.",
+        "Difficulty pronouncing some sounds, when a specialist links it to the frenulum.",
+        "A recommendation from your dentist, orthodontist or speech therapist.",
+      ],
+      steps: [
+        { t: "Assessment", d: "The doctor assesses the frenulum and tongue movement to confirm whether a frenectomy is the best option." },
+        { t: "Frenectomy", d: "Under local anesthesia, the frenulum is released and the area is closed with fine stitches." },
+        { t: "Instructions and follow-up", d: "You receive home-care instructions and, if the doctor recommends them, tongue exercises. A follow-up visit is scheduled to check healing." },
+      ],
+      recovery: "Discomfort is usually mild during the first days and is controlled with the medication the doctor prescribes. A soft diet, good hygiene and following the recommended exercises are advised.",
+      care: {
+        expect: [
+          { ic: "shield", t: "During the procedure", s: "With local anesthesia, you should not feel pain." },
+          { ic: "leaf", t: "First days", s: "Mild discomfort and some swelling, controlled with the prescribed medication." },
+          { ic: "crown", t: "Over time", s: "The area heals and movement is free." },
+        ],
+        items: [
+          { ic: "pill", t: "Medication", s: "As prescribed by the doctor" },
+          { ic: "bowl", t: "Soft diet", s: "Gentle foods" },
+          { ic: "brush", t: "Good hygiene", s: "To care for the area" },
+          { ic: "calendar", t: "Follow-up", s: "Attend your check-up" },
+        ],
+      },
+      price: {
+        lines: [{ label: "Tongue frenectomy", value: "RD$25,000" }],
+        note: "Under local anesthesia. If the frenectomy has already been recommended, you can book it directly as a procedure.",
+      },
+      faqs: [
+        { q: "Does it hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort, controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
+        { q: "Will it improve speech?", a: "The surgery frees the tongue's movement. When there are speech difficulties, speech therapy is sometimes recommended as well. The doctor will guide you according to your case." },
+        { q: "When can I return to my activities?", a: "Since it is a short outpatient procedure, you can usually get back to your routine soon, following the care instructions the doctor gives you." },
+      ],
+    },
+  },
+  {
     service: "cirugia-estetica-facial",
     index: 0,
     slug: "lipopapada-perfilamiento-mandibular",

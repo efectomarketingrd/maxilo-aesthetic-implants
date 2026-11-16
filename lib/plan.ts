@@ -3,7 +3,7 @@
 import { agenda } from "./agenda";
 
 export type PlanKind =
-  | "implant" | "molar" | "oral"
+  | "implant" | "molar" | "oral" | "frenlab" | "frenling"
   | "lipo" | "platisma" | "blefaro" | "oto" | "bichat" | "facelift" | "lobule" | "wart"
   | "botox" | "harmony" | "filler" | "rejuv" | "prpcap" | "prpfac" | "lift" | "bio"
   | "fracture" | "malform" | "recon";
@@ -17,6 +17,8 @@ export const PLAN: Record<PlanKind, { mode: PlanMode; visual: "face" | "teeth"; 
   implant: { mode: "single", visual: "teeth", defaults: [0] },
   molar: { mode: "multi", visual: "teeth", defaults: [2, 3] },
   oral: { mode: "multi", visual: "face", defaults: [1] },
+  frenlab: { mode: "multi", visual: "face", defaults: [0] },
+  frenling: { mode: "none", visual: "face", defaults: [0] },
   lipo: { mode: "multi", visual: "face", defaults: [0, 1] },
   platisma: { mode: "none", visual: "face", defaults: [0] },
   blefaro: { mode: "multi", visual: "face", defaults: [0] },
@@ -44,6 +46,10 @@ export function planPrice(id: PlanKind, zones: number[]): number | null {
   switch (id) {
     case "molar":
       return n * (n === 1 ? agenda.molarPrice : n === 4 ? agenda.molarPriceAll4 : agenda.molarPrice23);
+    case "frenlab":
+      return n * agenda.frenLabPrice;
+    case "frenling":
+      return agenda.frenLingPrice;
     case "lobule":
       return n * agenda.lobulePrice;
     case "wart":

@@ -74,6 +74,8 @@ export const agenda = {
   threadBioPrice: 24500,
   // Lobuloplastia: por oreja · Eliminación de verrugas: por área
   lobulePrice: 10000,
+  frenLabPrice: 15000, // frenilectomía labial, por frenillo (superior o inferior)
+  frenLingPrice: 25000, // frenilectomía lingual
   wartPrice: 8000,
 
   // PRP capilar: precio por sesión y planes (los planes se pagan completos al inicio)

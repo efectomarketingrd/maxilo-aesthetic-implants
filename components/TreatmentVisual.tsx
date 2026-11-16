@@ -1360,10 +1360,139 @@ function GraftDiagram({ labels }: { labels: ArtLabel[] }) {
   );
 }
 
+// Frenilectomía labial: el labio superior levantado muestra un frenillo grueso que tira de la encía y separa
+// los incisivos; una línea dorada lo libera y queda solo un pequeño pliegue.
+function LipFrenumDiagram({ labels }: { labels: ArtLabel[] }) {
+  const TOOTH = (x: number, w: number, h: number) => `M${x} 182 L${x + w} 182 L${x + w - 1} ${182 + h - 10} Q${x + w / 2} ${182 + h + 4} ${x + 1} ${182 + h - 10} Z`;
+  return (
+    <svg className="tx-svg" viewBox="0 74 374 200" role="img" aria-label={aria(labels)}>
+      <defs>
+        <linearGradient id="txLip" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#e7a69d" />
+          <stop offset="1" stopColor="#d98d84" />
+        </linearGradient>
+        <linearGradient id="txGum" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f3c3bb" />
+          <stop offset="1" stopColor="#eeb2a9" />
+        </linearGradient>
+      </defs>
+      {/* labio levantado */}
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <path d="M18 96 Q115 70 212 96 L212 118 Q115 136 18 118 Z" fill="url(#txLip)" />
+        <path d="M24 116 Q115 134 206 116 L200 150 Q115 164 30 150 Z" fill="#f6d0c9" />
+        <path d="M28 120 Q115 138 202 120" fill="none" stroke="#d98d84" strokeWidth="1.4" opacity="0.6" />
+      </g>
+      {/* encía y dientes */}
+      <g className="tx-in" style={css({ "--d": 0.3 })}>
+        <path d="M30 150 Q115 164 200 150 L200 190 L30 190 Z" fill="url(#txGum)" />
+        {[
+          [44, 20, 50],
+          [66, 22, 58],
+          [90, 23, 66],
+          [117, 23, 66],
+          [142, 22, 58],
+          [166, 20, 50],
+        ].map(([x, w, h], k) => (
+          <path key={k} d={TOOTH(x, w, h)} fill="#fff" stroke="#d9cfc0" strokeWidth="1.6" strokeLinejoin="round" />
+        ))}
+        {/* festoneado de la encía */}
+        <path d="M30 186 Q54 170 64 186 Q77 168 88 186 Q101 166 113 186 Q115 180 117 186 Q128 166 140 186 Q152 168 164 186 Q176 170 200 186 L200 178 L30 178 Z" fill="#eeb2a9" />
+      </g>
+      {/* frenillo grueso (antes) */}
+      <g className="tx-out" style={css({ "--d": 2.4 })}>
+        <path d="M107 124 Q111 156 112 186 L118 186 Q119 156 123 124 Z" fill="#d0786e" />
+        <path d="M110 130 Q113 160 114 184" stroke="#b9645b" strokeWidth="1" fill="none" opacity="0.7" />
+      </g>
+      {/* línea de corte */}
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 1.6 })} d="M98 158 H132" stroke="#be9d61" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="4 3" />
+      {/* después: pequeño pliegue y zona liberada */}
+      <path className="tx-show" style={css({ "--d": 2.7 })} d="M111 126 Q114 136 114.5 142 L115.5 142 Q116 136 119 126 Z" fill="#d98d84" />
+      <g className="tx-zone" style={css({ "--d": 3 })}>
+        <circle cx="115" cy="164" r="13" fill="none" stroke="#be9d61" strokeWidth="1.4" />
+        <circle cx="115" cy="164" r="3" fill="#be9d61" />
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M192 104 L 206 100 H226", x: 192, y: 104, ly: 100, t: 0.4 },
+          { d: "M121 140 L 206 148 H226", x: 121, y: 140, ly: 148, t: 0.9 },
+          { d: "M170 180 L 206 196 H226", x: 170, y: 180, ly: 196, t: 1.3 },
+          { d: "M128 164 L 206 244 H226", x: 128, y: 164, ly: 244, t: 3 },
+        ]}
+      />
+    </svg>
+  );
+}
+
+// Frenilectomía lingual: boca abierta con la lengua levantada; un frenillo corto la une al piso de la boca
+// (punta en forma de corazón). Se libera y la lengua sube con la punta redondeada.
+function TongueFrenumDiagram({ labels }: { labels: ArtLabel[] }) {
+  return (
+    <svg className="tx-svg" viewBox="0 74 374 200" role="img" aria-label={aria(labels)}>
+      <defs>
+        <clipPath id="txMouth">
+          <ellipse cx="115" cy="176" rx="86" ry="78" />
+        </clipPath>
+        <linearGradient id="txTongue" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#f0a49a" />
+          <stop offset="1" stopColor="#e48d83" />
+        </linearGradient>
+      </defs>
+      {/* labios y boca */}
+      <g className="tx-in" style={css({ "--d": 0 })}>
+        <ellipse cx="115" cy="176" rx="100" ry="92" fill="#e7a69d" />
+        <ellipse cx="115" cy="176" rx="86" ry="78" fill="#a9504a" />
+      </g>
+      <g clipPath="url(#txMouth)">
+        {/* dientes de arriba y de abajo */}
+        <g className="tx-in" style={css({ "--d": 0.2 })}>
+          {[-3, -2, -1, 0, 1, 2].map((k) => (
+            <rect key={`u${k}`} x={115 + k * 20 + 1} y="96" width="18" height="20" rx="5" fill="#fff" />
+          ))}
+          {/* piso de la boca */}
+          <path d="M28 214 Q115 196 202 214 L202 260 L28 260 Z" fill="#d97c72" />
+          {[-3, -2, -1, 0, 1, 2].map((k) => (
+            <rect key={`l${k}`} x={115 + k * 18 + 1} y="236" width="16" height="18" rx="5" fill="#fff" />
+          ))}
+        </g>
+        {/* antes: lengua sujeta, punta en corazón */}
+        <g className="tx-out" style={css({ "--d": 2.4 })}>
+          <path d="M58 212 C 56 160, 84 136, 106 142 L115 154 L124 142 C 146 136, 174 160, 172 212 Q115 222 58 212 Z" fill="url(#txTongue)" />
+          <path d="M100 168 Q104 190 108 208 M130 168 Q126 190 122 208" stroke="#c96b62" strokeWidth="1.3" fill="none" opacity="0.6" />
+          <path d="M110 206 Q113 222 112 234 L118 234 Q117 222 120 206 Z" fill="#c4645b" />
+        </g>
+        {/* después: lengua más alta y punta redondeada */}
+        <g className="tx-show" style={css({ "--d": 2.7 })}>
+          <path d="M58 200 C 58 140, 88 112, 115 112 C 142 112, 172 140, 172 200 Q115 212 58 200 Z" fill="url(#txTongue)" />
+          <path d="M100 150 Q104 172 108 196 M130 150 Q126 172 122 196" stroke="#c96b62" strokeWidth="1.3" fill="none" opacity="0.6" />
+          <path d="M112 202 Q114 210 114.5 214 L115.5 214 Q116 210 118 202 Z" fill="#c4645b" />
+        </g>
+      </g>
+      {/* línea de corte */}
+      <path className="tx-draw" pathLength={1} style={css({ "--d": 1.6 })} d="M98 222 H132" stroke="#be9d61" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="4 3" />
+      <g className="tx-zone" style={css({ "--d": 3 })}>
+        <circle cx="115" cy="222" r="12" fill="none" stroke="#be9d61" strokeWidth="1.4" />
+        <circle cx="115" cy="222" r="3" fill="#be9d61" />
+      </g>
+      <Labels
+        labels={labels}
+        items={[
+          { d: "M150 150 L 206 100 H226", x: 150, y: 150, ly: 100, t: 0.4 },
+          { d: "M118 214 L 206 148 H226", x: 118, y: 214, ly: 148, t: 0.9 },
+          { d: "M170 236 L 206 196 H226", x: 170, y: 236, ly: 196, t: 1.3 },
+          { d: "M127 222 L 206 244 H226", x: 127, y: 222, ly: 244, t: 3 },
+        ]}
+      />
+    </svg>
+  );
+}
+
 const arts: Record<string, (p: { labels: ArtLabel[] }) => React.ReactElement> = {
   "implantes-dentales": ImplantDiagram,
   "extraccion-cordales": WisdomDiagram,
   "cirugia-oral-maxilofacial": FaceZonesDiagram,
+  "frenilectomia-labial": LipFrenumDiagram,
+  "frenilectomia-lingual": TongueFrenumDiagram,
   "lipopapada-perfilamiento-mandibular": DoubleChinDiagram,
   platismoplastia: NeckBandsDiagram,
   blefaroplastia: EyelidDiagram,
