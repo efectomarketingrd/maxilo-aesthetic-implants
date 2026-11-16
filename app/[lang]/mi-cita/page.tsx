@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import CopyBtn from "@/components/CopyBtn";
 import { WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { rd, usd } from "@/lib/agenda";
+import { rd, usd, formatTime } from "@/lib/agenda";
 import { readCita } from "@/lib/cita";
-import { site, waLink, xrayCenters, type Locale } from "@/lib/site";
+import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 
 // "Mi cita": página personal (enlace con los datos de la solicitud) con el resumen y cómo pagar.
 // No se indexa: es de cada paciente.
@@ -29,7 +29,20 @@ export default async function MiCita({ params, searchParams }: { params: Promise
   const t = dictionaries[lang];
   const b = t.booking;
   const k = b.cita;
-  const c = readCita((await searchParams).c);
+  const raw = readCita((await searchParams).c);
+  // los textos se reconstruyen con el diccionario del idioma
+  const c = raw
+    ? (() => {
+        const svc = b.services[raw.sv]?.name ?? "";
+        const ctr = centers.find((x) => x.id === raw.pl);
+        return {
+          ...raw,
+          s: [svc, raw.sub].filter(Boolean).join(" — "),
+          p: raw.m === "online" || !ctr ? b.modes.online : `${ctr.name} · ${ctr.town}`,
+          h: raw.hm ? formatTime(raw.hm, lang) : raw.x ? b.timeTbd : "",
+        };
+      })()
+    : null;
 
   const [y, mo, d] = (c?.d ?? "2000-01-01").split("-").map(Number);
   const dateLabel = new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", {

@@ -369,11 +369,11 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const myCita = date
     ? citaUrl(lang, {
         n: form.name.trim(),
-        s: svcFull,
+        sv: b.services.findIndex((s) => s.id === service),
+        sub: subs.length ? subsText : "",
         d: toKey(date),
-        h: timeLabel,
         hm: ext ? "" : special ? specialTime : (time ?? ""),
-        p: effMode === "presencial" ? `${center.name} · ${center.town}` : b.modes.online,
+        pl: effMode === "presencial" ? center.id : "o",
         k: isProc ? "procedimiento" : "consulta",
         m: effMode,
         x: extDeposit ? 1 : 0,
