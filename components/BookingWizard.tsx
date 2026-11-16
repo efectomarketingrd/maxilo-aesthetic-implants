@@ -176,10 +176,20 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const procMin = new Date(today.getFullYear(), today.getMonth(), today.getDate() + agenda.procMinDaysAhead);
   const firstDate = type === "procedimiento" && !special ? procMin : minDate;
   const inRange = (d: Date) => d >= firstDate && d <= maxDate;
+  // Citas para hoy: solo las horas que aún no han pasado (con un margen de agenda.todayLeadMinutes)
+  const isToday = (d: Date) => toKey(d) === toKey(today);
+  const notPast = (d: Date, hhmm: string) => {
+    if (!isToday(d)) return true;
+    const [h, m] = hhmm.split(":").map(Number);
+    const now = new Date();
+    return h * 60 + m >= now.getHours() * 60 + now.getMinutes() + agenda.todayLeadMinutes;
+  };
   const selectable = (d: Date) => {
     if (!inRange(d)) return false;
     if (agenda.closedDates.includes(toKey(d))) return false;
-    return special || ext ? d.getDay() !== 0 : isOpenDay(d);
+    if (ext) return d.getDay() !== 0;
+    if (special) return d.getDay() !== 0 && (!isToday(d) || SPECIAL_HOURS.some((h) => notPast(d, h)));
+    return isOpenDay(d) && (!isToday(d) || slotsFor(d).some((s) => s.type === type && notPast(d, s.time)));
   };
 
   const canPrev = new Date(cursor.getFullYear(), cursor.getMonth(), 0) >= firstDate;
@@ -197,7 +207,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   }, [firstKey]);
   const canNext = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1) <= maxDate;
 
-  const daySlots = date && !special && !ext ? slotsFor(date).filter((s) => s.type === type) : [];
+  const daySlots = date && !special && !ext ? slotsFor(date).filter((s) => s.type === type && notPast(date, s.time)) : [];
   const weekHeads = [1, 2, 3, 4, 5, 6, 0].map((i) => b.days[i]);
 
   const svcName = b.services.find((s) => s.id === service)?.name ?? "";
@@ -988,7 +998,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <div className="bk2-in" key="special">
                     <p className="times__title">{b.specialTime}</p>
                     <div className="times__grid bk2-hours">
-                      {SPECIAL_HOURS.map((h, i) => (
+                      {SPECIAL_HOURS.filter((h) => notPast(date, h)).map((h, i) => (
                         <button
                           type="button"
                           key={h}

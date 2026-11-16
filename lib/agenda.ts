@@ -44,8 +44,10 @@ export const agenda = {
   // Hasta cuántos días hacia adelante se puede agendar
   maxDaysAhead: 60,
 
-  // Días mínimos de anticipación (1 = desde mañana)
-  minDaysAhead: 1,
+  // Días mínimos de anticipación (0 = desde hoy; hoy solo muestra las horas que aún no han pasado)
+  minDaysAhead: 0,
+  // Hoy: minutos mínimos entre "ahora" y la hora de la cita
+  todayLeadMinutes: 30,
 
   // Procedimientos: días mínimos de anticipación y anticipo mínimo (%)
   procMinDaysAhead: 7,
