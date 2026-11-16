@@ -13,7 +13,7 @@ import { WaIcon } from "./Icons";
 type Plan = { id: PlanKind; zones: number[] }[];
 
 // Tratamientos que pueden hacerse el mismo día de la consulta (entonces la consulta se descuenta)
-const SAME_DAY: PlanKind[] = ["molar", "botox", "harmony", "filler", "rejuv", "prpcap", "prpfac", "lift", "bio", "lobule", "wart"];
+const SAME_DAY: PlanKind[] = ["molar", "frenlab", "frenling", "botox", "harmony", "filler", "rejuv", "prpcap", "prpfac", "lift", "bio", "lobule", "wart"];
 
 type Item = { id: PlanKind; slug: string; service: string; name: string; info: string; tag: string; note: string; zones: string[]; pick?: string };
 

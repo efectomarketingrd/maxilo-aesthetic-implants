@@ -244,7 +244,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const sameDay =
     (service === "medicina-estetica" && subs.some((x) => med.includes(x))) ||
     (service === "estetica-facial" && subs.some((x) => x === lobuleOpt || x === wartOpt)) ||
-    (service === "cirugia-oral" && subs.includes(molarOpt)); // cordales: la doctora confirmó que puede extraerlas el mismo día
+    (service === "cirugia-oral" && subs.some((x) => x === molarOpt || x === frenLabOpt || x === frenLingOpt)); // cordales y frenillos: confirmados por la doctora
   // en cirugía oral, si solo se eligen frenillos no se pide radiografía
   const onlyFren = service === "cirugia-oral" && subs.length > 0 && subs.every((x) => x === frenLabOpt || x === frenLingOpt);
   const xray = ["implantes", "cirugia-oral", "reconstructiva", "paquete"].includes(service ?? "") && !onlyFren;

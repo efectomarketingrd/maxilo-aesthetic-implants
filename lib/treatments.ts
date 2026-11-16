@@ -417,6 +417,7 @@ export const treatments: Treatment[] = [
       },
       faqs: [
         { q: "¿Duele?", a: "No durante el procedimiento, porque se realiza con anestesia local. Después puede haber molestias leves, que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
+        { q: "¿Necesito radiografía?", a: "No. El frenillo es un tejido blando, así que no hace falta radiografía previa: la doctora lo evalúa directamente en la consulta." },
         { q: "¿Qué frenillo necesito tratar?", a: "La doctora lo determina en la valoración: puede ser el superior, el inferior o, en algunos casos, ambos. Cada frenillo tiene un costo de RD$15,000.", viz: { kind: "chips", items: [{ t: "Frenillo superior" }, { t: "Frenillo inferior" }] } },
         { q: "¿Cuándo puedo volver a mis actividades?", a: "Al ser una cirugía breve y ambulatoria, por lo general puede retomar su rutina pronto, siguiendo los cuidados que le indique la doctora." },
       ],
@@ -473,6 +474,7 @@ export const treatments: Treatment[] = [
       },
       faqs: [
         { q: "Does it hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort, controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
+        { q: "Do I need an X-ray?", a: "No. The frenulum is soft tissue, so no X-ray is needed beforehand: the doctor assesses it directly at the consultation." },
         { q: "Which frenulum do I need treated?", a: "The doctor determines this at the assessment: it may be the upper, the lower or, in some cases, both. Each frenulum costs RD$15,000.", viz: { kind: "chips", items: [{ t: "Upper frenulum" }, { t: "Lower frenulum" }] } },
         { q: "When can I return to my activities?", a: "Since it is a short outpatient procedure, you can usually get back to your routine soon, following the care instructions the doctor gives you." },
       ],
@@ -532,6 +534,7 @@ export const treatments: Treatment[] = [
       },
       faqs: [
         { q: "¿Duele?", a: "No durante el procedimiento, porque se realiza con anestesia local. Después puede haber molestias leves, que se controlan con medicamentos.", viz: { kind: "flow", items: [{ t: "Durante", s: "Sin dolor, con anestesia local" }, { t: "Después", s: "Molestias leves, con medicamentos" }] } },
+        { q: "¿Necesito radiografía?", a: "No. El frenillo es un tejido blando, así que no hace falta radiografía previa: la doctora lo evalúa directamente en la consulta." },
         { q: "¿Mejora el habla?", a: "La cirugía libera el movimiento de la lengua. Cuando hay dificultades del habla, en algunos casos también se recomienda terapia del lenguaje. La doctora le orientará según su caso." },
         { q: "¿Cuándo puedo volver a mis actividades?", a: "Al ser una cirugía breve y ambulatoria, por lo general puede retomar su rutina pronto, siguiendo los cuidados que le indique la doctora." },
       ],
@@ -585,6 +588,7 @@ export const treatments: Treatment[] = [
       },
       faqs: [
         { q: "Does it hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort, controlled with medication.", viz: { kind: "flow", items: [{ t: "During", s: "No pain, local anesthesia" }, { t: "After", s: "Mild discomfort, medication" }] } },
+        { q: "Do I need an X-ray?", a: "No. The frenulum is soft tissue, so no X-ray is needed beforehand: the doctor assesses it directly at the consultation." },
         { q: "Will it improve speech?", a: "The surgery frees the tongue's movement. When there are speech difficulties, speech therapy is sometimes recommended as well. The doctor will guide you according to your case." },
         { q: "When can I return to my activities?", a: "Since it is a short outpatient procedure, you can usually get back to your routine soon, following the care instructions the doctor gives you." },
       ],
