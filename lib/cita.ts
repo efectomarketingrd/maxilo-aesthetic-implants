@@ -6,7 +6,7 @@
 import { site, type Locale } from "./site";
 
 export type Cita = {
-  n: string; // nombre (solo el primero)
+  n: string; // nombre del paciente
   sv: number; // índice del servicio en booking.services (-1 = sin servicio)
   sub: string; // opciones elegidas (texto)
   d: string; // fecha AAAA-MM-DD
@@ -43,7 +43,7 @@ export function citaUrl(lang: Locale, c: Cita) {
   const flags = (c.k === "procedimiento" ? 1 : 0) | (c.m === "online" ? 2 : 0) | (c.x ? 4 : 0) | (c.dt ? 8 : 0) | (c.r ? 16 : 0) | (c.ok ? 32 : 0);
   const parts = [
     lang === "en" ? "e" : "s",
-    clean(c.n.split(/\s+/)[0] ?? ""),
+    clean(c.n).replace(/\s+/g, " ").slice(0, 40),
     c.sv < 0 ? "" : c.sv.toString(36),
     clean(c.sub),
     c.d.slice(2).replace(/-/g, ""),

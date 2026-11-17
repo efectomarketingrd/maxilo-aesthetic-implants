@@ -61,6 +61,13 @@ export default async function MiCita({ params, searchParams }: { params: Promise
   const ev = c && ok ? citaEvent(c, lang, `${site.url}/c/${code}`) : null;
 
   const ext = c?.x === 1;
+  const ctr = c ? centers.find((x) => x.id === c.pl) : undefined;
+  const isMain = !!ctr && ctr.main && c?.m === "presencial";
+  const loc = lang === "es" ? "es-DO" : "en-US";
+  const cap = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
+  const dd = new Date(Date.UTC(y, mo - 1, d, 12));
+  const weekday = cap(dd.toLocaleDateString(loc, { weekday: "long", timeZone: "UTC" }));
+  const dayLong = dd.toLocaleDateString(loc, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const consultAtCenter = c && c.k === "consulta" && c.m === "presencial" && !ext;
   const proof = waLink(k.proofMsg.replace("{svc}", c?.s ?? "").replace("{date}", dateLabel));
 
@@ -84,38 +91,90 @@ export default async function MiCita({ params, searchParams }: { params: Promise
 
               {/* Resumen */}
               <div className="mc-card mc-ticket">
-                <span className={`mc-status${ext ? " is-ext" : ""}${ok && !ext ? " is-ok" : ""}`}>
-                  <i aria-hidden="true" />
-                  {ext ? (ok ? k.statusExtOk : k.statusExt) : ok ? k.statusOk : k.status}
-                </span>
-                <div className="mc-date">
-                  <span className="mc-date__sheet" aria-hidden="true">
-                    <small>{new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", { month: "short", timeZone: "UTC" }).replace(".", "")}</small>
-                    <strong>{d}</strong>
+                <div className="mc-ticket__top">
+                  <span className={`mc-status${ext ? " is-ext" : ""}${ok && !ext ? " is-ok" : ""}`}>
+                    <i aria-hidden="true" />
+                    {ext ? (ok ? k.statusExtOk : k.statusExt) : ok ? k.statusOk : k.status}
                   </span>
-                  <div>
-                    <strong className="mc-date__day">{dateLabel}</strong>
-                    <span>{c.h || b.timeTbd}</span>
+                  <div className="mc-when2">
+                    <span className="bk2-addcal__sheet mc-sheet" aria-hidden="true">
+                      <span className="bk2-addcal__rings">
+                        <i />
+                        <i />
+                      </span>
+                      <span className="bk2-addcal__month">{new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", { month: "short", timeZone: "UTC" }).replace(".", "")}</span>
+                      <strong className="bk2-addcal__day">{d}</strong>
+                    </span>
+                    <div className="mc-when2__txt">
+                      <small>{weekday}</small>
+                      <strong>{dayLong}</strong>
+                      <span className="mc-time">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <circle cx="12" cy="12" r="8.5" />
+                          <path d="M12 7.5V12l3 2" />
+                        </svg>
+                        {c.h || b.timeTbd}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <dl>
-                  <div>
-                    <dt>{b.service}</dt>
-                    <dd>{c.s}</dd>
-                  </div>
-                  <div>
-                    <dt>{b.type}</dt>
-                    <dd>
-                      {b.types[c.k]} · {b.modes[c.m]}
-                    </dd>
-                  </div>
-                  {c.m === "presencial" && (
+                <ul className="mc-info">
+                  <li>
+                    <span className="mc-info__ico" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6" /><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6" /></svg>
+                    </span>
                     <div>
-                      <dt>{b.place}</dt>
-                      <dd>{c.p}</dd>
+                      <small>{k.patient}</small>
+                      <strong>{c.n}</strong>
                     </div>
-                  )}
-                </dl>
+                  </li>
+                  <li>
+                    <span className="mc-info__ico" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 4.6 4.9.4-3.7 3.2 1.1 4.8L12 14l-4.2 2.5 1.1-4.8-3.7-3.2 4.9-.4z" /></svg>
+                    </span>
+                    <div>
+                      <small>{b.service}</small>
+                      <strong>{c.s}</strong>
+                      <span>
+                        {b.types[c.k]} · {b.modes[c.m]}
+                      </span>
+                    </div>
+                  </li>
+                  <li>
+                    <span className="mc-info__ico" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M9 4.5v4a3 3 0 0 0 6 0v-4M12 11.5v3.5a4 4 0 0 0 8 0v-1.5" /><circle cx="20" cy="12" r="1.6" /></svg>
+                    </span>
+                    <div>
+                      <small>{k.doctor}</small>
+                      <strong>{t.about.doctorName}</strong>
+                    </div>
+                  </li>
+                  <li>
+                    <span className="mc-info__ico" aria-hidden="true">
+                      {c.m === "online" ? (
+                        <svg viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5" /><path d="M15.5 10.5l5-3v9l-5-3" /></svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.4" /></svg>
+                      )}
+                    </span>
+                    <div>
+                      <small>{c.m === "online" ? b.modes.online : b.place}</small>
+                      {c.m === "online" ? (
+                        <span>{k.online}</span>
+                      ) : (
+                        <>
+                          <strong>{ctr?.name ?? c.p}</strong>
+                          <span>{isMain ? `${site.address.street}, ${site.address.locality}` : ctr?.town}</span>
+                          {isMain && (
+                            <a className="mc-info__link" href={site.maps} target="_blank" rel="noopener noreferrer">
+                              {k.directions} →
+                            </a>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </li>
+                </ul>
               </div>
 
               {c.r === 1 && (
@@ -138,10 +197,7 @@ export default async function MiCita({ params, searchParams }: { params: Promise
               {/* Pago */}
               <div className="mc-card mc-pay">
                 <h2>{k.payT}</h2>
-                <div className={`mc-when${ext ? " is-ext" : ""}`}>
-                  <strong>{ext ? k.extT : ok ? k.okT : k.waitT}</strong>
-                  <p>{ext ? k.ext : ok ? (consultAtCenter ? k.okCenter : k.ok) : k.wait}</p>
-                </div>
+                {!ok && !ext && <p className="mc-pending">{k.pendingNote}</p>}
                 <ul className="mc-lines">
                   <li>
                     <span>{k.total}</span>
@@ -235,11 +291,9 @@ export default async function MiCita({ params, searchParams }: { params: Promise
               )}
 
               <div className="mc-foot">
-                <a className="btn btn--wa" href={waLink("")} target="_blank" rel="noopener">
-                  <WaIcon /> WhatsApp {site.phones[0]}
-                </a>
-                <Link className="mc-new" href={`/${lang}/agendar`}>
-                  {k.newBooking} →
+                <p>{k.newT}</p>
+                <Link className="btn btn--line mc-new" href={`/${lang}/agendar`}>
+                  {b.cita.newBooking}
                 </Link>
               </div>
             </>
