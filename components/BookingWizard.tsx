@@ -1241,12 +1241,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <div>
                     <strong>{extDeposit ? b.cost.extDepositPct : b.cita.doneT}</strong>
                     <p>{extDeposit ? b.cita.doneExt : b.cita.done}</p>
-                    <div className="bk2-mycita__btns">
-                      <a href={myCita} target="_blank" rel="noopener">
-                        {b.cita.open} →
-                      </a>
-                      <CopyBtn text={myCita} label={b.cita.copyLink} done={b.cita.copied} />
-                    </div>
                   </div>
                 </div>
               )}
