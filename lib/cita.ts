@@ -20,6 +20,7 @@ export type Cita = {
   dt: 0 | 1; // anticipo a confirmar
   pf: number; // pago completo de plan PRP
   r: 0 | 1; // traer radiografía panorámica
+  ok?: 0 | 1; // enlace de la respuesta de confirmación (el del paciente al agendar va sin confirmar)
 };
 
 const toB64Url = (s: string) => {
@@ -39,7 +40,7 @@ const p36 = (s: string) => (s === "-" ? -1 : s ? parseInt(s, 36) || 0 : 0);
 const clean = (s: string) => s.replace(/~/g, "-").trim();
 
 export function citaUrl(lang: Locale, c: Cita) {
-  const flags = (c.k === "procedimiento" ? 1 : 0) | (c.m === "online" ? 2 : 0) | (c.x ? 4 : 0) | (c.dt ? 8 : 0) | (c.r ? 16 : 0);
+  const flags = (c.k === "procedimiento" ? 1 : 0) | (c.m === "online" ? 2 : 0) | (c.x ? 4 : 0) | (c.dt ? 8 : 0) | (c.r ? 16 : 0) | (c.ok ? 32 : 0);
   const parts = [
     lang === "en" ? "e" : "s",
     clean(c.n.split(/\s+/)[0] ?? ""),
@@ -84,6 +85,7 @@ export function readCita(raw: string | undefined): Cita | null {
       x: f & 4 ? 1 : 0,
       dt: f & 8 ? 1 : 0,
       r: f & 16 ? 1 : 0,
+      ok: f & 32 ? 1 : 0,
       t: p36(p[8]),
       dep: p36(p[9]),
       pf: p36(p[10]),

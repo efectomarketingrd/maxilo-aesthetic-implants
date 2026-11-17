@@ -8,7 +8,7 @@ import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType 
 import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
 import CopyBtn from "./CopyBtn";
-import { citaUrl } from "@/lib/cita";
+import { citaUrl, type Cita } from "@/lib/cita";
 
 function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -83,7 +83,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   const [step, setStep] = useState<Step>(0);
   const honey = useRef<HTMLInputElement>(null);
-  const [calSaved, setCalSaved] = useState<"" | "g" | "i">("");
   const [dir, setDir] = useState<"fwd" | "back">("fwd");
   const [reached, setReached] = useState<Step>(0);
   const [nudge, setNudge] = useState(0);
@@ -366,8 +365,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   }
 
   // Enlace personal "Mi cita" (resumen + cómo pagar), para no tener que repetir la reserva al confirmar
-  const myCita = date
-    ? citaUrl(lang, {
+  const citaData: Cita | null = date
+    ? {
         n: form.name.trim(),
         sv: b.services.findIndex((s) => s.id === service),
         sub: subs.length ? subsText : "",
@@ -381,16 +380,19 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
         dep: deposit,
         dt: showDeposit && !deposit ? 1 : 0,
         pf: planFull,
-        r: pano ? 1 : 0,
-      })
-    : "";
+        r: pano ? (1 as const) : (0 as const),
+      }
+    : null;
+  const myCita = citaData ? citaUrl(lang, citaData) : "";
+  // el enlace de la respuesta de confirmación muestra "Cita confirmada" y los botones del calendario
+  const myCitaOk = citaData ? citaUrl(lang, { ...citaData, ok: 1 }) : "";
   const firstName = form.name.trim().split(/\s+/)[0] ?? "";
   const staffReply = () =>
     (extDeposit ? b.cita.replyExt : b.cita.reply)
       .replace("{name}", firstName)
       .replace("{date}", dateLabel)
       .replace("{time}", rawTimeLabel())
-      .replace("{url}", myCita);
+      .replace("{url}", myCitaOk);
   function rawTimeLabel() {
     return !ext && timeLabel ? `${b.cita.at}${timeLabel}` : "";
   }
@@ -449,75 +451,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     if (json === lastSent.current) return;
     lastSent.current = json;
     fetch("/api/solicitud", { method: "POST", headers: { "Content-Type": "application/json" }, body: json, keepalive: true }).catch(() => {});
-  }
-
-  // "Añadir a mi calendario" para el paciente
-  const pad = (n: number) => String(n).padStart(2, "0");
-  function calRange() {
-    if (!date) return null;
-    const ymd = `${date.getFullYear()}${pad(date.getMonth() + 1)}${pad(date.getDate())}`;
-    if (!rawTime) {
-      const n = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-      return { allDay: true, a: ymd, z: `${n.getFullYear()}${pad(n.getMonth() + 1)}${pad(n.getDate())}`, start: date, end: n };
-    }
-    const [h, m] = rawTime.split(":").map(Number);
-    const start = new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
-    const end = new Date(start.getTime() + minutes * 60000);
-    const f = (d: Date) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-    return { allDay: false, a: f(start), z: f(end), start, end };
-  }
-  const calDetails = () =>
-    `${svcFull}${pano ? `\n${b.pano.cal}\n${b.pano.where}: ${xrayCenters.map((x) => `${x.name} (${x.area}) ${x.phone ?? ""}`.trim()).join(" · ")}` : ""}\n${b.calNote}${myCita ? `\n${b.cita.msgLink}: ${myCita}` : ""}\n${site.phones[0]} · ${site.email}`;
-  function googleCal() {
-    const r = calRange();
-    if (!r) return "#";
-    const q = new URLSearchParams({
-      action: "TEMPLATE",
-      text: b.calTitle,
-      dates: `${r.a}/${r.z}`,
-      details: calDetails(),
-      location: placeText,
-      ctz: "America/Santo_Domingo",
-    });
-    return `https://calendar.google.com/calendar/render?${q.toString()}`;
-  }
-  function downloadIcs() {
-    const r = calRange();
-    if (!r) return;
-    // República Dominicana: UTC-4 todo el año (sin horario de verano)
-    const utc = (d: Date) => {
-      const u = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours() + 4, d.getMinutes()));
-      return `${u.getUTCFullYear()}${pad(u.getUTCMonth() + 1)}${pad(u.getUTCDate())}T${pad(u.getUTCHours())}${pad(u.getUTCMinutes())}00Z`;
-    };
-    const esc = (x: string) => x.replace(/([,;])/g, "\\$1");
-    const ics = [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Maxilo Aesthetic Implants//Agenda//ES",
-      "BEGIN:VEVENT",
-      `UID:${Date.now()}@maxilo-aesthetic-implants`,
-      `DTSTAMP:${utc(new Date())}`,
-      r.allDay ? `DTSTART;VALUE=DATE:${r.a}` : `DTSTART:${utc(r.start)}`,
-      r.allDay ? `DTEND;VALUE=DATE:${r.z}` : `DTEND:${utc(r.end)}`,
-      `SUMMARY:${esc(b.calTitle)}`,
-      `DESCRIPTION:${esc(calDetails()).replace(/\n/g, "\\n")}`,
-      `LOCATION:${esc(placeText)}`,
-      "BEGIN:VALARM",
-      "TRIGGER:-PT2H",
-      "ACTION:DISPLAY",
-      `DESCRIPTION:${esc(b.calTitle)}`,
-      "END:VALARM",
-      "END:VEVENT",
-      "END:VCALENDAR",
-    ].join("\r\n");
-    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "cita-maxilo.ics";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
   function sendWa() {
@@ -1326,54 +1259,6 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
                   <Mail size={18} /> {b.sendMail}
                 </button>
               </div>
-              {date && (
-                <div className="bk2-addcal">
-                  <div className="bk2-addcal__sheet" aria-hidden="true">
-                    <span className="bk2-addcal__rings">
-                      <i />
-                      <i />
-                    </span>
-                    <span className="bk2-addcal__month">{date.toLocaleDateString(locale, { month: "short" }).replace(".", "")}</span>
-                    <strong className="bk2-addcal__day">{date.getDate()}</strong>
-                    <span className="bk2-addcal__time">{timeLabel}</span>
-                  </div>
-                  <div className="bk2-addcal__body">
-                    <p className="bk2-addcal__title">{b.addCal}</p>
-                    <p className="bk2-addcal__note">{b.calNote}</p>
-                    <div className="bk2-addcal__btns">
-                      <a
-                        className={`bk2-addcal__btn ${calSaved === "g" ? "is-saved" : ""}`}
-                        href={googleCal()}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => setCalSaved("g")}
-                      >
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
-                          <path d="M3.5 10h17M8 3v4M16 3v4" />
-                          <path className="bk2-addcal__mark" d="M9 15l2 2 4-4.5" />
-                        </svg>
-                        <span>{calSaved === "g" ? b.calSaved : "Google Calendar"}</span>
-                      </a>
-                      <button
-                        type="button"
-                        className={`bk2-addcal__btn ${calSaved === "i" ? "is-saved" : ""}`}
-                        onClick={() => {
-                          downloadIcs();
-                          setCalSaved("i");
-                        }}
-                      >
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <rect x="6.5" y="2.5" width="11" height="19" rx="2.6" />
-                          <path d="M6.5 7h11M10.5 19h3" />
-                          <path className="bk2-addcal__mark" d="M9.5 13l1.8 1.8 3.4-3.8" />
-                        </svg>
-                        <span>{calSaved === "i" ? b.calSaved : b.addCalIcs}</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
               <input ref={honey} type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="bk2-hp" />
               <p className="bk2-confirm">{b.confirmNote}</p>
             </div>

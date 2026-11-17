@@ -3,6 +3,8 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CopyBtn from "@/components/CopyBtn";
+import AddCal from "@/components/AddCal";
+import { citaEvent, googleCalHref } from "@/lib/cita-cal";
 import { WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { rd, usd, formatTime } from "@/lib/agenda";
@@ -29,7 +31,8 @@ export default async function MiCita({ params, searchParams }: { params: Promise
   const t = dictionaries[lang];
   const b = t.booking;
   const k = b.cita;
-  const raw = readCita((await searchParams).c);
+  const code = (await searchParams).c ?? "";
+  const raw = readCita(code);
   // los textos se reconstruyen con el diccionario del idioma
   const c = raw
     ? (() => {
@@ -53,30 +56,9 @@ export default async function MiCita({ params, searchParams }: { params: Promise
     timeZone: "UTC",
   });
 
-  // Google Calendar
-  const pad = (n: number) => String(n).padStart(2, "0");
-  let calHref = "";
-  if (c) {
-    const ymd = `${y}${pad(mo)}${pad(d)}`;
-    let dates: string;
-    if (c.hm) {
-      const [h, m] = c.hm.split(":").map(Number);
-      const end = h * 60 + m + (c.k === "procedimiento" ? 60 : 30);
-      dates = `${ymd}T${pad(h)}${pad(m)}00/${ymd}T${pad(Math.floor(end / 60))}${pad(end % 60)}00`;
-    } else {
-      const n = new Date(Date.UTC(y, mo - 1, d + 1));
-      dates = `${ymd}/${n.getUTCFullYear()}${pad(n.getUTCMonth() + 1)}${pad(n.getUTCDate())}`;
-    }
-    const q = new URLSearchParams({
-      action: "TEMPLATE",
-      text: b.calTitle,
-      dates,
-      details: `${c.s}${c.r ? `\n${b.pano.cal}` : ""}\n${site.phones[0]} · ${site.email}`,
-      location: c.p,
-      ctz: "America/Santo_Domingo",
-    });
-    calHref = `https://calendar.google.com/calendar/render?${q.toString()}`;
-  }
+  // Calendario: solo en el enlace de la confirmación (no tiene sentido guardar una cita aún por confirmar)
+  const ok = c?.ok === 1;
+  const ev = c && ok ? citaEvent(c, lang, `${site.url}/c/${code}`) : null;
 
   const ext = c?.x === 1;
   const consultAtCenter = c && c.k === "consulta" && c.m === "presencial" && !ext;
@@ -98,13 +80,13 @@ export default async function MiCita({ params, searchParams }: { params: Promise
             <>
               <p className="eyebrow mc-eyebrow">{site.name}</p>
               <h1 className="mc-h1">{k.hello.replace("{name}", c.n.split(/\s+/)[0] || "")}</h1>
-              <p className="mc-intro">{k.intro}</p>
+              <p className="mc-intro">{ok ? k.introOk : k.intro}</p>
 
               {/* Resumen */}
               <div className="mc-card mc-ticket">
-                <span className={`mc-status${ext ? " is-ext" : ""}`}>
+                <span className={`mc-status${ext ? " is-ext" : ""}${ok && !ext ? " is-ok" : ""}`}>
                   <i aria-hidden="true" />
-                  {ext ? k.statusExt : k.status}
+                  {ext ? (ok ? k.statusExtOk : k.statusExt) : ok ? k.statusOk : k.status}
                 </span>
                 <div className="mc-date">
                   <span className="mc-date__sheet" aria-hidden="true">
@@ -134,15 +116,6 @@ export default async function MiCita({ params, searchParams }: { params: Promise
                     </div>
                   )}
                 </dl>
-                {calHref && (
-                  <a className="mc-cal" href={calHref} target="_blank" rel="noopener">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
-                      <path d="M3.5 10h17M8 3v4M16 3v4" />
-                    </svg>
-                    {k.cal}
-                  </a>
-                )}
               </div>
 
               {c.r === 1 && (
@@ -166,8 +139,8 @@ export default async function MiCita({ params, searchParams }: { params: Promise
               <div className="mc-card mc-pay">
                 <h2>{k.payT}</h2>
                 <div className={`mc-when${ext ? " is-ext" : ""}`}>
-                  <strong>{ext ? k.extT : k.waitT}</strong>
-                  <p>{ext ? k.ext : k.wait}</p>
+                  <strong>{ext ? k.extT : ok ? k.okT : k.waitT}</strong>
+                  <p>{ext ? k.ext : ok ? (consultAtCenter ? k.okCenter : k.ok) : k.wait}</p>
                 </div>
                 <ul className="mc-lines">
                   <li>
@@ -246,6 +219,20 @@ export default async function MiCita({ params, searchParams }: { params: Promise
                 <p className="mc-note">{b.cost.payFirst}</p>
                 {ext && <p className="mc-note">{b.cost.cancel}</p>}
               </div>
+
+              {ev && (
+                <AddCal
+                  month={new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", { month: "short", timeZone: "UTC" }).replace(".", "")}
+                  day={d}
+                  time={c.h}
+                  title={k.calT}
+                  note={k.calNote}
+                  google={googleCalHref(ev)}
+                  ics={`/c/${code}/ics`}
+                  icsLabel={b.addCalIcs}
+                  saved={b.calSaved}
+                />
+              )}
 
               <div className="mc-foot">
                 <a className="btn btn--wa" href={waLink("")} target="_blank" rel="noopener">

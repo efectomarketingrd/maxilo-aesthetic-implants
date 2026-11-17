@@ -17313,6 +17313,20 @@ body:has(.bk2-page) .wa-float {
   animation: mc-blink 1.8s ease-in-out infinite;
 }
 
+.mc-status.is-ok {
+  background: rgba(46, 125, 82, 0.12);
+  color: #23704a;
+}
+
+.mc-status.is-ok i {
+  background: #2e9a63;
+  animation: none;
+}
+
+.mc-addcal {
+  margin-top: 18px;
+}
+
 @keyframes mc-blink {
   50% { opacity: 0.3; }
 }
