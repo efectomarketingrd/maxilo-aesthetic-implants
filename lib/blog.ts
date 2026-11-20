@@ -60,6 +60,7 @@ export const posts: Post[] = [
   {
     slug: "implantes-dentales-republica-dominicana-que-especialista-debe-colocarlos",
     date: "2026-11-20",
+    cover: "https://d8j0ntlcm91z4.cloudfront.net/user_3LZ8my4o5R9prXx0ZTCU28u6qVU/hf_20261120_154245_108ca331-40bb-42f6-a929-d764449af1df.png", // Higgsfield, 20 nov 2026
     service: "implantes-cirugia-oral",
     readMinutes: 6,
     es: {

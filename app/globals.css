@@ -1543,6 +1543,9 @@ p {
 .post__cover img {
   border-radius: var(--radius-lg);
   width: 100%;
+  height: auto;
+  aspect-ratio: 40 / 21;
+  object-fit: cover;
 }
 
 .post__body {
