@@ -58,6 +58,178 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "implantes-dentales-republica-dominicana-que-especialista-debe-colocarlos",
+    date: "2026-11-20",
+    service: "implantes-cirugia-oral",
+    readMinutes: 6,
+    es: {
+      title: "Implantes dentales en República Dominicana: ¿qué especialista debe colocarlos?",
+      excerpt: "Qué es un implante, cuánto dura, quién está capacitado para colocarlo, las señales de alerta y por qué un cirujano maxilofacial es una opción segura.",
+      category: "Implantes y cirugía oral",
+      body: [
+        { p: "Cada vez más personas eligen los implantes para reponer los dientes que les faltan, y en República Dominicana también llegan muchos pacientes del extranjero con ese fin. Un implante bien hecho puede acompañarle por muchos años. Por eso, antes de comparar precios, conviene hacerse una pregunta: ¿quién va a colocarlo?" },
+        { h: "¿Qué es un implante dental?" },
+        { p: "Es una pequeña pieza de titanio que se coloca en el hueso del maxilar y cumple la función de la raíz del diente. Con las semanas, el hueso se une al implante y, sobre él, se fija una corona o una prótesis hecha a medida. No depende de los dientes vecinos y no se mueve al comer ni al hablar." },
+        { p: "Bien planificados y bien cuidados, los implantes tienen resultados muy estables: una revisión científica de 2019 calculó que entre el 93% y el 96% siguen funcionando a los 10 años." },
+        { h: "Qué incluye un tratamiento con implantes" },
+        {
+          timeline: [
+            { t: "Valoración", d: "Con su historia clínica y una radiografía panorámica (o una tomografía, si hace falta) se mide el hueso y se planifica cada implante." },
+            { t: "Cirugía", d: "El implante se coloca en el hueso con anestesia local." },
+            { t: "Integración", d: "Durante las semanas siguientes, el hueso se une al implante." },
+            { t: "Corona definitiva", d: "Se coloca la corona o la prótesis final, y siguen los controles." },
+          ],
+        },
+        { h: "¿Quién puede colocar implantes dentales?" },
+        { p: "Colocar un implante es una cirugía. Exige conocer bien el hueso, los nervios y los senos maxilares, planificar con estudios de imagen y saber resolver una complicación. Por eso debe hacerlo un profesional de la odontología con especialidad o formación específica en implantes, y con experiencia en cirugía." },
+        {
+          compare: {
+            yes: { t: "Profesionales capacitados", items: ["Cirujanos orales y maxilofaciales", "Periodoncistas", "Prostodoncistas y rehabilitadores orales con formación quirúrgica", "Odontólogos con formación específica en implantología"] },
+            no: { t: "Señales de alerta", items: ["Le proponen operar sin radiografía ni estudios previos", "Le prometen dientes fijos el mismo día sin evaluar su hueso", "No le dicen la marca del implante que le van a colocar", "Un precio muy por debajo de lo habitual", "Nadie le habla de los controles después de la cirugía"] },
+          },
+        },
+        { h: "¿Por qué un cirujano maxilofacial?" },
+        { p: "El cirujano oral y maxilofacial es el especialista en la cirugía de la boca, los maxilares y la cara. Los implantes forman parte de su formación quirúrgica, igual que los injertos de hueso y el manejo de casos complejos." },
+        {
+          points: [
+            { ic: "anatomy", t: "Hueso, nervios y senos maxilares", d: "Conoce a fondo las estructuras que hay que respetar al colocar un implante, porque opera en ellas todos los días." },
+            { ic: "needle", t: "Cirugía e injertos de hueso", d: "Si falta hueso, puede valorar y realizar los injertos que su caso necesite antes o durante la colocación." },
+            { ic: "face", t: "Su sonrisa dentro de su rostro", d: "Planifica pensando en la función, la encía y la armonía de la cara, no solo en el hueco del diente." },
+            { ic: "shield", t: "Casos complejos y complicaciones", d: "Está preparado para atender pacientes con condiciones médicas y para resolver a tiempo cualquier complicación." },
+          ],
+        },
+        { tip: "Un implante no es solo el tornillo: es un tratamiento completo. Pregunte quién hará la cirugía, quién hará la corona y cómo serán los controles." },
+        { h: "Cómo elegir dónde ponerse implantes en República Dominicana" },
+        {
+          checklist: {
+            items: [
+              { ic: "person", t: "¿Quién lo coloca?", d: "Pregunte su nombre y su especialidad." },
+              { ic: "clipboard", t: "Estudios antes de operar", d: "Radiografía panorámica y, si hace falta, tomografía." },
+              { ic: "box", t: "Un implante identificado", d: "Que le digan la marca del implante y le entreguen sus datos." },
+              { ic: "clinic", t: "Un lugar adecuado", d: "Un consultorio o centro con condiciones quirúrgicas y esterilización." },
+              { ic: "tag", t: "Un presupuesto claro", d: "Que diga qué incluye: implante, pilar, corona y controles." },
+              { ic: "calendar", t: "Seguimiento", d: "Pregunte cuándo serán las revisiones después de la cirugía." },
+            ],
+            done: "6 de 6: listo para elegir con seguridad",
+          },
+        },
+        {
+          doc: {
+            eyebrow: "Dónde ponerse implantes en Las Terrenas",
+            name: "Dra. Celia Hernández Mauricio",
+            role: "Cirujana maxilofacial · Maxilo Aesthetic Implants",
+            text: "Planifica cada implante con sus estudios de imagen, realiza la cirugía y le acompaña en los controles hasta su corona definitiva.",
+            chips: ["Cirujana maxilofacial", "Valoración con radiografía panorámica", "Anestesia local", "Paquete con hospedaje"],
+            book: "Agendar mi valoración",
+            more: "Ver el tratamiento",
+            service: "implantes-cirugia-oral",
+            slug: "implantes-dentales",
+          },
+        },
+        { h: "Preguntas frecuentes" },
+        {
+          faq: [
+            { q: "¿Cualquier dentista puede colocar implantes?", a: "Colocar implantes no es una especialidad aparte, sino una cirugía que exige formación específica y experiencia. Antes de decidir, pregunte por la formación de quien lo hará y cuántos casos como el suyo atiende." },
+            { q: "¿Cuánto dura un implante dental?", a: "Con buena planificación, buena higiene y controles, la mayoría siguen funcionando después de 10 años. Fumar, la diabetes sin control y la enfermedad de las encías aumentan el riesgo de que falle." },
+            { q: "¿La colocación duele?", a: "No durante el procedimiento, porque se realiza con anestesia local. Después puede haber molestias leves y algo de inflamación, que se controlan con los medicamentos indicados." },
+            { q: "¿Qué pasa si no tengo suficiente hueso?", a: "En muchos casos se puede preparar el hueso con un injerto. Es justamente una de las áreas de la cirugía maxilofacial. La doctora lo evalúa con sus estudios en la valoración." },
+            { q: "¿Cuánto cuesta un implante en Las Terrenas?", a: "Depende de cuántos dientes se reponen, el tipo de implante, el material de la corona y el tiempo del tratamiento. En la valoración, la doctora le presenta las opciones con su costo. Desconfíe de un precio muy bajo que no explique qué incluye." },
+          ],
+        },
+        {
+          refs: [
+            { t: "Long-term (10-year) dental implant survival: A systematic review and sensitivity meta-analysis. J Dent, 2019.", url: "https://pubmed.ncbi.nlm.nih.gov/30904559/" },
+            { t: "Position Statement: Dental Implants. American College of Prosthodontists.", url: "https://prosthodontics.org/about-acp/position-statement-dental-implants" },
+            { t: "Dental Implants. American Association of Oral and Maxillofacial Surgeons (AAOMS).", url: "https://aaoms.org/wp-content/uploads/2024/05/Dental_Implant_1.pdf" },
+          ],
+        },
+      ],
+    },
+    en: {
+      title: "Dental implants in the Dominican Republic: which specialist should place them?",
+      excerpt: "What an implant is, how long it lasts, who is qualified to place it, the warning signs and why a maxillofacial surgeon is a safe choice.",
+      category: "Implants and oral surgery",
+      body: [
+        { p: "More and more people choose implants to replace missing teeth, and many patients also travel to the Dominican Republic for this. A well-placed implant can stay with you for many years. That is why, before comparing prices, it is worth asking one question: who is going to place it?" },
+        { h: "What is a dental implant?" },
+        { p: "It is a small titanium post placed in the jawbone that works as the root of a tooth. Over the following weeks, the bone bonds with the implant and a custom crown or prosthesis is fixed on top. It does not rely on neighboring teeth and does not move when you eat or speak." },
+        { p: "When well planned and well cared for, implants have very stable results: a 2019 scientific review estimated that between 93% and 96% are still working after 10 years." },
+        { h: "What an implant treatment includes" },
+        {
+          timeline: [
+            { t: "Assessment", d: "With your medical history and a panoramic X-ray (or a CT scan if needed), the bone is measured and each implant is planned." },
+            { t: "Surgery", d: "The implant is placed in the bone under local anesthesia." },
+            { t: "Integration", d: "Over the following weeks, the bone bonds with the implant." },
+            { t: "Final crown", d: "The final crown or prosthesis is placed, followed by check-ups." },
+          ],
+        },
+        { h: "Who can place dental implants?" },
+        { p: "Placing an implant is surgery. It requires solid knowledge of the bone, nerves and maxillary sinuses, planning with imaging and knowing how to handle a complication. That is why it should be done by a dental professional with a specialty or specific implant training, and with surgical experience." },
+        {
+          compare: {
+            yes: { t: "Qualified professionals", items: ["Oral and maxillofacial surgeons", "Periodontists", "Prosthodontists and restorative dentists with surgical training", "Dentists with specific implant training"] },
+            no: { t: "Warning signs", items: ["They offer surgery without an X-ray or prior imaging", "They promise fixed teeth the same day without assessing your bone", "They will not tell you the brand of the implant", "A price far below the usual", "Nobody mentions check-ups after surgery"] },
+          },
+        },
+        { h: "Why a maxillofacial surgeon?" },
+        { p: "The oral and maxillofacial surgeon specializes in surgery of the mouth, jaws and face. Implants are part of their surgical training, as are bone grafts and the management of complex cases." },
+        {
+          points: [
+            { ic: "anatomy", t: "Bone, nerves and sinuses", d: "They know in depth the structures that must be protected when placing an implant, because they operate on them every day." },
+            { ic: "needle", t: "Surgery and bone grafts", d: "If bone is missing, they can assess and perform the grafts your case needs before or during placement." },
+            { ic: "face", t: "Your smile within your face", d: "They plan for function, gums and facial balance, not just the gap in your teeth." },
+            { ic: "shield", t: "Complex cases and complications", d: "They are prepared to treat patients with medical conditions and to resolve any complication early." },
+          ],
+        },
+        { tip: "An implant is not just the screw: it is a complete treatment. Ask who will do the surgery, who will make the crown and how the check-ups will work." },
+        { h: "How to choose where to get implants in the Dominican Republic" },
+        {
+          checklist: {
+            items: [
+              { ic: "person", t: "Who places it?", d: "Ask for their name and specialty." },
+              { ic: "clipboard", t: "Imaging before surgery", d: "A panoramic X-ray and, if needed, a CT scan." },
+              { ic: "box", t: "An identified implant", d: "They should tell you the implant brand and give you its details." },
+              { ic: "clinic", t: "The right place", d: "An office or clinic with surgical conditions and sterilization." },
+              { ic: "tag", t: "A clear quote", d: "It should state what is included: implant, abutment, crown and check-ups." },
+              { ic: "calendar", t: "Follow-up", d: "Ask when the reviews after surgery will be." },
+            ],
+            done: "6 of 6: ready to choose safely",
+          },
+        },
+        {
+          doc: {
+            eyebrow: "Where to get implants in Las Terrenas",
+            name: "Dr. Celia Hernández Mauricio",
+            role: "Maxillofacial surgeon · Maxilo Aesthetic Implants",
+            text: "She plans each implant with your imaging, performs the surgery and follows you through your check-ups until your final crown.",
+            chips: ["Maxillofacial surgeon", "Assessment with a panoramic X-ray", "Local anesthesia", "Package with accommodation"],
+            book: "Book my assessment",
+            more: "See the treatment",
+            service: "implantes-cirugia-oral",
+            slug: "implantes-dentales",
+          },
+        },
+        { h: "Frequently asked questions" },
+        {
+          faq: [
+            { q: "Can any dentist place implants?", a: "Implant placement is not a separate specialty but a surgery that requires specific training and experience. Before deciding, ask about the training of the person who will do it and how many cases like yours they treat." },
+            { q: "How long does a dental implant last?", a: "With good planning, good hygiene and check-ups, most are still working after 10 years. Smoking, uncontrolled diabetes and gum disease increase the risk of failure." },
+            { q: "Does placement hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort and some swelling, controlled with the prescribed medication." },
+            { q: "What if I do not have enough bone?", a: "In many cases the bone can be prepared with a graft. This is precisely one of the areas of maxillofacial surgery. The doctor assesses it with your imaging at the consultation." },
+            { q: "How much does an implant cost in Las Terrenas?", a: "It depends on how many teeth are replaced, the type of implant, the crown material and the treatment time. At the assessment, the doctor presents the options with their cost. Be wary of a very low price that does not explain what is included." },
+          ],
+        },
+        {
+          refs: [
+            { t: "Long-term (10-year) dental implant survival: A systematic review and sensitivity meta-analysis. J Dent, 2019.", url: "https://pubmed.ncbi.nlm.nih.gov/30904559/" },
+            { t: "Position Statement: Dental Implants. American College of Prosthodontists.", url: "https://prosthodontics.org/about-acp/position-statement-dental-implants" },
+            { t: "Dental Implants. American Association of Oral and Maxillofacial Surgeons (AAOMS).", url: "https://aaoms.org/wp-content/uploads/2024/05/Dental_Implant_1.pdf" },
+          ],
+        },
+      ],
+    },
+  },
+  {
     slug: "botox-republica-dominicana-que-especialista-debe-aplicarlo",
     date: "2026-11-13",
     cover: "/blog/botox-republica-dominicana.jpg",
