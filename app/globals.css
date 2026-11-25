@@ -17915,3 +17915,67 @@ body:has(.mc) .wa-float {
   color: inherit;
   text-decoration: underline;
 }
+
+/* Selector de idioma (ES · EN · FR): en el móvil un botón que despliega los otros dos; desde 420 px, los dos a la vista */
+.header__langs {
+  position: relative;
+  display: inline-flex;
+}
+
+.header__lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+}
+
+.header__lang-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 10px 24px rgba(28, 37, 41, 0.14);
+}
+
+.header__langs.is-open .header__lang-list {
+  display: flex;
+}
+
+.header__lang-list .header__lang {
+  text-align: center;
+}
+
+@media (min-width: 420px) {
+  .header__lang-btn {
+    display: none;
+  }
+
+  .header__lang-list {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .header__lang-list .header__lang {
+    padding: 7px 8px;
+  }
+}
+
+.footer__langs {
+  display: inline-flex;
+  gap: 12px;
+}

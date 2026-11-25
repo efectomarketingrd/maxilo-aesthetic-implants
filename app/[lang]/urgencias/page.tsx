@@ -58,7 +58,7 @@ export default async function Urgent({ params }: { params: Promise<{ lang: strin
                 </li>
               ))}
             </ol>
-            <UrgentForm t={t} />
+            <UrgentForm t={t} msgT={lang === "fr" ? dictionaries.es : undefined} />
           </div>
         </section>
       </main>

@@ -42,7 +42,7 @@ const clean = (s: string) => s.replace(/~/g, "-").trim();
 export function citaUrl(lang: Locale, c: Cita) {
   const flags = (c.k === "procedimiento" ? 1 : 0) | (c.m === "online" ? 2 : 0) | (c.x ? 4 : 0) | (c.dt ? 8 : 0) | (c.r ? 16 : 0) | (c.ok ? 32 : 0);
   const parts = [
-    lang === "en" ? "e" : "s",
+    lang === "en" ? "e" : lang === "fr" ? "f" : "s",
     clean(c.n).replace(/\s+/g, " ").slice(0, 40),
     c.sv < 0 ? "" : c.sv.toString(36),
     clean(c.sub),
@@ -60,7 +60,7 @@ export function citaUrl(lang: Locale, c: Cita) {
 export function citaLang(raw: string): Locale | null {
   try {
     const f = fromB64Url(raw)[0];
-    return f === "e" ? "en" : f === "s" ? "es" : null;
+    return f === "e" ? "en" : f === "f" ? "fr" : f === "s" ? "es" : null;
   } catch {
     return null;
   }

@@ -5,7 +5,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { bookingImg } from "@/lib/images";
 import type { Dict } from "@/lib/content";
 import { agenda, formatTime, isOpenDay, rd, slotsFor, toKey, usd, type SlotType } from "@/lib/agenda";
-import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
+import { centers, intlLocale, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
 import CopyBtn from "./CopyBtn";
 import { citaUrl, type Cita } from "@/lib/cita";
@@ -76,8 +76,26 @@ function Seg<T extends string>({
   );
 }
 
-export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
+// msgT: textos del mensaje que recibe la clínica. En la versión francesa llega en español (la clínica no lee francés),
+// igual que en la web del spa; el paciente sigue viendo todo en francés y su enlace «Mi cita» abre en francés.
+export default function BookingWizard({ t, lang, msgT }: { t: Dict; lang: Locale; msgT?: Dict }) {
   const b = t.booking;
+  const mb = (msgT ?? t).booking;
+  const mLang: Locale = msgT ? "es" : lang;
+  // traducción de las opciones elegidas (texto del paciente → español) recorriendo los dos diccionarios en paralelo
+  const toMsg = useMemo(() => {
+    const map = new Map<string, string>();
+    const walk = (x: unknown, y: unknown) => {
+      if (typeof x === "string" && typeof y === "string") map.set(x, y);
+      else if (Array.isArray(x) && Array.isArray(y)) x.forEach((v, i) => walk(v, y[i]));
+      else if (x && y && typeof x === "object" && typeof y === "object") for (const k of Object.keys(x)) walk((x as Record<string, unknown>)[k], (y as Record<string, unknown>)[k]);
+    };
+    if (msgT) {
+      walk(t.booking, msgT.booking);
+      walk(t.services, msgT.services);
+    }
+    return (v: string) => (msgT ? (map.get(v) ?? v) : v);
+  }, [t, msgT]);
   const today = useMemo(() => startOfDay(new Date()), []);
   const minDate = useMemo(() => new Date(today.getFullYear(), today.getMonth(), today.getDate() + agenda.minDaysAhead), [today]);
   const maxDate = useMemo(() => new Date(today.getFullYear(), today.getMonth(), today.getDate() + agenda.maxDaysAhead), [today]);
@@ -133,7 +151,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     if (el && el.getBoundingClientRect().top < 0) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [step]);
 
-  const locale = lang === "es" ? "es-DO" : "en-US";
+  const locale = intlLocale(lang);
   const monthLabel = cursor.toLocaleDateString(locale, { month: "long", year: "numeric" });
 
   // Calendario: semana empieza en lunes
@@ -243,18 +261,28 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const needEars = inEst && subs.includes(lobuleOpt);
   const needWarts = inEst && subs.includes(wartOpt);
   const countText = (n: string, one: string, many: string) => (n === "?" ? b.molarsTbd : `${n} ${n === "1" ? one : many}`);
-  const subsText = subs
-    .map((x) => {
-      if (x === molarOpt && molars) return `${x} (${molarText})`;
-      if (x === prpOpt && prp) return `${x} (${prpText})`;
-      if (x === fillerOpt && needAreas && areas.length) return `${x} (${areas.join(", ")})`;
-      if (x === lobuleOpt && ears) return `${x} (${countText(ears, b.earWord, b.earsWord)})`;
-      if (x === b.frenChip && fren.length) return `${x} (${fren.join(", ")})`;
-      if (x === wartOpt && warts) return `${x} (${countText(warts, b.areaWord, b.areasWord)})`;
-      return x;
-    })
-    .join(", ");
+  // texto de las opciones elegidas en el idioma indicado (pantalla: idioma del paciente; mensaje: español si es francés)
+  const subsWith = (bk: typeof b, tr: (v: string) => string) =>
+    subs
+      .map((x) => {
+        const X = tr(x);
+        const cnt = (n: string, one: string, many: string) => (n === "?" ? bk.molarsTbd : `${n} ${n === "1" ? one : many}`);
+        if (x === molarOpt && molars) return `${X} (${cnt(molars, bk.molarsOne, bk.molarsMany)})`;
+        if (x === prpOpt && prp) {
+          const pn = prpPlan ? bk.prpPlans[prpPlan.id as keyof typeof bk.prpPlans] : null;
+          return pn ? `${X} (${pn.name}: ${pn.note})` : X;
+        }
+        if (x === fillerOpt && needAreas && areas.length) return `${X} (${areas.map(tr).join(", ")})`;
+        if (x === lobuleOpt && ears) return `${X} (${cnt(ears, bk.earWord, bk.earsWord)})`;
+        if (x === b.frenChip && fren.length) return `${X} (${fren.map(tr).join(", ")})`;
+        if (x === wartOpt && warts) return `${X} (${cnt(warts, bk.areaWord, bk.areasWord)})`;
+        return X;
+      })
+      .join(", ");
+  const subsText = subsWith(b, (v) => v);
   const svcFull = subs.length ? `${svcName} — ${subsText}` : svcName;
+  const svcNameM = mb.services.find((x) => x.id === service)?.name ?? "";
+  const svcFullM = subs.length ? `${svcNameM} — ${subsWith(mb, toMsg)}` : svcNameM;
 
   function toggleSub(o: string) {
     setSubs((cur) => {
@@ -292,6 +320,8 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   }
   const dateLabel = date ? date.toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
   const timeLabel = ext ? (date ? b.timeTbd : "") : special ? (specialTime ? formatTime(specialTime, lang) : "") : time ? formatTime(time, lang) : "";
+  const dateLabelM = date ? date.toLocaleDateString(intlLocale(mLang), { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : "";
+  const timeLabelM = ext ? (date ? mb.timeTbd : "") : special ? (specialTime ? formatTime(specialTime, mLang) : "") : time ? formatTime(time, mLang) : "";
   const slotInfo = !special && time ? agenda.slots.find((s) => s.time === time && s.type === type) : undefined;
 
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim());
@@ -340,6 +370,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       ? `${money(total)}${procTbd ? ` ${b.cost.plusTbd}` : ""}`
       : b.cost.toConfirm
     : money(total);
+  const costLineM = isProc ? (priced.length ? `${money(total)}${procTbd ? ` ${mb.cost.plusTbd}` : ""}` : mb.cost.toConfirm) : money(total);
   // Planes de PRP (más de 1 sesión): pago completo; lo demás: anticipo del 50%
   const planFull = isProc && needPrp && prpPlan && prpPlan.sessions > 1 ? prpPlan.price : 0;
   const depositBase = pricedSum - planFull;
@@ -400,29 +431,30 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
 
   function message() {
     const lines = [
-      b.msgTitle,
+      mb.msgTitle,
+      msgT ? mb.frClient : "",
       "",
-      `${b.service}: ${svcFull}`,
-      `${b.type}: ${b.types[type]}`,
-      `${b.mode}: ${b.modes[effMode]}`,
-      effMode === "presencial" ? `${b.place}: ${center.name} (${center.town})` : "",
-      `${b.date}: ${dateLabel}`,
-      `${b.time}: ${timeLabel}${slotInfo?.alt ? ` (${b.alt})` : ""}`,
-      special && !ext ? b.msgSpecial : "",
-      `${b.cost.msg}: ${costLine}`,
-      planFull ? `${b.cost.msgPlanFull} (${money(planFull)})` : "",
-      showDeposit && !extDeposit ? `${b.cost.msgDeposit}: ${deposit ? money(deposit) : b.cost.depositTbd}` : "",
-      extDeposit ? `${b.cost.msgDepositExt}: ${money(deposit)} — ${b.cost.msgPending}` : "",
-      extDeposit ? `${b.cost.msgRest}: ${money(base - deposit)}` : "",
-      ext ? b.cost.cancel : "",
-      myCita ? `${b.cita.msgLink}: ${myCita}` : "",
+      `${mb.service}: ${svcFullM}`,
+      `${mb.type}: ${mb.types[type]}`,
+      `${mb.mode}: ${mb.modes[effMode]}`,
+      effMode === "presencial" ? `${mb.place}: ${center.name} (${center.town})` : "",
+      `${mb.date}: ${dateLabelM}`,
+      `${mb.time}: ${timeLabelM}${slotInfo?.alt ? ` (${mb.alt})` : ""}`,
+      special && !ext ? mb.msgSpecial : "",
+      `${mb.cost.msg}: ${costLineM}`,
+      planFull ? `${mb.cost.msgPlanFull} (${money(planFull)})` : "",
+      showDeposit && !extDeposit ? `${mb.cost.msgDeposit}: ${deposit ? money(deposit) : mb.cost.depositTbd}` : "",
+      extDeposit ? `${mb.cost.msgDepositExt}: ${money(deposit)} — ${mb.cost.msgPending}` : "",
+      extDeposit ? `${mb.cost.msgRest}: ${money(base - deposit)}` : "",
+      ext ? mb.cost.cancel : "",
+      myCita ? `${mb.cita.msgLink}: ${myCita}` : "",
       "",
-      `${b.name}: ${form.name.trim()}`,
-      `${b.phone}: ${form.phone.trim()}`,
-      form.email.trim() ? `${b.email}: ${form.email.trim()}` : "",
-      form.country.trim() ? `${b.country}: ${form.country.trim()}` : "",
-      form.notes.trim() ? `${b.notes}: ${form.notes.trim()}` : "",
-      getOrigin() ? `${b.origin}: ${getOrigin()}` : "",
+      `${mb.name}: ${form.name.trim()}`,
+      `${mb.phone}: ${form.phone.trim()}`,
+      form.email.trim() ? `${mb.email}: ${form.email.trim()}` : "",
+      form.country.trim() ? `${mb.country}: ${form.country.trim()}` : "",
+      form.notes.trim() ? `${mb.notes}: ${form.notes.trim()}` : "",
+      getOrigin() ? `${mb.origin}: ${getOrigin()}` : "",
     ];
     return lines.filter((l, i) => l !== "" || (i > 0 && lines[i - 1] !== "")).join("\n").trim();
   }
@@ -430,7 +462,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   // Datos de la cita para el calendario (centro y paciente)
   const rawTime = ext ? "" : special ? specialTime : time ?? "";
   const minutes = isProc ? 60 : 30;
-  const placeText = effMode === "presencial" ? `${center.name}, ${center.town}` : b.modes.online;
+  const placeText = effMode === "presencial" ? `${center.name}, ${center.town}` : mb.modes.online;
 
   // Aviso al centro: evento "Por confirmar" en su Google Calendar + correo (vía /api/solicitud)
   const lastSent = useRef("");
@@ -440,13 +472,13 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       name: form.name,
       phone: form.phone,
       email: form.email,
-      service: svcFull,
+      service: svcFullM,
       place: placeText,
       date: toKey(date),
       time: rawTime,
       minutes,
-      dateLabel,
-      message: `${message()}\n\n${b.cita.replyT}\n${staffReply()}`,
+      dateLabel: dateLabelM,
+      message: `${message()}\n\n${mb.cita.replyT}\n${staffReply()}`,
       website: honey.current?.value ?? "",
     };
     const json = JSON.stringify(data);
@@ -466,7 +498,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     if (!valid) return;
     notifyCenter();
     track("booking_email", { service: svcName });
-    const subject = `${b.mailSubject} — ${svcName} — ${date ? toKey(date) : ""}`;
+    const subject = `${mb.mailSubject} — ${svcNameM} — ${date ? toKey(date) : ""}`;
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message())}`;
   }
 

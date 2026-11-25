@@ -29,7 +29,7 @@ export default async function Package({ params }: { params: Promise<{ lang: stri
     description: k.metaDesc,
     url: `${site.url}/${lang}/paquete-implantes`,
     offeredBy: { "@id": `${site.url}/#clinic` },
-    itemOffered: { "@type": "MedicalProcedure", name: lang === "es" ? "Implantes dentales" : "Dental implants" },
+    itemOffered: { "@type": "MedicalProcedure", name: t.services.items[0].procedures[0].name },
     areaServed: "Las Terrenas, Samaná, República Dominicana",
   };
 

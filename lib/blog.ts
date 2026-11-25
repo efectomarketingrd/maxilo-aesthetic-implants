@@ -1,4 +1,4 @@
-import type { Locale } from "./site";
+import { intlLocale, type Locale } from "./site";
 import type { ServiceSlug } from "./content";
 import { img } from "./images";
 
@@ -54,6 +54,7 @@ export type Post = {
   readMinutes: number;
   es: PostVersion;
   en?: PostVersion;
+  fr?: PostVersion;
 };
 
 export const posts: Post[] = [
@@ -218,6 +219,89 @@ export const posts: Post[] = [
             { q: "Does placement hurt?", a: "Not during the procedure, because it is done under local anesthesia. Afterwards there may be mild discomfort and some swelling, controlled with the prescribed medication." },
             { q: "What if I do not have enough bone?", a: "In many cases the bone can be prepared with a graft. This is precisely one of the areas of maxillofacial surgery. The doctor assesses it with your imaging at the consultation." },
             { q: "How much does an implant cost in Las Terrenas?", a: "It depends on how many teeth are replaced, the type of implant, the crown material and the treatment time. At the assessment, the doctor presents the options with their cost. Be wary of a very low price that does not explain what is included." },
+          ],
+        },
+        {
+          refs: [
+            { t: "Long-term (10-year) dental implant survival: A systematic review and sensitivity meta-analysis. J Dent, 2019.", url: "https://pubmed.ncbi.nlm.nih.gov/30904559/" },
+            { t: "Position Statement: Dental Implants. American College of Prosthodontists.", url: "https://prosthodontics.org/about-acp/position-statement-dental-implants" },
+            { t: "Dental Implants. American Association of Oral and Maxillofacial Surgeons (AAOMS).", url: "https://aaoms.org/wp-content/uploads/2024/05/Dental_Implant_1.pdf" },
+          ],
+        },
+      ],
+    },
+    fr: {
+      title: "Implants dentaires en République dominicaine : quel spécialiste doit les poser ?",
+      excerpt: "Ce qu'est un implant, combien de temps il dure, qui est qualifié pour le poser, les signaux d'alerte et pourquoi un chirurgien maxillo-facial est un choix sûr.",
+      category: "Implants et chirurgie buccale",
+      body: [
+        { p: "De plus en plus de personnes choisissent les implants pour remplacer les dents qui leur manquent, et beaucoup de patients viennent aussi en République dominicaine pour cela. Un implant bien posé peut vous accompagner pendant de nombreuses années. C'est pourquoi, avant de comparer les prix, il vaut la peine de se poser une question : qui va le poser ?" },
+        { h: "Qu'est-ce qu'un implant dentaire ?" },
+        { p: "C'est un petit pilier en titane placé dans l'os de la mâchoire, qui joue le rôle de racine de la dent. Au cours des semaines suivantes, l'os se lie à l'implant et on y fixe une couronne ou une prothèse sur mesure. Il ne dépend pas des dents voisines et ne bouge pas quand vous mangez ou parlez." },
+        { p: "Bien planifiés et bien entretenus, les implants donnent des résultats très stables : une revue scientifique de 2019 a estimé qu'entre 93 % et 96 % fonctionnent encore au bout de 10 ans." },
+        { h: "Ce que comprend un traitement par implants" },
+        {
+          timeline: [
+            { t: "Évaluation", d: "Avec vos antécédents médicaux et une radiographie panoramique (ou un scanner si besoin), on mesure l'os et on planifie chaque implant." },
+            { t: "Chirurgie", d: "L'implant est placé dans l'os sous anesthésie locale." },
+            { t: "Intégration", d: "Au cours des semaines suivantes, l'os se lie à l'implant." },
+            { t: "Couronne définitive", d: "La couronne ou la prothèse définitive est posée, puis viennent les contrôles." },
+          ],
+        },
+        { h: "Qui peut poser des implants dentaires ?" },
+        { p: "Poser un implant est une chirurgie. Cela demande une bonne connaissance de l'os, des nerfs et des sinus maxillaires, une planification avec imagerie et savoir gérer une complication. C'est pourquoi elle doit être réalisée par un professionnel dentaire avec une spécialité ou une formation spécifique en implantologie, et une expérience chirurgicale." },
+        {
+          compare: {
+            yes: { t: "Professionnels qualifiés", items: ["Chirurgiens buccaux et maxillo-faciaux", "Parodontistes", "Prothésistes et dentistes en réhabilitation orale avec formation chirurgicale", "Dentistes avec une formation spécifique en implantologie"] },
+            no: { t: "Signaux d'alerte", items: ["On vous propose d'opérer sans radiographie ni examen préalable", "On vous promet des dents fixes le jour même sans évaluer votre os", "On refuse de vous dire la marque de l'implant", "Un prix bien en dessous de l'habituel", "Personne ne parle des contrôles après la chirurgie"] },
+          },
+        },
+        { h: "Pourquoi un chirurgien maxillo-facial ?" },
+        { p: "Le chirurgien buccal et maxillo-facial est spécialisé dans la chirurgie de la bouche, des mâchoires et du visage. Les implants font partie de sa formation chirurgicale, tout comme les greffes osseuses et la prise en charge des cas complexes." },
+        {
+          points: [
+            { ic: "anatomy", t: "Os, nerfs et sinus", d: "Il connaît en profondeur les structures à protéger lors de la pose d'un implant, car il opère sur elles tous les jours." },
+            { ic: "needle", t: "Chirurgie et greffes osseuses", d: "S'il manque de l'os, il peut évaluer et réaliser les greffes dont votre cas a besoin avant ou pendant la pose." },
+            { ic: "face", t: "Votre sourire dans votre visage", d: "Il planifie en pensant à la fonction, à la gencive et à l'équilibre du visage, pas seulement à l'espace de la dent." },
+            { ic: "shield", t: "Cas complexes et complications", d: "Il est préparé à soigner des patients ayant des problèmes de santé et à résoudre à temps toute complication." },
+          ],
+        },
+        { tip: "Un implant n'est pas seulement la vis : c'est un traitement complet. Demandez qui fera la chirurgie, qui fera la couronne et comment se dérouleront les contrôles." },
+        { h: "Comment choisir où se faire poser des implants en République dominicaine" },
+        {
+          checklist: {
+            items: [
+              { ic: "person", t: "Qui le pose ?", d: "Demandez son nom et sa spécialité." },
+              { ic: "clipboard", t: "Des examens avant d'opérer", d: "Une radiographie panoramique et, si besoin, un scanner." },
+              { ic: "box", t: "Un implant identifié", d: "On doit vous dire la marque de l'implant et vous remettre ses références." },
+              { ic: "clinic", t: "Un lieu adapté", d: "Un cabinet ou une clinique avec des conditions chirurgicales et de stérilisation." },
+              { ic: "tag", t: "Un devis clair", d: "Il doit préciser ce qui est inclus : implant, pilier, couronne et contrôles." },
+              { ic: "calendar", t: "Suivi", d: "Demandez quand auront lieu les contrôles après la chirurgie." },
+            ],
+            done: "6 sur 6 : prêt(e) à choisir en toute sécurité",
+          },
+        },
+        {
+          doc: {
+            eyebrow: "Où se faire poser des implants à Las Terrenas",
+            name: "Dre Celia Hernández Mauricio",
+            role: "Chirurgienne maxillo-faciale · Maxilo Aesthetic Implants",
+            text: "Elle planifie chaque implant avec vos examens, réalise la chirurgie et vous accompagne lors des contrôles jusqu'à votre couronne définitive.",
+            chips: ["Chirurgienne maxillo-faciale", "Évaluation avec radiographie panoramique", "Anesthésie locale", "Forfait avec hébergement"],
+            book: "Réserver mon évaluation",
+            more: "Voir le soin",
+            service: "implantes-cirugia-oral",
+            slug: "implantes-dentales",
+          },
+        },
+        { h: "Questions fréquentes" },
+        {
+          faq: [
+            { q: "N'importe quel dentiste peut-il poser des implants ?", a: "La pose d'implants n'est pas une spécialité à part, mais une chirurgie qui demande une formation spécifique et de l'expérience. Avant de décider, renseignez-vous sur la formation de la personne qui la fera et sur le nombre de cas comme le vôtre qu'elle traite." },
+            { q: "Combien de temps dure un implant dentaire ?", a: "Avec une bonne planification, une bonne hygiène et des contrôles, la plupart fonctionnent encore au bout de 10 ans. Le tabac, un diabète mal contrôlé et les maladies des gencives augmentent le risque d'échec." },
+            { q: "La pose fait-elle mal ?", a: "Pas pendant l'intervention, car elle se fait sous anesthésie locale. Ensuite, il peut y avoir une gêne légère et un peu de gonflement, contrôlés avec les médicaments prescrits." },
+            { q: "Et si je n'ai pas assez d'os ?", a: "Dans bien des cas, l'os peut être préparé par une greffe. C'est justement l'un des domaines de la chirurgie maxillo-faciale. La docteure l'évalue avec vos examens en consultation." },
+            { q: "Combien coûte un implant à Las Terrenas ?", a: "Cela dépend du nombre de dents remplacées, du type d'implant, du matériau de la couronne et de la durée du traitement. Lors de l'évaluation, la docteure vous présente les options avec leur coût. Méfiez-vous d'un prix très bas qui n'explique pas ce qui est inclus." },
           ],
         },
         {
@@ -404,6 +488,90 @@ export const posts: Post[] = [
         },
       ],
     },
+    fr: {
+      title: "Botox en République dominicaine : quel spécialiste doit l'appliquer ?",
+      excerpt: "Ce qu'est le Botox, combien de temps il dure, qui est qualifié pour l'appliquer en République dominicaine et pourquoi un chirurgien maxillo-facial est un choix sûr.",
+      category: "Médecine esthétique",
+      body: [
+        { p: "Le Botox est l'un des soins esthétiques les plus demandés en République dominicaine. C'est aussi l'un de ceux que l'on applique le plus souvent dans des lieux inadaptés, comme des salons ou des salles de sport. Avant de décider où le faire, la question la plus importante est : qui l'applique ?" },
+        { h: "Qu'est-ce que le Botox et comment agit-il ?" },
+        { p: "Le Botox est la toxine botulique de type A, un médicament injecté en très petites quantités pour détendre temporairement les muscles qui créent les rides d'expression. Il ne comble pas : il détend. C'est pourquoi la peau paraît plus lisse sans que le visage perde son expression." },
+        { p: "Aux États-Unis, la FDA a approuvé son usage esthétique entre les sourcils en 2002, pour les pattes d'oie en 2013, sur le front en 2017 et pour les cordes du cou en 2024." },
+        { map: "botox", caption: "Les zones du visage les plus souvent traitées au Botox.", phases: ["Rides d'expression", "Muscle détendu, peau plus lisse"] },
+        { h: "À quoi s'attendre après le soin" },
+        {
+          timeline: [
+            { t: "Jour 0", d: "L'application prend quelques minutes et vous pouvez reprendre vos activités." },
+            { t: "Jours 2 et 3", d: "L'effet commence à se voir." },
+            { t: "Semaine 2", d: "Effet complet. C'est le moment du contrôle et d'une retouche si besoin." },
+            { t: "3 à 4 mois", d: "Durée habituelle. Elle varie selon la personne et la zone." },
+          ],
+        },
+        { h: "Qui peut appliquer le Botox ?" },
+        { p: "Même si l'application est rapide, le Botox est un médicament à usage professionnel. Bien l'injecter demande une connaissance précise des muscles, des vaisseaux et des nerfs du visage, la bonne dose et savoir quoi faire en cas de réaction. C'est pourquoi il doit être appliqué par un professionnel de santé avec une spécialité et une formation spécifique." },
+        {
+          compare: {
+            yes: { t: "Professionnels qualifiés", items: ["Chirurgiens buccaux et maxillo-faciaux", "Dermatologues", "Chirurgiens plasticiens", "Médecins formés en médecine esthétique"] },
+            no: { t: "Signaux d'alerte", items: ["Salons de beauté, spas ou salles de sport", "Personnel sans formation clinique", "On ne vous montre pas le produit ni son enregistrement", "Applications à domicile sans conditions sanitaires"] },
+          },
+        },
+        { h: "Pourquoi un chirurgien maxillo-facial ?" },
+        { p: "Le chirurgien buccal et maxillo-facial est spécialisé dans la chirurgie du visage, de la bouche et des mâchoires. Il travaille tous les jours dans les zones mêmes où s'applique le Botox, et cela se voit autant en sécurité qu'en résultats." },
+        {
+          points: [
+            { ic: "anatomy", t: "Anatomie du visage approfondie", d: "Il connaît les muscles de l'expression et de la mastication, et le trajet des vaisseaux et des nerfs, car il opère dans ces zones." },
+            { ic: "needle", t: "Précision de l'aiguille", d: "Il est formé aux techniques d'anesthésie et d'infiltration du visage et de la bouche." },
+            { ic: "face", t: "Une vision de tout le visage", d: "Il évalue ensemble os, muscles et sourire, pour un résultat équilibré plutôt que pour effacer une seule ride." },
+            { ic: "shield", t: "Gestion des complications", d: "En tant que chirurgien, il sait reconnaître et traiter tôt une réaction ou une complication." },
+          ],
+        },
+        { p: "Grâce à leur formation, les chirurgiens maxillo-faciaux connaissent aussi les usages de la toxine dans les muscles de la mastication, par exemple pour le bruxisme (serrer ou grincer des dents). Si c'est votre cas, mentionnez-le lors de votre évaluation." },
+        { h: "Comment choisir où faire son Botox en République dominicaine" },
+        {
+          checklist: {
+            items: [
+              { ic: "person", t: "Qui l'applique ?", d: "Demandez son nom et sa spécialité." },
+              { ic: "box", t: "Le produit, bien visible", d: "Marque, lot, enregistrement sanitaire et date d'expiration." },
+              { ic: "clipboard", t: "Une évaluation préalable", d: "Avec vos antécédents médicaux, avant l'injection." },
+              { ic: "clinic", t: "Un lieu adapté", d: "Un cabinet médical ou une clinique, pas un salon." },
+              { ic: "tag", t: "Un prix raisonnable", d: "Méfiez-vous des prix bien en dessous de l'habituel." },
+              { ic: "calendar", t: "Contrôle et retouche", d: "Demandez si le contrôle à 2 semaines est inclus." },
+            ],
+            done: "6 sur 6 : prêt(e) à choisir en toute sécurité",
+          },
+        },
+        {
+          doc: {
+            eyebrow: "Où faire son Botox à Las Terrenas",
+            name: "Dre Celia Hernández Mauricio",
+            role: "Chirurgienne maxillo-faciale · Maxilo Aesthetic Implants",
+            text: "Elle applique la toxine botulique de type A après une évaluation, dans un cadre clinique et avec un suivi de votre résultat.",
+            chips: ["Neuronox · Medytox, Corée du Sud", "Évaluation préalable", "Retouche à 2 semaines incluse", "RD$28,000"],
+            book: "Réserver mon évaluation",
+            more: "Voir le soin",
+            service: "medicina-estetica",
+            slug: "botox",
+          },
+        },
+        { h: "Questions fréquentes" },
+        {
+          faq: [
+            { q: "Le Botox est-il sûr ?", a: "Appliqué par un professionnel formé, avec un produit enregistré et la bonne dose, c'est l'un des soins esthétiques les plus étudiés. Ses effets sont temporaires. Une gêne légère peut apparaître, comme de petits bleus ou un mal de tête passager." },
+            { q: "Qui ne doit pas faire de Botox ?", a: "Il est déconseillé pendant la grossesse ou l'allaitement, et chez les personnes atteintes de certaines maladies neuromusculaires. C'est pourquoi l'évaluation préalable compte." },
+            { q: "Combien de temps ça dure ?", a: "En général 3 à 4 mois. Cela varie selon la personne, la zone et la dose." },
+            { q: "Combien coûte le Botox à Las Terrenas ?", a: "Chez Maxilo Aesthetic Implants, il coûte RD$28,000, retouche à 2 semaines incluse, et le prix est le même quelles que soient les zones traitées. Un prix très bas peut être un signal d'alerte sur le produit ou sur la personne qui l'applique." },
+            { q: "Mon visage aura-t-il l'air figé ?", a: "Ce n'est pas le but. La dose est ajustée pour atténuer les rides et garder une expression naturelle." },
+          ],
+        },
+        {
+          refs: [
+            { t: "Onset and Duration of AbobotulinumtoxinA for Aesthetic Use in the Upper Face: A Systematic Literature Review. J Clin Aesthet Dermatol, 2020.", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7819591" },
+            { t: "Botox Cosmetic FDA approval history (Drugs.com).", url: "https://www.drugs.com/history/botox-cosmetic.html" },
+            { t: "Los riesgos de aplicar la medicina estética en República Dominicana. Listín Diario, 2024 (en espagnol).", url: "https://listindiario.com/la-republica/20240316/riesgos-aplicar-medicina-estetica-republica-dominicana_800193.html" },
+          ],
+        },
+      ],
+    },
   },
 ];
 
@@ -421,7 +589,7 @@ export function findPost(lang: Locale, slug: string) {
 }
 
 export function formatDate(date: string, lang: Locale) {
-  return new Date(`${date}T12:00:00`).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", {
+  return new Date(`${date}T12:00:00`).toLocaleDateString(intlLocale(lang), {
     day: "numeric",
     month: "long",
     year: "numeric",

@@ -37,7 +37,7 @@ export default async function CreatePlan({ params }: { params: Promise<{ lang: s
         </section>
         <section className="pl-build">
           <div className="container pl-wrap pl-wrap--wide">
-            <PlanBuilder t={t} lang={lang} />
+            <PlanBuilder t={t} lang={lang} msgT={lang === "fr" ? dictionaries.es : undefined} />
           </div>
         </section>
       </main>

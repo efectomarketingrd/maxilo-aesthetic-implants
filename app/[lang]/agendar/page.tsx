@@ -65,7 +65,7 @@ export default async function Booking({ params }: { params: Promise<{ lang: stri
 
         <section className="bk2-main">
           <div className="container">
-            <BookingWizard t={t} lang={lang} />
+            <BookingWizard t={t} lang={lang} msgT={lang === "fr" ? dictionaries.es : undefined} />
           </div>
         </section>
       </main>

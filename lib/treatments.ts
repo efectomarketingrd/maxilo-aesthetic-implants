@@ -37,6 +37,7 @@ export type Treatment = {
   guide?: { es: string; en: string }; // guía en PDF para pacientes (public/guias/<nombre>.pdf y .jpg de portada)
   es: TreatmentDetail;
   en: TreatmentDetail;
+  fr: TreatmentDetail;
 };
 
 export const treatments: Treatment[] = [
@@ -178,6 +179,71 @@ export const treatments: Treatment[] = [
         { q: "Can I have treatment if I'm visiting from abroad?", a: "Yes. We schedule appointments to make the most of your stay, and we also offer an implants package with accommodation.", viz: { kind: "chips", items: [{ t: "Appointments around your stay" }, { t: "Package with accommodation" }] } },
       ],
     },
+    fr: {
+      summary: "Remplacez une ou plusieurs dents par une solution fixe qui ressemble à une dent naturelle, se ressent et fonctionne comme elle.",
+      what: "Un implant dentaire est un petit pilier en titane biocompatible placé dans l'os de la mâchoire, qui joue le rôle de racine de la dent. Une fois lié à l'os, on y fixe une couronne ou une prothèse. C'est la façon la plus stable de remplacer des dents manquantes, car il ne dépend pas des dents voisines et ne bouge pas quand vous mangez ou parlez.",
+      art: {
+        labels: [
+          { t: "Couronne", s: "custom-made" },
+          { t: "Pilier", s: "relie couronne et implant" },
+          { t: "Implant", s: "titanium" },
+          { t: "Os", s: "se lie à l'implant" },
+        ],
+        caption: "L'implant fait office de racine : l'os se forme autour et la couronne se fixe dessus.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Aucune douleur pendant l'intervention" },
+        { i: "titanium", t: "Titane", s: "Un matériau biocompatible" },
+        { i: "fixed", t: "Fixe", s: "Ne bouge pas en mangeant ni en parlant" },
+        { i: "crown", t: "Couronne sur mesure", s: "Assortie à vos dents" },
+      ],
+      forWho: [
+        "Les personnes à qui il manque une ou plusieurs dents.",
+        "Celles qui portent un dentier amovible et veulent une solution fixe et confortable.",
+        "Celles qui préfèrent ne pas limer les dents voisines pour un bridge.",
+        "Les patients en bonne santé générale avec assez d'os, ou chez qui on peut le préparer (évalué en consultation).",
+      ],
+      steps: [
+        { t: "Évaluation et examens", d: "Apportez votre radiographie panoramique le jour de la consultation. La docteure évalue votre cas et vos antécédents et, avec la radiographie (ou un scanner si besoin), mesure l'os disponible pour planifier chaque implant." },
+        { t: "Pose de l'implant", d: "L'implant est placé dans l'os sous anesthésie locale. C'est une intervention précise et généralement courte." },
+        { t: "Intégration à l'os", d: "Au cours des semaines suivantes, l'os fusionne avec l'implant. Cette étape lui donne sa stabilité à long terme." },
+        { t: "Couronne définitive", d: "Une fois l'implant intégré, on pose la couronne ou la prothèse définitive, conçue pour ressembler à vos dents naturelles." },
+      ],
+      recovery: "La gêne est généralement légère et se contrôle avec les médicaments prescrits par la docteure. Un peu de gonflement les premiers jours est normal. Une alimentation molle, une bonne hygiène et le respect des contrôles sont recommandés.",
+      cost: {
+        title: "De quoi dépend le coût d'un implant ?",
+        intro: "Chaque cas est différent. Voici les facteurs qui déterminent votre budget :",
+        items: [
+          { ic: "teeth", t: "Combien de dents", d: "Un seul implant, plusieurs ou une restauration complète." },
+          { ic: "implant", t: "Type d'implant", d: "Il existe des implants conventionnels et des implants sur mesure." },
+          { ic: "crown", t: "Matériau de la prothèse", d: "Le matériau de la dent ou de la prothèse posée sur l'implant." },
+          { ic: "time", t: "Durée du traitement", d: "En plusieurs étapes ou en une seule, selon votre préférence." },
+        ],
+        closeT: "C'est vous qui choisissez",
+        close: "En consultation, la docteure vous explique chaque option et son coût, et vous décidez celle qui convient le mieux à votre budget.",
+      },
+      care: {
+        expect: [
+          { ic: "shield", t: "Pendant l'intervention", s: "Avec l'anesthésie locale, vous ne devriez pas avoir mal." },
+          { ic: "leaf", t: "Premiers jours", s: "Une gêne légère et un peu de gonflement, contrôlés avec les médicaments prescrits." },
+          { ic: "crown", t: "Avec le temps", s: "L'os se lie à l'implant et votre couronne définitive est posée." },
+        ],
+        items: [
+          { ic: "pill", t: "Médicaments", s: "Selon la prescription de la docteure" },
+          { ic: "bowl", t: "Alimentation molle", s: "Des aliments doux" },
+          { ic: "brush", t: "Bonne hygiène", s: "Pour prendre soin de la zone" },
+          { ic: "calendar", t: "Contrôles", s: "Venez à vos rendez-vous de suivi" },
+        ],
+      },
+      faqs: [
+        { q: "Combien coûte un implant dentaire ?", a: "Cela dépend de votre cas. En consultation, la docteure vous présente les options et leur coût, et vous choisissez celle qui convient le mieux à votre budget.", viz: { kind: "chips", items: [{ t: "Combien de dents" }, { t: "Type d'implant" }, { t: "Matériau" }, { t: "Délais" }] } },
+        { q: "Que faut-il pour la première consultation ?", a: "Une radiographie panoramique. Faites-la avant et apportez-la le jour de la consultation, pour que la docteure puisse évaluer votre cas en détail. Apportez aussi vos autres examens et la liste des médicaments que vous prenez.", viz: { kind: "flow", items: [{ t: "Avant la consultation", s: "Faites votre radiographie panoramique" }, { t: "Le jour de la consultation", s: "Remettez-la à la docteure" }] } },
+        { q: "La pose fait-elle mal ?", a: "Pas pendant l'intervention, car elle se fait sous anesthésie locale. Ensuite, il peut y avoir une gêne légère, contrôlée avec des médicaments.", viz: { kind: "flow", items: [{ t: "Pendant", s: "Sans douleur, anesthésie locale" }, { t: "Après", s: "Gêne légère, médicaments" }] } },
+        { q: "Combien de temps dure un implant ?", a: "Avec une bonne hygiène, des contrôles réguliers et de bonnes habitudes, un implant peut durer de nombreuses années.", viz: { kind: "chips", items: [{ t: "Bonne hygiène" }, { t: "Contrôles réguliers" }, { t: "Bonnes habitudes" }] } },
+        { q: "Et si je n'ai pas assez d'os ?", a: "La docteure l'évalue en consultation et vous expliquera les options possibles pour votre cas.", viz: { kind: "flow", items: [{ t: "Évaluation", s: "On mesure l'os disponible" }, { t: "Options", s: "Pour votre cas" }] } },
+        { q: "Puis-je me faire soigner si je viens de l'étranger ?", a: "Oui. Nous organisons les rendez-vous pour profiter au mieux de votre séjour, et nous proposons aussi un forfait implants avec hébergement.", viz: { kind: "chips", items: [{ t: "Rendez-vous adaptés à votre séjour" }, { t: "Forfait avec hébergement" }] } },
+      ],
+    },
   },
   {
     service: "implantes-cirugia-oral",
@@ -276,6 +342,52 @@ export const treatments: Treatment[] = [
         { q: "Do they have to come out if they don't hurt?", a: "Not always. If they are well positioned and cause no problems, they can stay. The assessment determines this." },
       ],
     },
+    fr: {
+      summary: "Retrait sûr des dents de sagesse qui causent douleur, infection ou encombrement.",
+      what: "Les troisièmes molaires, appelées dents de sagesse, sont les dernières dents à pousser, en général entre 17 et 25 ans. Elles manquent souvent de place et restent coincées dans l'os ou poussent de travers, ce qui peut causer douleur, gonflement, infection ou abîmer la molaire voisine. L'extraction chirurgicale les retire de façon contrôlée.",
+      art: {
+        labels: [
+          { t: "Deuxième molaire", s: "la dent voisine" },
+          { t: "Pression", s: "douleur et gonflement" },
+          { t: "Dent de sagesse", s: "coincée, sans place" },
+          { t: "Os", s: "la maintient inclinée" },
+        ],
+        caption: "Quand une dent de sagesse n'a pas de place, elle pousse sur la molaire voisine. La retirer soulage la pression.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Aucune douleur pendant l'extraction" },
+        { i: "xray", t: "Radiographie d'abord", s: "Pour planifier chaque dent" },
+        { i: "home", t: "En ambulatoire", s: "Vous rentrez chez vous le jour même" },
+        { i: "tag", t: "À partir de RD$7,000", s: "Par dent, quand on retire les 4" },
+      ],
+      forWho: [
+        "Douleur ou pression au fond de la bouche.",
+        "Gonflement ou infection répétés de la gencive autour de la dent de sagesse.",
+        "Dents de sagesse sans place pour sortir, ou qui poussent de travers.",
+        "Carie ou dommage sur la molaire voisine.",
+        "Recommandation de votre dentiste ou orthodontiste.",
+      ],
+      steps: [
+        { t: "Évaluation et radiographie", d: "La docteure vérifie la position de chaque dent de sagesse sur une radiographie pour planifier l'extraction." },
+        { t: "Extraction", d: "Réalisée sous anesthésie locale. Selon la position, l'extraction peut être simple ou chirurgicale." },
+        { t: "Consignes et suivi", d: "Vous recevez des consignes de soins à domicile et une visite de contrôle est prévue pour vérifier la cicatrisation." },
+      ],
+      recovery: "Un gonflement et une gêne pendant 2 ou 3 jours sont normaux. Des compresses froides les premières heures, une alimentation molle, un repos relatif et le respect des consignes de la docteure aident. La plupart des gens reprennent leurs activités en quelques jours.",
+      price: {
+        lines: [
+          { label: "1 dent de sagesse", value: "RD$10,000" },
+          { label: "2 ou 3 dents de sagesse", value: "RD$8,500 chacune" },
+          { label: "Les 4 dents de sagesse", value: "RD$7,000 chacune (RD$28,000)" },
+        ],
+        note: "Si l'extraction vous a déjà été recommandée, vous pouvez la réserver directement comme intervention : sans frais de consultation.",
+      },
+      faqs: [
+        { q: "Que faut-il pour la première consultation ?", a: "Une radiographie panoramique. Faites-la avant et apportez-la le jour de la consultation, pour que la docteure puisse évaluer votre cas en détail. Apportez aussi vos autres examens et la liste des médicaments que vous prenez.", viz: { kind: "flow", items: [{ t: "Avant la consultation", s: "Faites votre radiographie panoramique" }, { t: "Le jour de la consultation", s: "Remettez-la à la docteure" }] } },
+        { q: "Peut-on retirer les 4 dents de sagesse en une fois ?", a: "Dans bien des cas, oui. La docteure décide lors de l'évaluation selon la position de chaque dent et votre état de santé général." },
+        { q: "Combien de repos me faudra-t-il ?", a: "En général 2 ou 3 jours de soins à la maison, selon le nombre de dents retirées et leur position." },
+        { q: "Faut-il les retirer si elles ne font pas mal ?", a: "Pas toujours. Si elles sont bien placées et ne posent pas de problème, elles peuvent rester. L'évaluation permet de le déterminer." },
+      ],
+    },
   },
   {
     service: "implantes-cirugia-oral",
@@ -356,6 +468,44 @@ export const treatments: Treatment[] = [
         { q: "What do I need for the first consultation?", a: "A panoramic X-ray. Have it taken beforehand and bring it on the day of your consultation, so the doctor can assess your case in detail. Also bring any other studies you have and a list of the medications you take.", viz: { kind: "flow", items: [{ t: "Before the consultation", s: "Have your panoramic X-ray taken" }, { t: "On consultation day", s: "Hand it to the doctor" }] } },
         { q: "Do I need a referral from my dentist?", a: "It is not required. You can book a consultation directly and the doctor will assess your case." },
         { q: "How much does it cost?", a: "It depends on the procedure. After the assessment, the clinic will confirm the cost of your treatment." },
+      ],
+    },
+    fr: {
+      summary: "Traitement chirurgical des problèmes de la bouche, des mâchoires et du visage, réalisé par une chirurgienne spécialiste.",
+      what: "La chirurgie buccale et maxillo-faciale est la spécialité qui traite chirurgicalement les maladies, blessures et affections de la bouche, des mâchoires et du visage. Elle comprend des interventions comme le retrait de dents incluses (par exemple les canines), le traitement des kystes et lésions de la bouche, la correction des freins, la préparation de l'os pour des prothèses ou des implants et l'évaluation des problèmes d'occlusion, entre autres.",
+      art: {
+        labels: [
+          { t: "Articulation", s: "ouvrir, fermer" },
+          { t: "Maxillaire", s: "en haut" },
+          { t: "Bouche", s: "kystes, freins" },
+          { t: "Mandibule", s: "occlusion" },
+        ],
+        caption: "Une spécialiste pour la bouche, les mâchoires et le visage.",
+      },
+      facts: [
+        { i: "xray", t: "Imagerie", s: "Radiographie ou scanner selon le besoin" },
+        { i: "plan", t: "Un plan clair", s: "Nous expliquons options et délais" },
+        { i: "anest", t: "Anesthésie", s: "Adaptée à chaque intervention" },
+        { i: "follow", t: "Suivi", s: "Des contrôles jusqu'à votre rétablissement" },
+      ],
+      forWho: [
+        "Les patients adressés par leur dentiste pour une intervention chirurgicale.",
+        "Les dents incluses qui ne sont pas sorties, comme les canines.",
+        "Les lésions, kystes ou bosses dans la bouche ou les mâchoires.",
+        "Les freins qui gênent la parole, l'hygiène ou le port de prothèses.",
+        "Les problèmes d'occlusion ou de mâchoire à évaluer.",
+      ],
+      steps: [
+        { t: "Évaluation spécialisée", d: "La docteure évalue votre cas, examine les examens nécessaires et vous explique les options de traitement." },
+        { t: "Plan chirurgical", d: "L'intervention, le type d'anesthésie et la préparation sont définis pour votre cas." },
+        { t: "Intervention", d: "Réalisée à la clinique avec les mesures de sécurité et de confort adaptées." },
+        { t: "Suivi", d: "Des visites de contrôle pour assurer une bonne récupération." },
+      ],
+      recovery: "La récupération dépend de l'intervention. La docteure vous indiquera les soins, les médicaments et le temps de repos estimé pour votre cas.",
+      faqs: [
+        { q: "Que faut-il pour la première consultation ?", a: "Une radiographie panoramique. Faites-la avant et apportez-la le jour de la consultation, pour que la docteure puisse évaluer votre cas en détail. Apportez aussi vos autres examens et la liste des médicaments que vous prenez.", viz: { kind: "flow", items: [{ t: "Avant la consultation", s: "Faites votre radiographie panoramique" }, { t: "Le jour de la consultation", s: "Remettez-la à la docteure" }] } },
+        { q: "Ai-je besoin d'une lettre de mon dentiste ?", a: "Ce n'est pas obligatoire. Vous pouvez réserver une consultation directement et la docteure évaluera votre cas." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de l'intervention. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
       ],
     },
   },
@@ -479,6 +629,63 @@ export const treatments: Treatment[] = [
         { q: "When can I return to my activities?", a: "Since it is a short outpatient procedure, you can usually get back to your routine soon, following the care instructions the doctor gives you." },
       ],
     },
+    fr: {
+      summary: "Correction du frein de la lèvre supérieure ou inférieure lorsqu'il est épais, court ou attaché trop près de la gencive.",
+      what: "Le frein labial est le repli de tissu qui relie la lèvre à la gencive. Lorsqu'il est épais, court ou attaché trop près des dents, il peut écarter les dents de devant, tirer sur la gencive ou gêner le nettoyage et le mouvement de la lèvre. La frénectomie labiale le libère ou le retire lors d'une courte intervention sous anesthésie locale. Elle peut se faire sur le frein supérieur ou inférieur.",
+      art: {
+        labels: [
+          { t: "Lèvre", s: "bouge librement" },
+          { t: "Frein", s: "une bride qui tire" },
+          { t: "Gencive", s: "entre les dents" },
+          { t: "Libération", s: "sous anesthésie locale" },
+        ],
+        caption: "Un frein épais tire sur la gencive et écarte les dents. Une fois libéré, la lèvre et la gencive sont libres.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Aucune douleur pendant l'intervention" },
+        { i: "time", t: "Chirurgie courte", s: "Réalisée au cabinet" },
+        { i: "home", t: "En ambulatoire", s: "Vous rentrez chez vous le jour même" },
+        { i: "tag", t: "RD$15,000", s: "Par frein, supérieur ou inférieur" },
+      ],
+      forWho: [
+        "Un espace entre les dents de devant lié au frein.",
+        "Un frein qui tire sur la gencive ou la fait reculer.",
+        "Une difficulté à bouger la lèvre ou à bien nettoyer la zone.",
+        "Une recommandation de votre dentiste ou orthodontiste, par exemple avant ou après un appareil dentaire.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue le frein, la gencive et les dents, et vous indique s'il faut traiter le supérieur, l'inférieur ou les deux." },
+        { t: "Frénectomie", d: "Sous anesthésie locale, le frein est libéré ou retiré et la zone est refermée avec des points fins." },
+        { t: "Consignes et suivi", d: "Vous recevez des consignes de soins à domicile et une visite de contrôle est prévue pour vérifier la cicatrisation." },
+      ],
+      recovery: "La gêne est généralement légère les premiers jours et se contrôle avec les médicaments prescrits par la docteure. Une alimentation molle, une bonne hygiène et éviter d'étirer la lèvre pendant la cicatrisation sont recommandés.",
+      care: {
+        expect: [
+          { ic: "shield", t: "Pendant l'intervention", s: "Avec l'anesthésie locale, vous ne devriez pas avoir mal." },
+          { ic: "leaf", t: "Premiers jours", s: "Une gêne légère et un peu de gonflement, contrôlés avec les médicaments prescrits." },
+          { ic: "crown", t: "Avec le temps", s: "La zone cicatrise et le mouvement est libre." },
+        ],
+        items: [
+          { ic: "pill", t: "Médicaments", s: "Selon la prescription de la docteure" },
+          { ic: "bowl", t: "Alimentation molle", s: "Des aliments doux" },
+          { ic: "brush", t: "Bonne hygiène", s: "Pour prendre soin de la zone" },
+          { ic: "calendar", t: "Suivi", s: "Venez à votre contrôle" },
+        ],
+      },
+      price: {
+        lines: [
+          { label: "Frein supérieur", value: "RD$15,000" },
+          { label: "Frein inférieur", value: "RD$15,000" },
+        ],
+        note: "Prix par frein, anesthésie locale comprise. Si la frénectomie vous a déjà été recommandée, vous pouvez la réserver directement comme intervention.",
+      },
+      faqs: [
+        { q: "Est-ce douloureux ?", a: "Pas pendant l'intervention, car elle se fait sous anesthésie locale. Ensuite, il peut y avoir une gêne légère, contrôlée avec des médicaments.", viz: { kind: "flow", items: [{ t: "Pendant", s: "Sans douleur, anesthésie locale" }, { t: "Après", s: "Gêne légère, médicaments" }] } },
+        { q: "Ai-je besoin d'une radiographie ?", a: "Non. Le frein est un tissu mou, il n'y a donc pas besoin de radiographie avant : la docteure l'évalue directement en consultation." },
+        { q: "Quel frein dois-je faire traiter ?", a: "La docteure le détermine lors de l'évaluation : ce peut être le supérieur, l'inférieur ou, dans certains cas, les deux. Chaque frein coûte RD$15,000.", viz: { kind: "chips", items: [{ t: "Frein supérieur" }, { t: "Frein inférieur" }] } },
+        { q: "Quand puis-je reprendre mes activités ?", a: "Comme c'est une intervention courte et ambulatoire, vous pouvez en général reprendre vite votre routine, en suivant les consignes de la docteure." },
+      ],
+    },
   },
   {
     service: "implantes-cirugia-oral",
@@ -593,6 +800,60 @@ export const treatments: Treatment[] = [
         { q: "When can I return to my activities?", a: "Since it is a short outpatient procedure, you can usually get back to your routine soon, following the care instructions the doctor gives you." },
       ],
     },
+    fr: {
+      summary: "Libération du frein de la langue lorsqu'il est court ou épais et limite ses mouvements.",
+      what: "Le frein de la langue est le repli qui relie le dessous de la langue au plancher de la bouche. Lorsqu'il est court ou épais, ce qu'on appelle ankyloglossie ou « langue attachée », il limite les mouvements de la langue et peut gêner la parole, la déglutition ou l'hygiène buccale. La frénectomie linguale libère la langue lors d'une courte intervention sous anesthésie locale.",
+      art: {
+        labels: [
+          { t: "Langue", s: "se lève librement" },
+          { t: "Frein", s: "courte, la retient" },
+          { t: "Plancher", s: "point d'attache" },
+          { t: "Libération", s: "sous anesthésie locale" },
+        ],
+        caption: "Un frein court attache la langue au plancher de la bouche. Une fois libérée, la langue bouge librement.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Aucune douleur pendant l'intervention" },
+        { i: "sparkle", t: "Plus de mobilité", s: "La langue est libérée" },
+        { i: "home", t: "En ambulatoire", s: "Vous rentrez chez vous le jour même" },
+        { i: "tag", t: "RD$25,000", s: "Intervention complète" },
+      ],
+      forWho: [
+        "Une difficulté à tirer la langue ou à la lever vers le palais.",
+        "Le bout de la langue prend une forme de cœur quand on la tire.",
+        "Une difficulté à prononcer certains sons, lorsqu'un spécialiste l'attribue au frein.",
+        "Une recommandation de votre dentiste, orthodontiste ou orthophoniste.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue le frein et les mouvements de la langue pour confirmer si la frénectomie est la meilleure option." },
+        { t: "Frénectomie", d: "Sous anesthésie locale, le frein est libéré et la zone est refermée avec des points fins." },
+        { t: "Consignes et suivi", d: "Vous recevez des consignes de soins à domicile et, si la docteure les recommande, des exercices de la langue. Une visite de contrôle est prévue pour vérifier la cicatrisation." },
+      ],
+      recovery: "La gêne est généralement légère les premiers jours et se contrôle avec les médicaments prescrits par la docteure. Une alimentation molle, une bonne hygiène et les exercices recommandés sont conseillés.",
+      care: {
+        expect: [
+          { ic: "shield", t: "Pendant l'intervention", s: "Avec l'anesthésie locale, vous ne devriez pas avoir mal." },
+          { ic: "leaf", t: "Premiers jours", s: "Une gêne légère et un peu de gonflement, contrôlés avec les médicaments prescrits." },
+          { ic: "crown", t: "Avec le temps", s: "La zone cicatrise et le mouvement est libre." },
+        ],
+        items: [
+          { ic: "pill", t: "Médicaments", s: "Selon la prescription de la docteure" },
+          { ic: "bowl", t: "Alimentation molle", s: "Des aliments doux" },
+          { ic: "brush", t: "Bonne hygiène", s: "Pour prendre soin de la zone" },
+          { ic: "calendar", t: "Suivi", s: "Venez à votre contrôle" },
+        ],
+      },
+      price: {
+        lines: [{ label: "Frénectomie linguale", value: "RD$25,000" }],
+        note: "Sous anesthésie locale. Si la frénectomie vous a déjà été recommandée, vous pouvez la réserver directement comme intervention.",
+      },
+      faqs: [
+        { q: "Est-ce douloureux ?", a: "Pas pendant l'intervention, car elle se fait sous anesthésie locale. Ensuite, il peut y avoir une gêne légère, contrôlée avec des médicaments.", viz: { kind: "flow", items: [{ t: "Pendant", s: "Sans douleur, anesthésie locale" }, { t: "Après", s: "Gêne légère, médicaments" }] } },
+        { q: "Ai-je besoin d'une radiographie ?", a: "Non. Le frein est un tissu mou, il n'y a donc pas besoin de radiographie avant : la docteure l'évalue directement en consultation." },
+        { q: "Est-ce que cela améliorera la parole ?", a: "La chirurgie libère les mouvements de la langue. En cas de difficultés de prononciation, une rééducation orthophonique est parfois aussi recommandée. La docteure vous orientera selon votre cas." },
+        { q: "Quand puis-je reprendre mes activités ?", a: "Comme c'est une intervention courte et ambulatoire, vous pouvez en général reprendre vite votre routine, en suivant les consignes de la docteure." },
+      ],
+    },
   },
   {
     service: "cirugia-estetica-facial",
@@ -671,6 +932,43 @@ export const treatments: Treatment[] = [
         { q: "Is the result permanent?", a: "The fat cells removed do not grow back. Keeping a stable weight helps maintain the result." },
         { q: "When will I see the result?", a: "A change is noticeable within the first weeks, but the final contour shows once the swelling has fully gone down." },
         { q: "How much does it cost?", a: "It depends on each case. After the assessment, the clinic will confirm the cost of your treatment." },
+      ],
+    },
+    fr: {
+      summary: "Réduisez la graisse sous le menton et dessinez la ligne de la mâchoire pour un profil plus équilibré.",
+      what: "La liposuccion du double menton retire la graisse accumulée sous le menton par de toutes petites incisions. Elle peut se combiner avec la définition de la mâchoire, qui traite la graisse le long du bord de la mâchoire pour mieux marquer l'angle entre le cou et le visage. L'objectif est un profil plus net qui reste naturel.",
+      art: {
+        labels: [
+          { t: "Double menton", s: "graisse sous le menton" },
+          { t: "Incision", s: "minuscule, sous le menton" },
+          { t: "Mâchoire", s: "contour plus net" },
+        ],
+        caption: "La graisse sous le menton est retirée pour un profil plus net.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Avec ou sans sédation" },
+        { i: "scar", t: "Incisions minuscules", s: "À peine visibles" },
+        { i: "band", t: "Mentonnière", s: "En général 1 à 2 semaines" },
+        { i: "follow", t: "Résultat final", s: "Une fois le gonflement résorbé" },
+      ],
+      forWho: [
+        "Les personnes avec de la graisse sous le menton qui ne disparaît pas avec le régime ou le sport.",
+        "Celles qui veulent une mâchoire plus dessinée.",
+        "Les patients avec une bonne élasticité de la peau (en cas de fort relâchement, la docteure peut proposer de la combiner avec une autre intervention).",
+        "Les personnes en bonne santé générale avec des attentes réalistes.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue la quantité de graisse, la qualité de la peau et les proportions de votre visage pour définir le plan." },
+        { t: "Intervention", d: "Par de minuscules incisions à peine visibles, la graisse est aspirée sous le menton et le long de la mâchoire. L'intervention se fait sous anesthésie locale, avec ou sans sédation selon le cas." },
+        { t: "Bandage ou mentonnière", d: "Un vêtement de compression est posé à la fin pour aider la peau à s'adapter au nouveau contour." },
+        { t: "Suivi", d: "La docteure vérifie votre évolution lors des visites de contrôle jusqu'au résultat final." },
+      ],
+      recovery: "Un gonflement et quelques bleus les premiers jours sont normaux. La mentonnière se porte le temps indiqué par la docteure, en général une à deux semaines. La plupart des gens reprennent leurs activités en quelques jours, et le contour final apparaît à mesure que le gonflement diminue au fil des semaines et des mois.",
+      faqs: [
+        { q: "Est-ce que cela laisse des cicatrices ?", a: "Les incisions sont très petites et placées dans des zones discrètes, comme sous le menton, elles sont donc généralement à peine visibles." },
+        { q: "Le résultat est-il définitif ?", a: "Les cellules graisseuses retirées ne repoussent pas. Garder un poids stable aide à conserver le résultat." },
+        { q: "Quand verrai-je le résultat ?", a: "Le changement se remarque dès les premières semaines, mais le contour final apparaît une fois le gonflement complètement résorbé." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
       ],
     },
   },
@@ -753,6 +1051,43 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on each case. After the assessment, the clinic will confirm the cost of your treatment." },
       ],
     },
+    fr: {
+      summary: "Corrigez les cordes verticales du cou et définissez l'angle entre le cou et la mâchoire.",
+      what: "Le platysma est un muscle fin qui recouvre l'avant du cou. Avec les années, ses bords se séparent et apparaissent comme des cordes verticales, et le cou perd sa définition. La platysmaplastie réunit et retend ce muscle, en général par une petite incision sous le menton, pour donner au cou un contour plus ferme et plus jeune.",
+      art: {
+        labels: [
+          { t: "Cordes du cou", s: "muscle séparé" },
+          { t: "Réparation", s: "muscle retendu" },
+          { t: "Incision", s: "discrète, sous le menton" },
+        ],
+        caption: "Les bords du muscle sont réunis pour un cou plus ferme et mieux dessiné.",
+      },
+      facts: [
+        { i: "scar", t: "Incision discrète", s: "Sous le menton" },
+        { i: "plan", t: "Peut se combiner", s: "Avec la liposuccion du menton ou un lifting" },
+        { i: "band", t: "Bandage", s: "Les premiers jours" },
+        { i: "follow", t: "Suivi", s: "Jusqu'au résultat final" },
+      ],
+      forWho: [
+        "Les personnes avec des cordes verticales visibles sur le cou.",
+        "Celles qui remarquent une perte de définition entre le cou et la mâchoire.",
+        "Les patients qui veulent améliorer le cou sans lifting complet (la docteure évalue si cela suffit ou s'il faut combiner).",
+        "Les personnes en bonne santé générale.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure examine le muscle, la peau et la graisse du cou pour choisir la technique la plus adaptée." },
+        { t: "Intervention", d: "Par une incision discrète sous le menton, les bords du muscle sont réunis et retendus. Elle peut se combiner avec la liposuccion du double menton. L'anesthésie est décidée au cas par cas." },
+        { t: "Bandage", d: "Un vêtement de compression protège la zone et aide le cou à s'adapter." },
+        { t: "Suivi", d: "Les points sont retirés et l'évolution est vérifiée lors des visites de contrôle." },
+      ],
+      recovery: "Les premiers jours, il peut y avoir un gonflement, une sensation de tiraillement et quelques bleus. Il est recommandé de dormir la tête surélevée et d'éviter les efforts le temps indiqué par la docteure. Le résultat se précise à mesure que le gonflement diminue.",
+      faqs: [
+        { q: "Est-ce la même chose qu'un lifting du cou ?", a: "Pas exactement. La platysmaplastie agit sur le muscle ; un lifting retire et repositionne aussi la peau. Lors de l'évaluation, la docteure vous dira ce dont votre cas a besoin." },
+        { q: "La cicatrice est-elle visible ?", a: "L'incision est sous le menton, une zone peu visible, et elle devient en général très discrète avec le temps." },
+        { q: "Peut-on la combiner avec d'autres interventions ?", a: "Oui. Elle se combine souvent avec la liposuccion du double menton ou un lifting du visage et du cou." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
+      ],
+    },
   },
   {
     service: "cirugia-estetica-facial",
@@ -831,6 +1166,43 @@ export const treatments: Treatment[] = [
         { q: "When can I return to my activities?", a: "Many people return to light activities within a few days. The doctor will tell you when you can exercise again." },
         { q: "Can I have upper and lower eyelids done together?", a: "Yes, both can be treated in the same procedure if your case requires it." },
         { q: "How much does it cost?", a: "It depends on each case. After the assessment, the clinic will confirm the cost of your treatment." },
+      ],
+    },
+    fr: {
+      summary: "Retirez l'excès de peau ou les poches des paupières pour un regard plus reposé.",
+      what: "La blépharoplastie est la chirurgie des paupières. Sur la paupière supérieure, elle retire l'excès de peau qui donne un air fatigué et, dans certains cas, peut même gêner la vue. Sur la paupière inférieure, elle corrige les poches sous les yeux. Les incisions suivent les plis naturels de l'œil, la cicatrice est donc très bien cachée.",
+      art: {
+        labels: [
+          { t: "Pli de la paupière", s: "où se cache la cicatrice" },
+          { t: "Excès de peau", s: "removed" },
+          { t: "Poches", s: "corrected" },
+        ],
+        caption: "L'excès de peau est retiré et la cicatrice se place dans le pli naturel de la paupière.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Avec ou sans sédation" },
+        { i: "scar", t: "Cicatrice cachée", s: "Dans le pli de la paupière" },
+        { i: "time", t: "Points", s: "Retirés en quelques jours" },
+        { i: "follow", t: "1 à 2 semaines", s: "De gonflement et de bleus" },
+      ],
+      forWho: [
+        "Les personnes avec un excès de peau sur les paupières supérieures.",
+        "Celles qui ont des poches marquées sous les yeux.",
+        "Celles qui trouvent leur regard fatigué même reposées.",
+        "Les personnes sans maladie oculaire active (vérifié lors de l'évaluation).",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue les paupières, la peau et les poches, et revoit vos antécédents de santé oculaire." },
+        { t: "Intervention", d: "L'intervention se fait sous anesthésie locale, avec ou sans sédation. L'excès de peau est retiré et, si besoin, les poches sont corrigées par des incisions dans les plis naturels." },
+        { t: "Retrait des points", d: "Les points sont retirés quelques jours plus tard, selon les indications de la docteure." },
+        { t: "Suivi", d: "La cicatrisation et l'évolution sont vérifiées jusqu'au résultat final." },
+      ],
+      recovery: "Un gonflement et des bleus autour des yeux pendant la première ou les deux premières semaines sont normaux. Les compresses froides, dormir la tête surélevée et éviter les efforts aident. Évitez les lentilles de contact et le maquillage sur la zone jusqu'à ce que la docteure vous le permette.",
+      faqs: [
+        { q: "Les cicatrices sont-elles visibles ?", a: "Les incisions suivent le pli naturel de la paupière ou se situent juste sous les cils, elles deviennent donc très discrètes avec le temps." },
+        { q: "Quand puis-je reprendre mes activités ?", a: "Beaucoup de personnes reprennent des activités légères en quelques jours. La docteure vous dira quand reprendre le sport." },
+        { q: "Puis-je faire les paupières supérieures et inférieures en même temps ?", a: "Oui, les deux peuvent être traitées lors de la même intervention si votre cas le demande." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
       ],
     },
   },
@@ -913,6 +1285,43 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on each case. After the assessment, the clinic will confirm the cost of your treatment." },
       ],
     },
+    fr: {
+      summary: "Corrigez les oreilles décollées et rapprochez-les dans une position plus harmonieuse avec le visage.",
+      what: "L'otoplastie remodèle le cartilage de l'oreille pour la rapprocher de la tête ou en corriger la forme. C'est l'une des chirurgies les plus gratifiantes, car un petit changement apporte beaucoup d'harmonie au visage. L'incision se fait derrière l'oreille, où la cicatrice reste cachée.",
+      art: {
+        labels: [
+          { t: "Décollée", s: "position d'avant" },
+          { t: "Nouvelle position", s: "plus près de la tête" },
+          { t: "Incision", s: "cachée derrière l'oreille" },
+        ],
+        caption: "Le cartilage est remodelé pour que l'oreille se place plus près de la tête.",
+      },
+      facts: [
+        { i: "scar", t: "Cicatrice cachée", s: "Derrière l'oreille" },
+        { i: "band", t: "Bandeau", s: "Pour dormir, les premières semaines" },
+        { i: "people", t: "Enfants et adultes", s: "À partir de l'âge conseillé par la docteure" },
+        { i: "follow", t: "Résultat durable", s: "Dans la grande majorité des cas" },
+      ],
+      forWho: [
+        "Les enfants, à partir de l'âge recommandé par la docteure, et les adultes aux oreilles décollées ou proéminentes.",
+        "Les personnes dont les oreilles diffèrent de forme ou de taille.",
+        "Celles qui se sentent mal à l'aise avec la forme de leurs oreilles.",
+        "Les personnes en bonne santé générale.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure analyse la forme du cartilage et la position de l'oreille, et vous explique le résultat attendu." },
+        { t: "Intervention", d: "Par une incision derrière l'oreille, le cartilage est remodelé et fixé dans sa nouvelle position. Le type d'anesthésie dépend de l'âge et du cas." },
+        { t: "Bandage", d: "Un bandage de tête se porte les premiers jours, puis un bandeau élastique, surtout pour dormir." },
+        { t: "Suivi", d: "Les points sont retirés et l'évolution est vérifiée jusqu'au résultat final." },
+      ],
+      recovery: "Les premières nuits peuvent être un peu inconfortables et sensibles, ce qui se contrôle avec les médicaments prescrits. Le bandeau protège les oreilles pendant la cicatrisation, le temps indiqué par la docteure. Évitez les chocs et les sports de contact les premières semaines.",
+      faqs: [
+        { q: "À partir de quel âge peut-on la faire ?", a: "Elle peut se faire chez l'enfant une fois que l'oreille a presque atteint sa taille adulte. La docteure vous conseillera selon l'âge et le cas." },
+        { q: "La cicatrice est-elle visible ?", a: "Elle se trouve derrière l'oreille, dans le pli avec la tête, elle n'est donc normalement pas visible." },
+        { q: "Le résultat est-il définitif ?", a: "Oui, dans la grande majorité des cas, le résultat dure dans le temps." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
+      ],
+    },
   },
   {
     service: "cirugia-estetica-facial",
@@ -993,6 +1402,43 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on each case. After the assessment, the clinic will confirm the cost of your treatment." },
       ],
     },
+    fr: {
+      summary: "Affinez les joues et le visage en retirant les boules de Bichat, sans cicatrices visibles.",
+      what: "Les boules de Bichat sont des amas de graisse situés dans le bas des joues. Lorsqu'elles sont volumineuses, elles donnent un visage rond ou des joues très pleines. La bichectomie retire une partie de cette graisse par une petite incision à l'intérieur de la bouche, elle ne laisse donc pas de cicatrice sur la peau.",
+      art: {
+        labels: [
+          { t: "Contour", s: "visage plus fin" },
+          { t: "Boule de Bichat", s: "amas graisseux de la joue" },
+          { t: "Incision", s: "à l'intérieur de la bouche" },
+        ],
+        caption: "La graisse des joues est réduite par l'intérieur de la bouche, sans cicatrice sur la peau.",
+      },
+      facts: [
+        { i: "scar", t: "Pas de cicatrice visible", s: "L'incision est à l'intérieur de la bouche" },
+        { i: "anest", t: "Anesthésie locale", s: "Une intervention courte" },
+        { i: "plan", t: "Une évaluation attentive", s: "Tous les visages n'en ont pas besoin" },
+        { i: "follow", t: "Résultat progressif", s: "S'affine au fil des mois suivants" },
+      ],
+      forWho: [
+        "Les personnes aux joues très pleines ou au visage rond à cause des boules de Bichat.",
+        "Celles qui veulent un visage plus sculpté et des pommettes plus marquées.",
+        "Les personnes qui se mordent souvent l'intérieur des joues.",
+        "Les patients chez qui la docteure confirme que les boules de Bichat sont la cause du volume (tous les visages ronds ne le sont pas).",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure analyse la structure de votre visage pour confirmer si la bichectomie vous convient, en tenant compte aussi de la façon dont votre visage vieillira." },
+        { t: "Intervention", d: "Sous anesthésie locale, une petite incision est faite à l'intérieur de la bouche et la quantité de graisse adaptée est retirée. C'est une intervention courte." },
+        { t: "Soins", d: "Une alimentation molle, une hygiène buccale soigneuse et les médicaments nécessaires sont prescrits." },
+        { t: "Suivi", d: "La cicatrisation à l'intérieur de la bouche et l'évolution du contour sont vérifiées." },
+      ],
+      recovery: "Le gonflement des joues est normal les premiers jours ou semaines. Une alimentation molle et des bains de bouche selon les consignes sont recommandés. Le visage s'affine progressivement et le résultat final apparaît au cours des mois suivants.",
+      faqs: [
+        { q: "Est-ce que cela laisse une cicatrice ?", a: "Pas sur la peau. L'incision est à l'intérieur de la bouche et cicatrise sans marque visible." },
+        { q: "Est-ce pour tout le monde ?", a: "Non. Pour certains visages, retirer cette graisse n'est pas conseillé ; c'est pourquoi la docteure l'évalue avec soin." },
+        { q: "Quand verrai-je le résultat ?", a: "Le changement est progressif : visible dès les premières semaines, avec le contour final au cours des mois suivants." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
+      ],
+    },
   },
   {
     service: "cirugia-estetica-facial",
@@ -1071,6 +1517,43 @@ export const treatments: Treatment[] = [
         { q: "How long does the result last?", a: "A lift does not stop aging, but your face keeps looking younger than it would have without surgery for many years." },
         { q: "Do I need to stay several days if I'm visiting?", a: "Yes, it is best to plan your stay so you can attend the first follow-ups. The clinic will help you coordinate the dates." },
         { q: "How much does it cost?", a: "It depends on each case. After the assessment, the clinic will confirm the cost of your treatment." },
+      ],
+    },
+    fr: {
+      summary: "Traitez le relâchement du visage et du cou en repositionnant les tissus, avec un résultat naturel.",
+      what: "Avec le temps, la peau et les tissus du visage perdent de leur fermeté et descendent : les plis se creusent, la mâchoire perd sa définition et le cou se relâche. Un lifting du visage et du cou repositionne les tissus profonds et retire l'excès de peau. Les incisions se placent autour de l'oreille et le long de la racine des cheveux, où elles restent cachées. L'objectif est d'avoir l'air reposé et plus jeune, pas différent.",
+      art: {
+        labels: [
+          { t: "Lifting", s: "tissus remontés" },
+          { t: "Incision", s: "autour de l'oreille" },
+          { t: "Cou", s: "contour plus ferme" },
+        ],
+        caption: "Les tissus sont repositionnés vers le haut et l'arrière pour un résultat naturel.",
+      },
+      facts: [
+        { i: "plan", t: "Plan sur mesure", s: "Visage, cou ou les deux" },
+        { i: "scar", t: "Incisions cachées", s: "Autour de l'oreille et à la racine des cheveux" },
+        { i: "time", t: "Récupération", s: "Vie sociale en quelques semaines" },
+        { i: "follow", t: "Résultat naturel", s: "Reposé(e), pas différent(e)" },
+      ],
+      forWho: [
+        "Les personnes avec un relâchement modéré ou marqué du visage et du cou.",
+        "Celles qui ont perdu la définition de la mâchoire.",
+        "Les patients pour qui les soins sans chirurgie ne donnent plus le résultat souhaité.",
+        "Les personnes en bonne santé générale. Il est recommandé de ne pas fumer avant et après la chirurgie.",
+      ],
+      steps: [
+        { t: "Évaluation et examens", d: "La docteure évalue votre visage, votre peau et votre santé générale, et demande les examens nécessaires pour opérer en toute sécurité." },
+        { t: "Planification", d: "Ensemble, vous définissez les zones à traiter (visage, cou ou les deux) et s'il faut combiner avec d'autres interventions, comme la blépharoplastie ou la liposuccion du double menton." },
+        { t: "Chirurgie", d: "Les tissus sont repositionnés et l'excès de peau est retiré. Le type d'anesthésie est décidé au cas par cas." },
+        { t: "Récupération et suivi", d: "Des bandages sont posés et des consignes de soins vous sont données. La docteure vérifie votre évolution à chaque contrôle." },
+      ],
+      recovery: "C'est l'intervention de ce groupe qui demande la plus longue récupération. Un gonflement, des bleus et une sensation de tiraillement les premières semaines sont normaux. Un repos relatif, dormir la tête surélevée et suivre de près les consignes sont recommandés. La plupart des gens se sentent prêts pour la vie sociale en quelques semaines, et le résultat continue de s'affiner au cours des mois suivants.",
+      faqs: [
+        { q: "Mon visage aura-t-il l'air tiré ?", a: "Ce n'est pas le but. La technique repositionne les tissus profonds au lieu de simplement tendre la peau, pour un résultat naturel." },
+        { q: "Combien de temps dure le résultat ?", a: "Un lifting n'arrête pas le vieillissement, mais votre visage continue de paraître plus jeune qu'il ne l'aurait été sans chirurgie pendant de nombreuses années." },
+        { q: "Dois-je rester plusieurs jours si je viens de l'étranger ?", a: "Oui, il vaut mieux prévoir votre séjour pour assister aux premiers contrôles. La clinique vous aidera à coordonner les dates." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation, la clinique vous confirmera le coût de votre traitement." },
       ],
     },
   },
@@ -1159,6 +1642,46 @@ export const treatments: Treatment[] = [
         { q: "Can both ears be done on the same day?", a: "Yes. The price is per ear." },
       ],
     },
+    fr: {
+      summary: "Réparez un lobe d'oreille déchiré ou distendu par des boucles d'oreilles, lors d'une courte intervention.",
+      what: "Des boucles d'oreilles lourdes, un arrachement accidentel ou des écarteurs peuvent déchirer ou distendre le trou du lobe. La lobuloplastie referme et remodèle le lobe pour lui rendre une forme naturelle. C'est une intervention simple, sous anesthésie locale, réalisée au cabinet.",
+      art: {
+        labels: [
+          { t: "Piercing", s: "à distance de la cicatrice" },
+          { t: "Fermeture", s: "avec des points fins" },
+          { t: "Lobe déchiré", s: "boucles lourdes" },
+        ],
+        caption: "Le lobe est refermé avec des points fins et, une fois cicatrisé, peut être percé à nouveau.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Au cabinet" },
+        { i: "home", t: "Le jour même", s: "Retour à vos activités" },
+        { i: "time", t: "Points", s: "Retirés au bout d'une semaine environ" },
+        { i: "tag", t: "RD$10,000", s: "Par oreille" },
+      ],
+      forWho: [
+        "Les personnes au lobe déchiré complètement ou en partie.",
+        "Celles dont le trou de boucle d'oreille est très distendu.",
+        "Les personnes qui ont porté des écarteurs et veulent refermer le lobe.",
+        "Celles qui veulent porter à nouveau des boucles d'oreilles (l'oreille peut être repercée après cicatrisation).",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure examine le lobe et vous explique le résultat. Si l'intervention vous a déjà été recommandée, vous pouvez la réserver directement." },
+        { t: "Intervention", d: "Sous anesthésie locale, le lobe est refermé avec des points fins. C'est rapide et vous rentrez chez vous le jour même." },
+        { t: "Retrait des points", d: "Les points sont retirés environ une semaine plus tard." },
+        { t: "Nouveau perçage", d: "Si vous voulez porter des boucles d'oreilles, la docteure vous dira quand et où repercer, à distance de la cicatrice." },
+      ],
+      recovery: "La récupération est rapide. Vous pouvez reprendre vos activités le jour même. Gardez la plaie propre, ne portez pas de boucle d'oreille de ce côté jusqu'à l'accord de la docteure, et évitez de tirer ou de cogner la zone.",
+      price: {
+        lines: [{ label: "Par oreille", value: "RD$10,000" }],
+        note: "Si l'intervention vous a déjà été recommandée, vous pouvez la réserver directement : sans frais de consultation.",
+      },
+      faqs: [
+        { q: "Est-ce douloureux ?", a: "Une anesthésie locale est appliquée, vous ne devriez donc pas avoir mal pendant l'intervention. Une légère gêne ensuite est possible." },
+        { q: "Pourrai-je porter à nouveau des boucles d'oreilles ?", a: "Oui. Une fois cicatrisée, l'oreille peut être repercée à un endroit éloigné de la cicatrice. La docteure vous dira quand." },
+        { q: "Peut-on faire les deux oreilles le même jour ?", a: "Oui. Le prix est par oreille." },
+      ],
+    },
   },
   {
     service: "cirugia-estetica-facial",
@@ -1243,6 +1766,46 @@ export const treatments: Treatment[] = [
         { q: "What counts as an area?", a: "One specific zone of the face or body, such as the neck, a cheek or an underarm. Several small lesions in that zone are treated together." },
         { q: "Can they come back?", a: "Some warts are caused by a virus and can reappear. The doctor will explain how to reduce that risk." },
         { q: "Will there be a mark?", a: "There may be a small mark that fades over time, especially if protected from the sun." },
+      ],
+    },
+    fr: {
+      summary: "Retirez en toute sécurité les verrues et petites lésions bénignes de la peau du visage et du corps.",
+      what: "Les verrues et autres lésions bénignes de la peau, comme les acrochordons, peuvent gêner, frotter contre les vêtements ou simplement être indésirables. La docteure les retire avec la technique la plus adaptée à chaque lésion, en veillant à ce que la peau cicatrise le plus discrètement possible. Le prix est par zone : une séance peut donc inclure plusieurs petites lésions groupées.",
+      art: {
+        labels: [
+          { t: "Une zone", s: "lésions groupées" },
+          { t: "Lésions", s: "verrues ou acrochordons" },
+          { t: "Peau lisse", s: "la marque s'estompe" },
+        ],
+        caption: "Les lésions d'une zone sont retirées en une seule séance et la peau cicatrise discrètement.",
+      },
+      facts: [
+        { i: "anest", t: "Anesthésie locale", s: "Une intervention rapide" },
+        { i: "tag", t: "RD$8,000", s: "Par zone" },
+        { i: "time", t: "1 à 2 semaines", s: "Pour cicatriser" },
+        { i: "plan", t: "Analyse si besoin", s: "La lésion est envoyée au laboratoire" },
+      ],
+      forWho: [
+        "Les personnes avec des verrues sur le visage, le cou ou le corps.",
+        "Celles qui ont de petites lésions groupées, par exemple sur le cou ou sous les aisselles.",
+        "Les lésions qui s'irritent, saignent au frottement ou gênent avec les vêtements ou les bijoux.",
+        "Toute lésion qui a changé de forme, de couleur ou de taille doit être évaluée avant d'être retirée.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure examine les lésions, confirme qu'elles peuvent être retirées et choisit la technique. Si l'une d'elles le nécessite, elle est envoyée en analyse." },
+        { t: "Intervention", d: "Sous anesthésie locale, les lésions de la zone traitée sont retirées. C'est rapide et vous rentrez chez vous le jour même." },
+        { t: "Soins", d: "Des consignes de soin de la peau et de protection solaire vous sont données pour une bonne cicatrisation." },
+        { t: "Suivi", d: "La docteure vérifie la zone et la cicatrisation." },
+      ],
+      recovery: "La peau cicatrise en général en une à deux semaines, selon la taille et la zone. Gardez la zone propre, ne touchez pas aux croûtes et utilisez une protection solaire pour que la marque reste la plus discrète possible.",
+      price: {
+        lines: [{ label: "Par zone", value: "RD$8,000" }],
+        note: "Une zone est une partie du visage ou du corps (par exemple, le cou). La docteure confirme les zones lors de l'évaluation.",
+      },
+      faqs: [
+        { q: "Qu'est-ce qui compte comme une zone ?", a: "Une partie précise du visage ou du corps, comme le cou, une joue ou une aisselle. Plusieurs petites lésions dans cette partie sont traitées ensemble." },
+        { q: "Peuvent-elles revenir ?", a: "Certaines verrues sont causées par un virus et peuvent réapparaître. La docteure vous expliquera comment réduire ce risque." },
+        { q: "Restera-t-il une marque ?", a: "Il peut rester une petite marque qui s'estompe avec le temps, surtout si on la protège du soleil." },
       ],
     },
   },
@@ -1338,6 +1901,49 @@ export const treatments: Treatment[] = [
         { q: "Does Botox help the folds from the nose to the mouth?", a: "Those folds are mainly caused by volume loss and are treated with hyaluronic acid. Botox in the mouth corners can help as a complement. The doctor will recommend the best combination for your case." },
       ],
     },
+    fr: {
+      summary: "Atténuez les rides d'expression du front, entre les sourcils et autour des yeux, et relevez les coins de la bouche, avec un résultat naturel.",
+      what: "La toxine botulique, connue sous le nom de Botox, détend temporairement les muscles qui créent les rides d'expression quand vous bougez le visage. La peau paraît plus lisse et le visage plus reposé, sans perdre votre expression. Dans le bas du visage, elle détend le muscle qui tire les coins de la bouche vers le bas : les coins cessent de tomber et le visage ne paraît plus triste ou fatigué. Elle atténue aussi les ridules autour des lèvres. Elle s'applique par micro-injections à des points précis, lors d'une courte séance sans chirurgie.",
+      art: {
+        labels: [
+          { t: "Front", s: "rides horizontales" },
+          { t: "Rides du lion", s: "entre les sourcils" },
+          { t: "Pattes d'oie", s: "autour des yeux" },
+          { t: "Commissures", s: "air moins triste" },
+        ],
+        caption: "Des micro-injections à des points précis détendent le muscle : les rides s'atténuent et les coins de la bouche ne tombent plus.",
+      },
+      facts: [
+        { i: "tag", t: "RD$28,000", s: "Retouche incluse" },
+        { i: "time", t: "Effet en quelques jours", s: "Complet à 2 semaines" },
+        { i: "home", t: "Sans arrêt d'activité", s: "Retour à vos activités" },
+        { i: "follow", t: "3 à 4 mois", s: "Durée habituelle de l'effet" },
+      ],
+      forWho: [
+        "Les personnes avec des rides sur le front, entre les sourcils ou des pattes d'oie.",
+        "Les coins de la bouche tombants qui donnent un air triste ou fatigué, et les ridules autour des lèvres.",
+        "Celles qui veulent éviter que les rides d'expression se creusent.",
+        "Celles qui cherchent un résultat naturel qui garde leur expression.",
+        "Déconseillé pendant la grossesse ou l'allaitement (vérifié lors de l'évaluation).",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure observe les mouvements de votre visage et définit les points et la dose pour votre cas." },
+        { t: "Application", d: "De petites quantités sont appliquées dans les muscles choisis avec des aiguilles très fines. Cela prend quelques minutes." },
+        { t: "Effet", d: "Le résultat commence à se voir en quelques jours et est complet au bout d'environ deux semaines." },
+        { t: "Retouche", d: "À 2 semaines, le résultat est revu et, si besoin, retouché. C'est inclus dans le prix." },
+      ],
+      recovery: "Vous pouvez reprendre vos activités tout de suite. De petites marques peuvent apparaître aux points d'injection et disparaissent en quelques heures. Les premières heures, évitez de vous allonger, de masser la zone et le sport intense, selon les indications de la docteure.",
+      price: {
+        lines: [{ label: "Traitement au Botox", value: "RD$28,000" }],
+        note: "Comprend l'application et une retouche au bout de 2 semaines. Le prix est le même si l'on traite aussi les coins de la bouche et les rides des lèvres.",
+      },
+      faqs: [
+        { q: "Mon visage aura-t-il l'air figé ?", a: "Ce n'est pas le but. La dose est ajustée pour atténuer les rides tout en gardant une expression naturelle." },
+        { q: "Combien de temps ça dure ?", a: "En général 3 à 4 mois, mais cela varie selon les personnes. Avec des séances régulières, beaucoup constatent que l'effet dure plus longtemps." },
+        { q: "Est-ce douloureux ?", a: "Les aiguilles sont très fines et la gêne est minime. L'application prend quelques minutes." },
+        { q: "Le Botox aide-t-il pour les sillons du nez à la bouche ?", a: "Ces sillons sont surtout dus à une perte de volume et se traitent à l'acide hyaluronique. Le Botox dans les coins de la bouche peut aider en complément. La docteure vous recommandera la meilleure combinaison pour votre cas." },
+      ],
+    },
   },
   {
     service: "medicina-estetica",
@@ -1414,6 +2020,42 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on the treatments in your plan. After the assessment, the clinic will confirm the cost." },
         { q: "Will I look different?", a: "The idea is to look like yourself, but more balanced and rested. Changes are planned to be natural." },
         { q: "Is everything done in one visit?", a: "Sometimes, but it is often better to spread it over several visits to follow the progress." },
+      ],
+    },
+    fr: {
+      summary: "Un plan qui combine des soins pour équilibrer les proportions de votre visage, sans chirurgie.",
+      what: "L'harmonisation du visage n'est pas un soin unique mais un plan. La docteure analyse les proportions de votre visage (front, pommettes, nez, lèvres, menton et mâchoire) et combine des techniques comme le Botox, l'acide hyaluronique et les fils pour les équilibrer. Sa formation en chirurgie maxillo-faciale lui donne une connaissance détaillée de la structure du visage, ce qui permet de planifier des changements subtils et naturels.",
+      art: {
+        labels: [
+          { t: "Proportions", s: "tiers du visage" },
+          { t: "Pommettes", s: "volume et soutien" },
+          { t: "Menton", s: "profil équilibré" },
+        ],
+        caption: "Les proportions de votre visage sont analysées et les soins sont combinés pour les équilibrer.",
+      },
+      facts: [
+        { i: "plan", t: "Plan sur mesure", s: "Selon vos proportions" },
+        { i: "follow", t: "Par étapes", s: "Une ou plusieurs visites" },
+        { i: "home", t: "Sans chirurgie", s: "Retour à vos activités" },
+        { i: "sparkle", t: "Résultat naturel", s: "Vous, en plus harmonieux" },
+      ],
+      forWho: [
+        "Les personnes qui trouvent qu'un trait est en déséquilibre avec le reste du visage.",
+        "Celles qui veulent un changement global et naturel plutôt qu'un seul détail.",
+        "Celles qui préfèrent des soins sans chirurgie avec une récupération rapide.",
+        "Déconseillé pendant la grossesse ou l'allaitement.",
+      ],
+      steps: [
+        { t: "Analyse du visage", d: "La docteure étudie vos proportions et écoute ce que vous souhaitez améliorer." },
+        { t: "Plan personnalisé", d: "Ensemble, vous définissez les soins à combiner, dans quel ordre et en combien de séances." },
+        { t: "Traitement", d: "Les soins du plan sont appliqués, en une ou plusieurs visites selon le cas." },
+        { t: "Bilan", d: "Le résultat est évalué et les ajustements nécessaires sont faits." },
+      ],
+      recovery: "Cela dépend des soins du plan. En général, vous pouvez reprendre vos activités le jour même. Un peu de gonflement ou de petits bleus pendant quelques jours sont normaux.",
+      faqs: [
+        { q: "Combien ça coûte ?", a: "Cela dépend des soins de votre plan. Après l'évaluation, la clinique vous confirmera le coût." },
+        { q: "Est-ce que j'aurai l'air différent(e) ?", a: "L'idée est que vous restiez vous-même, mais plus équilibré(e) et reposé(e). Les changements sont prévus pour être naturels." },
+        { q: "Tout se fait-il en une visite ?", a: "Parfois, mais il vaut souvent mieux répartir sur plusieurs visites pour suivre l'évolution." },
       ],
     },
   },
@@ -1520,6 +2162,55 @@ export const treatments: Treatment[] = [
         { q: "Is there a discount for several areas?", a: "Yes. A single area costs RD$30,000. From two areas on, each one costs RD$25,000: two areas, RD$50,000; three areas, RD$75,000, and so on up to all 7." },
       ],
     },
+    fr: {
+      summary: "Redonnez volume et hydratation aux lèvres, aux pommettes, au menton et aux sillons, avec un résultat immédiat et naturel.",
+      what: "L'acide hyaluronique est une substance que le corps produit naturellement et qui retient l'eau dans la peau. Il diminue avec l'âge, et le visage perd du volume. Les injections d'acide hyaluronique s'appliquent sur des zones précises pour redonner du volume, dessiner un contour ou atténuer des sillons. Le produit que nous utilisons contient un anesthésiant (lidocaïne) pour une application plus confortable. Le prix est par zone traitée.",
+      art: {
+        labels: [
+          { t: "Cernes", s: "" },
+          { t: "Pommettes", s: "" },
+          { t: "Sillons nasogéniens", s: "" },
+          { t: "Lèvres", s: "" },
+          { t: "Plis d'amertume", s: "" },
+          { t: "Menton", s: "" },
+          { t: "Définition de la mâchoire", s: "" },
+        ],
+        caption: "Les 7 zones qui peuvent être traitées à l'acide hyaluronique.",
+      },
+      facts: [
+        { i: "tag", t: "RD$30,000", s: "1 zone · dès 2 : RD$25,000 chacune" },
+        { i: "sparkle", t: "Résultat immédiat", s: "Visible tout de suite" },
+        { i: "anest", t: "Avec lidocaïne", s: "Une application plus confortable" },
+        { i: "plan", t: "7 zones", s: "Vous pouvez en combiner plusieurs" },
+      ],
+      forWho: [
+        "Les pommettes qui ont perdu du volume.",
+        "Les lèvres que vous voulez dessiner ou hydrater.",
+        "Les sillons nasogéniens (du nez à la bouche) et les plis d'amertume.",
+        "La définition de la mâchoire, le menton et les cernes creux.",
+        "Déconseillé pendant la grossesse ou l'allaitement.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure analyse votre visage et définit les zones à traiter et la quantité de produit." },
+        { t: "Préparation", d: "La zone est nettoyée et, si besoin, une crème anesthésiante est appliquée." },
+        { t: "Application", d: "Le produit est appliqué avec une aiguille fine ou une canule dans les zones choisies, en modelant le résultat." },
+        { t: "Bilan", d: "Au contrôle, le résultat est vérifié une fois le gonflement résorbé." },
+      ],
+      recovery: "Le résultat se voit tout de suite, même s'il peut y avoir un peu de gonflement ou de petits bleus les premières heures ou jours. Évitez le sport intense, la forte chaleur et les massages de la zone les premiers jours.",
+      price: {
+        lines: [
+          { label: "1 zone", value: "RD$30,000" },
+          { label: "À partir de 2 zones", value: "RD$25,000 chacune" },
+        ],
+        note: "Exemples : 2 zones RD$50,000 · 3 zones RD$75,000. Il y a 7 zones : cernes, pommettes, sillons nasogéniens, lèvres, plis d'amertume, menton et définition de la mâchoire.",
+      },
+      faqs: [
+        { q: "Combien de temps dure une injection ?", a: "Cela dépend de la zone et de la personne. En général, le résultat dure plusieurs mois et se résorbe progressivement de façon naturelle." },
+        { q: "Le résultat est-il naturel ?", a: "Oui. La quantité est ajustée à vos proportions pour un résultat équilibré, sans excès." },
+        { q: "Qu'est-ce qui compte comme une zone ?", a: "Chaque zone de la liste compte pour une, par exemple les lèvres ou les pommettes. Deux zones comptent pour deux." },
+        { q: "Y a-t-il une réduction pour plusieurs zones ?", a: "Oui. Une seule zone coûte RD$30,000. À partir de deux zones, chacune coûte RD$25,000 : deux zones, RD$50,000 ; trois zones, RD$75,000, et ainsi de suite jusqu'aux 7." },
+      ],
+    },
   },
   {
     service: "medicina-estetica",
@@ -1596,6 +2287,42 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on the protocol your skin needs. After the assessment, the clinic will confirm the cost." },
         { q: "How many sessions do I need?", a: "It depends on your skin and your goal. The doctor will tell you the number of sessions and how often." },
         { q: "Can it be combined with other treatments?", a: "Yes. It is often combined with Botox, fillers or facial PRP for a more complete result." },
+      ],
+    },
+    fr: {
+      summary: "Des protocoles pour améliorer la texture, la fermeté et l'éclat de la peau, adaptés à votre type de peau.",
+      what: "Avec le temps, le soleil et le stress font perdre à la peau son éclat, sa fermeté et son uniformité. Le rajeunissement du visage réunit des soins qui agissent sur la qualité de la peau sous différents angles. La docteure conçoit le protocole selon votre type de peau et ce que vous voulez améliorer, et le complète avec des produits professionnels pour les soins à la maison.",
+      art: {
+        labels: [
+          { t: "Texture", s: "plus uniforme" },
+          { t: "Éclat", s: "éclat naturel" },
+          { t: "Fermeté", s: "ridules atténuées" },
+        ],
+        caption: "Un protocole sur mesure améliore la texture, la fermeté et l'éclat de la peau.",
+      },
+      facts: [
+        { i: "plan", t: "Protocole sur mesure", s: "Selon votre type de peau" },
+        { i: "time", t: "En séances", s: "La docteure fixe la fréquence" },
+        { i: "home", t: "Sans arrêt d'activité", s: "Retour à vos activités" },
+        { i: "sun", t: "Protection solaire", s: "Tous les jours" },
+      ],
+      forWho: [
+        "Les personnes à la peau terne, fatiguée ou irrégulière.",
+        "Celles qui remarquent une perte de fermeté ou des ridules.",
+        "Celles qui veulent prendre soin de leur peau de façon régulière.",
+        "En complément d'autres soins, comme le Botox ou les injections.",
+      ],
+      steps: [
+        { t: "Bilan de la peau", d: "La docteure évalue votre type de peau, vos besoins et vos habitudes de soin." },
+        { t: "Protocole personnalisé", d: "Ensemble, vous définissez les soins à inclure et leur fréquence." },
+        { t: "Séances", d: "Les séances du protocole se font à la clinique." },
+        { t: "Soins à la maison", d: "Les produits adaptés vous sont recommandés pour entretenir et renforcer le résultat." },
+      ],
+      recovery: "Avec la plupart des protocoles, vous pouvez reprendre vos activités le jour même. Il est important d'utiliser une protection solaire tous les jours et de suivre les consignes de soin.",
+      faqs: [
+        { q: "Combien ça coûte ?", a: "Cela dépend du protocole dont votre peau a besoin. Après l'évaluation, la clinique vous confirmera le coût." },
+        { q: "Combien de séances me faut-il ?", a: "Cela dépend de votre peau et de votre objectif. La docteure vous indiquera le nombre de séances et leur fréquence." },
+        { q: "Peut-on le combiner avec d'autres soins ?", a: "Oui. Il se combine souvent avec le Botox, les injections ou le PRP du visage pour un résultat plus complet." },
       ],
     },
   },
@@ -1696,6 +2423,52 @@ export const treatments: Treatment[] = [
         { q: "Is the result permanent?", a: "PRP helps preserve your hair, but hair loss can continue over time. That is why maintenance sessions are recommended." },
       ],
     },
+    fr: {
+      summary: "Réduisez la chute des cheveux et stimulez la pousse avec le plasma de votre propre sang, dans un programme planifié.",
+      what: "Le PRP (plasma riche en plaquettes) s'obtient à partir d'un petit prélèvement de votre propre sang, traité pour concentrer les plaquettes et leurs facteurs de croissance. Appliqué sur le cuir chevelu, il aide à renforcer les follicules, à réduire la chute et à améliorer la densité des cheveux. Comme il vient de votre propre sang, il est sûr et bien toléré. Le meilleur résultat vient d'un programme : une phase initiale de séances mensuelles, suivie de séances d'entretien.",
+      art: {
+        labels: [
+          { t: "Votre plasma", s: "de votre propre sang" },
+          { t: "Follicule", s: "strengthened" },
+          { t: "Cheveu", s: "denser" },
+        ],
+        caption: "Le plasma de votre propre sang stimule les follicules pour réduire la chute et gagner en densité.",
+      },
+      facts: [
+        { i: "drop", t: "Votre propre sang", s: "Sûr et bien toléré" },
+        { i: "plan", t: "Programme de 12 mois", s: "6 séances · RD$45,000" },
+        { i: "time", t: "Premiers changements", s: "Dès le 2e ou 3e mois" },
+        { i: "home", t: "Sans arrêt d'activité", s: "Retour à vos activités" },
+      ],
+      forWho: [
+        "Les personnes qui perdent leurs cheveux ou de la densité.",
+        "Les cheveux qui paraissent plus fins, surtout au sommet du crâne ou sur la ligne frontale.",
+        "Les hommes et les femmes au début de la chute.",
+        "En complément d'autres traitements capillaires recommandés par la docteure.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue votre cuir chevelu et votre type de chute pour confirmer si le PRP vous convient." },
+        { t: "Prise de sang et préparation", d: "Un petit échantillon de sang est prélevé et traité sur place pour obtenir le plasma riche en plaquettes." },
+        { t: "Application", d: "Le plasma est appliqué sur les zones du cuir chevelu qui en ont besoin, avec des aiguilles très fines." },
+        { t: "Programme", d: "Dans le programme de 12 mois : 4 séances mensuelles plus entretien aux mois 8 et 12, soit 6 séances au total." },
+      ],
+      recovery: "Vous pouvez reprendre vos activités le jour même. Le cuir chevelu peut être un peu sensible quelques heures. Évitez de vous laver les cheveux ou d'appliquer des produits sur la zone jusqu'au lendemain. Les premiers changements se voient en général dès le deuxième ou troisième mois, avec plus de densité entre le 3e et le 6e mois et un résultat plus fourni entre le 6e et le 12e mois.",
+      price: {
+        lines: [
+          { label: "Séance unique", value: "RD$10,000" },
+          { label: "Plan de départ de 3 mois (3 séances)", value: "RD$25,000" },
+          { label: "Programme capillaire de 12 mois (6 séances)", value: "RD$45,000" },
+          { label: "Entretien (par séance)", value: "RD$8,000" },
+        ],
+        note: "Les plans se paient en entier au départ. L'entretien est réservé aux patients qui ont terminé un plan.",
+      },
+      faqs: [
+        { q: "Pourquoi 6 séances plutôt qu'une par mois toute l'année ?", a: "Les recommandations et les études préconisent une phase initiale de 3 à 5 séances mensuelles suivie d'un entretien tous les 4 à 6 mois. Rien ne montre que des séances mensuelles toute l'année améliorent le résultat." },
+        { q: "Quand verrai-je les résultats ?", a: "Les premiers changements se remarquent en général dès le deuxième ou troisième mois. Le résultat le plus complet apparaît entre le 6e et le 12e mois." },
+        { q: "Est-ce douloureux ?", a: "Il peut y avoir une légère gêne pendant l'application. Les aiguilles sont très fines et la séance est courte." },
+        { q: "Le résultat est-il définitif ?", a: "Le PRP aide à préserver vos cheveux, mais la chute peut continuer avec le temps. C'est pourquoi des séances d'entretien sont recommandées." },
+      ],
+    },
   },
   {
     service: "medicina-estetica",
@@ -1782,6 +2555,46 @@ export const treatments: Treatment[] = [
         { q: "Can it be combined with other treatments?", a: "Yes. It combines well with Botox, fillers and rejuvenation protocols." },
       ],
     },
+    fr: {
+      summary: "Stimulez la régénération de la peau du visage avec des composants de votre propre sang.",
+      what: "Le PRP du visage utilise le plasma riche en plaquettes obtenu à partir d'un petit prélèvement de votre propre sang. Appliqué sur la peau du visage, ses facteurs de croissance stimulent la production de collagène et le renouvellement de la peau. Il aide à améliorer la texture, l'éclat et la fermeté de façon progressive et naturelle. La docteure a l'expérience des concentrés de plaquettes, sujet de sa thèse de spécialité.",
+      art: {
+        labels: [
+          { t: "Votre plasma", s: "facteurs de croissance" },
+          { t: "Application", s: "micro-injections" },
+          { t: "Éclat", s: "peau renouvelée" },
+        ],
+        caption: "Les facteurs de croissance de votre plasma stimulent le collagène et renouvellent la peau.",
+      },
+      facts: [
+        { i: "drop", t: "Votre propre sang", s: "Risque de réaction très faible" },
+        { i: "tag", t: "RD$10,000", s: "Par séance" },
+        { i: "time", t: "En séances", s: "La docteure indique combien" },
+        { i: "sparkle", t: "Changement progressif", s: "Au fil des semaines suivantes" },
+      ],
+      forWho: [
+        "Peau terne, fatiguée ou irrégulière.",
+        "Ridules et perte de fermeté.",
+        "Celles qui préfèrent un soin fait à partir de leur propre sang.",
+        "En complément d'autres soins de rajeunissement.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue votre peau et recommande le nombre de séances." },
+        { t: "Prise de sang et préparation", d: "Un petit échantillon de sang est prélevé et traité sur place pour obtenir le plasma." },
+        { t: "Application", d: "Le plasma est appliqué sur la peau du visage par micro-injections ou par des techniques qui facilitent l'absorption." },
+        { t: "Suivi", d: "L'évolution de la peau est vérifiée entre les séances." },
+      ],
+      recovery: "Une légère rougeur ou de petites marques pendant quelques heures ou une journée sont normales. Évitez le maquillage le jour même, évitez le soleil et utilisez une protection solaire. Les changements de la peau apparaissent progressivement au fil des semaines.",
+      price: {
+        lines: [{ label: "Par séance", value: "RD$10,000" }],
+        note: "La docteure vous indiquera combien de séances votre peau nécessite.",
+      },
+      faqs: [
+        { q: "Est-ce sûr ?", a: "Oui. Comme il utilise le plasma de votre propre sang, le risque de réaction est très faible." },
+        { q: "Combien de séances me faut-il ?", a: "Cela dépend de votre peau et de votre objectif. Une série de séances est généralement recommandée ; la docteure vous dira combien." },
+        { q: "Peut-on le combiner avec d'autres soins ?", a: "Oui. Il se combine bien avec le Botox, les injections et les protocoles de rajeunissement." },
+      ],
+    },
   },
   {
     service: "medicina-estetica",
@@ -1866,6 +2679,45 @@ export const treatments: Treatment[] = [
         { q: "Can the threads be seen?", a: "No. They sit under the skin and cannot be seen or felt once the swelling goes down." },
       ],
     },
+    fr: {
+      summary: "Repositionnez et retendez les tissus du visage avec des fils résorbables, pour un effet lifting sans chirurgie.",
+      what: "Les fils tenseurs sont des fils médicaux résorbables placés sous la peau avec une aiguille fine ou une canule. Ils ont de petits crans qui retiennent les tissus et permettent de les repositionner, par exemple pour remonter le milieu du visage ou dessiner l'ovale. Avec le temps, le fil se résorbe en stimulant la formation de collagène.",
+      art: {
+        labels: [
+          { t: "Fils", s: "absorbable" },
+          { t: "Soutien", s: "remonte les tissus" },
+          { t: "Ovale", s: "contour dessiné" },
+        ],
+        caption: "Les fils soutiennent et remontent les tissus ; en se résorbant, ils stimulent le collagène.",
+      },
+      facts: [
+        { i: "tag", t: "RD$31,000", s: "Prix du soin" },
+        { i: "anest", t: "Anesthésie locale", s: "Sans chirurgie" },
+        { i: "time", t: "Récupération rapide", s: "Quelques jours de gonflement" },
+        { i: "sparkle", t: "Collagène", s: "Stimulé à mesure que le fil se résorbe" },
+      ],
+      forWho: [
+        "Les personnes avec un relâchement du visage léger à modéré.",
+        "Celles qui veulent dessiner l'ovale du visage ou remonter les joues.",
+        "Celles qui cherchent un effet lifting sans chirurgie et avec une récupération rapide.",
+        "Si le relâchement est marqué, la docteure peut recommander un lifting chirurgical.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue le relâchement et définit les zones, la direction et le nombre de fils." },
+        { t: "Préparation", d: "Le trajet des fils est marqué et une anesthésie locale est appliquée." },
+        { t: "Pose", d: "Les fils sont insérés sous la peau et ajustés pour repositionner les tissus." },
+        { t: "Bilan", d: "Le résultat et l'évolution sont vérifiés au contrôle." },
+      ],
+      recovery: "Il peut y avoir un gonflement, de petits bleus ou une sensation de tiraillement les premiers jours. Évitez les mouvements exagérés du visage, les massages du visage, le sport intense et de dormir sur le ventre, le temps indiqué par la docteure.",
+      price: {
+        lines: [{ label: "Lifting par fils", value: "RD$31,000" }],
+      },
+      faqs: [
+        { q: "Combien de temps dure le résultat ?", a: "L'effet lifting dure plusieurs mois, et le collagène formé aide à le prolonger. La durée varie selon les personnes." },
+        { q: "Est-ce la même chose qu'un lifting chirurgical ?", a: "Non. Les fils donnent un effet plus subtil et temporaire, sans chirurgie. En cas de relâchement marqué, un lifting chirurgical donne un résultat plus important." },
+        { q: "Les fils se voient-ils ?", a: "Non. Ils sont sous la peau et ne se voient ni ne se sentent une fois le gonflement résorbé." },
+      ],
+    },
   },
   {
     service: "medicina-estetica",
@@ -1948,6 +2800,45 @@ export const treatments: Treatment[] = [
         { q: "What is the difference from tensor threads?", a: "Tensor threads lift and reposition tissues. Biostimulation threads do not lift; they improve firmness and skin quality by stimulating collagen." },
         { q: "When will I see the result?", a: "The change is gradual: it shows over the following weeks and months as new collagen forms." },
         { q: "Can both types of threads be combined?", a: "Yes. They are often combined to lift and, at the same time, improve skin quality." },
+      ],
+    },
+    fr: {
+      summary: "Améliorez la fermeté et la qualité de la peau en stimulant votre propre collagène avec des fils fins.",
+      what: "La biostimulation par fils utilise des fils très fins, résorbables et lisses, placés sous la peau en maillage. Contrairement aux fils tenseurs, leur but n'est pas de remonter mais de stimuler la production de collagène. Le résultat est une peau plus ferme, plus dense et de meilleure qualité, qui s'améliore progressivement.",
+      art: {
+        labels: [
+          { t: "Fils fins", s: "en maillage" },
+          { t: "Collagène", s: "il se renouvelle" },
+          { t: "Peau", s: "plus ferme et plus dense" },
+        ],
+        caption: "Le maillage de fils stimule un nouveau collagène et la peau gagne progressivement en fermeté.",
+      },
+      facts: [
+        { i: "tag", t: "RD$24,500", s: "Prix du soin" },
+        { i: "plan", t: "Peut se combiner", s: "Avec les fils tenseurs" },
+        { i: "time", t: "Progressif", s: "S'améliore au fil des semaines et des mois" },
+        { i: "home", t: "Quelques jours", s: "De léger gonflement" },
+      ],
+      forWho: [
+        "Une peau qui perd de sa fermeté ou un léger relâchement.",
+        "Des zones comme les joues, le cou ou le contour de la bouche.",
+        "Celles qui veulent améliorer la qualité de leur peau de façon progressive et naturelle.",
+        "En complément d'un lifting par fils ou d'autres soins.",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure évalue la peau et définit les zones à traiter." },
+        { t: "Préparation", d: "La zone est nettoyée et une anesthésie locale ou une crème anesthésiante est appliquée." },
+        { t: "Pose", d: "Les fils fins sont placés sous la peau en maillage sur la zone traitée." },
+        { t: "Évolution", d: "Le collagène se forme au fil des semaines suivantes et la peau s'améliore progressivement." },
+      ],
+      recovery: "Un peu de gonflement ou de petits bleus pendant quelques jours sont normaux. Vous pouvez reprendre vite vos activités. Évitez les massages et le sport intense les premiers jours.",
+      price: {
+        lines: [{ label: "Biostimulation du collagène par fils", value: "RD$24,500" }],
+      },
+      faqs: [
+        { q: "Quelle différence avec les fils tenseurs ?", a: "Les fils tenseurs remontent et repositionnent les tissus. Les fils de biostimulation ne remontent pas ; ils améliorent la fermeté et la qualité de la peau en stimulant le collagène." },
+        { q: "Quand verrai-je le résultat ?", a: "Le changement est progressif : il apparaît au fil des semaines et des mois, à mesure que le nouveau collagène se forme." },
+        { q: "Peut-on combiner les deux types de fils ?", a: "Oui. Ils se combinent souvent pour remonter et, en même temps, améliorer la qualité de la peau." },
       ],
     },
   },
@@ -2035,6 +2926,45 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on the injury and the treatment. After the evaluation, the clinic will confirm the cost." },
       ],
     },
+    fr: {
+      summary: "Traitement des fractures de la mâchoire, des pommettes, du nez et d'autres blessures du visage, en prenant soin de la fonction comme de l'apparence.",
+      what: "Un coup, une chute, un accident de la route ou une blessure sportive peuvent fracturer les os du visage ou abîmer ses tissus. Le traitement vise à remettre les os en place, à rétablir l'occlusion, la respiration et les mouvements, et à préserver la forme du visage. La docteure s'est formée en chirurgie maxillo-faciale avec une résidence à l'hôpital Dr Darío Contreras, centre de référence du pays pour les traumatismes.",
+      art: {
+        labels: [
+          { t: "Fracture", s: "os déplacé" },
+          { t: "Plaque", s: "fixation en titane" },
+          { t: "Consolidation", s: "l'os se ressoude" },
+        ],
+        caption: "L'os est remis en place et fixé avec des plaques en titane pendant qu'il se consolide.",
+      },
+      facts: [
+        { i: "xray", t: "Diagnostic précis", s: "Radiographie ou scanner" },
+        { i: "titanium", t: "Plaques en titane", s: "Peuvent rester à vie" },
+        { i: "time", t: "Consolidation osseuse", s: "Prend plusieurs semaines" },
+        { i: "follow", t: "Suivi", s: "Jusqu'au retour de la fonction" },
+      ],
+      forWho: [
+        "Les fractures de la mâchoire, du maxillaire, des pommettes, du nez ou du contour de l'œil.",
+        "Les dents qui ne s'emboîtent plus comme avant après un coup.",
+        "Les plaies du visage qui demandent une réparation soigneuse.",
+        "Les séquelles de fractures anciennes mal consolidées.",
+      ],
+      alert: "Après un coup récent avec saignement, difficulté à respirer, perte de connaissance ou troubles de la vue, allez d'abord aux urgences.",
+      steps: [
+        { t: "Évaluation", d: "La docteure examine la blessure et demande des radiographies ou un scanner pour connaître le type exact de fracture." },
+        { t: "Plan de traitement", d: "Selon la fracture, on choisit un traitement conservateur ou une chirurgie pour repositionner et fixer les os." },
+        { t: "Traitement", d: "Quand la chirurgie est nécessaire, les os sont repositionnés et fixés avec des plaques et des vis en titane, par des incisions discrètes." },
+        { t: "Suivi", d: "La consolidation osseuse, l'occlusion et la cicatrisation sont suivies jusqu'au retour de la fonction." },
+      ],
+      recovery: "Cela dépend du type de fracture. Les premières semaines, on prescrit en général une alimentation molle ou liquide, un repos relatif, une bonne hygiène buccale et les médicaments nécessaires. L'os met plusieurs semaines à se consolider, il est donc important de venir à chaque contrôle.",
+      faqs: [
+        { q: "Dois-je aller aux urgences ou venir à la clinique ?", a: "Si la blessure est récente et qu'il y a un saignement abondant, une difficulté à respirer, une perte de connaissance ou des troubles de la vue, allez d'abord aux urgences. La docteure pourra ensuite prendre en charge le traitement maxillo-facial." },
+        { q: "Que faut-il pour la première consultation ?", a: "Si la blessure est récente et que c'est une urgence, n'attendez pas d'examens : appelez-nous ou écrivez-nous tout de suite et la docteure vous dira quoi faire. Pour une consultation programmée, par exemple pour une fracture ancienne, faites une radiographie avant et apportez-la le jour de votre rendez-vous.", viz: { kind: "chips", items: [{ t: "Urgence : appelez tout de suite" }, { t: "Visite programmée : apportez votre radiographie" }] } },
+        { q: "Les plaques sont-elles retirées ?", a: "Dans la plupart des cas, les plaques en titane peuvent rester définitivement sans poser de problème. La docteure vous dira si votre cas nécessite de les retirer." },
+        { q: "Peut-on corriger une fracture ancienne ?", a: "Dans bien des cas, oui. La docteure évalue les séquelles et vous explique les options pour améliorer la fonction et la forme." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de la blessure et du traitement. Après l'évaluation, la clinique vous confirmera le coût." },
+      ],
+    },
   },
   {
     service: "cirugia-reconstructiva",
@@ -2119,6 +3049,45 @@ export const treatments: Treatment[] = [
         { q: "How much does it cost?", a: "It depends on each case. After the evaluation and records, the clinic will confirm the cost." },
       ],
     },
+    fr: {
+      summary: "Correction des troubles du développement des mâchoires et du visage pour améliorer l'occlusion, la fonction et l'harmonie du visage.",
+      what: "Certaines personnes naissent ou se développent avec des mâchoires dont la position ou la taille ne correspondent pas : une mâchoire trop en avant ou en arrière, une béance ou un visage asymétrique. Ces troubles peuvent gêner la mastication, la respiration, la parole et l'apparence. La chirurgie des mâchoires (chirurgie orthognathique) repositionne les mâchoires pour que l'occlusion et le visage soient en équilibre. Elle se planifie en général avec l'orthodontiste.",
+      art: {
+        labels: [
+          { t: "Mandibule", s: "trop en avant" },
+          { t: "Nouvelle position", s: "occlusion équilibrée" },
+          { t: "Profil", s: "plus harmonieux" },
+        ],
+        caption: "La chirurgie repositionne les mâchoires pour que l'occlusion et le profil soient en équilibre.",
+      },
+      facts: [
+        { i: "plan", t: "Avec orthodontie", s: "Avant et après la chirurgie" },
+        { i: "xray", t: "Planification numérique", s: "Avec bilans et scanner" },
+        { i: "scar", t: "Pas de cicatrice visible", s: "Incisions à l'intérieur de la bouche" },
+        { i: "follow", t: "Fonction et harmonie", s: "Mieux mâcher, respirer et parler" },
+      ],
+      forWho: [
+        "Une mâchoire inférieure trop en avant (prognathie) ou trop en arrière (rétrognathie).",
+        "Une béance, ou des dents qui ne s'emboîtent pas même après une orthodontie.",
+        "Une asymétrie du visage ou de la mâchoire.",
+        "Des difficultés à mâcher, respirer ou parler liées à la position de la mâchoire.",
+        "Les personnes qui ont fini leur croissance (l'âge est évalué au cas par cas).",
+      ],
+      steps: [
+        { t: "Évaluation", d: "La docteure analyse votre visage, votre occlusion et vos bilans (photos, modèles, scanner) pour comprendre la cause." },
+        { t: "Planification commune", d: "Avec l'orthodontiste, on définit le plan complet : préparation orthodontique et chirurgie planifiée en numérique." },
+        { t: "Chirurgie", d: "Les mâchoires sont repositionnées et fixées avec des plaques en titane, en général par des incisions à l'intérieur de la bouche." },
+        { t: "Récupération et orthodontie finale", d: "Après la chirurgie, la cicatrisation est suivie et l'ajustement final de l'occlusion est réalisé." },
+      ],
+      recovery: "C'est une chirurgie importante qui demande une récupération planifiée. Les premières semaines, on prescrit une alimentation liquide ou molle et un repos relatif, et le gonflement diminue progressivement. La docteure vous accompagne à chaque étape avec des contrôles fréquents.",
+      faqs: [
+        { q: "Que faut-il pour la première consultation ?", a: "Une radiographie. Faites-la avant et apportez-la le jour de la consultation, pour que la docteure puisse évaluer votre cas en détail. Apportez aussi vos autres examens et la liste des médicaments que vous prenez.", viz: { kind: "flow", items: [{ t: "Avant la consultation", s: "Faites votre radiographie" }, { t: "Le jour de la consultation", s: "Remettez-la à la docteure" }] } },
+        { q: "Ai-je besoin d'une orthodontie ?", a: "Dans la plupart des cas, oui. L'orthodontie prépare les dents avant la chirurgie et ajuste l'occlusion à la fin." },
+        { q: "Les cicatrices sont-elles visibles ?", a: "Les incisions se font en général à l'intérieur de la bouche, il n'y a donc pas de cicatrice visible sur le visage." },
+        { q: "Le changement est-il seulement esthétique ?", a: "Non. Le but principal est d'améliorer la fonction (mâcher, respirer, parler), et le visage y gagne aussi en harmonie." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation et les bilans, la clinique vous confirmera le coût." },
+      ],
+    },
   },
   {
     service: "cirugia-reconstructiva",
@@ -2199,6 +3168,44 @@ export const treatments: Treatment[] = [
         { q: "Will I be able to get implants afterwards?", a: "In many cases, yes. One goal of reconstruction is precisely to build the bone needed to place them." },
         { q: "How long does the whole process take?", a: "It depends on the defect and the plan. If a graft is placed, it must integrate before the next step, which usually takes several months." },
         { q: "How much does it cost?", a: "It depends on each case. After the evaluation and imaging, the clinic will confirm the cost." },
+      ],
+    },
+    fr: {
+      summary: "Restaurez la forme et la fonction des mâchoires et du visage après une blessure, une maladie ou une perte osseuse.",
+      what: "La reconstruction maxillo-faciale restaure les structures du visage et des mâchoires perdues ou abîmées : l'os disparu après la perte de dents, les défauts laissés par le retrait de kystes ou de lésions, ou les séquelles de traumatismes. On utilise des greffes osseuses, des matériaux de régénération et, si c'est indiqué, des concentrés issus du propre sang du patient qui favorisent la cicatrisation. L'objectif est de rétablir la fonction et de préparer le terrain, par exemple, pour des implants dentaires.",
+      art: {
+        labels: [
+          { t: "Défaut", s: "os perdu" },
+          { t: "Greffe", s: "comble l'espace" },
+          { t: "Nouvel os", s: "prêt pour des implants" },
+        ],
+        caption: "La greffe comble l'os perdu et, une fois intégrée, permet de poser des implants.",
+      },
+      facts: [
+        { i: "xray", t: "Scanner", s: "Pour mesurer le défaut" },
+        { i: "plan", t: "Greffe sur mesure", s: "Votre propre os ou un matériau homologué" },
+        { i: "time", t: "Intégration", s: "Plusieurs mois" },
+        { i: "titanium", t: "Implants ensuite", s: "Si le plan les prévoit" },
+      ],
+      forWho: [
+        "Une perte osseuse dans les mâchoires qui empêche de poser des implants.",
+        "Des défauts après le retrait de kystes, de tumeurs bénignes ou d'autres lésions.",
+        "Des séquelles de traumatismes ou de chirurgies antérieures.",
+        "Les personnes qui veulent rétablir la fonction et la forme d'une zone du visage.",
+      ],
+      steps: [
+        { t: "Évaluation et imagerie", d: "Avec un scanner et d'autres examens, la docteure mesure le défaut et planifie la reconstruction." },
+        { t: "Plan personnalisé", d: "On choisit la technique et le matériau les plus adaptés : greffe osseuse, régénération guidée ou d'autres options." },
+        { t: "Chirurgie", d: "La reconstruction est réalisée avec l'anesthésie adaptée au cas." },
+        { t: "Intégration et étape suivante", d: "La cicatrisation et l'intégration de la greffe sont suivies. Si le plan le prévoit, les implants sont posés ensuite." },
+      ],
+      recovery: "Cela dépend du type de reconstruction. Une alimentation molle, une bonne hygiène et des médicaments sont en général prescrits les premiers jours. Les greffes osseuses ont besoin de plusieurs mois pour s'intégrer avant l'étape suivante du traitement.",
+      faqs: [
+        { q: "Que faut-il pour la première consultation ?", a: "Une radiographie. Faites-la avant et apportez-la le jour de la consultation, pour que la docteure puisse évaluer votre cas en détail. Apportez aussi vos autres examens et la liste des médicaments que vous prenez.", viz: { kind: "flow", items: [{ t: "Avant la consultation", s: "Faites votre radiographie" }, { t: "Le jour de la consultation", s: "Remettez-la à la docteure" }] } },
+        { q: "D'où vient l'os de la greffe ?", a: "Il peut venir du patient ou de matériaux de greffe sûrs et homologués. La docteure vous expliquera la meilleure option pour votre cas." },
+        { q: "Pourrai-je avoir des implants ensuite ?", a: "Dans bien des cas, oui. L'un des objectifs de la reconstruction est justement de construire l'os nécessaire pour les poser." },
+        { q: "Combien de temps dure l'ensemble du processus ?", a: "Cela dépend du défaut et du plan. Si une greffe est posée, elle doit s'intégrer avant l'étape suivante, ce qui prend en général plusieurs mois." },
+        { q: "Combien ça coûte ?", a: "Cela dépend de chaque cas. Après l'évaluation et l'imagerie, la clinique vous confirmera le coût." },
       ],
     },
   },

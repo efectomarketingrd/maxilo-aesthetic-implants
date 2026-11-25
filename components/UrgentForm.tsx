@@ -8,8 +8,10 @@ import { centers, site, waLink } from "@/lib/site";
 import { WaIcon } from "./Icons";
 
 // Formulario corto de urgencia: un solo paso, la cita es para hoy y la hora se confirma.
-export default function UrgentForm({ t }: { t: Dict }) {
+// msgT: en la versión francesa la urgencia llega a la clínica en español
+export default function UrgentForm({ t, msgT }: { t: Dict; msgT?: Dict }) {
   const u = t.urgent;
+  const mu = (msgT ?? t).urgent;
   const [f, setF] = useState({ name: "", phone: "", what: "", referred: "" });
   const [place, setPlace] = useState<string>("maxilo");
   const [nudge, setNudge] = useState(false);
@@ -23,17 +25,18 @@ export default function UrgentForm({ t }: { t: Dict }) {
 
   function message() {
     return [
-      u.msgTitle,
+      mu.msgTitle,
+      msgT ? mu.msgFr : "",
       "",
-      `${u.name}: ${f.name.trim()}`,
-      `${u.phone}: ${f.phone.trim()}`,
-      `${u.msgWhat}: ${f.what.trim()}`,
-      f.referred.trim() ? `${u.msgReferred}: ${f.referred.trim()}` : "",
-      `${u.msgPlace}: ${center.name} (${center.town})`,
+      `${mu.name}: ${f.name.trim()}`,
+      `${mu.phone}: ${f.phone.trim()}`,
+      `${mu.msgWhat}: ${f.what.trim()}`,
+      f.referred.trim() ? `${mu.msgReferred}: ${f.referred.trim()}` : "",
+      `${mu.msgPlace}: ${center.name} (${center.town})`,
       "",
-      `${u.msgCost}: ${rd(price)} (≈ ${usd(price)}) — ${u.payOnArrival}`,
-      u.costNote,
-      getOrigin() ? `${u.msgOrigin}: ${getOrigin()}` : "",
+      `${mu.msgCost}: ${rd(price)} (≈ ${usd(price)}) — ${mu.payOnArrival}`,
+      mu.costNote,
+      getOrigin() ? `${mu.msgOrigin}: ${getOrigin()}` : "",
     ]
       .filter((l, i, a) => l !== "" || (i > 0 && a[i - 1] !== ""))
       .join("\n");
@@ -55,7 +58,7 @@ export default function UrgentForm({ t }: { t: Dict }) {
         name: f.name,
         phone: f.phone,
         email: "",
-        service: `${u.service} — ${f.what.trim().slice(0, 80)}`,
+        service: `${mu.service} — ${f.what.trim().slice(0, 80)}`,
         referred: f.referred,
         place: `${center.name}, ${center.town}`,
         date: today,

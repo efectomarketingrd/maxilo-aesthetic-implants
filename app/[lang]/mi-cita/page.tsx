@@ -9,7 +9,7 @@ import { WaIcon } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
 import { rd, usd, formatTime } from "@/lib/agenda";
 import { readCita } from "@/lib/cita";
-import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
+import { centers, intlLocale, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 
 // "Mi cita": página personal (enlace con los datos de la solicitud) con el resumen y cómo pagar.
 // No se indexa: es de cada paciente.
@@ -48,7 +48,7 @@ export default async function MiCita({ params, searchParams }: { params: Promise
     : null;
 
   const [y, mo, d] = (c?.d ?? "2000-01-01").split("-").map(Number);
-  const dateLabel = new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", {
+  const dateLabel = new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(intlLocale(lang), {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -63,13 +63,15 @@ export default async function MiCita({ params, searchParams }: { params: Promise
   const ext = c?.x === 1;
   const ctr = c ? centers.find((x) => x.id === c.pl) : undefined;
   const isMain = !!ctr && ctr.main && c?.m === "presencial";
-  const loc = lang === "es" ? "es-DO" : "en-US";
+  const loc = intlLocale(lang);
   const cap = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
   const dd = new Date(Date.UTC(y, mo - 1, d, 12));
   const weekday = cap(dd.toLocaleDateString(loc, { weekday: "long", timeZone: "UTC" }));
   const dayLong = dd.toLocaleDateString(loc, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const consultAtCenter = c && c.k === "consulta" && c.m === "presencial" && !ext;
-  const proof = waLink(k.proofMsg.replace("{svc}", c?.s ?? "").replace("{date}", dateLabel));
+  // el comprobante llega a la clínica: en la versión francesa, en español
+  const proofTpl = lang === "fr" ? dictionaries.es.booking.cita.proofMsg : k.proofMsg;
+  const proof = waLink(proofTpl.replace("{svc}", c?.s ?? "").replace("{date}", dateLabel));
 
   return (
     <>
@@ -102,7 +104,7 @@ export default async function MiCita({ params, searchParams }: { params: Promise
                         <i />
                         <i />
                       </span>
-                      <span className="bk2-addcal__month">{new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", { month: "short", timeZone: "UTC" }).replace(".", "")}</span>
+                      <span className="bk2-addcal__month">{new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(intlLocale(lang), { month: "short", timeZone: "UTC" }).replace(".", "")}</span>
                       <strong className="bk2-addcal__day">{d}</strong>
                     </span>
                     <div className="mc-when2__txt">
@@ -278,7 +280,7 @@ export default async function MiCita({ params, searchParams }: { params: Promise
 
               {ev && (
                 <AddCal
-                  month={new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(lang === "es" ? "es-DO" : "en-US", { month: "short", timeZone: "UTC" }).replace(".", "")}
+                  month={new Date(Date.UTC(y, mo - 1, d, 12)).toLocaleDateString(intlLocale(lang), { month: "short", timeZone: "UTC" }).replace(".", "")}
                   day={d}
                   time={c.h}
                   title={k.calT}

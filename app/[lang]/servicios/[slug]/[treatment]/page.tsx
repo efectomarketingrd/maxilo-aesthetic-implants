@@ -15,7 +15,7 @@ import ServiceIcon from "@/components/ServiceIcon";
 import TreatmentVisual, { hasVisual } from "@/components/TreatmentVisual";
 import { Arrow, Check } from "@/components/Icons";
 import { dictionaries } from "@/lib/content";
-import { locales, site, type Locale } from "@/lib/site";
+import { inTown, locales, site, type Locale } from "@/lib/site";
 import { serviceImg, treatmentImg } from "@/lib/images";
 import { bookingHref, findTreatment, treatments, treatmentsFor } from "@/lib/treatments";
 
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const x = load(lang, slug, treatment);
   if (!x) return {};
   const path = `/servicios/${slug}/${treatment}`;
-  const title = lang === "en" ? `${x.proc.name} in Las Terrenas` : `${x.proc.name} en Las Terrenas`;
+  const title = `${x.proc.name} ${inTown(lang as Locale)}`;
   return pageMeta({ lang: lang as Locale, path, title, ogTitle: x.proc.name, description: x.d.summary, image: treatmentImg[treatment] });
 }
 
@@ -114,8 +114,8 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                 {k.book} <Arrow />
               </Link>
             </div>
-            {tr.guide && (
-              <a className="tr-guide-link bk2-rise" style={{ "--d": 5 } as React.CSSProperties} href={`/guias/${tr.guide[lang]}.pdf`} download>
+            {tr.guide && lang !== "fr" && (
+              <a className="tr-guide-link bk2-rise" style={{ "--d": 5 } as React.CSSProperties} href={`/guias/${tr.guide[lang as "es" | "en"]}.pdf`} download>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14" />
                 </svg>
@@ -258,20 +258,20 @@ export default async function TreatmentPage({ params }: { params: Params }) {
           <div className="container sv-wrap">
             <h2 className="loc-h2">{k.faqs}</h2>
             <TreatmentFaq items={d.faqs} />
-            {tr.guide && (
+            {tr.guide && lang !== "fr" && (
               <div className="tr-guide">
-                <a className="tr-guide__cover" href={`/guias/${tr.guide[lang]}.pdf`} download>
-                  <Image src={`/guias/${tr.guide[lang]}.jpg`} alt="" width={360} height={465} sizes="120px" />
+                <a className="tr-guide__cover" href={`/guias/${tr.guide[lang as "es" | "en"]}.pdf`} download>
+                  <Image src={`/guias/${tr.guide[lang as "es" | "en"]}.jpg`} alt="" width={360} height={465} sizes="120px" />
                   <span>PDF</span>
                 </a>
                 <div>
                   <strong>{k.guideT}</strong>
                   <p>{k.guideText}</p>
                   <div className="tr-guide__btns">
-                    <a className="btn btn--gold btn--sm" href={`/guias/${tr.guide[lang]}.pdf`} download>
+                    <a className="btn btn--gold btn--sm" href={`/guias/${tr.guide[lang as "es" | "en"]}.pdf`} download>
                       {k.guideBtn}
                     </a>
-                    <a className="tr-guide__wa" href={`https://wa.me/?text=${encodeURIComponent(`${k.guideMsg} ${site.url}/guias/${tr.guide[lang]}.pdf`)}`} target="_blank" rel="noopener">
+                    <a className="tr-guide__wa" href={`https://wa.me/?text=${encodeURIComponent(`${k.guideMsg} ${site.url}/guias/${tr.guide[lang as "es" | "en"]}.pdf`)}`} target="_blank" rel="noopener">
                       {k.guideShare} →
                     </a>
                   </div>

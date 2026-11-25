@@ -122,8 +122,9 @@ export function slotsFor(d: Date) {
   return agenda.slots.filter((s) => !blocked.includes(s.time));
 }
 
-export function formatTime(time: string, lang: "es" | "en") {
+export function formatTime(time: string, lang: "es" | "en" | "fr") {
   const [h, m] = time.split(":").map(Number);
+  if (lang === "fr") return `${h} h ${String(m).padStart(2, "0")}`;
   const suffix = lang === "es" ? (h < 12 ? "a. m." : "p. m.") : h < 12 ? "AM" : "PM";
   const h12 = h % 12 === 0 ? 12 : h % 12;
   return `${h12}:${String(m).padStart(2, "0")} ${suffix}`;

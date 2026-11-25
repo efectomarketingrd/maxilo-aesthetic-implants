@@ -11,7 +11,7 @@ import InView from "@/components/InView";
 import ServiceIcon from "@/components/ServiceIcon";
 import { bookingHref, treatmentAt } from "@/lib/treatments";
 import { dictionaries } from "@/lib/content";
-import { locales, site, type Locale } from "@/lib/site";
+import { inTown, locales, site, type Locale } from "@/lib/site";
 import { serviceImg } from "@/lib/images";
 
 type Params = Promise<{ lang: string; slug: string }>;
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { s } = find(lang, slug);
   if (!s) return {};
   const title = `${s.title} en Las Terrenas`;
-  return pageMeta({ lang: lang as Locale, path: `/servicios/${slug}`, title: lang === "en" ? `${s.title} in Las Terrenas` : title, ogTitle: s.title, description: s.intro });
+  return pageMeta({ lang: lang as Locale, path: `/servicios/${slug}`, title: `${s.title} ${inTown(lang as Locale)}`, ogTitle: s.title, description: s.intro });
 }
 
 export default async function ServicePage({ params }: { params: Params }) {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Dict } from "@/lib/content";
-import type { Locale } from "@/lib/site";
+import { langNames, locales, type Locale } from "@/lib/site";
 import ServiceIcon from "./ServiceIcon";
 
 export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
@@ -15,6 +15,8 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const dropRef = useRef<HTMLDivElement>(null);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -30,14 +32,16 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
   useEffect(() => {
     const close = (e: MouseEvent) => {
       if (dropRef.current && !dropRef.current.contains(e.target as Node)) setDrop(false);
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
     };
     document.addEventListener("click", close);
     return () => document.removeEventListener("click", close);
   }, []);
 
   const home = `/${lang}`;
-  const other = lang === "es" ? "en" : "es";
-  const otherPath = pathname ? pathname.replace(/^\/(es|en)/, `/${other}`) : `/${other}`;
+  // los otros dos idiomas (ES · EN · FR)
+  const others = locales.filter((l) => l !== lang);
+  const pathFor = (l: Locale) => (pathname ? pathname.replace(/^\/(es|en|fr)/, `/${l}`) : `/${l}`);
   const svc = t.services.items.map((s) => ({ href: `${home}/servicios/${s.slug}`, label: s.title }));
   const links = [
     { href: `${home}/sobre-nosotros`, label: t.nav.about },
@@ -103,9 +107,22 @@ export default function Header({ t, lang }: { t: Dict; lang: Locale }) {
 
         <div className="header__actions">
           {/* Enlace normal (no Link): el cambio de idioma recarga la página y empieza arriba */}
-          <a href={otherPath} className="header__lang" hrefLang={other} lang={other}>
-            {other.toUpperCase()}
-          </a>
+          {/* Idioma: en el móvil, un botón con el idioma actual que despliega los otros dos; en pantallas anchas, los dos a la vista */}
+          <span className={`header__langs ${langOpen ? "is-open" : ""}`} ref={langRef}>
+            <button type="button" className="header__lang header__lang-btn" aria-expanded={langOpen} aria-label={langNames[lang]} onClick={() => setLangOpen(!langOpen)}>
+              {lang.toUpperCase()}
+              <svg width="8" height="8" viewBox="0 0 10 10" aria-hidden="true">
+                <path d="M1 3l4 4 4-4" stroke="currentColor" fill="none" strokeWidth="1.6" />
+              </svg>
+            </button>
+            <span className="header__lang-list">
+              {others.map((l) => (
+                <a key={l} href={pathFor(l)} className="header__lang" hrefLang={l} lang={l} aria-label={langNames[l]}>
+                  {l.toUpperCase()}
+                </a>
+              ))}
+            </span>
+          </span>
           <a className="btn btn--dark btn--sm header__cta" href={`${home}/agendar`}>
             {t.nav.cta}
           </a>

@@ -219,7 +219,7 @@ export function BlogChecklist({ items, done }: { items: (Pair & { ic: CheckIcon 
 }
 
 // Tarjeta de la doctora: foto recortada sobre un círculo dorado, datos clave y botones.
-export function BlogDoc({ eyebrow, name, role, text, chips, book, more, service, slug, lang, bookHref }: { eyebrow: string; name: string; role: string; text: string; chips: string[]; book: string; more: string; service: string; slug: string; lang: "es" | "en"; bookHref: string }) {
+export function BlogDoc({ eyebrow, name, role, text, chips, book, more, service, slug, lang, bookHref }: { eyebrow: string; name: string; role: string; text: string; chips: string[]; book: string; more: string; service: string; slug: string; lang: "es" | "en" | "fr"; bookHref: string }) {
   return (
     <InView className="bb-doc">
       <div className="bb-doc__photo">

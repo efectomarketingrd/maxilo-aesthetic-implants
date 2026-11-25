@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Dict } from "@/lib/content";
-import { agency, site, spa, waLink, type Locale } from "@/lib/site";
+import { agency, langNames, locales, site, spa, waLink, type Locale } from "@/lib/site";
 import { Mail, Phone, Pin, WaIcon } from "./Icons";
 import OfferCard from "./OfferCard";
 import SpaCard from "./SpaCard";
@@ -53,7 +53,15 @@ export default function Footer({ t, lang, offer = false, spaCard = false }: { t:
           <span>
             © {new Date().getFullYear()} {site.name}. {t.footer.rights} · <a href={`/${lang}/privacidad`}>{t.privacy.link}</a>
           </span>
-          <a href={lang === "es" ? "/en" : "/es"} hrefLang={lang === "es" ? "en" : "es"}>{t.footer.lang}</a>
+          <span className="footer__langs">
+            {locales
+              .filter((l) => l !== lang)
+              .map((l) => (
+                <a key={l} href={`/${l}`} hrefLang={l} lang={l}>
+                  {langNames[l]}
+                </a>
+              ))}
+          </span>
         </div>
         <div className="container footer__credit">
           <span>{t.footer.credit}</span>

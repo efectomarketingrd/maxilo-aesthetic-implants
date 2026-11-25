@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { site, type Locale } from "./site";
+import { locales, site, type Locale } from "./site";
 
 /*
  * Metadatos de cada página (SEO, 25 nov 2026):
@@ -41,7 +41,7 @@ type Opts = {
 };
 
 export function pageMeta(o: Opts): Metadata {
-  const langs = o.langs ?? (["es", "en"] as Locale[]);
+  const langs = o.langs ?? ([...locales] as Locale[]);
   const languages: Record<string, string> = {};
   for (const l of langs) languages[l] = `/${l}${o.path}`;
   languages["x-default"] = `/${langs.includes("es") ? "es" : langs[0]}${o.path}`;
@@ -55,7 +55,7 @@ export function pageMeta(o: Opts): Metadata {
     openGraph: {
       type: o.type ?? "website",
       siteName: site.name,
-      locale: o.lang === "es" ? "es_DO" : "en_US",
+      locale: o.lang === "es" ? "es_DO" : o.lang === "fr" ? "fr_FR" : "en_US",
       title: o.ogTitle ?? title.replace(BRAND, "").replace(SHORT, ""),
       description,
       url: `/${o.lang}${o.path}`,

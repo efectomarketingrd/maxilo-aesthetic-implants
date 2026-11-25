@@ -33,8 +33,13 @@ export const site = {
   },
 };
 
-export const locales = ["es", "en"] as const;
+export const locales = ["es", "en", "fr"] as const;
 export type Locale = (typeof locales)[number];
+// Formato de fechas y números de cada idioma
+export const intlLocale = (lang: Locale) => (lang === "es" ? "es-DO" : lang === "fr" ? "fr-FR" : "en-US");
+// "en Las Terrenas" en el título de cada página
+export const inTown = (lang: Locale) => (lang === "es" ? "en Las Terrenas" : lang === "fr" ? "à Las Terrenas" : "in Las Terrenas");
+export const langNames: Record<Locale, string> = { es: "Español", en: "English", fr: "Français" };
 
 export function waLink(text: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;

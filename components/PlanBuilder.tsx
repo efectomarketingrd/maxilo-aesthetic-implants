@@ -17,9 +17,12 @@ const SAME_DAY: PlanKind[] = ["molar", "frenlab", "frenling", "botox", "harmony"
 
 type Item = { id: PlanKind; slug: string; service: string; name: string; info: string; tag: string; note: string; zones: string[]; pick?: string };
 
-export default function PlanBuilder({ t, lang }: { t: Dict; lang: Locale }) {
+// msgT: en la versión francesa el plan llega a la clínica en español (como en la agenda)
+export default function PlanBuilder({ t, lang, msgT }: { t: Dict; lang: Locale; msgT?: Dict }) {
   const b = t.plan.b;
   const items = b.items as Item[];
+  const mb = (msgT ?? t).plan.b;
+  const mItems = mb.items as Item[];
   const services = t.services.items;
   const [tab, setTab] = useState<string>(services[0].slug);
   const [plan, setPlan] = useState<Plan>([]);
@@ -82,17 +85,23 @@ export default function PlanBuilder({ t, lang }: { t: Dict; lang: Locale }) {
 
   function message() {
     return [
-      b.msgTitle,
+      mb.msgTitle,
+      msgT ? (msgT.booking.frClient as string) : "",
       "",
-      b.msgIntro,
-      ...lines.map((l) => `• ${l.it.name} — ${money(l.price)}${l.zoneNames.length ? `\n   ${l.mode === "multi" ? `${b.zones}: ` : ""}${l.zoneNames.join(", ")}` : ""}`),
+      mb.msgIntro,
+      ...lines.map((l) => {
+        const mi = mItems.find((i) => i.id === l.id) ?? l.it;
+        const zn = l.mode === "none" ? [] : l.zones.map((z) => mi.zones[z]);
+        const mm = (n: number | null) => (n === null ? mb.tbc : rd(n));
+        return `• ${mi.name} — ${mm(l.price)}${zn.length ? `\n   ${l.mode === "multi" ? `${mb.zones}: ` : ""}${zn.join(", ")}` : ""}`;
+      }),
       "",
-      `${b.total}: ${total ? `${rd(total)} (≈ ${usd(total)})` : b.tbc}${pending && total ? ` + ${pending} ${b.tbcNote}` : ""}`,
-      b.estimateNote,
+      `${mb.total}: ${total ? `${rd(total)} (≈ ${usd(total)})` : mb.tbc}${pending && total ? ` + ${pending} ${mb.tbcNote}` : ""}`,
+      mb.estimateNote,
       "",
-      `${b.name}: ${f.name.trim()}`,
-      `${b.phone}: ${f.phone.trim()}`,
-    ].join("\n");
+      `${mb.name}: ${f.name.trim()}`,
+      `${mb.phone}: ${f.phone.trim()}`,
+    ].filter((l, i, a) => l !== "" || (i > 0 && a[i - 1] !== "")).join("\n");
   }
 
   function send() {
