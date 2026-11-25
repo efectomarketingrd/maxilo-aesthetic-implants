@@ -23,7 +23,7 @@ export const site = {
   ],
   maps: "https://share.google/jq0Id5rWFLBov2GvE",
   // Search Console (propiedad de prefijo https://maxiloaestheticimplants.com/): pegar aquí el código de la etiqueta HTML.
-  googleVerification: "",
+  googleVerification: "MkfAjtHxjzXAiHblUACiqrMqcuEWWopwNZGoEvqVaN4",
   address: {
     street: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",
     locality: "Las Terrenas",
