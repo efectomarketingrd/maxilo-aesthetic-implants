@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // www → dominio sin www (hay que añadir www.maxiloaestheticimplants.com como dominio en Vercel)
+      { source: "/:path*", has: [{ type: "host", value: "www.maxiloaestheticimplants.com" }], destination: "https://maxiloaestheticimplants.com/:path*", permanent: true },
       { source: "/", destination: "/es", permanent: false },
       { source: "/:lang(es|en)/noticias", destination: "/:lang/blog", permanent: true },
     ];

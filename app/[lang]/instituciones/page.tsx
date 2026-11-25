@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -9,11 +10,9 @@ import { site, type Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const t = dictionaries[lang as Locale];
-  return {
-    title: `${t.institutions.eyebrow} | ${site.name}`,
-    description: t.institutions.title,
-    alternates: { canonical: `/${lang}/instituciones`, languages: { es: "/es/instituciones", en: "/en/instituciones" } },
-  };
+  const m = pageMeta({ lang: lang as Locale, path: "/instituciones", title: t.institutions.eyebrow, description: t.institutions.title });
+  // Sin instituciones confirmadas la página solo muestra "Pendiente": fuera de Google hasta tener contenido
+  return t.institutions.items.length ? m : { ...m, robots: { index: false, follow: true } };
 }
 
 export default async function Institutions({ params }: { params: Promise<{ lang: string }> }) {

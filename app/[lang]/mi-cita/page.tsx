@@ -255,7 +255,7 @@ export default async function MiCita({ params, searchParams }: { params: Promise
                       </div>
                     ))}
                   </dl>
-                  <a className="bk2-bank__proof" href={proof} target="_blank" rel="noopener noreferrer">
+                  <a className="bk2-bank__proof" href={proof} target="_blank" rel="noopener noreferrer" data-track="proof_whatsapp">
                     <WaIcon size={16} /> {b.cost.bank.proof}
                   </a>
                   <p className="bk2-bank__abroad">{b.cost.bank.abroad}</p>

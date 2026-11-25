@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,11 +14,7 @@ import type { Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const p = dictionaries[lang as Locale].plan;
-  return {
-    title: `${p.rec.eyebrow} | ${p.metaTitle}`,
-    description: p.rec.intro,
-    alternates: { canonical: `/${lang}/planes/recomendados`, languages: { es: "/es/planes/recomendados", en: "/en/planes/recomendados" } },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/planes/recomendados", title: p.rec.eyebrow, description: p.rec.intro });
 }
 
 export default async function RecPlans({ params }: { params: Promise<{ lang: string }> }) {

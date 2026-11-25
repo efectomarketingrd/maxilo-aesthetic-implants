@@ -23,7 +23,7 @@ export default function Footer({ t, lang, offer = false, spaCard = false }: { t:
             </a>
           </div>
           <div>
-            <h4>{t.footer.quick}</h4>
+            <h3 className="footer__h">{t.footer.quick}</h3>
             <ul>
               <li><Link href={home}>{t.nav.home}</Link></li>
               <li><Link href={`${home}/sobre-nosotros`}>{t.nav.about}</Link></li>
@@ -39,7 +39,7 @@ export default function Footer({ t, lang, offer = false, spaCard = false }: { t:
             </ul>
           </div>
           <div id="contacto">
-            <h4>{t.footer.contact}</h4>
+            <h3 className="footer__h">{t.footer.contact}</h3>
             <p className="footer__line"><Pin /> <Link href={`${home}/ubicacion`}>{t.footer.address}</Link></p>
             {site.phones.map((p) => (
               <p className="footer__line" key={p}>
@@ -50,7 +50,9 @@ export default function Footer({ t, lang, offer = false, spaCard = false }: { t:
           </div>
         </div>
         <div className="container footer__bottom">
-          <span>© {new Date().getFullYear()} {site.name}. {t.footer.rights}</span>
+          <span>
+            © {new Date().getFullYear()} {site.name}. {t.footer.rights} · <a href={`/${lang}/privacidad`}>{t.privacy.link}</a>
+          </span>
           <a href={lang === "es" ? "/en" : "/es"} hrefLang={lang === "es" ? "en" : "es"}>{t.footer.lang}</a>
         </div>
         <div className="container footer__credit">

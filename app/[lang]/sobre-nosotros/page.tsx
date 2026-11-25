@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -13,12 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params;
   const t = dictionaries[lang as Locale];
   const p = t.about.page;
-  return {
-    title: p.metaTitle,
-    description: p.metaDesc,
-    alternates: { canonical: `/${lang}/sobre-nosotros`, languages: { es: "/es/sobre-nosotros", en: "/en/sobre-nosotros" } },
-    openGraph: { title: p.metaTitle, description: p.metaDesc, images: ["/brand/dra-escritorio.jpg"] },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/sobre-nosotros", title: p.metaTitle, description: p.metaDesc, image: "/brand/dra-escritorio.jpg" });
 }
 
 const gallery = ["/brand/dra-valoracion.jpg", "/brand/dra-procedimiento.jpg", "/brand/dra-consultorio.jpg", "/brand/dra-recepcion.jpg"];

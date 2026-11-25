@@ -9,6 +9,7 @@ import { centers, site, waLink, xrayCenters, type Locale } from "@/lib/site";
 import { Arrow, Chevron, Lock, Mail, WaIcon } from "./Icons";
 import CopyBtn from "./CopyBtn";
 import { citaUrl, type Cita } from "@/lib/cita";
+import { getOrigin, track } from "@/lib/track";
 
 function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -421,6 +422,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
       form.email.trim() ? `${b.email}: ${form.email.trim()}` : "",
       form.country.trim() ? `${b.country}: ${form.country.trim()}` : "",
       form.notes.trim() ? `${b.notes}: ${form.notes.trim()}` : "",
+      getOrigin() ? `${b.origin}: ${getOrigin()}` : "",
     ];
     return lines.filter((l, i) => l !== "" || (i > 0 && lines[i - 1] !== "")).join("\n").trim();
   }
@@ -456,12 +458,14 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   function sendWa() {
     if (!valid) return;
     notifyCenter();
+    track("booking_whatsapp", { service: svcName });
     window.open(waLink(message()), "_blank", "noopener");
   }
 
   function sendMail() {
     if (!valid) return;
     notifyCenter();
+    track("booking_email", { service: svcName });
     const subject = `${b.mailSubject} — ${svcName} — ${date ? toKey(date) : ""}`;
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message())}`;
   }

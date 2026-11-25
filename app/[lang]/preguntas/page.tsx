@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -9,11 +10,7 @@ import { site, type Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const t = dictionaries[lang as Locale];
-  return {
-    title: `${t.faq.eyebrow} | ${site.name}`,
-    description: t.faq.items.map((f) => f.q).join(" "),
-    alternates: { canonical: `/${lang}/preguntas`, languages: { es: "/es/preguntas", en: "/en/preguntas" } },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/preguntas", title: t.faq.eyebrow, description: t.faq.items.map((f) => f.q).join(" ") });
 }
 
 export default async function Faq({ params }: { params: Promise<{ lang: string }> }) {

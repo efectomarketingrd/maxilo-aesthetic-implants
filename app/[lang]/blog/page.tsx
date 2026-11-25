@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -11,11 +12,7 @@ import { site, type Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const t = dictionaries[lang as Locale];
-  return {
-    title: `${t.news.title} | ${site.name}`,
-    description: t.news.text,
-    alternates: { canonical: `/${lang}/blog`, languages: { es: "/es/blog", en: "/en/blog" } },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/blog", title: t.news.title, description: t.news.text });
 }
 
 export default async function Blog({ params }: { params: Promise<{ lang: string }> }) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,11 +10,7 @@ import { type Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const u = dictionaries[lang as Locale].urgent;
-  return {
-    title: u.metaTitle,
-    description: u.metaDesc,
-    alternates: { canonical: `/${lang}/urgencias`, languages: { es: "/es/urgencias", en: "/en/urgencias" } },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/urgencias", title: u.metaTitle, description: u.metaDesc });
 }
 
 export default async function Urgent({ params }: { params: Promise<{ lang: string }> }) {

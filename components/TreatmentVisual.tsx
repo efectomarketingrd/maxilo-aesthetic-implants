@@ -1549,7 +1549,7 @@ export default function TreatmentVisual({ slug, labels, facts, caption }: { slug
         </ReplayInView>
       )}
       {facts && facts.length > 0 && (
-        <InView className="tx-facts">
+        <InView as="ul" className="tx-facts">
           {facts.map((f, i) => (
             <li key={f.t} style={css({ "--i": i })}>
               <span className="tx-facts__ico">

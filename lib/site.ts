@@ -22,6 +22,8 @@ export const site = {
     { name: "Western Union", url: "https://www.westernunion.com/us/en/providers/banco-popular.html" },
   ],
   maps: "https://share.google/jq0Id5rWFLBov2GvE",
+  // Search Console (propiedad de prefijo https://maxiloaestheticimplants.com/): pegar aquí el código de la etiqueta HTML.
+  googleVerification: "",
   address: {
     street: "Sector La Ceiba, próximo a los supermercados Merca Jumbo y La Sirena",
     locality: "Las Terrenas",
@@ -66,3 +68,12 @@ export const centers = [
 
 // Agencia que diseñó la web (crédito en el pie). Cuando exista su web, poner la dirección en `url`.
 export const agency: { name: string; url: string | null } = { name: "Efecto Marketing", url: null };
+
+// Medición para anuncios (SEM, 25 nov 2026). Vacíos = no se carga nada y no sale el aviso de cookies.
+// ga4: "G-XXXXXXX" · googleAds: "AW-XXXXXXXXX" · adsLabels: etiquetas de conversión de Google Ads · metaPixel: id numérico.
+export const tracking = {
+  ga4: "",
+  googleAds: "",
+  adsLabels: { booking: "", contact: "" },
+  metaPixel: "",
+};

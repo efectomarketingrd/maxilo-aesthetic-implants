@@ -69,13 +69,13 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="h5-hero__greet">
                 <Greeting fallback={h.greet} {...h.greetings} />
               </p>
-              <h1>
+              <p className="h5-title">
                 {h.h1a} <em>{h.h1b}</em>
-              </h1>
-              <p className="h5-hero__doc">
-                <strong>{h.doctorLine}</strong>
-                <span>{h.doctorRole}</span>
               </p>
+              <div className="h5-hero__doc">
+                <strong>{h.doctorLine}</strong>
+                <h1 className="h5-hero__role">{h.doctorRole}</h1>
+              </div>
             </div>
 
             <div className="h5-hero__photo">

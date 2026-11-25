@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 
 // Añade la clase "is-in" cuando el bloque entra en pantalla (para animaciones de entrada).
-export default function InView({ className = "", children }: { className?: string; children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function InView({ className = "", children, as = "div" }: { className?: string; children: React.ReactNode; as?: "div" | "ul" | "ol" }) {
+  const ref = useRef<HTMLElement>(null);
   const [ready, setReady] = useState(false);
   const [inView, setInView] = useState(false);
 
@@ -28,9 +28,11 @@ export default function InView({ className = "", children }: { className?: strin
     return () => io.disconnect();
   }, []);
 
+  // as="ul" / "ol" cuando los hijos son <li> (accesibilidad y SEO)
+  const Tag = as as "div";
   return (
-    <div ref={ref} className={`${className} ${ready ? "js-anim" : ""} ${inView ? "is-in" : ""}`}>
+    <Tag ref={ref as React.RefObject<HTMLDivElement>} className={`${className} ${ready ? "js-anim" : ""} ${inView ? "is-in" : ""}`}>
       {children}
-    </div>
+    </Tag>
   );
 }

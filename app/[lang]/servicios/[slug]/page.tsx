@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -28,16 +29,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { lang, slug } = await params;
   const { s } = find(lang, slug);
   if (!s) return {};
-  const title = `${s.title} en Las Terrenas | ${site.name}`;
-  return {
-    title: lang === "en" ? `${s.title} in Las Terrenas | ${site.name}` : title,
-    description: s.intro,
-    alternates: {
-      canonical: `/${lang}/servicios/${slug}`,
-      languages: { es: `/es/servicios/${slug}`, en: `/en/servicios/${slug}` },
-    },
-    openGraph: { title: s.title, description: s.intro, url: `/${lang}/servicios/${slug}` },
-  };
+  const title = `${s.title} en Las Terrenas`;
+  return pageMeta({ lang: lang as Locale, path: `/servicios/${slug}`, title: lang === "en" ? `${s.title} in Las Terrenas` : title, ogTitle: s.title, description: s.intro });
 }
 
 export default async function ServicePage({ params }: { params: Params }) {

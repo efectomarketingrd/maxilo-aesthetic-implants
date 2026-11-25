@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,11 +13,7 @@ import type { Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const p = dictionaries[lang as Locale].plan;
-  return {
-    title: p.metaTitle,
-    description: p.metaDesc,
-    alternates: { canonical: `/${lang}/planes`, languages: { es: "/es/planes", en: "/en/planes" } },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/planes", title: p.metaTitle, description: p.metaDesc });
 }
 
 export default async function Plans({ params }: { params: Promise<{ lang: string }> }) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BookingWizard from "@/components/BookingWizard";
@@ -10,11 +11,7 @@ import { site, type Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const b = dictionaries[lang as Locale].booking;
-  return {
-    title: b.metaTitle,
-    description: b.metaDesc,
-    alternates: { canonical: `/${lang}/agendar`, languages: { es: "/es/agendar", en: "/en/agendar" } },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/agendar", title: b.metaTitle, description: b.metaDesc });
 }
 
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -26,18 +27,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!p) return {};
   const languages: Record<string, string> = {};
   for (const l of locales) if (p[l]) languages[l] = `/${l}/blog/${slug}`;
-  return {
-    title: `${p.v.title} | ${site.name}`,
-    description: p.v.excerpt,
-    alternates: { canonical: `/${lang}/blog/${slug}`, languages },
-    openGraph: {
-      type: "article",
-      title: p.v.title,
-      description: p.v.excerpt,
-      publishedTime: p.date,
-      images: [p.cover ?? "/brand/og.png"],
-    },
-  };
+  return pageMeta({ lang: lang as Locale, path: `/blog/${slug}`, title: p.v.title, ogTitle: p.v.title, description: p.v.excerpt, image: p.cover, type: "article", publishedTime: p.date, langs: locales.filter((l) => p[l]) });
 }
 
 const abs = (src: string) => (src.startsWith("http") ? src : `${site.url}${src}`);

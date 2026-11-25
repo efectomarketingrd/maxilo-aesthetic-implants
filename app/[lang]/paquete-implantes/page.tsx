@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -12,12 +13,7 @@ import { site, waLink, type Locale } from "@/lib/site";
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   const k = dictionaries[lang as Locale].pkg;
-  return {
-    title: k.metaTitle,
-    description: k.metaDesc,
-    alternates: { canonical: `/${lang}/paquete-implantes`, languages: { es: "/es/paquete-implantes", en: "/en/paquete-implantes" } },
-    openGraph: { title: k.metaTitle, description: k.metaDesc, images: [img.playa] },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/paquete-implantes", title: k.metaTitle, description: k.metaDesc, image: img.playa });
 }
 
 export default async function Package({ params }: { params: Promise<{ lang: string }> }) {

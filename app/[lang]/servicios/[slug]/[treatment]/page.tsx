@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import CostFactors from "@/components/CostFactors";
@@ -38,13 +39,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const x = load(lang, slug, treatment);
   if (!x) return {};
   const path = `/servicios/${slug}/${treatment}`;
-  const title = lang === "en" ? `${x.proc.name} in Las Terrenas | ${site.name}` : `${x.proc.name} en Las Terrenas | ${site.name}`;
-  return {
-    title,
-    description: x.d.summary,
-    alternates: { canonical: `/${lang}${path}`, languages: { es: `/es${path}`, en: `/en${path}` } },
-    openGraph: { title: x.proc.name, description: x.d.summary, url: `/${lang}${path}` },
-  };
+  const title = lang === "en" ? `${x.proc.name} in Las Terrenas` : `${x.proc.name} en Las Terrenas`;
+  return pageMeta({ lang: lang as Locale, path, title, ogTitle: x.proc.name, description: x.d.summary, image: treatmentImg[treatment] });
 }
 
 export default async function TreatmentPage({ params }: { params: Params }) {
@@ -164,7 +160,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
                 </span>
               </p>
         ) : undefined}>
-            <InView className="tr-for">
+            <InView as="ul" className="tr-for">
               {d.forWho.map((f, i) => (
                 <li key={f} style={{ "--i": i } as React.CSSProperties}>
                   <span className="tr-for__ico">
@@ -178,7 +174,7 @@ export default async function TreatmentPage({ params }: { params: Params }) {
 
         {/* Pasos */}
         <Fold title={k.steps} hint={`${d.steps.length} ${k.foldSteps}`}>
-            <InView className="tr-steps">
+            <InView as="ol" className="tr-steps">
               {d.steps.map((st, i) => (
                 <li key={st.t} style={{ "--i": i } as React.CSSProperties}>
                   <span className="tr-steps__n">{i + 1}</span>

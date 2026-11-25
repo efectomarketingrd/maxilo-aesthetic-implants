@@ -18,7 +18,7 @@ type Service = {
 
 const es = {
   meta: {
-    title: "Maxilo Aesthetic Implants | Implantes dentales y cirugía maxilofacial en Las Terrenas",
+    title: "Maxilo Aesthetic Implants · Implantes dentales en Las Terrenas",
     description:
       "Centro de cirugía oral, implantes dentales, cirugía estética facial y medicina estética de la Dra. Celia Hernández Mauricio en Las Terrenas, Samaná, República Dominicana.",
   },
@@ -76,7 +76,7 @@ const es = {
     h1a: "Su sonrisa y su rostro,",
     h1b: "en manos expertas.",
     doctorLine: "Dra. Celia Hernández Mauricio",
-    doctorRole: "Cirujana oral y maxilofacial · Las Terrenas",
+    doctorRole: "Cirujana maxilofacial · Implantes dentales en Las Terrenas",
     search: "¿Qué tratamiento busca?",
     searchHint: "Implantes, bótox, cordales…",
     searchEmpty: "No encontramos ese tratamiento. Escríbanos y le orientamos.",
@@ -203,7 +203,7 @@ const es = {
     diplomasTitle: "Diplomas y certificaciones",
     diplomas: [] as string[],
     page: {
-      metaTitle: "Dra. Celia Hernández Mauricio, cirujana bucomaxilofacial | Maxilo Aesthetic Implants",
+      metaTitle: "Dra. Celia Hernández Mauricio, cirujana maxilofacial",
       metaDesc: "Conozca a la Dra. Celia Hernández Mauricio, especialista en Cirugía Bucomaxilofacial (UASD) con residencia en el Hospital Dr. Darío Contreras y formación en cirugía estética facial en Brasil y España. Atiende en español e inglés en Las Terrenas.",
       role: "Cirujana bucomaxilofacial",
       intro: "Especialista en cirugía de la boca, los maxilares y el rostro. Une la precisión quirúrgica con una mirada estética para que cada paciente recupere la función, se sienta seguro y se vea natural.",
@@ -360,7 +360,7 @@ const es = {
   },
   location: {
     nav: "Ubicación",
-    metaTitle: "Ubicación y cómo llegar | Maxilo Aesthetic Implants, Las Terrenas",
+    metaTitle: "Ubicación y cómo llegar en Las Terrenas | Maxilo Aesthetic Implants",
     metaDesc: "Encuentre Maxilo Aesthetic Implants en el sector La Ceiba, Las Terrenas, Samaná: frente al parque del letrero de bienvenida, próximo a Merca Jumbo y La Sirena. Mapa, parqueo, horario y cómo llegar.",
     eyebrow: "Ubicación",
     title: "Cómo",
@@ -706,6 +706,7 @@ const es = {
     },
     secure: "Sus datos se usan solo para gestionar su cita.",
     msgTitle: "SOLICITUD DE CITA — Maxilo Aesthetic Implants",
+    origin: "Llegó desde",
     msgSpecial: "Solicita horario especial (sujeto a disponibilidad)",
     mailSubject: "Solicitud de cita",
     scheduleTitle: "Horario de atención",
@@ -743,7 +744,7 @@ const es = {
     nav: "Urgencias",
     pill: "Urgencias",
     homeLink: "¿Es una urgencia? Atención el mismo día",
-    metaTitle: "Atención de urgencia el mismo día | Dra. Celia Hernández · Las Terrenas",
+    metaTitle: "Urgencias maxilofaciales el mismo día en Las Terrenas",
     metaDesc: "Accidentes, golpes en la cara o la boca, fracturas y dolor intenso: la Dra. Celia Hernández, cirujana maxilofacial, trata de atenderle el mismo día en Las Terrenas, Samaná y Sánchez.",
     eyebrow: "Atención el mismo día",
     title: "¿Es una",
@@ -778,6 +779,7 @@ const es = {
     need: "Complete su nombre, su teléfono y qué pasó.",
     sent: "Solicitud enviada. Le escribiremos para confirmar la hora. Si es muy urgente, llámenos.",
     msgTitle: "URGENCIA — HOY · Maxilo Aesthetic Implants",
+    msgOrigin: "Llegó desde",
     msgWhat: "Qué pasó",
     msgReferred: "Referido por",
     msgPlace: "Puede venir a",
@@ -897,6 +899,55 @@ const es = {
     locTitle: "En el mismo edificio",
     locText: "En el segundo nivel está Terrenas Massage, un spa con masajes individuales, en pareja y a domicilio.",
   },
+  consent: { text: "Usamos cookies para saber cómo nos encuentran y mejorar nuestros anuncios.", accept: "Aceptar", reject: "Solo las necesarias", more: "Más información" },
+  privacy: {
+    metaTitle: "Política de privacidad",
+    metaDesc: "Qué datos recibe Maxilo Aesthetic Implants al agendar una cita, para qué los usa, qué cookies utiliza la web y cómo pedir que se borren sus datos.",
+    eyebrow: "Privacidad",
+    title: "Política de privacidad",
+    crumb: "Privacidad",
+    updated: "Última actualización: 25 de noviembre de 2026",
+    sections: [
+      { t: "Quiénes somos", p: ["Maxilo Aesthetic Implants es el centro de cirugía oral y maxilofacial, implantes y estética facial de la Dra. Celia Hernández Mauricio, en Las Terrenas, Samaná, República Dominicana. Somos responsables de los datos que usted nos envía a través de esta web."] },
+      {
+        t: "Qué datos recibimos",
+        p: ["Solo los que usted nos envía al agendar una cita o escribirnos:"],
+        li: ["Nombre, teléfono, correo y país.", "El tratamiento, el centro, el día y la hora que elige.", "Las notas que quiera añadir, que pueden incluir información sobre su salud."],
+        p2: ["La web no tiene cuentas de usuario ni guarda su historia clínica: la solicitud se arma en su teléfono y nos llega por WhatsApp o por correo cuando usted la envía, junto con un aviso en el calendario del centro."],
+      },
+      {
+        t: "Para qué los usamos",
+        li: ["Confirmar su cita y coordinar su atención.", "Gestionar el pago y responder sus preguntas.", "Llevar el registro de nuestros servicios y cumplir nuestras obligaciones legales y contables."],
+        p2: ["La información sobre su salud se trata con confidencialidad médica. No vendemos ni compartimos sus datos con otras empresas para su publicidad."],
+      },
+      {
+        t: "Servicios que intervienen",
+        p: ["Para funcionar usamos servicios de otras empresas, que tratan los datos según sus propias políticas:"],
+        li: ["WhatsApp y correo electrónico (Gmail), por donde nos llega su solicitud.", "Google Calendar, donde anotamos la cita por confirmar.", "Vercel, donde está alojada la web.", "Google y Meta, para medir visitas y anuncios (ver Cookies)."],
+      },
+      {
+        t: "Cookies y medición",
+        p: [
+          "Medimos de forma anónima cuántas personas visitan la web, sin usar cookies.",
+          "Si usted acepta en el aviso de cookies, también usamos herramientas de Google (Analytics y Ads) y de Meta (Facebook e Instagram) para saber cómo nos encuentran y si un anuncio termina en una cita. Si elige «Solo las necesarias», no se usan esas cookies.",
+          "En su teléfono guardamos su elección sobre las cookies y, durante 30 días, de dónde llegó a la web (por ejemplo, un anuncio), para que su solicitud nos diga cómo nos encontró.",
+        ],
+      },
+      { t: "Cuánto tiempo los guardamos", p: ["El tiempo necesario para atenderle y cumplir nuestras obligaciones legales. Después los borramos o los dejamos de usar."] },
+      {
+        t: "Sus derechos",
+        p: [
+          "Puede pedirnos en cualquier momento ver los datos que tenemos sobre usted, corregirlos o borrarlos, conforme a la Ley 172-13 sobre protección de datos personales de la República Dominicana. Si nos visita desde la Unión Europea, también puede ejercer los derechos que le da el RGPD.",
+          "Para hacerlo, escríbanos por WhatsApp o al correo de abajo.",
+        ],
+      },
+      { t: "Cambios", p: ["Si cambiamos esta política, publicaremos la nueva versión en esta página con su fecha."] },
+    ],
+    contactTitle: "¿Preguntas sobre sus datos?",
+    wa: "Escribir por WhatsApp",
+    waMsg: "Hola, tengo una pregunta sobre mis datos personales.",
+    link: "Privacidad",
+  },
   footer: {
     tagline: "Cirugía maxilofacial, implantes y estética facial en Las Terrenas.",
     quick: "Enlaces",
@@ -920,7 +971,7 @@ type Dict = typeof es;
 
 const en: Dict = {
   meta: {
-    title: "Maxilo Aesthetic Implants | Dental implants & maxillofacial surgery in Las Terrenas",
+    title: "Maxilo Aesthetic Implants · Dental implants in Las Terrenas",
     description:
       "Oral surgery, dental implants, facial aesthetic surgery and aesthetic medicine by Dr. Celia Hernández Mauricio in Las Terrenas, Samaná, Dominican Republic.",
   },
@@ -978,7 +1029,7 @@ const en: Dict = {
     h1a: "Your smile and your face,",
     h1b: "in expert hands.",
     doctorLine: "Dr. Celia Hernández Mauricio",
-    doctorRole: "Oral & maxillofacial surgeon · Las Terrenas",
+    doctorRole: "Maxillofacial surgeon · Dental implants in Las Terrenas",
     search: "What treatment are you looking for?",
     searchHint: "Implants, Botox, wisdom teeth…",
     searchEmpty: "We couldn't find that treatment. Message us and we'll guide you.",
@@ -1101,7 +1152,7 @@ const en: Dict = {
     diplomasTitle: "Diplomas & certifications",
     diplomas: [],
     page: {
-      metaTitle: "Dr. Celia Hernández Mauricio, oral & maxillofacial surgeon | Maxilo Aesthetic Implants",
+      metaTitle: "Dr. Celia Hernández, oral & maxillofacial surgeon",
       metaDesc: "Meet Dr. Celia Hernández Mauricio, specialist in Oral & Maxillofacial Surgery (UASD) with residency at Dr. Darío Contreras Hospital and training in facial aesthetic surgery in Brazil and Spain. English-speaking care in Las Terrenas.",
       role: "Oral & maxillofacial surgeon",
       intro: "A specialist in surgery of the mouth, jaws and face. She combines surgical precision with an aesthetic eye so every patient regains function, feels confident and looks natural.",
@@ -1258,7 +1309,7 @@ const en: Dict = {
   },
   location: {
     nav: "Location",
-    metaTitle: "Location & directions | Maxilo Aesthetic Implants, Las Terrenas",
+    metaTitle: "Location & directions in Las Terrenas | Maxilo Aesthetic Implants",
     metaDesc: "Find Maxilo Aesthetic Implants in the La Ceiba area of Las Terrenas, Samaná: across from the welcome-sign park, near Merca Jumbo and La Sirena. Map, parking, hours and directions.",
     eyebrow: "Location",
     title: "How to",
@@ -1604,6 +1655,7 @@ const en: Dict = {
     },
     secure: "Your details are only used to manage your appointment.",
     msgTitle: "APPOINTMENT REQUEST — Maxilo Aesthetic Implants",
+    origin: "Came from",
     msgSpecial: "Requests a special time (subject to availability)",
     mailSubject: "Appointment request",
     scheduleTitle: "Opening hours",
@@ -1676,6 +1728,7 @@ const en: Dict = {
     need: "Please fill in your name, phone and what happened.",
     sent: "Request sent. We will message you to confirm the time. If it is very urgent, call us.",
     msgTitle: "URGENT — TODAY · Maxilo Aesthetic Implants",
+    msgOrigin: "Came from",
     msgWhat: "What happened",
     msgReferred: "Referred by",
     msgPlace: "Can come to",
@@ -1794,6 +1847,55 @@ const en: Dict = {
     footer: "In the same building",
     locTitle: "In the same building",
     locText: "On the second floor is Terrenas Massage, a spa offering individual, couples and in-home massages.",
+  },
+  consent: { text: "We use cookies to learn how you find us and to improve our ads.", accept: "Accept", reject: "Only necessary", more: "Learn more" },
+  privacy: {
+    metaTitle: "Privacy policy",
+    metaDesc: "What data Maxilo Aesthetic Implants receives when you book, what it is used for, which cookies the site uses and how to ask us to delete your data.",
+    eyebrow: "Privacy",
+    title: "Privacy policy",
+    crumb: "Privacy",
+    updated: "Last updated: November 25, 2026",
+    sections: [
+      { t: "Who we are", p: ["Maxilo Aesthetic Implants is the oral and maxillofacial surgery, implant and facial aesthetics center of Dr. Celia Hernández Mauricio in Las Terrenas, Samaná, Dominican Republic. We are responsible for the data you send us through this website."] },
+      {
+        t: "What data we receive",
+        p: ["Only what you send us when you book or write to us:"],
+        li: ["Name, phone, email and country.", "The treatment, center, day and time you choose.", "Any notes you add, which may include information about your health."],
+        p2: ["The website has no user accounts and does not store your medical record: the request is put together on your phone and reaches us by WhatsApp or email when you send it, along with a notice in the center's calendar."],
+      },
+      {
+        t: "What we use it for",
+        li: ["To confirm your appointment and coordinate your care.", "To handle payment and answer your questions.", "To keep records of our services and meet our legal and accounting obligations."],
+        p2: ["Information about your health is handled with medical confidentiality. We do not sell or share your data with other companies for their advertising."],
+      },
+      {
+        t: "Services involved",
+        p: ["To work, we use services from other companies, which handle data under their own policies:"],
+        li: ["WhatsApp and email (Gmail), through which your request reaches us.", "Google Calendar, where we note the appointment pending confirmation.", "Vercel, which hosts the website.", "Google and Meta, to measure visits and ads (see Cookies)."],
+      },
+      {
+        t: "Cookies and measurement",
+        p: [
+          "We anonymously measure how many people visit the website, without cookies.",
+          "If you accept in the cookie notice, we also use Google tools (Analytics and Ads) and Meta tools (Facebook and Instagram) to learn how you find us and whether an ad leads to an appointment. If you choose “Only necessary”, those cookies are not used.",
+          "On your phone we store your cookie choice and, for 30 days, where you came from (for example, an ad), so your request tells us how you found us.",
+        ],
+      },
+      { t: "How long we keep it", p: ["As long as needed to care for you and meet our legal obligations. After that we delete it or stop using it."] },
+      {
+        t: "Your rights",
+        p: [
+          "You can ask us at any time to see, correct or delete the data we hold about you, under Dominican Law 172-13 on personal data protection. If you visit us from the European Union, you can also exercise your rights under the GDPR.",
+          "To do so, write to us on WhatsApp or at the email below.",
+        ],
+      },
+      { t: "Changes", p: ["If we change this policy, we will publish the new version on this page with its date."] },
+    ],
+    contactTitle: "Questions about your data?",
+    wa: "Write on WhatsApp",
+    waMsg: "Hello, I have a question about my personal data.",
+    link: "Privacy",
   },
   footer: {
     tagline: "Maxillofacial surgery, implants and facial aesthetics in Las Terrenas.",

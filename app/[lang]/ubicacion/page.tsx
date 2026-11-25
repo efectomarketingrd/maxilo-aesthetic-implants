@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
@@ -20,14 +21,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { lang } = await params;
   const t = dictionaries[lang as Locale];
   if (!t) return {};
-  return {
-    title: t.location.metaTitle,
-    description: t.location.metaDesc,
-    alternates: {
-      canonical: `${site.url}/${lang}/ubicacion`,
-      languages: { es: `${site.url}/es/ubicacion`, en: `${site.url}/en/ubicacion` },
-    },
-  };
+  return pageMeta({ lang: lang as Locale, path: "/ubicacion", title: t.location.metaTitle, description: t.location.metaDesc });
 }
 
 // Mapa ilustrado (no a escala): costa, calles, parque, supermercados y el pin del centro

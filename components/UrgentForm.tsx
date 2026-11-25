@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { getOrigin, track } from "@/lib/track";
 import type { Dict } from "@/lib/content";
 import { agenda, rd, usd } from "@/lib/agenda";
 import { centers, site, waLink } from "@/lib/site";
@@ -32,6 +33,7 @@ export default function UrgentForm({ t }: { t: Dict }) {
       "",
       `${u.msgCost}: ${rd(price)} (≈ ${usd(price)}) — ${u.payOnArrival}`,
       u.costNote,
+      getOrigin() ? `${u.msgOrigin}: ${getOrigin()}` : "",
     ]
       .filter((l, i, a) => l !== "" || (i > 0 && a[i - 1] !== ""))
       .join("\n");
@@ -64,6 +66,7 @@ export default function UrgentForm({ t }: { t: Dict }) {
         website: honey.current?.value ?? "",
       }),
     }).catch(() => {});
+    track("urgent_whatsapp");
     window.open(waLink(msg), "_blank", "noopener");
     setSent(true);
   }
